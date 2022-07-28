@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>yszhao的博客</title>
+  
+  <subtitle>记录我的生活 学习</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2022-04-26T12:33:15.102Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>yszhao</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建 mysql_server</title>
+    <link href="http://example.com/2022/04/17/mysql-server/"/>
+    <id>http://example.com/2022/04/17/mysql-server/</id>
+    <published>2022-04-17T14:53:37.000Z</published>
+    <updated>2022-04-26T12:33:15.102Z</updated>
+    
+    
+    
+    
+    <category term="server" scheme="http://example.com/categories/server/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搭建php环境</title>
+    <link href="http://example.com/2022/04/17/php/"/>
+    <id>http://example.com/2022/04/17/php/</id>
+    <published>2022-04-17T14:53:21.000Z</published>
+    <updated>2022-05-09T01:58:55.879Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、安装Remi源："><a href="#一、安装Remi源：" class="headerlink" title="一、安装Remi源："></a>一、安装Remi源：</h1><pre><code># CentOS 6 / RHEL 6yum install http://rpms.famillecollet.com/enterprise/remi-release-6.rpm# CentOS 7 / RHEL 7yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm</code></pre><h1 id="二、配置Remi源-可以不操作-："><a href="#二、配置Remi源-可以不操作-：" class="headerlink" title="二、配置Remi源(可以不操作)："></a>二、配置Remi源(可以不操作)：</h1><pre><code> 编辑remi源repo文件 /etc/yum.repos.d/remi.repo 启用 Remi Repository修改 enabled=0 为 enabled=1。 为 Remi Repository 设置合适的优先级在 [remi] 那一节的结尾另起一行添加下面的代码： priority=3    </code></pre><h1 id="三、安装-php"><a href="#三、安装-php" class="headerlink" title="三、安装 php"></a>三、安装 php</h1><pre><code> yum install php73 php73-php-fpm php73-php-opcache php73-php-gd php73-php-mbstring php73-php-xml php73-php-pdo php73-php-mysqlnd php73-php-pecl-mysql php73-php-bcmathphp73-php-mcrypt   </code></pre><h1 id="四-开机启动"><a href="#四-开机启动" class="headerlink" title="四.开机启动"></a>四.开机启动</h1><pre><code>systemctl enable  php73-php-fpm</code></pre><h1 id="五-服务相关命令"><a href="#五-服务相关命令" class="headerlink" title="五.服务相关命令"></a>五.服务相关命令</h1><pre><code>systemctl start  php73-php-fpmsystemctl stop  php73-php-fpmsystemctl status  php73-php-fpm</code></pre><h1 id="六-加入系统命令"><a href="#六-加入系统命令" class="headerlink" title="六.加入系统命令"></a>六.加入系统命令</h1><pre><code>ln -s  /opt/remi/php73/root/usr/bin/php /usr/bin/php</code></pre><h1 id="七-添加用户"><a href="#七-添加用户" class="headerlink" title="七.添加用户"></a>七.添加用户</h1><pre><code>groupadd wwwuseradd -g www -s /sbin/nologin www    </code></pre><h1 id="八-PHP-FPM配置文件www-conf"><a href="#八-PHP-FPM配置文件www-conf" class="headerlink" title="八.PHP-FPM配置文件www.conf"></a>八.PHP-FPM配置文件<a href="http://www.conf/">www.conf</a></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[www]</span><br><span class="line"></span><br><span class="line">user = www</span><br><span class="line">group = www</span><br><span class="line"></span><br><span class="line">;listen = 127.0.0.1:9000</span><br><span class="line">listen = /dev/shm/php71-fpm.socket</span><br><span class="line"></span><br><span class="line">listen.owner = www</span><br><span class="line">listen.group = www</span><br><span class="line">listen.mode = 0660</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">listen.allowed_clients = 127.0.0.1</span><br><span class="line"></span><br><span class="line">#如果选择static，则进程数就数固定的，由pm.max_children指定固定的子进程数。</span><br><span class="line">pm = static</span><br><span class="line">pm.max_children = 256</span><br><span class="line">pm.start_servers = 5</span><br><span class="line">#随着php-fpm一起启动时创建的子进程数目。默认值：min_spare_servers + (max_spare_servers - min_spare_servers) / 2。</span><br><span class="line">#这里表示，一起启动会有20个子进程</span><br><span class="line">pm.min_spare_servers = 5</span><br><span class="line">#设置服务器空闲时最小php-fpm进程数量。必须设置。如果空闲的时候，会检查如果少于10个，就会启动几个来补上。</span><br><span class="line">pm.max_spare_servers = 35</span><br><span class="line">#设置服务器空闲时最大php-fpm进程数量。必须设置。如果空闲时，会检查进程数，多于30个了，就会关闭几个，达到30个的状态。</span><br><span class="line">pm.max_requests = 5000</span><br><span class="line">#设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. </span><br><span class="line">#如果设置为 &#x27;0&#x27; 则一直接受请求. 等同于 PHP_FCGI_MAX_REQUESTS 环境变量. 默认值: 0.</span><br><span class="line">pm.status_path = /php7-php-fpm-status</span><br><span class="line"></span><br><span class="line">#当request_slowlog_timeout 设为一个具体秒时request_slowlog_timeout =5，表</span><br><span class="line">#示如果哪个脚本执行时间大于5秒，会记录这个脚本到慢日志文件中</span><br><span class="line">request_slowlog_timeout =10</span><br><span class="line">slowlog = /var/opt/remi/php71/log/php-fpm/www-slow.log</span><br><span class="line"></span><br><span class="line">php_admin_value[error_log] = /var/opt/remi/php71/log/php-fpm/www-error.log</span><br><span class="line">php_admin_flag[log_errors] = on</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">php_value[session.save_handler] = files</span><br><span class="line">php_value[session.save_path]    = /var/opt/remi/php71/lib/php/session</span><br><span class="line">php_value[soap.wsdl_cache_dir]  = /var/opt/remi/php71/lib/php/wsdlcache</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="九、php-ini配置文件"><a href="#九、php-ini配置文件" class="headerlink" title="九、php.ini配置文件"></a>九、php.ini配置文件</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#关闭PHP版本信息</span><br><span class="line">expose_php = On</span><br><span class="line"></span><br><span class="line">#.单个脚本等待输入的最长时间</span><br><span class="line">max_input_time = 60</span><br><span class="line"></span><br><span class="line">memory_limit = 128M</span><br><span class="line">error_reporting = E_ALL &amp; ~E_DEPRECATED &amp; ~E_STRICT</span><br><span class="line"></span><br><span class="line">#每个脚本最大允许执行时间(秒)，0表示没有限制</span><br><span class="line">max_execution_time = 300</span><br><span class="line"></span><br><span class="line">#上传文件的最大许可大小</span><br><span class="line">upload_max_filesize = 20M</span><br><span class="line"></span><br><span class="line">#post上传的大小，要&gt;=upload_max_filesize</span><br><span class="line">post_max_size = 20M</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#修改成如下设置：</span><br><span class="line">session.save_handler = memcache</span><br><span class="line">session.save_path = &quot;tcp://10.0.0.18:11211&quot;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;一、安装Remi源：&quot;&gt;&lt;a href=&quot;#一、安装Remi源：&quot; class=&quot;headerlink&quot; title=&quot;一、安装Remi源：&quot;&gt;&lt;/a&gt;一、安装Remi源：&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;# CentOS 6 / RHEL 6
+yum instal</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搭建 nginx_server</title>
+    <link href="http://example.com/2022/04/17/nginx-server/"/>
+    <id>http://example.com/2022/04/17/nginx-server/</id>
+    <published>2022-04-17T14:53:07.000Z</published>
+    <updated>2022-06-24T08:25:50.700Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><h2 id="1-yum-安装（默认情况下使用yum安装的nginx包含ssl模块）"><a href="#1-yum-安装（默认情况下使用yum安装的nginx包含ssl模块）" class="headerlink" title="1.yum 安装（默认情况下使用yum安装的nginx包含ssl模块）"></a>1.yum 安装（默认情况下使用yum安装的nginx包含ssl模块）</h2><pre><code>    官方 yum 源链接 http://nginx.org/en/linux_packages.html#RHEL-CentOS        vim /etc/yum.repos.d/nginx.repo    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[nginx-stable]</span><br><span class="line">name=nginx stable repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br><span class="line"></span><br><span class="line">[nginx-mainline]</span><br><span class="line">name=nginx mainline repo</span><br><span class="line">baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br></pre></td></tr></table></figure>        yum-config-manager --enable nginx-stable        yum install nginx</code></pre><h2 id="2-源码编译安装"><a href="#2-源码编译安装" class="headerlink" title="2.源码编译安装"></a>2.源码编译安装</h2><pre><code>下载源码包  http://nginx.org/en/download.html  下载稳定版本Mainline version：Mainline 是 Nginx 目前主力在做的版本，可以说是开发版Stable version：最新稳定版，生产环境上建议使用的版本Legacy versions：遗留的老版本的稳定版下载命令wget http://nginx.org/download/nginx-1.22.0.tar.gz解压缩tar -zxvf nginx-1.22.0.tar.gz     ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-pcre  make &amp;&amp; make install  ln -s /usr/local/nginx/conf  /etc/nginx   </code></pre><h1 id="配置服务"><a href="#配置服务" class="headerlink" title="配置服务"></a>配置服务</h1><pre><code>vim /lib/systemd/system/nginx.service           <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s quit</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>软连接etc目录ln -s /usr/local/nginx/conf /etc/nginx   systemctl status nginxsystemctl reload nginxsystemctl start nginx开机启动systemctl enable nginx添加用户groupadd wwwuseradd -g www -s /sbin/nologin www  </code></pre><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><h6 id="etc-nginx-nginx-conf"><a href="#etc-nginx-nginx-conf" class="headerlink" title="/etc/nginx/nginx.conf"></a>/etc/nginx/nginx.conf</h6><pre><code>   user  www;   #cpu 几核 这进程就多少   worker_processes  2;   worker_cpu_affinity 01 10;      worker_rlimit_nofile 65535;  # 一般等于ulimit -n系统值      #error_log  logs/error.log;   #error_log  logs/error.log  notice;   #error_log  logs/error.log  info;      #pid        logs/nginx.pid;         events &#123;       worker_connections  10240;       use epoll;   &#125;         http &#123;       include       mime.types;       default_type  application/octet-stream;       server_tokens off;          #log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;       #                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;       #                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;          #access_log  logs/access.log  main;          sendfile        on;       #tcp_nopush     on;          #keepalive_timeout  0;       keepalive_timeout  65;          gzip on;       #表示开启压缩功能       gzip_min_length  1k; #表示允许压缩的页面最小字节数，页面字节数从header头的Content-Length中获取。默认值是0，表示不管页面多大都进行压缩，建议设置成大于1K。如果小于1K可能会&gt;越压越大       gzip_buffers     4 32k; #压缩缓存区大小       gzip_http_version 1.1; #压缩版本       gzip_comp_level 6; #压缩比率， 一般选择4-6，为了性能       gzip_types text/css text/xml application/javascript;       #指定压缩的类型 gzip_vary on;　#vary header支持             #配置空主机头 404       server &#123;           listen 80 default;           server_name _;           root html;           location / &#123; return 404;&#125;           location ~ /.ht &#123; deny all; &#125;          &#125;       include vhost/*.conf;   &#125;</code></pre><h6 id="vhost-conf"><a href="#vhost-conf" class="headerlink" title="vhost/*.conf"></a>vhost/*.conf</h6><pre><code>server&#123;    listen 80;    server_name tp.webstudy.cc;    set $wwwroot /home/www/htdocs/tp.webstudy.cc;    root $wwwroot;    access_log  logs/ai.access.log;    error_log logs/ai.error.log debug;    #ssl_certificate     /usr/local/nginx/conf/ssl/jinju.utooo.com/Nginx/1_jinju.utooo.com_bundle.crt;    #ssl_certificate_key /usr/local/nginx/conf/ssl/jinju.utooo.com/Nginx/2_jinju.utooo.com.key;    #ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;    location / &#123;        index  index.php index.html index.htm;        # 这里使用try_files进行url重写，不用rewrite了        # try_files $uri $uri/ /index.php?$query_string;    &#125;   #error_page   500 502 503 504  /50x.html;   location = /50x.html &#123;        root   html;    &#125;    location ~ .*\.php&#123;            include fastcgi_params;            fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;            fastcgi_pass 127.0.0.1:9000;            fastcgi_index index.php;    &#125;&#125;  </code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;安装nginx&quot;&gt;&lt;a href=&quot;#安装nginx&quot; class=&quot;headerlink&quot; title=&quot;安装nginx&quot;&gt;&lt;/a&gt;安装nginx&lt;/h1&gt;&lt;h2 id=&quot;1-yum-安装（默认情况下使用yum安装的nginx包含ssl模块）&quot;&gt;&lt;a href=</summary>
+      
+    
+    
+    
+    <category term="server" scheme="http://example.com/categories/server/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>通过vsftpd搭建ftp服务器</title>
+    <link href="http://example.com/2022/04/15/vsftpd-server/"/>
+    <id>http://example.com/2022/04/15/vsftpd-server/</id>
+    <published>2022-04-15T14:12:12.000Z</published>
+    <updated>2022-05-07T08:56:01.293Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.yum 安装</p><pre><code>yum install vsftpd</code></pre><p>2.编译安装</p><pre><code>yum -y install epel-release &amp;&amp; yum -y install pam pam-devel db4-utilswget https://security.appspot.com/downloads/vsftpd-3.0.5.tar.gztar xf vsftpd-3.0.3.tar.gzmake clean &amp;&amp; make -j 4 &amp;&amp; make install如果编译的时候报错/usr/bin/ld: cannot find -lcap查找该 .so 文件find / -name &quot;*libcap.so*&quot;/usr/lib64/libcap.so.2.22/usr/lib64/libcap.so.2ln -sv /usr/lib64/libcap.so.2 /usr/lib64/libcap.so</code></pre><p>3./etc/vsftpd/vsftp.conf  配置文件    </p><pre><code>配置文件  vsftp.conf </code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#关闭匿名访问</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">local_enable=YES</span><br><span class="line">#启用虚拟账户</span><br><span class="line">guest_enable=YES</span><br><span class="line">##把虚拟账户映射到系统账户virftp</span><br><span class="line">guest_username=virftp</span><br><span class="line">##使用虚拟用户验证（PAM验证）</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">#设置存放各虚拟用户配置文件的目录（此目录下与虚拟用户名相同的文件为他的配置文件）</span><br><span class="line">user_config_dir=/etc/vsftpd/vsftpd_viruser</span><br><span class="line">##启用chroot时，虚拟用户根目录允许写入</span><br><span class="line">allow_writeable_chroot=YES</span><br><span class="line"></span><br><span class="line"># Uncomment this to enable any form of FTP write command.</span><br><span class="line">write_enable=YES</span><br><span class="line">#</span><br><span class="line"># Default umask for local users is 077. You may wish to change this to 022,</span><br><span class="line"># if your users expect that (022 is used by most other ftpd&#x27;s)</span><br><span class="line">local_umask=022</span><br><span class="line">#监听端口 默认21</span><br><span class="line">listen_port=10021</span><br><span class="line">#数据传输端口 默认20</span><br><span class="line">ftp_data_port=10020</span><br><span class="line"></span><br><span class="line">#被动模式 配置</span><br><span class="line">pasv_enable=YES</span><br><span class="line">pasv_min_port=20000</span><br><span class="line">pasv_max_port=20010</span><br><span class="line"># 可以发送消息当访问某个目录时</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line"># 开启上传下载记录</span><br><span class="line">xferlog_enable=YES</span><br><span class="line"># 日志标准输出</span><br><span class="line">xferlog_std_format=YES</span><br><span class="line"></span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">#监听ipv4</span><br><span class="line">listen=NO</span><br><span class="line"># 监听IPv6和监听IPv4</span><br><span class="line">listen_ipv6=YES</span><br><span class="line"></span><br><span class="line">userlist_enable=YES</span><br><span class="line"># 访问控制</span><br><span class="line">tcp_wrappers=YES</span><br></pre></td></tr></table></figure><p><strong>注意 根据需求自行修改<b><i>vsftp.conf</i></b>端口号以及模式：</strong><br><font color="#FF0000">#监听端口 默认21<br/>listen_port=10021<br/>#数据传输端口 默认20<br/>ftp_data_port=10020<br/>#被动模式 配置<br/>pasv_enable=YES<br/>pasv_min_port=20000<br/> pasv_max_port=20010<br/></font> </p><p>4、生成虚拟用户数据库：</p><pre><code>touch /etc/vsftpd/vir_uservir_user文件内容：    user1    password1    user2    password2yum -y install libdb-utilsdb_load -T -t hash -f /etc/vsftpd/vir_user /etc/vsftpd/vir_user.dbchmod 700 /etc/vsftpd/vir_user.db</code></pre><p>5、将auth及account的所有配置行均注释掉，添加如下两行</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pam.d/vsftpd</span><br><span class="line"></span><br><span class="line">auth                 required     pam_userdb.so   db=/etc/vsftpd/vir_user </span><br><span class="line">account              required     pam_userdb.so   db=/etc/vsftpd/vir_user</span><br></pre></td></tr></table></figure><p>6、增加一个系统用户</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/ftproot</span><br><span class="line">useradd -d /home/ftproot -s /sbin/nologin virftp</span><br><span class="line">chown -R virftp:virftp /home/ftproot</span><br></pre></td></tr></table></figure><p>7、创建和配置虚拟用户各自的配置文件，文件名称是‘虚拟用户名</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd_viruser/根据创建虚拟用户密码文件来(user1,user2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#允许写入</span><br><span class="line">write_enable=YES</span><br><span class="line">#允许浏览FTP目录和下载</span><br><span class="line">anon_world_readable_only=NO</span><br><span class="line">#允许虚拟用户上传文件</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">#允许虚拟用户创建目录</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">#允许虚拟用户执行其他操作（如改名、删除）</span><br><span class="line">anon_other_write_enable=YES</span><br><span class="line">#上传文件的掩码,如022时，上传目录权限为755,文件权限为644</span><br><span class="line">anon_umask=022</span><br><span class="line">#指定虚拟用户的虚拟目录（虚拟用户登录后的主目录） 可以指定其他目录  注意权限（给虚拟账号权限chown -R virftp:virftp 目录）</span><br><span class="line">local_root=/ftproot/admin/</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>8、各配置文件说明：</p><pre><code>/etc/vsftpd/vsftpd.conf                             ：vsftpd的主配置文件/etc/vsftpd/vir_user                                   ：虚拟用户的账号密码文件  /etc/vsftpd/vsftpd_viruser/user1            ：虚拟用户‘user1’的配置文件/etc/pam.d/vsftpd                                     ：启用虚拟用户验证功能的配置文件</code></pre><p>9、命令</p><pre><code>rename [filename]  [newfilename]，重命名远程Linux FTP服务器上指定的文件｡rename 1111.xlsx   processed/1111.xlsx</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;1.yum 安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install vsftpd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2.编译安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum -y install epel-release &amp;amp;&amp;amp; yum -y install p</summary>
+      
+    
+    
+    
+    <category term="server" scheme="http://example.com/categories/server/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搭建lnmp环境</title>
+    <link href="http://example.com/2022/04/13/make-lnmp/"/>
+    <id>http://example.com/2022/04/13/make-lnmp/</id>
+    <published>2022-04-13T15:00:07.000Z</published>
+    <updated>2022-04-26T06:59:26.688Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搭建git服务（适用小团队开发）</title>
+    <link href="http://example.com/2022/04/13/git-server/"/>
+    <id>http://example.com/2022/04/13/git-server/</id>
+    <published>2022-04-13T14:14:23.000Z</published>
+    <updated>2022-04-26T12:33:08.058Z</updated>
+    
+    <content type="html"><![CDATA[<p> #标签</p><ul><li><p>git<br>#添加账号<br>  useradd git </p><p>  useradd -g git test<br>  passwd test</p><p>  cd /home/git/<br>#创建项目<br>  git init –bare 项目名称.git</p></li></ul><p>#配置权限<br>    cd /home/git/项目名称.git</p><pre><code>git config core.sharedRepository 0770</code></pre><p>第二种方法 公钥 方法</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt; #标签&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;git&lt;br&gt;#添加账号&lt;br&gt;  useradd git &lt;/p&gt;
+&lt;p&gt;  useradd -g git test&lt;br&gt;  passwd test&lt;/p&gt;
+&lt;p&gt;  cd /home/git/&lt;br&gt;#创建项目&lt;br&gt;  gi</summary>
+      
+    
+    
+    
+    <category term="server" scheme="http://example.com/categories/server/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS模块化</title>
+    <link href="http://example.com/2022/02/26/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    <id>http://example.com/2022/02/26/js%E6%A8%A1%E5%9D%97%E5%8C%96/</id>
+    <published>2022-02-26T02:48:58.000Z</published>
+    <updated>2022-02-26T03:11:06.791Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="CommonJs规范简"><a href="#CommonJs规范简" class="headerlink" title="CommonJs规范简"></a>CommonJs规范简</h2><pre><code>前端模块化最初是服务于服务端的 但它的载体是前端语言 JavaScriptcommonjs 随着 nodejs 的诞生而面世，主要是用来解决服务端模块化的问题Node.js 应用由模块组成，每个文件就是一个模块，有自己的作用域。在一个文件里面定义的变量、函数、类，都是私有的，对其他文件不可见 CommonJS 规范的模块时，无外乎就是使用了 require 、 exports 、 module 三个东西， 然后一个 js 文件就是一个模块  弊端require 多个文件  网络加载问题</code></pre><h3 id="require"><a href="#require" class="headerlink" title="require"></a>require</h3><pre><code>用来加载某个模块</code></pre><h3 id="module"><a href="#module" class="headerlink" title="module"></a>module</h3><pre><code>module 代表当前模块，是一个对象，保存了当前模块的信息exports 是 module 上的一个属性，保存了当前模块要导出的接口或者变量，使用 require 加载的某个模块获取到的值就是那个模块使用 exports 导出的值</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">var name = &#x27;morrain&#x27;</span><br><span class="line">var age = 18</span><br><span class="line">module.exports.name = name</span><br><span class="line">module.exports.getAge = function()&#123;</span><br><span class="line">    return age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//b.js</span><br><span class="line">var a = require(&#x27;a.js&#x27;)</span><br><span class="line">console.log(a.name) // &#x27;morrain&#x27;</span><br><span class="line">console.log(a.getAge())// 18</span><br></pre></td></tr></table></figure><h3 id="exports"><a href="#exports" class="headerlink" title="exports"></a>exports</h3><pre><code>为了方便，Node.js 在实现 CommonJS 规范时，为每个模块提供一个 exports的私有变量为每个模块提供一个 exports的私有变量，指向 module.exports你可以理解为 Node.js 在每个模块开始的地方，添加了如下这行代码。exports 是模块内的私有局部变量，它只是指向了 module.exports所以直接对 exports 赋值是无效的</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//a.js</span><br><span class="line">var name = &#x27;test&#x27;</span><br><span class="line">var age = 18</span><br><span class="line">exports.name = name</span><br><span class="line">exports.getAge = function()&#123;</span><br><span class="line">    return age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//b.js</span><br><span class="line"></span><br><span class="line">a = require(&#x27;a.js&#x27;)</span><br><span class="line">console.log(a.name)</span><br><span class="line">a.name</span><br></pre></td></tr></table></figure><h2 id="AMD-Asynchronous-Module-Definition-异步模块定义-require-js"><a href="#AMD-Asynchronous-Module-Definition-异步模块定义-require-js" class="headerlink" title="AMD(Asynchronous Module Definition 异步模块定义)   require.js"></a>AMD(Asynchronous Module Definition 异步模块定义)   require.js</h2><pre><code>　　（1）实现js文件的异步加载，避免网页失去响应；　　（2）管理模块之间的依赖性，便于代码的编写和维护。</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">define(id?, dependencies?, factory)</span><br><span class="line"></span><br><span class="line">id：可选参数，用来定义模块的标识，如果没有提供该参数，就使用 js 文件名（去掉拓展名）对于一个 js 文件只定义了一个模块时，这个参数是可以省略的</span><br><span class="line"></span><br><span class="line">dependencies：可选参数，是一个数组，表示当前模块的依赖，如果没有依赖可以不传</span><br><span class="line"></span><br><span class="line">factory：工厂方法，模块初始化要执行的函数或对象。如果为函数，它应该只被执行一次，返回值便是模块要导出的值。</span><br><span class="line">如果是对象，此对象应该为模块的输出值</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">define(function()&#123;</span><br><span class="line">    var name = &#x27;morrain&#x27;</span><br><span class="line">    var age = 18</span><br><span class="line">    return &#123;</span><br><span class="line">        name,</span><br><span class="line">        getAge: () =&gt; age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">// b.js</span><br><span class="line">define([&#x27;a.js&#x27;], function(a)&#123;</span><br><span class="line">    var name = &#x27;lilei&#x27;</span><br><span class="line">    var age = 15</span><br><span class="line">    console.log(a.name) // &#x27;morrain&#x27;</span><br><span class="line">    console.log(a.getAge()) // 18</span><br><span class="line">    return &#123;</span><br><span class="line">        name,</span><br><span class="line">        getAge: () =&gt; age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h2 id="CMD-Common-Module-Definition-Sea-js"><a href="#CMD-Common-Module-Definition-Sea-js" class="headerlink" title="CMD (Common Module Definition)  Sea.js"></a>CMD (Common Module Definition)  Sea.js</h2><pre><code> Sea.js </code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;sea.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;b.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">// a.js</span><br><span class="line">define(function(require, exports, module)&#123;</span><br><span class="line">    var name = &#x27;morrain&#x27;</span><br><span class="line">    var age = 18</span><br><span class="line"></span><br><span class="line">    exports.name = name</span><br><span class="line">    exports.getAge = () =&gt; age</span><br><span class="line">&#125;)</span><br><span class="line">// b.js</span><br><span class="line">define(function(require, exports, module)&#123;</span><br><span class="line">    var name = &#x27;lilei&#x27;</span><br><span class="line">    var age = 15</span><br><span class="line">    var a = require(&#x27;a.js&#x27;)</span><br><span class="line"></span><br><span class="line">    console.log(a.name) // &#x27;morrain&#x27;</span><br><span class="line">    console.log(a.getAge()) //18</span><br><span class="line"></span><br><span class="line">    exports.name = name</span><br><span class="line">    exports.getAge = () =&gt; age</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h2 id="ES6-Moudule"><a href="#ES6-Moudule" class="headerlink" title="ES6 Moudule"></a>ES6 Moudule</h2>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;CommonJs规范简&quot;&gt;&lt;a href=&quot;#CommonJs规范简&quot; class=&quot;headerlink&quot; title=&quot;CommonJs规范简&quot;&gt;&lt;/a&gt;CommonJs规范简&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;前端模块化
+
+最初是服务于服务端的 但它的载体是前端</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>git总结</title>
+    <link href="http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/"/>
+    <id>http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/</id>
+    <published>2022-01-08T14:19:16.000Z</published>
+    <updated>2022-04-26T11:48:29.466Z</updated>
+    
+    <content type="html"><![CDATA[<p> #标签</p><ul><li><p>git</p><h1 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h1><p>  工作区(workspace)      就是你平时存放项目代码的地方<br>  暂存区(stage)          git add<br>  仓库区/版本库(Repository)     git commit<br>  远程仓库</p></li></ul><h1 id="二、回退问题"><a href="#二、回退问题" class="headerlink" title="二、回退问题"></a>二、回退问题</h1><h2 id="1-git-add-后回退"><a href="#1-git-add-后回退" class="headerlink" title="1.git add 后回退"></a>1.git add 后回退</h2><pre><code>git status 先看一下add 中的文件git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了git reset HEAD XXX/XXX/XXX.java 就是对某个文件进行撤销了</code></pre><h2 id="2-git-commit后回退"><a href="#2-git-commit后回退" class="headerlink" title="2.git commit后回退"></a>2.git commit后回退</h2><pre><code>git log    命令显示从最近到最远的提交日志    [root@localhost test-jenkins]# git log    commit e2c7f2d567cbdc36e4503479e15ea51d19816d33    Author: root &lt;root@localhost.localdomain&gt;    Date:   Fri Jan 7 11:17:27 2022 +0800    dev branch change    commit 8943166480734ac5a760e482a887ee8da0140ec8    Author: root &lt;root@localhost.localdomain&gt;    Date:   Fri Jan 7 10:56:22 2022 +0800    dev branch add index.php    。。。。git reest --hard  commit_id                  上一个版本就是HEAD^，                  上上一个版本就是HEAD^^，                  当然往上100个版本写100个^比较容易数不过来，                  所以写成HEAD~100。例：    git reset --hard 139dcfaa558e3276b30b6b2e5cbbb9c00bbdca96    git reset --hard HEAD^将会删除此版本之前添加强制push到对应的远程分支（如提交到develop分支）git push -f -u origin develop</code></pre><h2 id="3-回退后悔药"><a href="#3-回退后悔药" class="headerlink" title="3.回退后悔药"></a>3.回退后悔药</h2><pre><code>git reflog用来记录你的每一次命令[root@localhost test-jenkins]# git reflog8943166 HEAD@&#123;0&#125;: reset: moving to 8943166480734ac5a760e482a887ee8da0140ec8e2c7f2d HEAD@&#123;1&#125;: commit: dev branch change8943166 HEAD@&#123;2&#125;: commit: dev branch add index.php1ca6f06 HEAD@&#123;3&#125;: checkout: moving from release to dev1ca6f06 HEAD@&#123;4&#125;: pull origin release: Fast-forward14fbb47 HEAD@&#123;5&#125;: checkout: moving from master to release14fbb47 HEAD@&#123;6&#125;: clone: from ssh://git@117.89.131.220:44222/zhaoyoushui/test-jenkins.gitgit reset --hard e2c7f2d</code></pre><h2 id="4-已经提交远程分支"><a href="#4-已经提交远程分支" class="headerlink" title="4.已经提交远程分支"></a>4.已经提交远程分支</h2><pre><code>git reset 方法回退拉过的错误版本的本地分支  多需要回退回退  强制推送  远程git revert 版本号git revert HEAD 上个版本git revert HEAD~n 上n个版本git push 远程其他客户端正常拉取就可以</code></pre><h1 id="三、Git-Reset-三种模式"><a href="#三、Git-Reset-三种模式" class="headerlink" title="三、Git Reset 三种模式"></a>三、Git Reset 三种模式</h1><pre><code>--hard: 会清空工作目录和暂存区的改动--soft：保留工作目录，并把重置 HEAD 所带来的新的差异放进暂存区  **变得只是仓库区**--mixed reset 不加参数(mixed)：保留工作目录，并清空暂存区</code></pre><h1 id="四、修改远程url"><a href="#四、修改远程url" class="headerlink" title="四、修改远程url"></a>四、修改远程url</h1><pre><code>1.方法一    git remote set-url origin [url]    git remote -v 查看2.方法二    git remote rm origin    git remote add origin [url]    git remote -v 查看3.方法三    直接修改config 文件</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt; #标签&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;git&lt;/p&gt;
+&lt;h1 id=&quot;一、基础知识&quot;&gt;&lt;a href=&quot;#一、基础知识&quot; class=&quot;headerlink&quot; title=&quot;一、基础知识&quot;&gt;&lt;/a&gt;一、基础知识&lt;/h1&gt;&lt;p&gt;  工作区(workspace)      </summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>webpack学习笔记1</title>
+    <link href="http://example.com/2022/01/01/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/"/>
+    <id>http://example.com/2022/01/01/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</id>
+    <published>2022-01-01T07:19:05.000Z</published>
+    <updated>2022-02-26T02:46:01.762Z</updated>
+    
+    <content type="html"><![CDATA[<p>#1. webpack 安装</p><pre><code>全局安装 nodejs    验证  node -v          npm -vnpm install webpack -gnpm install webpack-cli -g正常情况下 安装webpack-cli 会自动安装webpacknpm uninstall webpack -g 全局卸载单独项目内安装npm install webpack webpack-cli --save-dev或者npm install webpack webpack-cli -D运行npx webpack -v   //注 npx 会在node_module文件夹中找安装特定版本npm info webpack   //查看webpack有那些版本npm install webpack@4.16.5 webpack-cli -D</code></pre><p>#2.webpack 基本使用</p><pre><code>npm init    增加package.json文件npm init -y</code></pre><p>#3.一些语法</p><pre><code>ES Module 模块引入方式</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#1. webpack 安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;全局安装 nodejs
+    验证  node -v
+          npm -v
+npm install webpack -g
+npm install webpack-cli -g
+正常情况下 安装webp</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>web备份方案</title>
+    <link href="http://example.com/2021/12/23/web%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88/"/>
+    <id>http://example.com/2021/12/23/web%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88/</id>
+    <published>2021-12-23T12:33:32.000Z</published>
+    <updated>2022-02-26T02:46:01.763Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一、服务器环境"><a href="#一、服务器环境" class="headerlink" title="一、服务器环境"></a>一、服务器环境</h2><pre><code>    192.168.100.230 web服务器    192.168.100.20  备份服务器 （rsync服务端）</code></pre><h2 id="二、备份服务器安装-rsync-服务端"><a href="#二、备份服务器安装-rsync-服务端" class="headerlink" title="二、备份服务器安装 rsync 服务端"></a>二、备份服务器安装 rsync 服务端</h2><pre><code>rpm -qa|grep rsync    //检查是否安装 rsyncyum install -y rsyncvim /etc/rsyncd.conf   //编辑rsyncd服务rsyncd.conf配置文件如下</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#rsyncd.conf start</span><br><span class="line">uid = rsync                                </span><br><span class="line">gid = rsync</span><br><span class="line">use chroot=no</span><br><span class="line">max connections=200</span><br><span class="line">timeout = 300</span><br><span class="line">pid file = /var/run/rsyncd.pid</span><br><span class="line">lock file = /var/run/rsyncd.lock</span><br><span class="line">log file = /var/log/rsyncd.log</span><br><span class="line">ignore errors</span><br><span class="line">read only = false</span><br><span class="line">list = false </span><br><span class="line">hosts allow = 172.16.1.0/24</span><br><span class="line">#hosts deny = 0.0.0.0/32</span><br><span class="line">auth users = rsync_backup</span><br><span class="line">secrets file = /etc/rsync.password</span><br><span class="line">fake super = yes</span><br><span class="line">[backup]</span><br><span class="line">comment = &quot;backup dir by oldboy&quot;</span><br><span class="line">path = /home/backup  </span><br><span class="line">#备份的目录</span><br></pre></td></tr></table></figure><pre><code>创建rsync 服务管理用户useradd -s /sbin/nologin -M rsync创建数据备份存储目录chown -R rsyn.rsync /home/backup创建认证用户密码文件echo &quot;rsync_backup:admin.123!@#$&quot;  &gt;/etc/rsync.passwordchmod 600 /etc/rsync.password启动rsync服务systemctl start rsyncd       </code></pre><h2 id="三、配置web-服务器端（192-168-100-230）"><a href="#三、配置web-服务器端（192-168-100-230）" class="headerlink" title="三、配置web 服务器端（192.168.100.230）"></a>三、配置web 服务器端（192.168.100.230）</h2><pre><code>    确认 rsync是否安装        rpm -qa|grep rsync        建立认证文件            echo &quot;密码字符串（与rsync一致）&quot;  &gt;/etc/rsync.password        chmod 600 /etc/rsync.password        web01主机数据传输到backup主机测试测试传输            Push: rsync [OPTION...] SRC... [USER@]HOST::DEST        交互式：rsync -avz /etc/hosts  rsync_backup@172.16.1.41::backup        非交互式：rsync -avz /etc/hosts  rsync_backup@172.16.1.41::backup --password-file=/etc/rsync.password                    shell 脚本</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">objectFilename=(&#x27;文件夹名称&#x27;);</span><br><span class="line">sourcePath=&#x27;/apps/web/&#x27;;</span><br><span class="line">for(( i=0;i&lt;$&#123;#objectFilename[@]&#125;;i++)) </span><br><span class="line">do </span><br><span class="line">    tar zcf /home/backup/web/source/$&#123;objectFilename[i]&#125;-$(date +%Y-%m-%d).tar.gz -C $&#123;sourcePath&#125; $&#123;objectFilename[i]&#125;; </span><br><span class="line">    rsync -avz /home/backup/web/source/  rsync_backup@192.168.100.20::backup --password-file=/etc/rsync.password</span><br><span class="line">    rm -rf /home/backup/web/source/$&#123;objectFilename[i]&#125;-$(date +%Y-%m-%d).tar.gz</span><br><span class="line">done;</span><br></pre></td></tr></table></figure><h2 id="四、注意事项"><a href="#四、注意事项" class="headerlink" title="四、注意事项"></a>四、注意事项</h2><pre><code>特殊情况 总是提示权限问题修改 服务端    uid = root                                    gid = root    fake super = no脚本备份大文件有问题</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;一、服务器环境&quot;&gt;&lt;a href=&quot;#一、服务器环境&quot; class=&quot;headerlink&quot; title=&quot;一、服务器环境&quot;&gt;&lt;/a&gt;一、服务器环境&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;    192.168.100.230 web服务器
+    192.168.100</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>普通心理学笔记2</title>
+    <link href="http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B02/"/>
+    <id>http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B02/</id>
+    <published>2021-12-21T13:05:13.000Z</published>
+    <updated>2022-04-26T11:49:55.331Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="现代心理学6个视角"><a href="#现代心理学6个视角" class="headerlink" title="现代心理学6个视角"></a>现代心理学6个视角</h1><pre><code>起源：古希腊哲学家 苏格拉底 柏拉图 亚里士多德 意识和疯癫的理解亚洲和非洲 瑜伽和佛教 探索意识 通过冥想控制意识天主教1.生物视角        大脑、神经系统、内分泌系统（激素）和基因        笛卡尔2.认知视角    每个人有各自的知觉模式、解释、预期、信念和记忆   威廉。冯特 威廉詹姆斯         3.行为视角        环境的刺激和先前行为的结果                   约翰。华生 斯金纳4.全人视角                                   弗洛伊德 古希腊           心理动力：无意识心理的过程    人本主义    特质和气质：5.发展视角                                   安斯沃思    遗传和环境的交互作用，在毕生发展中塑造    6.社会文化视角                                津巴多        环境的影响。社会和文化比其他因素更能决定行为</code></pre><p>笛卡尔 精神和肉体是分离的  由此生物学视角诞生</p><p>生物学主题</p><pre><code>神经科学进化心理学</code></pre><p>德国科学家  威廉 冯特 |内省法  格式塔心理学家</p><pre><code>科学心理学和现代认知视角的建立元素周期表  研究自然世界的科学方法  结构主义纳克立方体</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;现代心理学6个视角&quot;&gt;&lt;a href=&quot;#现代心理学6个视角&quot; class=&quot;headerlink&quot; title=&quot;现代心理学6个视角&quot;&gt;&lt;/a&gt;现代心理学6个视角&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;起源：古希腊哲学家 苏格拉底 柏拉图 亚里士多德 意识和疯癫的理解
+</summary>
+      
+    
+    
+    
+    <category term="心理学" scheme="http://example.com/categories/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>普通心理学笔记1</title>
+    <link href="http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B01/"/>
+    <id>http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B01/</id>
+    <published>2021-12-21T12:17:10.000Z</published>
+    <updated>2022-04-26T11:49:44.263Z</updated>
+    
+    <content type="html"><![CDATA[<p>#心理学</p><pre><code>心理学研究行为和心理过程一门多个专业领域的的科学</code></pre><p>#心理学三大分支</p><pre><code>实验心理学     实验心理学家 最少的心理学教学    心理学教师应用心理学    工业与组织心理学家    运动心里学家    学校心理学家    临床和咨询心理学家    法医心理学家    环境心理学家</code></pre><p>#心理学与精神病学区别</p><pre><code>精神病学是医学 接受过治疗精神与行为疾病的训练具有开具处方的执照从医学角度看问题心理学关注更为广泛 人类的行为和心理过程大脑功能到社会交往心里健康到心理障碍心理学角度 来访者</code></pre><p>#批判性思考技巧</p><pre><code>1.其来源出自哪里 问题的来源    提出问题的人 是否擅长啊    由于什么原因 提出了这个问题2.这个观点是合理的还是极端的3.证据是什么4.是否有影响结论的偏差    验证性偏差 只记得验证成功的那一面5.推理是否避开了常见谬误    避免 常识6.看待这个问题是否需要多种角度</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#心理学&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;心理学研究行为和心理过程
+一门多个专业领域的的科学
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;#心理学三大分支&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;实验心理学 
+    实验心理学家 最少的
+心理学教学
+    心理学教师
+应用心理学
+    工业</summary>
+      
+    
+    
+    
+    <category term="心理学" scheme="http://example.com/categories/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo基础应用</title>
+    <link href="http://example.com/2021/12/10/Hexo%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8/"/>
+    <id>http://example.com/2021/12/10/Hexo%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8/</id>
+    <published>2021-12-10T06:20:38.000Z</published>
+    <updated>2022-02-26T02:46:01.762Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.首先安装node,具体参考<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p><p>2.初始化 项目</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure><p>将会在当前目录下产生blog文件夹</p><p>3.新建文章</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n 文章标题  //完整命令 hexo new 文章标题</span><br></pre></td></tr></table></figure><p>相应会在source/_posts 目录下产生   文章标题.md</p><p>4.生成html</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g        //完整命令  hexo generate</span><br></pre></td></tr></table></figure><p>将会在public目录生成相应的html文件</p><p>5.开启本地测试环境</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s        //完整命令  hexo server</span><br></pre></td></tr></table></figure><pre><code>http://loaclhost:4000就可以访问了</code></pre><p>6.发布代码到github.io</p><pre><code>配置修改_config.yml文件</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: &#x27;git&#x27;</span><br><span class="line">  repo: https://github.com/github账号名称/github账号名称.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d       //发布到线上  hexo generate</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;1.首先安装node,具体参考&lt;a href=&quot;https://hexo.io/zh-cn/docs/&quot;&gt;https://hexo.io/zh-cn/docs/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2.初始化 项目&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
