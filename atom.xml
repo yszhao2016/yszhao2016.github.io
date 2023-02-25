@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-26T12:33:15.102Z</updated>
+  <updated>2023-02-25T06:56:50.277Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,47 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>windows搭建apache+php+mysql5.6</title>
+    <link href="http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/"/>
+    <id>http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/</id>
+    <published>2023-02-25T03:51:34.000Z</published>
+    <updated>2023-02-25T06:56:50.277Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="安装mysql服务"><a href="#安装mysql服务" class="headerlink" title="安装mysql服务"></a>安装mysql服务</h1><pre><code>1.下载地址：https://downloads.mysql.com/archives/community/2.下载相应windows版本3.解压后cmd cd到文件目录mysqld.exe  执行   mysqld.exe install【mysqld remove 移除服务 mysqld start 启动服务】4.设置开机启动  然后再win+r 输入services.msc  打开后找到mysql 右键点击属性   将启动类型设置为自动即可【注：期间不同版本可能会报奇奇怪怪的错，百度安装相关的版本vc库】</code></pre><h1 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h1><pre><code>1.下载地址：https://windows.php.net/downloads/releases/archives/2.下载版本必须有  php7apache2_4.dll  vc版本最好跟apache的版本一样3.配置php.ini 开启相应 扩展4.测试是否能用  到相应目录 执行 php.exe -v【注：期间不同版本可能会报奇奇怪怪的错，百度安装相关的版本vc库】</code></pre><h1 id="安装apache-服务器"><a href="#安装apache-服务器" class="headerlink" title="安装apache 服务器"></a>安装apache 服务器</h1><p>##apache 安装对接php<br>    下载：<a href="https://www.apachelounge.com/download/VC14/">https://www.apachelounge.com/download/VC14/</a></p><pre><code>到apache/config/httpd.conf文件找到&lt;IfModule unixd_module&gt;配置行 在其上面添加LoadModule php7_module C:/php/php7apache2_4.dll  【php7apache2_4.dll 不同版本不同  具体目录根据自己的配置】AddType application/x-httpd-php .php .html .htmPHPIniDir c:/php                                 【配置PHP所在目录  具体目录根据自己的配置】  然后通过bin目录下   **httpd.exe  -t** 测试配置是否通过bin目录下 ApacheMonitor.exe 可以用来启动关闭 httpd服务</code></pre><h2 id="配置apache项目访问"><a href="#配置apache项目访问" class="headerlink" title="配置apache项目访问"></a>配置apache项目访问</h2><h3 id="1-配置项"><a href="#1-配置项" class="headerlink" title="1.配置项"></a>1.配置项</h3><pre><code>    httpd.exe -k install -n &quot;apache2.4&quot;    1.ServerName     配置域名访问地址    例：ServerName 192.168.100.34:8080    ServerName www.baidu.com        2.ServerRoot  配置apache安装目录                 例     Define SRVROOT &quot;c:/httpd&quot;                    ServerRoot &quot;$&#123;SRVROOT&#125;&quot;                                    3.Listen      监听端口                 例     Listen 8080                 4.DocumentRoot    配置项目目录                 例：  DocumentRoot &quot;$&#123;SRVROOT&#125;/htdocs/jnyy.iguanwei.com/public&quot;        5.&lt;Directory 目录&gt;        权限    &lt;/&gt;Directory&gt;    配置目录权限相关            例：        &lt;Directory &quot;$&#123;SRVROOT&#125;/htdocs/jnyy.iguanwei.com/public&quot;&gt;                    Options Indexes FollowSymLinks                    AllowOverride All                    Require all granted         &lt;/Directory&gt;             6.配置默认访问文件            &lt;IfModule dir_module&gt;              DirectoryIndex  index.php index.html        &lt;/IfModule&gt;              </code></pre><h3 id="伪静态"><a href="#伪静态" class="headerlink" title="伪静态"></a>伪静态</h3><pre><code>1. httpd.conf配置文件 启动rewrite模块 如下：    LoadModule rewrite_module modules/mod_rewrite.so2.项目根目录.htaccess文件配置入下  没有则新建    &lt;IfModule mod_rewrite.c&gt;     RewriteEngine on     RewriteBase /     RewriteCond %&#123;REQUEST_FILENAME&#125; !-d     RewriteCond %&#123;REQUEST_FILENAME&#125; !-f     RewriteRule ^(.*)$ index.php?s=/$1 [QSA,PT,L]    &lt;/IfModule&gt;3.对应apache  httpd.conf配置文件     AllowOverride All    &lt;Directory 项目目录&gt;                            Options Indexes FollowSymLinks                            AllowOverride All                            Require all granted    &lt;/Directory&gt;      </code></pre><h3 id="配置开机启动"><a href="#配置开机启动" class="headerlink" title="配置开机启动"></a>配置开机启动</h3><pre><code>   1.将apache加入windows服务              apache的bin目录下 执行 httpd.exe -thttpd.exe -k install -n &quot;apache2.4&quot;         2.设置开机启动  然后再win+r 输入services.msc  打开后找到mysql 右键点击属性   将启动类型设置为自动即可   </code></pre><h1 id="apache相关知识"><a href="#apache相关知识" class="headerlink" title="apache相关知识"></a>apache相关知识</h1><h2 id="windows下apache常用命令"><a href="#windows下apache常用命令" class="headerlink" title="windows下apache常用命令"></a>windows下apache常用命令</h2><pre><code>httpd -k install                           安装apache服务httpd -k uninstall                         移除apache服务httpd -k start                             启动apache服务httpd -k restart                           重启apache服务httpd -k stop                              关闭已安装的apache服务httpd -v                                   查看apache版本httpd -t                                   查看apache配置文件状态    </code></pre><h2 id="重写规则"><a href="#重写规则" class="headerlink" title="重写规则"></a>重写规则</h2><pre><code>网站根目录下创建  .htaccess  文件1) R[=code](force redirect)  #强制外部重定向强制在替代字符串加上http://thishost[:thisport]/前缀重定向到外部的URL.如果code不指定，将用缺省的302 HTTP状态码。2) F(force URL to be forbidden)  #禁用URL,返回403HTTP状态码。3) G(force URL to be gone)  # 强制URL为GONE，返回410HTTP状态码。4) P(force proxy) # 强制使用代理转发。5) L(last rule) # 表明当前规则是最后一条规则，停止分析以后规则的重写。6) N(next round) # 重新从第一条规则开始运行重写过程。7) C(chained with next rule) # 与下一条规则关联如果规则匹配则正常处理，该标志无效，如果不匹配，那么下面所有关联的规则都跳过。8) T=MIME-type(force MIME type) # 强制MIME类型9) NS (used only if no internal sub-request) # 只用于不是内部子请求10) NC(no case) # 不区分大小写11) QSA(query string append) # 追加请求字符串12) NE(no URI escaping of output) # 不在输出转义特殊字符例如：RewriteRule /foo/(.*) /bar?arg=P1%3d$1 [R,NE] # 将能正确的将/foo/zoo转换成/bar?arg=P1=zoo13) PT(pass through to next handler) # 传递给下一个处理例如：RewriteRule ^/abc(.*) /def$1 [PT] # 将会交给/def规则处理Alias /def /ghi14) S=num(skip next rule(s)) # 跳过num条规则15) E=VAR:VAL(set environment variable) # 设置环境变量</code></pre><h2 id="HTTP-跳转至-HTTPS-示例"><a href="#HTTP-跳转至-HTTPS-示例" class="headerlink" title="HTTP 跳转至 HTTPS 示例"></a>HTTP 跳转至 HTTPS 示例</h2><pre><code>RewriteEngine on  # 开启重写RewriteCond %&#123;SERVER_PORT&#125; !^443$  # 如果访问的不是 443 端口RewriteCond %&#123;REQUEST_URI&#125; !^/tz.php  #如果访问的url 不是 /tz.phpRewriteRule (.*) https://%&#123;SERVER_NAME&#125;/$1 [R]     # 跳转到  https：//域名+$1</code></pre><h2 id="HTTP-80-强制转-HTTPS"><a href="#HTTP-80-强制转-HTTPS" class="headerlink" title="HTTP 80 强制转 HTTPS"></a>HTTP 80 强制转 HTTPS</h2><pre><code>RewriteEngine OnRewriteCond %&#123;SERVER_PORT&#125; 80  # 如果访问的是80 端口RewriteRule ^(.*)$ https://%&#123;HTTP_HOST&#125;/$1 [R,L]  # 跳转 https </code></pre><h2 id="强制301重定向-HTTPS"><a href="#强制301重定向-HTTPS" class="headerlink" title="强制301重定向 HTTPS"></a>强制301重定向 HTTPS</h2><pre><code>&lt;IfModule mod_rewrite.c&gt;RewriteEngine onRewriteBase /  # 表示项目根目录RewriteCond %&#123;SERVER_PORT&#125; !^443$  # 如果访问的不是443 端口RewriteRule (.*) https://%&#123;SERVER_NAME&#125;/$1 [R=301,L]  # 重定向到 301&lt;/IfModule&gt;</code></pre><h2 id="重命名目录"><a href="#重命名目录" class="headerlink" title="重命名目录"></a>重命名目录</h2><pre><code>RewriteRule   ^/?old_directory/([a-z\.]+)$   new_directory/$1   [R=301,L]</code></pre><h2 id="图片防盗链"><a href="#图片防盗链" class="headerlink" title="图片防盗链"></a>图片防盗链</h2><p>   RewriteCond   %{HTTP_REFERER}   !^$ # 如果上个页面地址为空<br>   RewriteCond    %{HTTP_REFERER}   !^http://(www.)?example.com/   [NC]    #或者不是来自你自己的域名<br>   RewriteRule   .(gif|jpg|png)$   - [F]  #禁止访问</p><h2 id="如果文件不存在重定向到404页面"><a href="#如果文件不存在重定向到404页面" class="headerlink" title="如果文件不存在重定向到404页面"></a>如果文件不存在重定向到404页面</h2><pre><code>RewriteCond   %&#123;REQUEST_FILENAME&#125;   !-f  # 如果访问的不是一个文件RewriteCond   %&#123;REQUEST_FILENAME&#125;   !-d  #如果访问的不是一个目录RewriteRule   .?   /404.php   [L]   #跳转到网站根目录# 也可携带参数#RewriteRule ^/?(.*)$ /404.php?url=$1 [L]</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;安装mysql服务&quot;&gt;&lt;a href=&quot;#安装mysql服务&quot; class=&quot;headerlink&quot; title=&quot;安装mysql服务&quot;&gt;&lt;/a&gt;安装mysql服务&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;1.下载地址：https://downloads.mysql.com</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java学习1</title>
+    <link href="http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/"/>
+    <id>http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/</id>
+    <published>2023-02-08T03:39:50.000Z</published>
+    <updated>2023-02-25T03:48:43.900Z</updated>
+    
+    <content type="html"><![CDATA[<p>git</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;git&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>搭建 mysql_server</title>

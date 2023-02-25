@@ -1,3 +1,5 @@
+http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/
+http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/
 http://example.com/2022/04/17/nginx-server/
 http://example.com/2022/04/17/php/
 http://example.com/2022/04/15/vsftpd-server/
