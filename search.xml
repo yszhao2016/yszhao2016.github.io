@@ -809,4 +809,213 @@ RewriteRule   .?   /404.php   [L]   #跳转到网站根目录
 </code></pre>
 ]]></content>
   </entry>
+  <entry>
+    <title>laravel学习1</title>
+    <url>/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/</url>
+    <content><![CDATA[<h1 id="public-index-php文件解析"><a href="#public-index-php文件解析" class="headerlink" title="public/index.php文件解析"></a>public/index.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 引入自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../bootstrap/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Turn On The Lights</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| We need to illuminate PHP development, so let us turn on the lights.</span><br><span class="line">| This bootstraps the framework and gets it ready for use, then it</span><br><span class="line">| will load up this application so that we can run it and send</span><br><span class="line">| the responses back to the browser and delight our users.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$app = require_once __DIR__.&#x27;/../bootstrap/app.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Run The Application</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Once we have the application, we can handle the incoming request</span><br><span class="line">| through the kernel, and send the associated response back to</span><br><span class="line">| the client&#x27;s browser allowing them to enjoy the creative</span><br><span class="line">| and wonderful application we have prepared for them.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line"></span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$response-&gt;send();</span><br><span class="line"></span><br><span class="line">$kernel-&gt;terminate($request, $response);</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="bootstrap-autoload-php文件解析"><a href="#bootstrap-autoload-php文件解析" class="headerlink" title="/bootstrap/autoload.php文件解析"></a>/bootstrap/autoload.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">#定义记录时间的常量</span><br><span class="line">define(&#x27;LARAVEL_START&#x27;, microtime(true));</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Register The Composer Auto Loader</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Composer provides a convenient, automatically generated class loader</span><br><span class="line">| for our application. We just need to utilize it! We&#x27;ll require it</span><br><span class="line">| into the script here so that we do not have to worry about the</span><br><span class="line">| loading of any our classes &quot;manually&quot;. Feels great to relax.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line">#引入外部库   自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../vendor/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Include The Compiled Class File</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| To dramatically increase your application&#x27;s performance, you may use a</span><br><span class="line">| compiled class file which contains all of the classes commonly used</span><br><span class="line">| by a request. The Artisan &quot;optimize&quot; is used to create this file.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line">#引入laravel缓存文件</span><br><span class="line">$compiledPath = __DIR__.&#x27;/cache/compiled.php&#x27;;</span><br><span class="line"></span><br><span class="line">if (file_exists($compiledPath)) &#123;</span><br><span class="line">    require $compiledPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>laravel源码学习2</title>
+    <url>/2023/03/14/laravel%E5%AD%A6%E4%B9%A02/</url>
+    <content><![CDATA[<p>#laravel 核心文件applications</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux硬盘以及分区</title>
+    <url>/2023/03/16/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA/</url>
+    <content><![CDATA[<h1 id="一、-硬盘分区基础知识"><a href="#一、-硬盘分区基础知识" class="headerlink" title="一、 硬盘分区基础知识"></a>一、 硬盘分区基础知识</h1><pre><code>磁盘分区类型：硬盘分区最常见的类型为msdos和gpt，
+前者表示MBR分区，而后者表示GPT分区。传统的BIOS只支持MBR分区硬盘启动，
+一个硬盘只能分成四个分区，并且单个分区最大不超过2TB。
+GPT(即GUID分区表)是源自EFI标准的一种较新的磁盘分区表结构的标准，是未来磁盘分区的主要形式。
+与MBR分区方式相比，突破MBR4个主分区限制，每个磁盘最多支持128个分区，持大于2T的分区，最大卷可达18EB。
+1、MBR分区：
+MBR的意思是“主引导记录”，它有自己的启动器，也就是启动代码，
+一旦启动代码被破坏，系统就没法启动，只有通过修复才能启动系统。最大支持2TB容量（T; terabytes,1TB=1024GB），
+对分区的设限：最多4个主分区或3个主分区加一个扩展分区。创建工具典型有fdisk。
+
+2、GPT分区：GPT意为GUID分区表，这是一个正逐渐取代MBR的新标准，它由UEFI辅住而形成的，
+这样就有了UEFI用于取代老旧的BIOS，而GPT则取代老旧的MBR。
+这个标准没有MBR的那些限制比如：容量2T限制、分区个数限制等。磁盘驱动器容量可以大得多，
+大到操作系统和文件系统都没法支持。它同时还支持几乎无限个分区数量，限制只在于操作系统，
+Windows支持最多128个GPT分区。GPT和MBR是不同的分区表类型。
+使用MBR分区表的硬盘最多只能划分4个主分区磁盘，并且MBR最大仅支持2TB的硬盘。如果需要分区的硬盘容量超过2TB了，
+则需要使用GPT分区表类型，
+此分区表类型不受分区个数、硬盘大小的限制。
+创建GPT分区典型工具有parted,gdisk,sgdisk等,fdisk不支持创建GPT分区。
+我们管理的服务器可能会随着业务量的不断增长而造成磁盘数据空间不足的情况（不考虑inode），
+这个时候我们就可能需要增加磁盘或挂载一些其他的块设备，
+
+这里我主要介绍如何使用fdisk分区工具创建磁盘分区和挂载分区。最重要的三步就是：
+1、创建主分区。（主分区创建之后可以马上被使用但不能再分区）
+2、创建扩展分区 (扩展分区必须再进行二次分区后才能被使用)
+3、在扩展分区上创建逻辑分区（扩充分区再分下去的是什么呢？它就是逻辑分区（Logical Partion））
+
+
+Linux下单个磁盘最多可以有15个分区。3个主分区 + 1个扩展分区 + 11个逻辑分区。
+建议的分区方法是：先分3个主分区，第四个分区为扩展分区，然后在扩展分区中再分成11个逻辑分区。
+在unix/linux系统中，一切都是文件。
+
+所有硬盘、软盘、键盘等设备都用文件来代表，对应 着/dev下面的文件。
+对于应用程序来说，可以像对待普通文件一样打开，关闭、读写这些设备文件。
+但是这种文件名，比如/dev/sda、/dev /raw/raw1都是用户空间名称，
+OS Kernel根本不知道这个名称指的是什么。在内核空间是通过major、minor device number 来区分设备的
+
+块设备也是通过/dev目录下的文件系统节点来访问。块设备上能够容纳文件系统。
+常见的块设备如磁盘、emmc flash、nand flash、 SD卡等。
+
+在linux系统中/dev目录下使用ls -l命令查看详细信息，第一个字母“b”为块设备文件的标识。/dev下每个块设备文件对应一个磁盘的分区。
+</code></pre>
+<h1 id="二、创建分区"><a href="#二、创建分区" class="headerlink" title="二、创建分区"></a>二、创建分区</h1><pre><code>虽然支持mbr的硬盘（容量小于等于2T）分区表中最多能存储四个分区，但我们实际使用时一般只分为两个分区，
+一个是主分区（Primary Partion）一个是扩展分区(extended partition)两种，主分区可以马上被使用但不能再分区，
+扩展分区必须再进行分区后才能使用，也就是说它必须还要进行二次分区。那么由扩充分区再分下去的是什么呢？它就是逻辑分区（Logical Partion）。 
+对习惯于使用Dos或Windows的朋友来说，有几个分区就有几个驱动器，并且每个分区都会获得一个字母标识符，然后就可以选用这个字母来指定在这个分区上的文件和目录，
+它们的文件结构都是独立的，非常好理解。 
+因为对Linux用户来说无论有几个分区，分给哪一目录使用，它归根结底就只有一个根目录，一个独立且唯一的文件结构。
+ Linux中每个分区都是用来组成整个文件系统的一部分，因为它采用了一种叫“挂载点”的处理方法，它的整个文件系统中包含了一整套的文件和目录，
+ 且将一个分区和一个目录联系起来。这时要载入的一个分区将使它的存储空间在一个目录下获得。
+ 
+ 
+ 1、 fdisk -l 查看块设备情况（块设备包括硬盘，U盘，SD卡） 
+</code></pre>
+<h1 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h1><pre><code>虚拟文件系统(VFS) 操作模型，通过mkfs.xxx等这种系列性的命令创建格式化很多不同的文件系统，
+比如：mkfs.ext4 /dev/sda 、 mkfs.btrfs /dev/sdb等,但这些不同的文件系统都有各自的API接口，而用户想要的是，不管你是什么API，
+他们只关心mount/umount，或open/close等操作，等于屏蔽了底层的文件系统类型，运维层面只关心mount等操作即可。不同的文件系统类型有不同的特点，
+因而根据存储设备的硬件特性、系统需求等有不同的应用场合,什么意思呢，也就是说假如你用了不同设备都是硬盘，那么建立这个硬盘可以用不同的文件系统来做映射，
+可能就会获得不同的性能提升。还是要看相关的设备种类和厂商设计的目的。
+
+
+文件系统    描 述
+Ext    Linux 中最早的文件系统，由于在性能和兼容性上具有很多缺陷，现在已经很少使用,是为 Linux 核心所做的第一个文件系统，最大可支持 2GB 的文件系统。
+
+Ext2    是 Ext 文件系统的升级版本，Red Hat Linux 7.2 版本以前的系统默认都是 Ext2 文件系统。于 1993 年发布，
+        支持最大 16TB 的分区和最大 2TB 的文件（1TB=1024GB=1024x1024KB)
+        Linux正统的文件系统(如ext2、ext3)一个文件由目录项、inode和数据块组成。
+        目录项:包括文件名和inode节点号。
+        Inode：又称文件索引节点，是文件基本信息的存放地和数据块指针存放地。
+        数据块：文件的具体内容存放地。
+        将硬盘分区时会划分出目录块、inode Table区块和data block数据区域。一个文件由一个目录项、inode和数据区域块组成。
+        Inode包含文件的属性(如读写属性、owner等，以及指向数据块的指针)，数据区域块则是文件内容。
+        当查看某个文件时，会先从inode table中查出文件属性及数据存放点，再从数据块中读取数据
+
+Ext3    是 Ext2 文件系统的升级版本，最大的区别就是带日志功能，以便在系统突然停止时提高文件系统的可靠性。支持最大 16TB 的分区和最大 2TB 的文件
+
+Ext4    是 Ext3 文件系统的升级版。Ext4 在性能、伸缩性和可靠性方面进行了大量改进。Ext4 的变化可以说是翻天覆地的，
+        比如向下兼容 Ext3、最大 1EB 文件系统和 16TB 文件、无限数量子目录、Extents 连续数据块 概念、多块分配、延迟分配、
+        持久预分配、快速 FSCK、日志校验、无日志模式、在线碎片整理、inode 增强、
+        默认启用 barrier 等。它是 CentOS 6.3 的默认文件系统
+        
+        
+xfs        被业界称为最先进、最具有可升级性的文件系统技术，由 SGI 公司设计，目前最新的 CentOS 7 版本默认使用的就是此文件系统。
+
+swap    swap 是 Linux 中用于交换分区的文件系统（类似于 Windows 中的虚拟内存)，
+当内存不够用时，使用交换分区暂时替代内存。一般大小为内存的 2 倍，但是不要超过 2GB。它是 Linux 的必需分区
+
+NFS    NFS 是网络文件系统（Network File System）的缩写，是用来实现不同主机之间文件共享的一种网络服务，本地主机可以通过挂载的方式使用远程共享的资源
+iso9660    光盘的标准文件系统。Linux 要想使用光盘，必须支持 iso9660 文件系统
+
+fat    就是 Windows 下的 fatl6 文件系统，在 Linux 中识别为 fat
+
+vfat    就是 Windows 下的 fat32 文件系统，在 Linux 中识别为 vfat。支持最大 32GB 的分区和最大 4GB 的文件
+
+NTFS    就是 Windows 下的 NTFS 文件系统，不过 Linux 默认是不能识别 NTFS 文件系统的，如果需要识别，则需要重新编译内核才能支持。
+        它比 fat32 文件系统更加安全，速度更快，支持最大 2TB 的分区和最大 64GB 的文件
+ufs    Sun 公司的操作系统 Solaris 和 SunOS 所采用的文件系统
+
+proc    Linux 中基于内存的虚拟文件系统，用来管理内存存储目录 /proc
+
+sysfs    和 proc —样，也是基于内存的虚拟文件系统，用来管理内存存储目录 /sysfs
+
+tmpfs    也是一种基于内存的虚拟文件系统，不过也可以使用 swap 交换分区
+
+现在一般是Ext4 xfs格式
+</code></pre>
+<h1 id="分区工具"><a href="#分区工具" class="headerlink" title="分区工具"></a>分区工具</h1><pre><code>fdisk命令可以用于对2TB以内的磁盘进行添加、删除、转换分区的功能,用户可以根据实际情况进行合理划分。
+
+
+parted -l命令
+
+parted一款功能强大的磁盘分区和分区大小调整工具。
+
+parted -l同fdisk -l命令类似，但是它可以识别2TB以上的硬盘，也能查看 GPT 磁盘的分区
+</code></pre>
+<p>#具体操作  </p>
+<h2 id="1-基本命令介绍"><a href="#1-基本命令介绍" class="headerlink" title="1.基本命令介绍"></a>1.基本命令介绍</h2><pre><code>df -h
+      查看分区情况 相对比较直观
+      
+fdisk -l
+      查看系统有几块硬盘  分标有多大  分了那几个区
+      
+      
+lsblk
+lsblk -f  
+查看分区信息  -f更详细
+令可以列出所有可用块设备的信息,而且还能显示他们之间的依赖关系，但是它不会列出RAM盘的信息。块设备有硬盘,闪存盘,CD-ROM等等
+
+用 blkid  获取磁盘的uuid和属性
+</code></pre>
+<h2 id="2-详细操作"><a href="#2-详细操作" class="headerlink" title="2.详细操作"></a>2.详细操作</h2><pre><code>1.fdisk -l|grep sd
+  fdisk -l
+  查看分区情况
+
+分区
+2.fdisk   盘符    示例：fidisk /dev/sdb
+
+3.输入n 是创建分区（一般下面多是默认）
+
+4.然后选择分区类型
+                p   primary(主分区)
+                e   extende（扩展）
+                
+5.设置分区号（一般默认）  
+              
+
+6.然后设置     起始扇区
+              结束扇区  
+                
+7.设置完 输入w    保存     
+
+8.特殊操作需要删除分区 输入d 然后选择分区号                   
+
+
+9.格式化  
+        mkfs -t ext3 /dev/sdb2
+        mkfs -t ext4 /dev/sdb2 
+        mkfs.xfs -f /dev/sdb2
+        
+        
+
+10.挂载分区
+    mount  分区地址     目录地址
+    示例 mount /dev/sba1 /apps
+    
+    卸载分区  umount 分区地址
+              
+              umount  /dev/sdb1  
+              umount -l  /dev/sdb1
+
+
+11.开机自动挂载
+    
+    用 blkid  获取磁盘的uuid和属性
+
+    vim /etc/fstab
+
+
+    配置模板：UUID=*************  挂载路径  格式  defaults  磁盘检查，默认为0  磁盘检查，默认为0，不需要检查 
+    示例   UUID=b2cc970b-7cf4-453e-b3f5-916497b9530e  /apps  xfs  defaults  1  1 
+    
+    验证是否配置正确
+    mount -a
+    
+    
+    查看分区信息       
+    lsblk
+    lsblk -f  更详细
+</code></pre>
+]]></content>
+  </entry>
 </search>
