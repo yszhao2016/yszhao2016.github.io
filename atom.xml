@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-03-16T06:56:37.090Z</updated>
+  <updated>2023-07-13T11:12:24.875Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,13 +17,157 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>nginx-vhost-安全配置模版</title>
+    <link href="http://example.com/2023/07/13/nginx-vhost-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E6%A8%A1%E7%89%88/"/>
+    <id>http://example.com/2023/07/13/nginx-vhost-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E6%A8%A1%E7%89%88/</id>
+    <published>2023-07-13T11:11:30.000Z</published>
+    <updated>2023-07-13T11:12:24.875Z</updated>
+    
+    <content type="html"><![CDATA[<p>#nginx-vhost-安全配置模版</p><pre><code>server&#123;        listen 443 ssl ;        server_name  [域名或者ip];        index        index.php index.html index.htm;        root [项目路径];        access_log  /var/log/nginx/[项目名称].access.log;        error_log   /var/log/nginx/[项目名称].error.log;        #证书文件名称        ssl_certificate [证书路径 公钥];        #私钥文件名称        ssl_certificate_key [证书路径 私钥];        ssl_session_timeout 5m;        #请按照以下协议配置        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;        #请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;        ssl_prefer_server_ciphers on        #允许cookie        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;        #安全头        add_header X-Xss-header &quot;1;mode=block&quot;;        add_header Set-Cookie &quot;HttpOnly&quot;;        add_header Set-Cookie &quot;Secure&quot;;        add_header X-Frame-Options &quot;SAMEORIGIN&quot;;        location ~ \.(json|lock|git)$ &#123;                 deny all;        &#125;        location ~ ^/(uploads|assets)/.*\.(php|php5|jsp|shtml)$ &#123;            deny all;        &#125;        location ~ .*\.(txt|doc|pdf|rar|gz|zip|docx|exe|xlsx|ppt|pptx)$ &#123;            add_header Content-Disposition attachment;        &#125;        location =/assets/libs/bootstrap/Gemfile &#123;                       return 404;        &#125;        location ~ /\. &#123;            deny  all;        &#125;        location / &#123;                proxy_cookie_path / &quot;/; httponly; secure; SameSite=None&quot;;                if (!-e $request_filename) &#123;                        rewrite  ^(.*)$  /index.php?s=/$1  last;                        break;                &#125;        &#125;        location ~ \.php(.*)$ &#123;                fastcgi_pass   [访问php方式];                fastcgi_index  index.php;                fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;                fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;                fastcgi_param  PATH_INFO  $fastcgi_path_info;                fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;                include        fastcgi_params;        &#125;        #timeout        large_client_header_buffers 4 16k;        client_max_body_size 180m;        client_body_buffer_size 128k;        fastcgi_connect_timeout 600;        fastcgi_read_timeout 600;        fastcgi_send_timeout 600;        fastcgi_buffer_size 128k;        fastcgi_buffers   2 256k;        fastcgi_busy_buffers_size 256k;        fastcgi_temp_file_write_size 256k;        proxy_read_timeout  240s;&#125;</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#nginx-vhost-安全配置模版&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;server&amp;#123;
+        listen 443 ssl ;
+        server_name  [域名或者ip];
+        index        index.php in</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>fail2ban软件使用</title>
+    <link href="http://example.com/2023/07/09/fail2ban%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/"/>
+    <id>http://example.com/2023/07/09/fail2ban%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/</id>
+    <published>2023-07-09T06:19:39.000Z</published>
+    <updated>2023-07-13T06:20:53.705Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>web安全</title>
+    <link href="http://example.com/2023/07/09/web%E5%AE%89%E5%85%A8/"/>
+    <id>http://example.com/2023/07/09/web%E5%AE%89%E5%85%A8/</id>
+    <published>2023-07-09T06:16:41.000Z</published>
+    <updated>2023-07-13T06:20:53.705Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>openEuler搭建lnmp</title>
+    <link href="http://example.com/2023/07/09/openEuler%E6%90%AD%E5%BB%BAlnmp/"/>
+    <id>http://example.com/2023/07/09/openEuler%E6%90%AD%E5%BB%BAlnmp/</id>
+    <published>2023-07-09T06:04:46.000Z</published>
+    <updated>2023-07-13T11:09:13.709Z</updated>
+    
+    <content type="html"><![CDATA[<p>#openEuler搭建lnmp</p><p>##安装php<br>wget <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a></p><p>rpm -ivh –nodeps epel-release-latest-7.noarch.rp</p><p>wget <a href="https://rpms.remirepo.net/enterprise/remi-release-7.rpm">https://rpms.remirepo.net/enterprise/remi-release-7.rpm</a></p><p>rpm -ivh –nodeps remi-release-7.rpm </p><p>yum-config-manager –enable remi-php73</p><p>yum install php73 php73-php-fpm php73-php-opcache php73-php-gd php73-php-mbstring php73-php-xml php73-php-pdo php73-php-mysqlnd php73-php-pecl-mysql php73-php-bcmath</p><p>##rpm包安装mysql</p><pre><code>Error:  Problem: cannot install the best candidate for the job  - nothing provides libcrypto.so.10()(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libssl.so.10()(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libcrypto.so.10(libcrypto.so.10)(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libssl.so.10(libssl.so.10)(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libcrypto.so.10(OPENSSL_1.0.1_EC)(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libcrypto.so.10(OPENSSL_1.0.2)(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  </code></pre><p>此报错处理办法      </p><pre><code>yum install compat-openssl10yum install http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-3.el8.x86_64.rpm</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#openEuler搭建lnmp&lt;/p&gt;
+&lt;p&gt;##安装php&lt;br&gt;wget &lt;a href=&quot;https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm&quot;&gt;https://dl.fedor</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu搭建lnmp环境</title>
+    <link href="http://example.com/2023/07/09/ubuntn%E6%90%AD%E5%BB%BAlnmp%E7%8E%AF%E5%A2%83/"/>
+    <id>http://example.com/2023/07/09/ubuntn%E6%90%AD%E5%BB%BAlnmp%E7%8E%AF%E5%A2%83/</id>
+    <published>2023-07-09T06:01:25.000Z</published>
+    <updated>2023-07-13T06:20:53.705Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>docker学习3</title>
+    <link href="http://example.com/2023/07/09/docker%E5%AD%A6%E4%B9%A03/"/>
+    <id>http://example.com/2023/07/09/docker%E5%AD%A6%E4%B9%A03/</id>
+    <published>2023-07-09T06:00:02.000Z</published>
+    <updated>2023-07-13T06:20:53.705Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="docker-compose使用"><a href="#docker-compose使用" class="headerlink" title="docker-compose使用"></a>docker-compose使用</h1><h2 id="docker-compose安装"><a href="#docker-compose安装" class="headerlink" title="docker-compose安装"></a>docker-compose安装</h2>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;docker-compose使用&quot;&gt;&lt;a href=&quot;#docker-compose使用&quot; class=&quot;headerlink&quot; title=&quot;docker-compose使用&quot;&gt;&lt;/a&gt;docker-compose使用&lt;/h1&gt;&lt;h2 id=&quot;docker-co</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>docker学习2</title>
+    <link href="http://example.com/2023/07/08/docker%E5%AD%A6%E4%B9%A02/"/>
+    <id>http://example.com/2023/07/08/docker%E5%AD%A6%E4%B9%A02/</id>
+    <published>2023-07-08T13:54:55.000Z</published>
+    <updated>2023-07-13T06:20:53.704Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Dockerfile-学习"><a href="#Dockerfile-学习" class="headerlink" title="Dockerfile 学习"></a>Dockerfile 学习</h1><h2 id="相关语法"><a href="#相关语法" class="headerlink" title="相关语法"></a>相关语法</h2><pre><code>FROM  scratchADD hello /CMD [&quot;/hello&quot;]</code></pre><h2 id="FROM语法"><a href="#FROM语法" class="headerlink" title="FROM语法"></a>FROM语法</h2><pre><code>FROM scratch   //制作  base imageFROM centos    //使用  base imageFROM ubuntu:14.4</code></pre><h2 id="LABEL语法"><a href="#LABEL语法" class="headerlink" title="LABEL语法"></a>LABEL语法</h2><pre><code>LABEL maintainer=&quot;xiaoquwl@gmail.com&quot;LABEL version=&quot;1.0&quot;LABEL description=&quot;This is description&quot;注：Metadata不可少</code></pre><h2 id="RUN-语法"><a href="#RUN-语法" class="headerlink" title="RUN 语法"></a>RUN 语法</h2><pre><code>RUN yum update &amp;&amp; yum install -y vim \python-dev 注：反斜杠换行RUN</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Dockerfile-学习&quot;&gt;&lt;a href=&quot;#Dockerfile-学习&quot; class=&quot;headerlink&quot; title=&quot;Dockerfile 学习&quot;&gt;&lt;/a&gt;Dockerfile 学习&lt;/h1&gt;&lt;h2 id=&quot;相关语法&quot;&gt;&lt;a href=&quot;#相关语法&quot;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>docker学习1-Docker基础命令</title>
+    <link href="http://example.com/2023/07/08/docker%E5%AD%A6%E4%B9%A01/"/>
+    <id>http://example.com/2023/07/08/docker%E5%AD%A6%E4%B9%A01/</id>
+    <published>2023-07-08T13:47:55.000Z</published>
+    <updated>2023-07-13T06:20:53.704Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker基础命令"><a href="#Docker基础命令" class="headerlink" title="Docker基础命令"></a>Docker基础命令</h1><h3 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h3><pre><code>Docker image ls </code></pre><h3 id="查看运行中的容器container"><a href="#查看运行中的容器container" class="headerlink" title="查看运行中的容器container"></a>查看运行中的容器container</h3><pre><code>docker ps      展示 正在运行的docker ps -a   所有  启动与未启动的 </code></pre><h3 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h3><pre><code>docker run 容器名称示例：</code></pre><h3 id="查看运行中的容器container-1"><a href="#查看运行中的容器container-1" class="headerlink" title="查看运行中的容器container"></a>查看运行中的容器container</h3><pre><code>docker inspect  容器名称    查看容器信息</code></pre><h3 id="根据dockerfile-文件生成image"><a href="#根据dockerfile-文件生成image" class="headerlink" title="根据dockerfile 文件生成image"></a>根据dockerfile 文件生成image</h3><pre><code>Docker build -t tag/镜像名称   dockerfile所在目录    示例：    docker build -t test/hello-word .</code></pre><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><pre><code>docker rm 容器ID       docker rm $(docker container ls -aq)    删除所有容器docker rmi image名称   删除镜像</code></pre><h3 id="进入容器内"><a href="#进入容器内" class="headerlink" title="进入容器内"></a>进入容器内</h3><pre><code>docker exec -it 容器名 /bin/bash示例：docker exec it php71 /bin/bash</code></pre><h3 id="docker-镜像-导出导入【必须成对使用】"><a href="#docker-镜像-导出导入【必须成对使用】" class="headerlink" title="docker 镜像 导出导入【必须成对使用】"></a>docker 镜像 导出导入【必须成对使用】</h3><pre><code>docker export：导出容器docker import：导入容器为镜像docker save：导出镜像    -o:输出到的文件。    导出示例：        docker save -o my_ubuntu_v3.tar runoob/ubuntu:v3        docker save ubuntu:load&gt;/root/ubuntu.tardocker load：导入镜像    -i：指定导出的文件    -q：精简输出信息        导入示例：        docker load -i ubuntu.tar        docker load &lt; ubuntu.tar</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Docker基础命令&quot;&gt;&lt;a href=&quot;#Docker基础命令&quot; class=&quot;headerlink&quot; title=&quot;Docker基础命令&quot;&gt;&lt;/a&gt;Docker基础命令&lt;/h1&gt;&lt;h3 id=&quot;查看镜像&quot;&gt;&lt;a href=&quot;#查看镜像&quot; class=&quot;head</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>linux硬盘以及分区</title>
     <link href="http://example.com/2023/03/16/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA/"/>
     <id>http://example.com/2023/03/16/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA/</id>
     <published>2023-03-16T02:24:39.000Z</published>
-    <updated>2023-03-16T06:56:37.090Z</updated>
+    <updated>2023-07-13T09:47:34.756Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="一、-硬盘分区基础知识"><a href="#一、-硬盘分区基础知识" class="headerlink" title="一、 硬盘分区基础知识"></a>一、 硬盘分区基础知识</h1><pre><code>磁盘分区类型：硬盘分区最常见的类型为msdos和gpt，前者表示MBR分区，而后者表示GPT分区。传统的BIOS只支持MBR分区硬盘启动，一个硬盘只能分成四个分区，并且单个分区最大不超过2TB。GPT(即GUID分区表)是源自EFI标准的一种较新的磁盘分区表结构的标准，是未来磁盘分区的主要形式。与MBR分区方式相比，突破MBR4个主分区限制，每个磁盘最多支持128个分区，持大于2T的分区，最大卷可达18EB。1、MBR分区：MBR的意思是“主引导记录”，它有自己的启动器，也就是启动代码，一旦启动代码被破坏，系统就没法启动，只有通过修复才能启动系统。最大支持2TB容量（T; terabytes,1TB=1024GB），对分区的设限：最多4个主分区或3个主分区加一个扩展分区。创建工具典型有fdisk。2、GPT分区：GPT意为GUID分区表，这是一个正逐渐取代MBR的新标准，它由UEFI辅住而形成的，这样就有了UEFI用于取代老旧的BIOS，而GPT则取代老旧的MBR。这个标准没有MBR的那些限制比如：容量2T限制、分区个数限制等。磁盘驱动器容量可以大得多，大到操作系统和文件系统都没法支持。它同时还支持几乎无限个分区数量，限制只在于操作系统，Windows支持最多128个GPT分区。GPT和MBR是不同的分区表类型。使用MBR分区表的硬盘最多只能划分4个主分区磁盘，并且MBR最大仅支持2TB的硬盘。如果需要分区的硬盘容量超过2TB了，则需要使用GPT分区表类型，此分区表类型不受分区个数、硬盘大小的限制。创建GPT分区典型工具有parted,gdisk,sgdisk等,fdisk不支持创建GPT分区。我们管理的服务器可能会随着业务量的不断增长而造成磁盘数据空间不足的情况（不考虑inode），这个时候我们就可能需要增加磁盘或挂载一些其他的块设备，这里我主要介绍如何使用fdisk分区工具创建磁盘分区和挂载分区。最重要的三步就是：1、创建主分区。（主分区创建之后可以马上被使用但不能再分区）2、创建扩展分区 (扩展分区必须再进行二次分区后才能被使用)3、在扩展分区上创建逻辑分区（扩充分区再分下去的是什么呢？它就是逻辑分区（Logical Partion））Linux下单个磁盘最多可以有15个分区。3个主分区 + 1个扩展分区 + 11个逻辑分区。建议的分区方法是：先分3个主分区，第四个分区为扩展分区，然后在扩展分区中再分成11个逻辑分区。在unix/linux系统中，一切都是文件。所有硬盘、软盘、键盘等设备都用文件来代表，对应 着/dev下面的文件。对于应用程序来说，可以像对待普通文件一样打开，关闭、读写这些设备文件。但是这种文件名，比如/dev/sda、/dev /raw/raw1都是用户空间名称，OS Kernel根本不知道这个名称指的是什么。在内核空间是通过major、minor device number 来区分设备的块设备也是通过/dev目录下的文件系统节点来访问。块设备上能够容纳文件系统。常见的块设备如磁盘、emmc flash、nand flash、 SD卡等。在linux系统中/dev目录下使用ls -l命令查看详细信息，第一个字母“b”为块设备文件的标识。/dev下每个块设备文件对应一个磁盘的分区。</code></pre><h1 id="二、创建分区"><a href="#二、创建分区" class="headerlink" title="二、创建分区"></a>二、创建分区</h1><pre><code>虽然支持mbr的硬盘（容量小于等于2T）分区表中最多能存储四个分区，但我们实际使用时一般只分为两个分区，一个是主分区（Primary Partion）一个是扩展分区(extended partition)两种，主分区可以马上被使用但不能再分区，扩展分区必须再进行分区后才能使用，也就是说它必须还要进行二次分区。那么由扩充分区再分下去的是什么呢？它就是逻辑分区（Logical Partion）。 对习惯于使用Dos或Windows的朋友来说，有几个分区就有几个驱动器，并且每个分区都会获得一个字母标识符，然后就可以选用这个字母来指定在这个分区上的文件和目录，它们的文件结构都是独立的，非常好理解。 因为对Linux用户来说无论有几个分区，分给哪一目录使用，它归根结底就只有一个根目录，一个独立且唯一的文件结构。 Linux中每个分区都是用来组成整个文件系统的一部分，因为它采用了一种叫“挂载点”的处理方法，它的整个文件系统中包含了一整套的文件和目录， 且将一个分区和一个目录联系起来。这时要载入的一个分区将使它的存储空间在一个目录下获得。   1、 fdisk -l 查看块设备情况（块设备包括硬盘，U盘，SD卡） </code></pre><h1 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h1><pre><code>虚拟文件系统(VFS) 操作模型，通过mkfs.xxx等这种系列性的命令创建格式化很多不同的文件系统，比如：mkfs.ext4 /dev/sda 、 mkfs.btrfs /dev/sdb等,但这些不同的文件系统都有各自的API接口，而用户想要的是，不管你是什么API，他们只关心mount/umount，或open/close等操作，等于屏蔽了底层的文件系统类型，运维层面只关心mount等操作即可。不同的文件系统类型有不同的特点，因而根据存储设备的硬件特性、系统需求等有不同的应用场合,什么意思呢，也就是说假如你用了不同设备都是硬盘，那么建立这个硬盘可以用不同的文件系统来做映射，可能就会获得不同的性能提升。还是要看相关的设备种类和厂商设计的目的。文件系统    描 述Ext    Linux 中最早的文件系统，由于在性能和兼容性上具有很多缺陷，现在已经很少使用,是为 Linux 核心所做的第一个文件系统，最大可支持 2GB 的文件系统。Ext2    是 Ext 文件系统的升级版本，Red Hat Linux 7.2 版本以前的系统默认都是 Ext2 文件系统。于 1993 年发布，        支持最大 16TB 的分区和最大 2TB 的文件（1TB=1024GB=1024x1024KB)        Linux正统的文件系统(如ext2、ext3)一个文件由目录项、inode和数据块组成。        目录项:包括文件名和inode节点号。        Inode：又称文件索引节点，是文件基本信息的存放地和数据块指针存放地。        数据块：文件的具体内容存放地。        将硬盘分区时会划分出目录块、inode Table区块和data block数据区域。一个文件由一个目录项、inode和数据区域块组成。        Inode包含文件的属性(如读写属性、owner等，以及指向数据块的指针)，数据区域块则是文件内容。        当查看某个文件时，会先从inode table中查出文件属性及数据存放点，再从数据块中读取数据Ext3    是 Ext2 文件系统的升级版本，最大的区别就是带日志功能，以便在系统突然停止时提高文件系统的可靠性。支持最大 16TB 的分区和最大 2TB 的文件Ext4    是 Ext3 文件系统的升级版。Ext4 在性能、伸缩性和可靠性方面进行了大量改进。Ext4 的变化可以说是翻天覆地的，        比如向下兼容 Ext3、最大 1EB 文件系统和 16TB 文件、无限数量子目录、Extents 连续数据块 概念、多块分配、延迟分配、        持久预分配、快速 FSCK、日志校验、无日志模式、在线碎片整理、inode 增强、        默认启用 barrier 等。它是 CentOS 6.3 的默认文件系统                xfs        被业界称为最先进、最具有可升级性的文件系统技术，由 SGI 公司设计，目前最新的 CentOS 7 版本默认使用的就是此文件系统。swap    swap 是 Linux 中用于交换分区的文件系统（类似于 Windows 中的虚拟内存)，当内存不够用时，使用交换分区暂时替代内存。一般大小为内存的 2 倍，但是不要超过 2GB。它是 Linux 的必需分区NFS    NFS 是网络文件系统（Network File System）的缩写，是用来实现不同主机之间文件共享的一种网络服务，本地主机可以通过挂载的方式使用远程共享的资源iso9660    光盘的标准文件系统。Linux 要想使用光盘，必须支持 iso9660 文件系统fat    就是 Windows 下的 fatl6 文件系统，在 Linux 中识别为 fatvfat    就是 Windows 下的 fat32 文件系统，在 Linux 中识别为 vfat。支持最大 32GB 的分区和最大 4GB 的文件NTFS    就是 Windows 下的 NTFS 文件系统，不过 Linux 默认是不能识别 NTFS 文件系统的，如果需要识别，则需要重新编译内核才能支持。        它比 fat32 文件系统更加安全，速度更快，支持最大 2TB 的分区和最大 64GB 的文件ufs    Sun 公司的操作系统 Solaris 和 SunOS 所采用的文件系统proc    Linux 中基于内存的虚拟文件系统，用来管理内存存储目录 /procsysfs    和 proc —样，也是基于内存的虚拟文件系统，用来管理内存存储目录 /sysfstmpfs    也是一种基于内存的虚拟文件系统，不过也可以使用 swap 交换分区现在一般是Ext4 xfs格式</code></pre><h1 id="分区工具"><a href="#分区工具" class="headerlink" title="分区工具"></a>分区工具</h1><pre><code>fdisk命令可以用于对2TB以内的磁盘进行添加、删除、转换分区的功能,用户可以根据实际情况进行合理划分。parted -l命令parted一款功能强大的磁盘分区和分区大小调整工具。parted -l同fdisk -l命令类似，但是它可以识别2TB以上的硬盘，也能查看 GPT 磁盘的分区</code></pre><p>#具体操作  </p><h2 id="1-基本命令介绍"><a href="#1-基本命令介绍" class="headerlink" title="1.基本命令介绍"></a>1.基本命令介绍</h2><pre><code>df -h      查看分区情况 相对比较直观      fdisk -l      查看系统有几块硬盘  分标有多大  分了那几个区            lsblklsblk -f  查看分区信息  -f更详细令可以列出所有可用块设备的信息,而且还能显示他们之间的依赖关系，但是它不会列出RAM盘的信息。块设备有硬盘,闪存盘,CD-ROM等等用 blkid  获取磁盘的uuid和属性</code></pre><h2 id="2-详细操作"><a href="#2-详细操作" class="headerlink" title="2.详细操作"></a>2.详细操作</h2><pre><code>1.fdisk -l|grep sd  fdisk -l  查看分区情况分区2.fdisk   盘符    示例：fidisk /dev/sdb3.输入n 是创建分区（一般下面多是默认）4.然后选择分区类型                p   primary(主分区)                e   extende（扩展）                5.设置分区号（一般默认）                6.然后设置     起始扇区              结束扇区                  7.设置完 输入w    保存     8.特殊操作需要删除分区 输入d 然后选择分区号                   9.格式化          mkfs -t ext3 /dev/sdb2        mkfs -t ext4 /dev/sdb2         mkfs.xfs -f /dev/sdb2                10.挂载分区    mount  分区地址     目录地址    示例 mount /dev/sba1 /apps        卸载分区  umount 分区地址                            umount  /dev/sdb1                umount -l  /dev/sdb111.开机自动挂载        用 blkid  获取磁盘的uuid和属性    vim /etc/fstab    配置模板：UUID=*************  挂载路径  格式  defaults  磁盘检查，默认为0  磁盘检查，默认为0，不需要检查     示例   UUID=b2cc970b-7cf4-453e-b3f5-916497b9530e  /apps  xfs  defaults  1  1         验证是否配置正确    mount -a            查看分区信息           lsblk    lsblk -f  更详细</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="一、-硬盘分区基础知识"><a href="#一、-硬盘分区基础知识" class="headerlink" title="一、 硬盘分区基础知识"></a>一、 硬盘分区基础知识</h1><pre><code>磁盘分区类型：硬盘分区最常见的类型为msdos和gpt，前者表示MBR分区，而后者表示GPT分区。传统的BIOS只支持MBR分区硬盘启动，一个硬盘只能分成四个分区，并且单个分区最大不超过2TB。GPT(即GUID分区表)是源自EFI标准的一种较新的磁盘分区表结构的标准，是未来磁盘分区的主要形式。与MBR分区方式相比，突破MBR4个主分区限制，每个磁盘最多支持128个分区，持大于2T的分区，最大卷可达18EB。1、MBR分区：MBR的意思是“主引导记录”，它有自己的启动器，也就是启动代码，一旦启动代码被破坏，系统就没法启动，只有通过修复才能启动系统。最大支持2TB容量（T; terabytes,1TB=1024GB），对分区的设限：最多4个主分区或3个主分区加一个扩展分区。创建工具典型有fdisk。2、GPT分区：GPT意为GUID分区表，这是一个正逐渐取代MBR的新标准，它由UEFI辅住而形成的，这样就有了UEFI用于取代老旧的BIOS，而GPT则取代老旧的MBR。这个标准没有MBR的那些限制比如：容量2T限制、分区个数限制等。磁盘驱动器容量可以大得多，大到操作系统和文件系统都没法支持。它同时还支持几乎无限个分区数量，限制只在于操作系统，Windows支持最多128个GPT分区。GPT和MBR是不同的分区表类型。使用MBR分区表的硬盘最多只能划分4个主分区磁盘，并且MBR最大仅支持2TB的硬盘。如果需要分区的硬盘容量超过2TB了，则需要使用GPT分区表类型，此分区表类型不受分区个数、硬盘大小的限制。创建GPT分区典型工具有parted,gdisk,sgdisk等,fdisk不支持创建GPT分区。我们管理的服务器可能会随着业务量的不断增长而造成磁盘数据空间不足的情况（不考虑inode），这个时候我们就可能需要增加磁盘或挂载一些其他的块设备，这里我主要介绍如何使用fdisk分区工具创建磁盘分区和挂载分区。最重要的三步就是：1、创建主分区。（主分区创建之后可以马上被使用但不能再分区）2、创建扩展分区 (扩展分区必须再进行二次分区后才能被使用)3、在扩展分区上创建逻辑分区（扩充分区再分下去的是什么呢？它就是逻辑分区（Logical Partion））Linux下单个磁盘最多可以有15个分区。3个主分区 + 1个扩展分区 + 11个逻辑分区。建议的分区方法是：先分3个主分区，第四个分区为扩展分区，然后在扩展分区中再分成11个逻辑分区。在unix/linux系统中，一切都是文件。所有硬盘、软盘、键盘等设备都用文件来代表，对应 着/dev下面的文件。对于应用程序来说，可以像对待普通文件一样打开，关闭、读写这些设备文件。但是这种文件名，比如/dev/sda、/dev /raw/raw1都是用户空间名称，OS Kernel根本不知道这个名称指的是什么。在内核空间是通过major、minor device number 来区分设备的块设备也是通过/dev目录下的文件系统节点来访问。块设备上能够容纳文件系统。常见的块设备如磁盘、emmc flash、nand flash、 SD卡等。在linux系统中/dev目录下使用ls -l命令查看详细信息，第一个字母“b”为块设备文件的标识。/dev下每个块设备文件对应一个磁盘的分区。</code></pre><h1 id="二、创建分区"><a href="#二、创建分区" class="headerlink" title="二、创建分区"></a>二、创建分区</h1><pre><code>虽然支持mbr的硬盘（容量小于等于2T）分区表中最多能存储四个分区，但我们实际使用时一般只分为两个分区，一个是主分区（Primary Partion）一个是扩展分区(extended partition)两种，主分区可以马上被使用但不能再分区，扩展分区必须再进行分区后才能使用，也就是说它必须还要进行二次分区。那么由扩充分区再分下去的是什么呢？它就是逻辑分区（Logical Partion）。 对习惯于使用Dos或Windows的朋友来说，有几个分区就有几个驱动器，并且每个分区都会获得一个字母标识符，然后就可以选用这个字母来指定在这个分区上的文件和目录，它们的文件结构都是独立的，非常好理解。 因为对Linux用户来说无论有几个分区，分给哪一目录使用，它归根结底就只有一个根目录，一个独立且唯一的文件结构。 Linux中每个分区都是用来组成整个文件系统的一部分，因为它采用了一种叫“挂载点”的处理方法，它的整个文件系统中包含了一整套的文件和目录， 且将一个分区和一个目录联系起来。这时要载入的一个分区将使它的存储空间在一个目录下获得。   1、 fdisk -l 查看块设备情况（块设备包括硬盘，U盘，SD卡） </code></pre><h1 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h1><pre><code>虚拟文件系统(VFS) 操作模型，通过mkfs.xxx等这种系列性的命令创建格式化很多不同的文件系统，比如：mkfs.ext4 /dev/sda 、 mkfs.btrfs /dev/sdb等,但这些不同的文件系统都有各自的API接口，而用户想要的是，不管你是什么API，他们只关心mount/umount，或open/close等操作，等于屏蔽了底层的文件系统类型，运维层面只关心mount等操作即可。不同的文件系统类型有不同的特点，因而根据存储设备的硬件特性、系统需求等有不同的应用场合,什么意思呢，也就是说假如你用了不同设备都是硬盘，那么建立这个硬盘可以用不同的文件系统来做映射，可能就会获得不同的性能提升。还是要看相关的设备种类和厂商设计的目的。文件系统    描 述Ext    Linux 中最早的文件系统，由于在性能和兼容性上具有很多缺陷，现在已经很少使用,是为 Linux 核心所做的第一个文件系统，最大可支持 2GB 的文件系统。Ext2    是 Ext 文件系统的升级版本，Red Hat Linux 7.2 版本以前的系统默认都是 Ext2 文件系统。于 1993 年发布，        支持最大 16TB 的分区和最大 2TB 的文件（1TB=1024GB=1024x1024KB)        Linux正统的文件系统(如ext2、ext3)一个文件由目录项、inode和数据块组成。        目录项:包括文件名和inode节点号。        Inode：又称文件索引节点，是文件基本信息的存放地和数据块指针存放地。        数据块：文件的具体内容存放地。        将硬盘分区时会划分出目录块、inode Table区块和data block数据区域。一个文件由一个目录项、inode和数据区域块组成。        Inode包含文件的属性(如读写属性、owner等，以及指向数据块的指针)，数据区域块则是文件内容。        当查看某个文件时，会先从inode table中查出文件属性及数据存放点，再从数据块中读取数据Ext3    是 Ext2 文件系统的升级版本，最大的区别就是带日志功能，以便在系统突然停止时提高文件系统的可靠性。支持最大 16TB 的分区和最大 2TB 的文件Ext4    是 Ext3 文件系统的升级版。Ext4 在性能、伸缩性和可靠性方面进行了大量改进。Ext4 的变化可以说是翻天覆地的，        比如向下兼容 Ext3、最大 1EB 文件系统和 16TB 文件、无限数量子目录、Extents 连续数据块 概念、多块分配、延迟分配、        持久预分配、快速 FSCK、日志校验、无日志模式、在线碎片整理、inode 增强、        默认启用 barrier 等。它是 CentOS 6.3 的默认文件系统                xfs        被业界称为最先进、最具有可升级性的文件系统技术，由 SGI 公司设计，目前最新的 CentOS 7 版本默认使用的就是此文件系统。swap    swap 是 Linux 中用于交换分区的文件系统（类似于 Windows 中的虚拟内存)，当内存不够用时，使用交换分区暂时替代内存。一般大小为内存的 2 倍，但是不要超过 2GB。它是 Linux 的必需分区NFS    NFS 是网络文件系统（Network File System）的缩写，是用来实现不同主机之间文件共享的一种网络服务，本地主机可以通过挂载的方式使用远程共享的资源iso9660    光盘的标准文件系统。Linux 要想使用光盘，必须支持 iso9660 文件系统fat    就是 Windows 下的 fatl6 文件系统，在 Linux 中识别为 fatvfat    就是 Windows 下的 fat32 文件系统，在 Linux 中识别为 vfat。支持最大 32GB 的分区和最大 4GB 的文件</code></pre><p><font color='red'>VFAT 是一种早期的文件系统，通常用于与 Windows 系统兼容的可移动设备。由于 VFAT 文件系统不支持类似 UNIX 文件系统的权限和所有权概念，<br>因此在挂载后无法执行 chown 命令来更改文件和目录的所有者。</font></p><pre><code>NTFS    就是 Windows 下的 NTFS 文件系统，不过 Linux 默认是不能识别 NTFS 文件系统的，如果需要识别，则需要重新编译内核才能支持。        它比 fat32 文件系统更加安全，速度更快，支持最大 2TB 的分区和最大 64GB 的文件ufs    Sun 公司的操作系统 Solaris 和 SunOS 所采用的文件系统proc    Linux 中基于内存的虚拟文件系统，用来管理内存存储目录 /procsysfs    和 proc —样，也是基于内存的虚拟文件系统，用来管理内存存储目录 /sysfstmpfs    也是一种基于内存的虚拟文件系统，不过也可以使用 swap 交换分区现在一般是Ext4 xfs格式</code></pre><h1 id="分区工具"><a href="#分区工具" class="headerlink" title="分区工具"></a>分区工具</h1><pre><code>fdisk命令可以用于对2TB以内的磁盘进行添加、删除、转换分区的功能,用户可以根据实际情况进行合理划分。parted -l命令parted一款功能强大的磁盘分区和分区大小调整工具。parted -l同fdisk -l命令类似，但是它可以识别2TB以上的硬盘，也能查看 GPT 磁盘的分区</code></pre><p>#具体操作  </p><h2 id="基本命令介绍"><a href="#基本命令介绍" class="headerlink" title="基本命令介绍"></a>基本命令介绍</h2><pre><code>df -h      查看分区情况 相对比较直观      fdisk -l      查看系统有几块硬盘  分标有多大  分了那几个区            lsblklsblk -f  查看分区信息  -f更详细令可以列出所有可用块设备的信息,而且还能显示他们之间的依赖关系，但是它不会列出RAM盘的信息。块设备有硬盘,闪存盘,CD-ROM等等用 blkid  获取磁盘的uuid和属性</code></pre><h2 id="详细操作"><a href="#详细操作" class="headerlink" title="详细操作"></a>详细操作</h2><pre><code>分区1.fdisk   盘符    示例：fidisk /dev/sdb2.输入n 是创建分区（一般下面多是默认）3.然后选择分区类型                p   primary(主分区)                e   extende（扩展）                4.设置分区号（一般默认）                5.然后设置     起始扇区              结束扇区                  6.设置完 输入w    保存     7.特殊操作需要删除分区 输入d 然后选择分区号                   格式化          mkfs -t ext3 /dev/sdb2        mkfs -t ext4 /dev/sdb2         mkfs.xfs -f /dev/sdb2                查看分区信息       lsblklsblk -f  更详细用 blkid  获取磁盘的uuid和属性vim /etc/fstab配置模板：UUID=*************  挂载路径  格式  defaults  1  1 示例   UUID=b2cc970b-7cf4-453e-b3f5-916497b9530e  /apps  xfs  defaults  1  1 </code></pre>]]></content>
     
     
       
@@ -41,7 +185,7 @@
     <link href="http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A02/"/>
     <id>http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A02/</id>
     <published>2023-03-14T03:59:07.000Z</published>
-    <updated>2023-03-14T04:00:35.845Z</updated>
+    <updated>2023-07-08T13:11:09.697Z</updated>
     
     <content type="html"><![CDATA[<p>#laravel 核心文件applications</p>]]></content>
     
@@ -62,7 +206,7 @@
     <link href="http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/"/>
     <id>http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/</id>
     <published>2023-03-14T03:45:11.000Z</published>
-    <updated>2023-03-14T03:56:58.391Z</updated>
+    <updated>2023-07-08T13:11:09.697Z</updated>
     
     <content type="html"><![CDATA[<h1 id="public-index-php文件解析"><a href="#public-index-php文件解析" class="headerlink" title="public/index.php文件解析"></a>public/index.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 引入自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../bootstrap/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Turn On The Lights</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| We need to illuminate PHP development, so let us turn on the lights.</span><br><span class="line">| This bootstraps the framework and gets it ready for use, then it</span><br><span class="line">| will load up this application so that we can run it and send</span><br><span class="line">| the responses back to the browser and delight our users.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$app = require_once __DIR__.&#x27;/../bootstrap/app.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Run The Application</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Once we have the application, we can handle the incoming request</span><br><span class="line">| through the kernel, and send the associated response back to</span><br><span class="line">| the client&#x27;s browser allowing them to enjoy the creative</span><br><span class="line">| and wonderful application we have prepared for them.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line"></span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$response-&gt;send();</span><br><span class="line"></span><br><span class="line">$kernel-&gt;terminate($request, $response);</span><br></pre></td></tr></table></figure><h1 id="bootstrap-autoload-php文件解析"><a href="#bootstrap-autoload-php文件解析" class="headerlink" title="/bootstrap/autoload.php文件解析"></a>/bootstrap/autoload.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">#定义记录时间的常量</span><br><span class="line">define(&#x27;LARAVEL_START&#x27;, microtime(true));</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Register The Composer Auto Loader</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Composer provides a convenient, automatically generated class loader</span><br><span class="line">| for our application. We just need to utilize it! We&#x27;ll require it</span><br><span class="line">| into the script here so that we do not have to worry about the</span><br><span class="line">| loading of any our classes &quot;manually&quot;. Feels great to relax.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line">#引入外部库   自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../vendor/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Include The Compiled Class File</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| To dramatically increase your application&#x27;s performance, you may use a</span><br><span class="line">| compiled class file which contains all of the classes commonly used</span><br><span class="line">| by a request. The Artisan &quot;optimize&quot; is used to create this file.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line">#引入laravel缓存文件</span><br><span class="line">$compiledPath = __DIR__.&#x27;/cache/compiled.php&#x27;;</span><br><span class="line"></span><br><span class="line">if (file_exists($compiledPath)) &#123;</span><br><span class="line">    require $compiledPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -82,7 +226,7 @@
     <link href="http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/"/>
     <id>http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/</id>
     <published>2023-02-25T03:51:34.000Z</published>
-    <updated>2023-02-25T06:56:50.277Z</updated>
+    <updated>2023-07-08T13:11:09.699Z</updated>
     
     <content type="html"><![CDATA[<h1 id="安装mysql服务"><a href="#安装mysql服务" class="headerlink" title="安装mysql服务"></a>安装mysql服务</h1><pre><code>1.下载地址：https://downloads.mysql.com/archives/community/2.下载相应windows版本3.解压后cmd cd到文件目录mysqld.exe  执行   mysqld.exe install【mysqld remove 移除服务 mysqld start 启动服务】4.设置开机启动  然后再win+r 输入services.msc  打开后找到mysql 右键点击属性   将启动类型设置为自动即可【注：期间不同版本可能会报奇奇怪怪的错，百度安装相关的版本vc库】</code></pre><h1 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h1><pre><code>1.下载地址：https://windows.php.net/downloads/releases/archives/2.下载版本必须有  php7apache2_4.dll  vc版本最好跟apache的版本一样3.配置php.ini 开启相应 扩展4.测试是否能用  到相应目录 执行 php.exe -v【注：期间不同版本可能会报奇奇怪怪的错，百度安装相关的版本vc库】</code></pre><h1 id="安装apache-服务器"><a href="#安装apache-服务器" class="headerlink" title="安装apache 服务器"></a>安装apache 服务器</h1><p>##apache 安装对接php<br>    下载：<a href="https://www.apachelounge.com/download/VC14/">https://www.apachelounge.com/download/VC14/</a></p><pre><code>到apache/config/httpd.conf文件找到&lt;IfModule unixd_module&gt;配置行 在其上面添加LoadModule php7_module C:/php/php7apache2_4.dll  【php7apache2_4.dll 不同版本不同  具体目录根据自己的配置】AddType application/x-httpd-php .php .html .htmPHPIniDir c:/php                                 【配置PHP所在目录  具体目录根据自己的配置】  然后通过bin目录下   **httpd.exe  -t** 测试配置是否通过bin目录下 ApacheMonitor.exe 可以用来启动关闭 httpd服务</code></pre><h2 id="配置apache项目访问"><a href="#配置apache项目访问" class="headerlink" title="配置apache项目访问"></a>配置apache项目访问</h2><h3 id="1-配置项"><a href="#1-配置项" class="headerlink" title="1.配置项"></a>1.配置项</h3><pre><code>    httpd.exe -k install -n &quot;apache2.4&quot;    1.ServerName     配置域名访问地址    例：ServerName 192.168.100.34:8080    ServerName www.baidu.com        2.ServerRoot  配置apache安装目录                 例     Define SRVROOT &quot;c:/httpd&quot;                    ServerRoot &quot;$&#123;SRVROOT&#125;&quot;                                    3.Listen      监听端口                 例     Listen 8080                 4.DocumentRoot    配置项目目录                 例：  DocumentRoot &quot;$&#123;SRVROOT&#125;/htdocs/jnyy.iguanwei.com/public&quot;        5.&lt;Directory 目录&gt;        权限    &lt;/&gt;Directory&gt;    配置目录权限相关            例：        &lt;Directory &quot;$&#123;SRVROOT&#125;/htdocs/jnyy.iguanwei.com/public&quot;&gt;                    Options Indexes FollowSymLinks                    AllowOverride All                    Require all granted         &lt;/Directory&gt;             6.配置默认访问文件            &lt;IfModule dir_module&gt;              DirectoryIndex  index.php index.html        &lt;/IfModule&gt;              </code></pre><h3 id="伪静态"><a href="#伪静态" class="headerlink" title="伪静态"></a>伪静态</h3><pre><code>1. httpd.conf配置文件 启动rewrite模块 如下：    LoadModule rewrite_module modules/mod_rewrite.so2.项目根目录.htaccess文件配置入下  没有则新建    &lt;IfModule mod_rewrite.c&gt;     RewriteEngine on     RewriteBase /     RewriteCond %&#123;REQUEST_FILENAME&#125; !-d     RewriteCond %&#123;REQUEST_FILENAME&#125; !-f     RewriteRule ^(.*)$ index.php?s=/$1 [QSA,PT,L]    &lt;/IfModule&gt;3.对应apache  httpd.conf配置文件     AllowOverride All    &lt;Directory 项目目录&gt;                            Options Indexes FollowSymLinks                            AllowOverride All                            Require all granted    &lt;/Directory&gt;      </code></pre><h3 id="配置开机启动"><a href="#配置开机启动" class="headerlink" title="配置开机启动"></a>配置开机启动</h3><pre><code>   1.将apache加入windows服务              apache的bin目录下 执行 httpd.exe -thttpd.exe -k install -n &quot;apache2.4&quot;         2.设置开机启动  然后再win+r 输入services.msc  打开后找到mysql 右键点击属性   将启动类型设置为自动即可   </code></pre><h1 id="apache相关知识"><a href="#apache相关知识" class="headerlink" title="apache相关知识"></a>apache相关知识</h1><h2 id="windows下apache常用命令"><a href="#windows下apache常用命令" class="headerlink" title="windows下apache常用命令"></a>windows下apache常用命令</h2><pre><code>httpd -k install                           安装apache服务httpd -k uninstall                         移除apache服务httpd -k start                             启动apache服务httpd -k restart                           重启apache服务httpd -k stop                              关闭已安装的apache服务httpd -v                                   查看apache版本httpd -t                                   查看apache配置文件状态    </code></pre><h2 id="重写规则"><a href="#重写规则" class="headerlink" title="重写规则"></a>重写规则</h2><pre><code>网站根目录下创建  .htaccess  文件1) R[=code](force redirect)  #强制外部重定向强制在替代字符串加上http://thishost[:thisport]/前缀重定向到外部的URL.如果code不指定，将用缺省的302 HTTP状态码。2) F(force URL to be forbidden)  #禁用URL,返回403HTTP状态码。3) G(force URL to be gone)  # 强制URL为GONE，返回410HTTP状态码。4) P(force proxy) # 强制使用代理转发。5) L(last rule) # 表明当前规则是最后一条规则，停止分析以后规则的重写。6) N(next round) # 重新从第一条规则开始运行重写过程。7) C(chained with next rule) # 与下一条规则关联如果规则匹配则正常处理，该标志无效，如果不匹配，那么下面所有关联的规则都跳过。8) T=MIME-type(force MIME type) # 强制MIME类型9) NS (used only if no internal sub-request) # 只用于不是内部子请求10) NC(no case) # 不区分大小写11) QSA(query string append) # 追加请求字符串12) NE(no URI escaping of output) # 不在输出转义特殊字符例如：RewriteRule /foo/(.*) /bar?arg=P1%3d$1 [R,NE] # 将能正确的将/foo/zoo转换成/bar?arg=P1=zoo13) PT(pass through to next handler) # 传递给下一个处理例如：RewriteRule ^/abc(.*) /def$1 [PT] # 将会交给/def规则处理Alias /def /ghi14) S=num(skip next rule(s)) # 跳过num条规则15) E=VAR:VAL(set environment variable) # 设置环境变量</code></pre><h2 id="HTTP-跳转至-HTTPS-示例"><a href="#HTTP-跳转至-HTTPS-示例" class="headerlink" title="HTTP 跳转至 HTTPS 示例"></a>HTTP 跳转至 HTTPS 示例</h2><pre><code>RewriteEngine on  # 开启重写RewriteCond %&#123;SERVER_PORT&#125; !^443$  # 如果访问的不是 443 端口RewriteCond %&#123;REQUEST_URI&#125; !^/tz.php  #如果访问的url 不是 /tz.phpRewriteRule (.*) https://%&#123;SERVER_NAME&#125;/$1 [R]     # 跳转到  https：//域名+$1</code></pre><h2 id="HTTP-80-强制转-HTTPS"><a href="#HTTP-80-强制转-HTTPS" class="headerlink" title="HTTP 80 强制转 HTTPS"></a>HTTP 80 强制转 HTTPS</h2><pre><code>RewriteEngine OnRewriteCond %&#123;SERVER_PORT&#125; 80  # 如果访问的是80 端口RewriteRule ^(.*)$ https://%&#123;HTTP_HOST&#125;/$1 [R,L]  # 跳转 https </code></pre><h2 id="强制301重定向-HTTPS"><a href="#强制301重定向-HTTPS" class="headerlink" title="强制301重定向 HTTPS"></a>强制301重定向 HTTPS</h2><pre><code>&lt;IfModule mod_rewrite.c&gt;RewriteEngine onRewriteBase /  # 表示项目根目录RewriteCond %&#123;SERVER_PORT&#125; !^443$  # 如果访问的不是443 端口RewriteRule (.*) https://%&#123;SERVER_NAME&#125;/$1 [R=301,L]  # 重定向到 301&lt;/IfModule&gt;</code></pre><h2 id="重命名目录"><a href="#重命名目录" class="headerlink" title="重命名目录"></a>重命名目录</h2><pre><code>RewriteRule   ^/?old_directory/([a-z\.]+)$   new_directory/$1   [R=301,L]</code></pre><h2 id="图片防盗链"><a href="#图片防盗链" class="headerlink" title="图片防盗链"></a>图片防盗链</h2><p>   RewriteCond   %{HTTP_REFERER}   !^$ # 如果上个页面地址为空<br>   RewriteCond    %{HTTP_REFERER}   !^http://(www.)?example.com/   [NC]    #或者不是来自你自己的域名<br>   RewriteRule   .(gif|jpg|png)$   - [F]  #禁止访问</p><h2 id="如果文件不存在重定向到404页面"><a href="#如果文件不存在重定向到404页面" class="headerlink" title="如果文件不存在重定向到404页面"></a>如果文件不存在重定向到404页面</h2><pre><code>RewriteCond   %&#123;REQUEST_FILENAME&#125;   !-f  # 如果访问的不是一个文件RewriteCond   %&#123;REQUEST_FILENAME&#125;   !-d  #如果访问的不是一个目录RewriteRule   .?   /404.php   [L]   #跳转到网站根目录# 也可携带参数#RewriteRule ^/?(.*)$ /404.php?url=$1 [L]</code></pre>]]></content>
     
@@ -98,11 +242,31 @@
   </entry>
   
   <entry>
+    <title>vue学习1</title>
+    <link href="http://example.com/2023/02/22/vue%E5%AD%A6%E4%B9%A01/"/>
+    <id>http://example.com/2023/02/22/vue%E5%AD%A6%E4%B9%A01/</id>
+    <published>2023-02-22T14:18:25.000Z</published>
+    <updated>2023-07-13T06:20:53.705Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="vuecli-vue脚手架"><a href="#vuecli-vue脚手架" class="headerlink" title="vuecli  vue脚手架"></a>vuecli  vue脚手架</h1><pre><code>vue 它是一个插件  最基础的项目架构 帮集成webpack 构建 打包 编译 包含基本的架子安装命令：    npm install -g @vue/cli            npm i -g @vue/cli            -g      表示全局安装查看脚手架版本         vue --version</code></pre><h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><pre><code>vue create [项目名称]默认安装项   [babel]  编译es6的语法    [eslint]     项目语法检查  可开关vue ui 启动vue ui操作界面</code></pre><h1 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h1><pre><code>/src/assets  目录存放 icon 图片/src/api     存放  api  文件夹/src/util    存放  一些工具方法/src/storage 存放 数据存储的工具箱/src/pages/src/router.js</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;vuecli-vue脚手架&quot;&gt;&lt;a href=&quot;#vuecli-vue脚手架&quot; class=&quot;headerlink&quot; title=&quot;vuecli  vue脚手架&quot;&gt;&lt;/a&gt;vuecli  vue脚手架&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;vue 它是一个插件  最基础的</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>java学习1</title>
     <link href="http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/"/>
     <id>http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/</id>
     <published>2023-02-08T03:39:50.000Z</published>
-    <updated>2023-02-25T03:48:43.900Z</updated>
+    <updated>2023-07-08T13:11:09.697Z</updated>
     
     <content type="html"><![CDATA[<p>git</p>]]></content>
     
@@ -123,8 +287,15 @@
     <link href="http://example.com/2022/04/17/mysql-server/"/>
     <id>http://example.com/2022/04/17/mysql-server/</id>
     <published>2022-04-17T14:53:37.000Z</published>
-    <updated>2022-04-26T12:33:15.102Z</updated>
+    <updated>2023-07-13T11:05:57.735Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="centos-mysql安装"><a href="#centos-mysql安装" class="headerlink" title="centos mysql安装"></a>centos mysql安装</h1><p>1.网站：<a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p><p>2.mysql官网找到相应版本安装包</p><p>3.然后下载本地 tar -xvf mysql-5.7.21-1.el7.x86_64.rpm-bundle.tar</p><p>4.rpm -qa|grep mariadb 查看是否安装mariadb数据库，有就卸载  yum remove 包名 <font color='red'>不卸载干净，会报错哦</font></p><p>5.按下列包顺序安装</p><pre><code>rpm -ivh mysql-community-common-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-libs-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-devel-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-libs-compat-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-client-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-server-5.7.19-1.el7.x86_64.rpm</code></pre><p>6 安装完毕 初始密码一般在/var/log/mysqld.log文件中   cat   /var/log/mysqld.log |grep password</p><p>7.登录数据库 修改密码 mysql -u root -p</p><p>8.登录后修改密码 </p><pre><code>SET PASSWORD = PASSWORD(&#39;xxx@520Flzx3qc&#39;);</code></pre><p>9.优化配置    </p><pre><code>port=3306设置端口号datadir=/data/mysqldata#数据存在目录    ############## Slow Log   ######################slow_query_log=ON# 开启慢查询日志slow_query_log_file=/data/mysql/logs/slow.log# # 慢查询日志存放路径long_query_time=10# # 超过10秒的查询，记录到慢查询日志，默认值10log_queries_not_using_indexes=ON# # 没有使用索引的查询，记录到慢查询日志，可能引起慢查询日志快速增长log_slow_admin_statements=ON# # 执行缓慢的管理语句，记录到慢查询日志# # 例如 ALTER TABLE, ANALYZE TABLE, CHECK TABLE, CREATE INDEX, DROP INDEX, OPTIMIZE TABLE, and REPAIR TABLE.###################     Error Log   ####################log_error=/data/mysql/logs/mysqld.log## 错误日志存放路径log_error_verbosity = 2## 全局动态变量，默认3，范围：1～3###################     Bin Log    ######################server_id = 6###################     Error Log   ####################log_error=/data/mysql/logs/mysqld.log</code></pre><p>10.相关命令</p><pre><code>开机启动systemctl enable mysqldsystemctl stop mysqldsystemctl start mysqldsystemctl restart mysqld</code></pre><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;centos-mysql安装&quot;&gt;&lt;a href=&quot;#centos-mysql安装&quot; class=&quot;headerlink&quot; title=&quot;centos mysql安装&quot;&gt;&lt;/a&gt;centos mysql安装&lt;/h1&gt;&lt;p&gt;1.网站：&lt;a href=&quot;https://</summary>
+      
     
     
     
@@ -237,175 +408,6 @@ yum instal</summary>
     
     
     <category term="server" scheme="http://example.com/categories/server/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JS模块化</title>
-    <link href="http://example.com/2022/02/26/js%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    <id>http://example.com/2022/02/26/js%E6%A8%A1%E5%9D%97%E5%8C%96/</id>
-    <published>2022-02-26T02:48:58.000Z</published>
-    <updated>2022-02-26T03:11:06.791Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="CommonJs规范简"><a href="#CommonJs规范简" class="headerlink" title="CommonJs规范简"></a>CommonJs规范简</h2><pre><code>前端模块化最初是服务于服务端的 但它的载体是前端语言 JavaScriptcommonjs 随着 nodejs 的诞生而面世，主要是用来解决服务端模块化的问题Node.js 应用由模块组成，每个文件就是一个模块，有自己的作用域。在一个文件里面定义的变量、函数、类，都是私有的，对其他文件不可见 CommonJS 规范的模块时，无外乎就是使用了 require 、 exports 、 module 三个东西， 然后一个 js 文件就是一个模块  弊端require 多个文件  网络加载问题</code></pre><h3 id="require"><a href="#require" class="headerlink" title="require"></a>require</h3><pre><code>用来加载某个模块</code></pre><h3 id="module"><a href="#module" class="headerlink" title="module"></a>module</h3><pre><code>module 代表当前模块，是一个对象，保存了当前模块的信息exports 是 module 上的一个属性，保存了当前模块要导出的接口或者变量，使用 require 加载的某个模块获取到的值就是那个模块使用 exports 导出的值</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">var name = &#x27;morrain&#x27;</span><br><span class="line">var age = 18</span><br><span class="line">module.exports.name = name</span><br><span class="line">module.exports.getAge = function()&#123;</span><br><span class="line">    return age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//b.js</span><br><span class="line">var a = require(&#x27;a.js&#x27;)</span><br><span class="line">console.log(a.name) // &#x27;morrain&#x27;</span><br><span class="line">console.log(a.getAge())// 18</span><br></pre></td></tr></table></figure><h3 id="exports"><a href="#exports" class="headerlink" title="exports"></a>exports</h3><pre><code>为了方便，Node.js 在实现 CommonJS 规范时，为每个模块提供一个 exports的私有变量为每个模块提供一个 exports的私有变量，指向 module.exports你可以理解为 Node.js 在每个模块开始的地方，添加了如下这行代码。exports 是模块内的私有局部变量，它只是指向了 module.exports所以直接对 exports 赋值是无效的</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//a.js</span><br><span class="line">var name = &#x27;test&#x27;</span><br><span class="line">var age = 18</span><br><span class="line">exports.name = name</span><br><span class="line">exports.getAge = function()&#123;</span><br><span class="line">    return age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//b.js</span><br><span class="line"></span><br><span class="line">a = require(&#x27;a.js&#x27;)</span><br><span class="line">console.log(a.name)</span><br><span class="line">a.name</span><br></pre></td></tr></table></figure><h2 id="AMD-Asynchronous-Module-Definition-异步模块定义-require-js"><a href="#AMD-Asynchronous-Module-Definition-异步模块定义-require-js" class="headerlink" title="AMD(Asynchronous Module Definition 异步模块定义)   require.js"></a>AMD(Asynchronous Module Definition 异步模块定义)   require.js</h2><pre><code>　　（1）实现js文件的异步加载，避免网页失去响应；　　（2）管理模块之间的依赖性，便于代码的编写和维护。</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">define(id?, dependencies?, factory)</span><br><span class="line"></span><br><span class="line">id：可选参数，用来定义模块的标识，如果没有提供该参数，就使用 js 文件名（去掉拓展名）对于一个 js 文件只定义了一个模块时，这个参数是可以省略的</span><br><span class="line"></span><br><span class="line">dependencies：可选参数，是一个数组，表示当前模块的依赖，如果没有依赖可以不传</span><br><span class="line"></span><br><span class="line">factory：工厂方法，模块初始化要执行的函数或对象。如果为函数，它应该只被执行一次，返回值便是模块要导出的值。</span><br><span class="line">如果是对象，此对象应该为模块的输出值</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">define(function()&#123;</span><br><span class="line">    var name = &#x27;morrain&#x27;</span><br><span class="line">    var age = 18</span><br><span class="line">    return &#123;</span><br><span class="line">        name,</span><br><span class="line">        getAge: () =&gt; age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">// b.js</span><br><span class="line">define([&#x27;a.js&#x27;], function(a)&#123;</span><br><span class="line">    var name = &#x27;lilei&#x27;</span><br><span class="line">    var age = 15</span><br><span class="line">    console.log(a.name) // &#x27;morrain&#x27;</span><br><span class="line">    console.log(a.getAge()) // 18</span><br><span class="line">    return &#123;</span><br><span class="line">        name,</span><br><span class="line">        getAge: () =&gt; age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h2 id="CMD-Common-Module-Definition-Sea-js"><a href="#CMD-Common-Module-Definition-Sea-js" class="headerlink" title="CMD (Common Module Definition)  Sea.js"></a>CMD (Common Module Definition)  Sea.js</h2><pre><code> Sea.js </code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;sea.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;b.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">// a.js</span><br><span class="line">define(function(require, exports, module)&#123;</span><br><span class="line">    var name = &#x27;morrain&#x27;</span><br><span class="line">    var age = 18</span><br><span class="line"></span><br><span class="line">    exports.name = name</span><br><span class="line">    exports.getAge = () =&gt; age</span><br><span class="line">&#125;)</span><br><span class="line">// b.js</span><br><span class="line">define(function(require, exports, module)&#123;</span><br><span class="line">    var name = &#x27;lilei&#x27;</span><br><span class="line">    var age = 15</span><br><span class="line">    var a = require(&#x27;a.js&#x27;)</span><br><span class="line"></span><br><span class="line">    console.log(a.name) // &#x27;morrain&#x27;</span><br><span class="line">    console.log(a.getAge()) //18</span><br><span class="line"></span><br><span class="line">    exports.name = name</span><br><span class="line">    exports.getAge = () =&gt; age</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h2 id="ES6-Moudule"><a href="#ES6-Moudule" class="headerlink" title="ES6 Moudule"></a>ES6 Moudule</h2>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;CommonJs规范简&quot;&gt;&lt;a href=&quot;#CommonJs规范简&quot; class=&quot;headerlink&quot; title=&quot;CommonJs规范简&quot;&gt;&lt;/a&gt;CommonJs规范简&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;前端模块化
-
-最初是服务于服务端的 但它的载体是前端</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>git总结</title>
-    <link href="http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/"/>
-    <id>http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/</id>
-    <published>2022-01-08T14:19:16.000Z</published>
-    <updated>2022-04-26T11:48:29.466Z</updated>
-    
-    <content type="html"><![CDATA[<p> #标签</p><ul><li><p>git</p><h1 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h1><p>  工作区(workspace)      就是你平时存放项目代码的地方<br>  暂存区(stage)          git add<br>  仓库区/版本库(Repository)     git commit<br>  远程仓库</p></li></ul><h1 id="二、回退问题"><a href="#二、回退问题" class="headerlink" title="二、回退问题"></a>二、回退问题</h1><h2 id="1-git-add-后回退"><a href="#1-git-add-后回退" class="headerlink" title="1.git add 后回退"></a>1.git add 后回退</h2><pre><code>git status 先看一下add 中的文件git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了git reset HEAD XXX/XXX/XXX.java 就是对某个文件进行撤销了</code></pre><h2 id="2-git-commit后回退"><a href="#2-git-commit后回退" class="headerlink" title="2.git commit后回退"></a>2.git commit后回退</h2><pre><code>git log    命令显示从最近到最远的提交日志    [root@localhost test-jenkins]# git log    commit e2c7f2d567cbdc36e4503479e15ea51d19816d33    Author: root &lt;root@localhost.localdomain&gt;    Date:   Fri Jan 7 11:17:27 2022 +0800    dev branch change    commit 8943166480734ac5a760e482a887ee8da0140ec8    Author: root &lt;root@localhost.localdomain&gt;    Date:   Fri Jan 7 10:56:22 2022 +0800    dev branch add index.php    。。。。git reest --hard  commit_id                  上一个版本就是HEAD^，                  上上一个版本就是HEAD^^，                  当然往上100个版本写100个^比较容易数不过来，                  所以写成HEAD~100。例：    git reset --hard 139dcfaa558e3276b30b6b2e5cbbb9c00bbdca96    git reset --hard HEAD^将会删除此版本之前添加强制push到对应的远程分支（如提交到develop分支）git push -f -u origin develop</code></pre><h2 id="3-回退后悔药"><a href="#3-回退后悔药" class="headerlink" title="3.回退后悔药"></a>3.回退后悔药</h2><pre><code>git reflog用来记录你的每一次命令[root@localhost test-jenkins]# git reflog8943166 HEAD@&#123;0&#125;: reset: moving to 8943166480734ac5a760e482a887ee8da0140ec8e2c7f2d HEAD@&#123;1&#125;: commit: dev branch change8943166 HEAD@&#123;2&#125;: commit: dev branch add index.php1ca6f06 HEAD@&#123;3&#125;: checkout: moving from release to dev1ca6f06 HEAD@&#123;4&#125;: pull origin release: Fast-forward14fbb47 HEAD@&#123;5&#125;: checkout: moving from master to release14fbb47 HEAD@&#123;6&#125;: clone: from ssh://git@117.89.131.220:44222/zhaoyoushui/test-jenkins.gitgit reset --hard e2c7f2d</code></pre><h2 id="4-已经提交远程分支"><a href="#4-已经提交远程分支" class="headerlink" title="4.已经提交远程分支"></a>4.已经提交远程分支</h2><pre><code>git reset 方法回退拉过的错误版本的本地分支  多需要回退回退  强制推送  远程git revert 版本号git revert HEAD 上个版本git revert HEAD~n 上n个版本git push 远程其他客户端正常拉取就可以</code></pre><h1 id="三、Git-Reset-三种模式"><a href="#三、Git-Reset-三种模式" class="headerlink" title="三、Git Reset 三种模式"></a>三、Git Reset 三种模式</h1><pre><code>--hard: 会清空工作目录和暂存区的改动--soft：保留工作目录，并把重置 HEAD 所带来的新的差异放进暂存区  **变得只是仓库区**--mixed reset 不加参数(mixed)：保留工作目录，并清空暂存区</code></pre><h1 id="四、修改远程url"><a href="#四、修改远程url" class="headerlink" title="四、修改远程url"></a>四、修改远程url</h1><pre><code>1.方法一    git remote set-url origin [url]    git remote -v 查看2.方法二    git remote rm origin    git remote add origin [url]    git remote -v 查看3.方法三    直接修改config 文件</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt; #标签&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;git&lt;/p&gt;
-&lt;h1 id=&quot;一、基础知识&quot;&gt;&lt;a href=&quot;#一、基础知识&quot; class=&quot;headerlink&quot; title=&quot;一、基础知识&quot;&gt;&lt;/a&gt;一、基础知识&lt;/h1&gt;&lt;p&gt;  工作区(workspace)      </summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>webpack学习笔记1</title>
-    <link href="http://example.com/2022/01/01/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/"/>
-    <id>http://example.com/2022/01/01/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</id>
-    <published>2022-01-01T07:19:05.000Z</published>
-    <updated>2022-02-26T02:46:01.762Z</updated>
-    
-    <content type="html"><![CDATA[<p>#1. webpack 安装</p><pre><code>全局安装 nodejs    验证  node -v          npm -vnpm install webpack -gnpm install webpack-cli -g正常情况下 安装webpack-cli 会自动安装webpacknpm uninstall webpack -g 全局卸载单独项目内安装npm install webpack webpack-cli --save-dev或者npm install webpack webpack-cli -D运行npx webpack -v   //注 npx 会在node_module文件夹中找安装特定版本npm info webpack   //查看webpack有那些版本npm install webpack@4.16.5 webpack-cli -D</code></pre><p>#2.webpack 基本使用</p><pre><code>npm init    增加package.json文件npm init -y</code></pre><p>#3.一些语法</p><pre><code>ES Module 模块引入方式</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;#1. webpack 安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;全局安装 nodejs
-    验证  node -v
-          npm -v
-npm install webpack -g
-npm install webpack-cli -g
-正常情况下 安装webp</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>web备份方案</title>
-    <link href="http://example.com/2021/12/23/web%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88/"/>
-    <id>http://example.com/2021/12/23/web%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88/</id>
-    <published>2021-12-23T12:33:32.000Z</published>
-    <updated>2022-02-26T02:46:01.763Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一、服务器环境"><a href="#一、服务器环境" class="headerlink" title="一、服务器环境"></a>一、服务器环境</h2><pre><code>    192.168.100.230 web服务器    192.168.100.20  备份服务器 （rsync服务端）</code></pre><h2 id="二、备份服务器安装-rsync-服务端"><a href="#二、备份服务器安装-rsync-服务端" class="headerlink" title="二、备份服务器安装 rsync 服务端"></a>二、备份服务器安装 rsync 服务端</h2><pre><code>rpm -qa|grep rsync    //检查是否安装 rsyncyum install -y rsyncvim /etc/rsyncd.conf   //编辑rsyncd服务rsyncd.conf配置文件如下</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#rsyncd.conf start</span><br><span class="line">uid = rsync                                </span><br><span class="line">gid = rsync</span><br><span class="line">use chroot=no</span><br><span class="line">max connections=200</span><br><span class="line">timeout = 300</span><br><span class="line">pid file = /var/run/rsyncd.pid</span><br><span class="line">lock file = /var/run/rsyncd.lock</span><br><span class="line">log file = /var/log/rsyncd.log</span><br><span class="line">ignore errors</span><br><span class="line">read only = false</span><br><span class="line">list = false </span><br><span class="line">hosts allow = 172.16.1.0/24</span><br><span class="line">#hosts deny = 0.0.0.0/32</span><br><span class="line">auth users = rsync_backup</span><br><span class="line">secrets file = /etc/rsync.password</span><br><span class="line">fake super = yes</span><br><span class="line">[backup]</span><br><span class="line">comment = &quot;backup dir by oldboy&quot;</span><br><span class="line">path = /home/backup  </span><br><span class="line">#备份的目录</span><br></pre></td></tr></table></figure><pre><code>创建rsync 服务管理用户useradd -s /sbin/nologin -M rsync创建数据备份存储目录chown -R rsyn.rsync /home/backup创建认证用户密码文件echo &quot;rsync_backup:admin.123!@#$&quot;  &gt;/etc/rsync.passwordchmod 600 /etc/rsync.password启动rsync服务systemctl start rsyncd       </code></pre><h2 id="三、配置web-服务器端（192-168-100-230）"><a href="#三、配置web-服务器端（192-168-100-230）" class="headerlink" title="三、配置web 服务器端（192.168.100.230）"></a>三、配置web 服务器端（192.168.100.230）</h2><pre><code>    确认 rsync是否安装        rpm -qa|grep rsync        建立认证文件            echo &quot;密码字符串（与rsync一致）&quot;  &gt;/etc/rsync.password        chmod 600 /etc/rsync.password        web01主机数据传输到backup主机测试测试传输            Push: rsync [OPTION...] SRC... [USER@]HOST::DEST        交互式：rsync -avz /etc/hosts  rsync_backup@172.16.1.41::backup        非交互式：rsync -avz /etc/hosts  rsync_backup@172.16.1.41::backup --password-file=/etc/rsync.password                    shell 脚本</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">objectFilename=(&#x27;文件夹名称&#x27;);</span><br><span class="line">sourcePath=&#x27;/apps/web/&#x27;;</span><br><span class="line">for(( i=0;i&lt;$&#123;#objectFilename[@]&#125;;i++)) </span><br><span class="line">do </span><br><span class="line">    tar zcf /home/backup/web/source/$&#123;objectFilename[i]&#125;-$(date +%Y-%m-%d).tar.gz -C $&#123;sourcePath&#125; $&#123;objectFilename[i]&#125;; </span><br><span class="line">    rsync -avz /home/backup/web/source/  rsync_backup@192.168.100.20::backup --password-file=/etc/rsync.password</span><br><span class="line">    rm -rf /home/backup/web/source/$&#123;objectFilename[i]&#125;-$(date +%Y-%m-%d).tar.gz</span><br><span class="line">done;</span><br></pre></td></tr></table></figure><h2 id="四、注意事项"><a href="#四、注意事项" class="headerlink" title="四、注意事项"></a>四、注意事项</h2><pre><code>特殊情况 总是提示权限问题修改 服务端    uid = root                                    gid = root    fake super = no脚本备份大文件有问题</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;一、服务器环境&quot;&gt;&lt;a href=&quot;#一、服务器环境&quot; class=&quot;headerlink&quot; title=&quot;一、服务器环境&quot;&gt;&lt;/a&gt;一、服务器环境&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;    192.168.100.230 web服务器
-    192.168.100</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>普通心理学笔记2</title>
-    <link href="http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B02/"/>
-    <id>http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B02/</id>
-    <published>2021-12-21T13:05:13.000Z</published>
-    <updated>2022-04-26T11:49:55.331Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="现代心理学6个视角"><a href="#现代心理学6个视角" class="headerlink" title="现代心理学6个视角"></a>现代心理学6个视角</h1><pre><code>起源：古希腊哲学家 苏格拉底 柏拉图 亚里士多德 意识和疯癫的理解亚洲和非洲 瑜伽和佛教 探索意识 通过冥想控制意识天主教1.生物视角        大脑、神经系统、内分泌系统（激素）和基因        笛卡尔2.认知视角    每个人有各自的知觉模式、解释、预期、信念和记忆   威廉。冯特 威廉詹姆斯         3.行为视角        环境的刺激和先前行为的结果                   约翰。华生 斯金纳4.全人视角                                   弗洛伊德 古希腊           心理动力：无意识心理的过程    人本主义    特质和气质：5.发展视角                                   安斯沃思    遗传和环境的交互作用，在毕生发展中塑造    6.社会文化视角                                津巴多        环境的影响。社会和文化比其他因素更能决定行为</code></pre><p>笛卡尔 精神和肉体是分离的  由此生物学视角诞生</p><p>生物学主题</p><pre><code>神经科学进化心理学</code></pre><p>德国科学家  威廉 冯特 |内省法  格式塔心理学家</p><pre><code>科学心理学和现代认知视角的建立元素周期表  研究自然世界的科学方法  结构主义纳克立方体</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;现代心理学6个视角&quot;&gt;&lt;a href=&quot;#现代心理学6个视角&quot; class=&quot;headerlink&quot; title=&quot;现代心理学6个视角&quot;&gt;&lt;/a&gt;现代心理学6个视角&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;起源：古希腊哲学家 苏格拉底 柏拉图 亚里士多德 意识和疯癫的理解
-</summary>
-      
-    
-    
-    
-    <category term="心理学" scheme="http://example.com/categories/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>普通心理学笔记1</title>
-    <link href="http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B01/"/>
-    <id>http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B01/</id>
-    <published>2021-12-21T12:17:10.000Z</published>
-    <updated>2022-04-26T11:49:44.263Z</updated>
-    
-    <content type="html"><![CDATA[<p>#心理学</p><pre><code>心理学研究行为和心理过程一门多个专业领域的的科学</code></pre><p>#心理学三大分支</p><pre><code>实验心理学     实验心理学家 最少的心理学教学    心理学教师应用心理学    工业与组织心理学家    运动心里学家    学校心理学家    临床和咨询心理学家    法医心理学家    环境心理学家</code></pre><p>#心理学与精神病学区别</p><pre><code>精神病学是医学 接受过治疗精神与行为疾病的训练具有开具处方的执照从医学角度看问题心理学关注更为广泛 人类的行为和心理过程大脑功能到社会交往心里健康到心理障碍心理学角度 来访者</code></pre><p>#批判性思考技巧</p><pre><code>1.其来源出自哪里 问题的来源    提出问题的人 是否擅长啊    由于什么原因 提出了这个问题2.这个观点是合理的还是极端的3.证据是什么4.是否有影响结论的偏差    验证性偏差 只记得验证成功的那一面5.推理是否避开了常见谬误    避免 常识6.看待这个问题是否需要多种角度</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;#心理学&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;心理学研究行为和心理过程
-一门多个专业领域的的科学
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;#心理学三大分支&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;实验心理学 
-    实验心理学家 最少的
-心理学教学
-    心理学教师
-应用心理学
-    工业</summary>
-      
-    
-    
-    
-    <category term="心理学" scheme="http://example.com/categories/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo基础应用</title>
-    <link href="http://example.com/2021/12/10/Hexo%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8/"/>
-    <id>http://example.com/2021/12/10/Hexo%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8/</id>
-    <published>2021-12-10T06:20:38.000Z</published>
-    <updated>2022-02-26T02:46:01.762Z</updated>
-    
-    <content type="html"><![CDATA[<p>1.首先安装node,具体参考<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p><p>2.初始化 项目</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure><p>将会在当前目录下产生blog文件夹</p><p>3.新建文章</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n 文章标题  //完整命令 hexo new 文章标题</span><br></pre></td></tr></table></figure><p>相应会在source/_posts 目录下产生   文章标题.md</p><p>4.生成html</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g        //完整命令  hexo generate</span><br></pre></td></tr></table></figure><p>将会在public目录生成相应的html文件</p><p>5.开启本地测试环境</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s        //完整命令  hexo server</span><br></pre></td></tr></table></figure><pre><code>http://loaclhost:4000就可以访问了</code></pre><p>6.发布代码到github.io</p><pre><code>配置修改_config.yml文件</code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: &#x27;git&#x27;</span><br><span class="line">  repo: https://github.com/github账号名称/github账号名称.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d       //发布到线上  hexo generate</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;1.首先安装node,具体参考&lt;a href=&quot;https://hexo.io/zh-cn/docs/&quot;&gt;https://hexo.io/zh-cn/docs/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2.初始化 项目&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;</summary>
-      
-    
-    
     
     
   </entry>

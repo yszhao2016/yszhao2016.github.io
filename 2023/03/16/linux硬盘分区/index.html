@@ -89,7 +89,7 @@
 <meta property="og:description" content="一、 硬盘分区基础知识磁盘分区类型：硬盘分区最常见的类型为msdos和gpt， 前者表示MBR分区，而后者表示GPT分区。传统的BIOS只支持MBR分区硬盘启动， 一个硬盘只能分成四个分区，并且单个分区最大不超过2TB。 GPT(即GUID分区表)是源自EFI标准的一种较新的磁盘分区表结构的标准，是未来磁盘分区的主要形式。 与MBR分区方式相比，突破MBR4个主分区限制，每个磁盘最多支持128个分">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-03-16T02:24:39.000Z">
-<meta property="article:modified_time" content="2023-03-16T06:56:37.090Z">
+<meta property="article:modified_time" content="2023-07-13T09:47:34.756Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -332,27 +332,18 @@ MBR的意思是“主引导记录”，它有自己的启动器，也就是启�
 对分区的设限：最多4个主分区或3个主分区加一个扩展分区。创建工具典型有fdisk。
 
 2、GPT分区：GPT意为GUID分区表，这是一个正逐渐取代MBR的新标准，它由UEFI辅住而形成的，
-这样就有了UEFI用于取代老旧的BIOS，而GPT则取代老旧的MBR。
-这个标准没有MBR的那些限制比如：容量2T限制、分区个数限制等。磁盘驱动器容量可以大得多，
-大到操作系统和文件系统都没法支持。它同时还支持几乎无限个分区数量，限制只在于操作系统，
-Windows支持最多128个GPT分区。GPT和MBR是不同的分区表类型。
-使用MBR分区表的硬盘最多只能划分4个主分区磁盘，并且MBR最大仅支持2TB的硬盘。如果需要分区的硬盘容量超过2TB了，
-则需要使用GPT分区表类型，
-此分区表类型不受分区个数、硬盘大小的限制。
-创建GPT分区典型工具有parted,gdisk,sgdisk等,fdisk不支持创建GPT分区。
-我们管理的服务器可能会随着业务量的不断增长而造成磁盘数据空间不足的情况（不考虑inode），
-这个时候我们就可能需要增加磁盘或挂载一些其他的块设备，
-
+这样就有了UEFI用于取代老旧的BIOS，而GPT则取代老旧的MBR。这个标准没有MBR的那些限制比如：容量2T限制、分区个数限制等。磁盘驱动器容量可以大得多，
+大到操作系统和文件系统都没法支持。它同时还支持几乎无限个分区数量，限制只在于操作系统，Windows支持最多128个GPT分区。GPT和MBR是不同的分区表类型。
+使用MBR分区表的硬盘最多只能划分4个主分区磁盘，并且MBR最大仅支持2TB的硬盘。如果需要分区的硬盘容量超过2TB了，则需要使用GPT分区表类型，
+此分区表类型不受分区个数、硬盘大小的限制。创建GPT分区典型工具有parted,gdisk,sgdisk等,fdisk不支持创建GPT分区。
+我们管理的服务器可能会随着业务量的不断增长而造成磁盘数据空间不足的情况（不考虑inode），这个时候我们就可能需要增加磁盘或挂载一些其他的块设备，
 这里我主要介绍如何使用fdisk分区工具创建磁盘分区和挂载分区。最重要的三步就是：
 1、创建主分区。（主分区创建之后可以马上被使用但不能再分区）
 2、创建扩展分区 (扩展分区必须再进行二次分区后才能被使用)
 3、在扩展分区上创建逻辑分区（扩充分区再分下去的是什么呢？它就是逻辑分区（Logical Partion））
-
-
 Linux下单个磁盘最多可以有15个分区。3个主分区 + 1个扩展分区 + 11个逻辑分区。
 建议的分区方法是：先分3个主分区，第四个分区为扩展分区，然后在扩展分区中再分成11个逻辑分区。
 在unix/linux系统中，一切都是文件。
-
 所有硬盘、软盘、键盘等设备都用文件来代表，对应 着/dev下面的文件。
 对于应用程序来说，可以像对待普通文件一样打开，关闭、读写这些设备文件。
 但是这种文件名，比如/dev/sda、/dev /raw/raw1都是用户空间名称，
@@ -414,8 +405,9 @@ iso9660    光盘的标准文件系统。Linux 要想使用光盘，必须支持
 fat    就是 Windows 下的 fatl6 文件系统，在 Linux 中识别为 fat
 
 vfat    就是 Windows 下的 fat32 文件系统，在 Linux 中识别为 vfat。支持最大 32GB 的分区和最大 4GB 的文件
-
-NTFS    就是 Windows 下的 NTFS 文件系统，不过 Linux 默认是不能识别 NTFS 文件系统的，如果需要识别，则需要重新编译内核才能支持。
+</code></pre>
+<p><font color='red'>VFAT 是一种早期的文件系统，通常用于与 Windows 系统兼容的可移动设备。由于 VFAT 文件系统不支持类似 UNIX 文件系统的权限和所有权概念，<br>因此在挂载后无法执行 chown 命令来更改文件和目录的所有者。</font></p>
+<pre><code>NTFS    就是 Windows 下的 NTFS 文件系统，不过 Linux 默认是不能识别 NTFS 文件系统的，如果需要识别，则需要重新编译内核才能支持。
         它比 fat32 文件系统更加安全，速度更快，支持最大 2TB 的分区和最大 64GB 的文件
 ufs    Sun 公司的操作系统 Solaris 和 SunOS 所采用的文件系统
 
@@ -437,7 +429,7 @@ parted一款功能强大的磁盘分区和分区大小调整工具。
 parted -l同fdisk -l命令类似，但是它可以识别2TB以上的硬盘，也能查看 GPT 磁盘的分区
 </code></pre>
 <p>#具体操作  </p>
-<h2 id="1-基本命令介绍"><a href="#1-基本命令介绍" class="headerlink" title="1.基本命令介绍"></a>1.基本命令介绍</h2><pre><code>df -h
+<h2 id="基本命令介绍"><a href="#基本命令介绍" class="headerlink" title="基本命令介绍"></a>基本命令介绍</h2><pre><code>df -h
       查看分区情况 相对比较直观
       
 fdisk -l
@@ -451,64 +443,44 @@ lsblk -f
 
 用 blkid  获取磁盘的uuid和属性
 </code></pre>
-<h2 id="2-详细操作"><a href="#2-详细操作" class="headerlink" title="2.详细操作"></a>2.详细操作</h2><pre><code>1.fdisk -l|grep sd
-  fdisk -l
-  查看分区情况
+<h2 id="详细操作"><a href="#详细操作" class="headerlink" title="详细操作"></a>详细操作</h2><pre><code>分区
+1.fdisk   盘符    示例：fidisk /dev/sdb
 
-分区
-2.fdisk   盘符    示例：fidisk /dev/sdb
+2.输入n 是创建分区（一般下面多是默认）
 
-3.输入n 是创建分区（一般下面多是默认）
-
-4.然后选择分区类型
+3.然后选择分区类型
                 p   primary(主分区)
                 e   extende（扩展）
                 
-5.设置分区号（一般默认）  
+4.设置分区号（一般默认）  
               
 
-6.然后设置     起始扇区
+5.然后设置     起始扇区
               结束扇区  
                 
-7.设置完 输入w    保存     
+6.设置完 输入w    保存     
 
-8.特殊操作需要删除分区 输入d 然后选择分区号                   
+7.特殊操作需要删除分区 输入d 然后选择分区号                   
 
 
-9.格式化  
+格式化  
         mkfs -t ext3 /dev/sdb2
         mkfs -t ext4 /dev/sdb2 
         mkfs.xfs -f /dev/sdb2
         
         
-
-10.挂载分区
-    mount  分区地址     目录地址
-    示例 mount /dev/sba1 /apps
-    
-    卸载分区  umount 分区地址
-              
-              umount  /dev/sdb1  
-              umount -l  /dev/sdb1
+查看分区信息       
+lsblk
+lsblk -f  更详细
 
 
-11.开机自动挂载
-    
-    用 blkid  获取磁盘的uuid和属性
+用 blkid  获取磁盘的uuid和属性
 
-    vim /etc/fstab
+vim /etc/fstab
 
 
-    配置模板：UUID=*************  挂载路径  格式  defaults  磁盘检查，默认为0  磁盘检查，默认为0，不需要检查 
-    示例   UUID=b2cc970b-7cf4-453e-b3f5-916497b9530e  /apps  xfs  defaults  1  1 
-    
-    验证是否配置正确
-    mount -a
-    
-    
-    查看分区信息       
-    lsblk
-    lsblk -f  更详细
+配置模板：UUID=*************  挂载路径  格式  defaults  1  1 
+示例   UUID=b2cc970b-7cf4-453e-b3f5-916497b9530e  /apps  xfs  defaults  1  1 
 </code></pre>
 
       
@@ -543,6 +515,10 @@ lsblk -f
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/07/08/docker%E5%AD%A6%E4%B9%A01/" rel="prev" title="docker学习1-Docker基础命令">
+                docker学习1-Docker基础命令 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -619,7 +595,7 @@ lsblk -f
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -672,7 +648,7 @@ lsblk -f
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">一、 硬盘分区基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA"><span class="nav-number">2.</span> <span class="nav-text">二、创建分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="nav-number">3.</span> <span class="nav-text">格式化分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7"><span class="nav-number">4.</span> <span class="nav-text">分区工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.1.</span> <span class="nav-text">1.基本命令介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C"><span class="nav-number">4.2.</span> <span class="nav-text">2.详细操作</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">一、 硬盘分区基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA"><span class="nav-number">2.</span> <span class="nav-text">二、创建分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="nav-number">3.</span> <span class="nav-text">格式化分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7"><span class="nav-number">4.</span> <span class="nav-text">分区工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.1.</span> <span class="nav-text">基本命令介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C"><span class="nav-number">4.2.</span> <span class="nav-text">详细操作</span></a></li></ol></li></ol></div>
             
 
           </div>
