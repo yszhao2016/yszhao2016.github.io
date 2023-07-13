@@ -946,6 +946,10 @@ vi /etc/fail2ban/filter.d/nginx-cc.conf
 failregex = ^&lt;HOST&gt; -.*&quot;(GET|POST).* HTTP\/.*$
 ignoreregex =
 </code></pre>
+<h1 id="正则规则检查"><a href="#正则规则检查" class="headerlink" title="正则规则检查"></a>正则规则检查</h1><pre><code>fail2ban-regex /var/log/nginx/access.log &quot;&lt;HOST&gt; -.*- .*HTTP/1.* .* .*$&quot;  
+</code></pre>
+<h1 id="根据配置文件检查"><a href="#根据配置文件检查" class="headerlink" title="根据配置文件检查"></a>根据配置文件检查</h1><pre><code>fail2ban-regex /var/log/nginx/access.log /etc/fail2ban/filter.d/nginx-cc.conf  
+</code></pre>
 <h1 id="控制规则配置文件"><a href="#控制规则配置文件" class="headerlink" title="控制规则配置文件"></a>控制规则配置文件</h1><pre><code>[DEFAULT]
 ignoreip = 127.0.0.1/8  117.89.130.84 117.89.134.183/16  218.2.244.241/16 49.82.132.215/16 122.195.252.237/16 114.238.64.157/16 180.110.114.152/16
 #放行的ip 可以带网段
