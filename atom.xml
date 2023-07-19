@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-07-19T03:40:33.473Z</updated>
+  <updated>2023-07-19T09:32:19.544Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux服务之crond</title>
+    <link href="http://example.com/2023/07/19/Linux%E6%9C%8D%E5%8A%A1%E4%B9%8Bcrond/"/>
+    <id>http://example.com/2023/07/19/Linux%E6%9C%8D%E5%8A%A1%E4%B9%8Bcrond/</id>
+    <published>2023-07-19T06:20:19.000Z</published>
+    <updated>2023-07-19T09:32:19.544Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、Cron介绍"><a href="#一、Cron介绍" class="headerlink" title="一、Cron介绍"></a>一、Cron介绍</h1><p>Cron被用来进行Linux系统的计划任务执行</p><h1 id="二、相关目录"><a href="#二、相关目录" class="headerlink" title="二、相关目录"></a>二、相关目录</h1><p>cron.d/*用来存放一些软件的Cron设置</p><p>cron.daily/每天执行一次的任务</p><p>cron.hourly/每小时执行一次的任务</p><p>cron.monthly/每个月执行一次的任务</p><p>cron.weekly/，每周执行一次的任务</p><p>每分钟执行一次脚本</p><pre><code>crontab -e</code></pre><h1 id="三、crontab使用"><a href="#三、crontab使用" class="headerlink" title="三、crontab使用"></a>三、crontab使用</h1><pre><code>*  *  *   *  *  命令/脚本分 时 日 月 周1  *  *   *  *  命令/脚本   指的是每个小时的第一分钟*/1 * * * *     命令/脚本   每分钟执行脚本crontab -l查看计划任务列表   </code></pre><h1 id="四、-etc-cron-daily-与crontab-e-定义的区别"><a href="#四、-etc-cron-daily-与crontab-e-定义的区别" class="headerlink" title="四、/etc/cron.daily 与crontab -e 定义的区别"></a>四、/etc/cron.daily 与crontab -e 定义的区别</h1><pre><code>/etc/cron.daily 和 crontab -e 都是用来设置定时任务的方式，但它们有一些不同之处。/etc/cron.daily 是一个目录，里面存放着以 &quot;cron&quot; 格式命名的脚本文件。这些脚本会每天执行一次，通常在系统闲置时执行。这个目录中的脚本是全局的，适用于整个系统的所有用户。而 crontab -e 则是一个命令，用于编辑和管理用户个人的 crontab 文件。crontab 文件中定义了用户的定时任务计划。通过编辑 crontab 文件，用户可以设置自己的定时任务，包括每天、每周、每月或其他时间间隔的执行。因此，主要区别在于：/etc/cron.daily 适用于全局系统级别的定时任务，而 crontab -e 是用户级别的定时任务。/etc/cron.daily 中的脚本在每天执行一次，而 crontab -e 可以更精确地设置时间间隔。/etc/cron.daily 中的脚本对所有用户有效，而 crontab -e 只对当前用户有效。需要注意的是，修改 /etc/cron.daily 目录中的文件需要 root 权限，而 crontab -e 只需要用户自己的权限</code></pre><h1 id="五、Linux-anacron"><a href="#五、Linux-anacron" class="headerlink" title="五、Linux anacron"></a>五、Linux anacron</h1><p> 执行由于关机  忘记执行的任务</p><p> 配置好 /etc/anacrontab 文件</p><p> 更具体学习参考<a href="http://c.biancheng.net/view/1095.html">http://c.biancheng.net/view/1095.html</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;一、Cron介绍&quot;&gt;&lt;a href=&quot;#一、Cron介绍&quot; class=&quot;headerlink&quot; title=&quot;一、Cron介绍&quot;&gt;&lt;/a&gt;一、Cron介绍&lt;/h1&gt;&lt;p&gt;Cron被用来进行Linux系统的计划任务执行&lt;/p&gt;
+&lt;h1 id=&quot;二、相关目录&quot;&gt;&lt;a</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>守护进程-supervisor</title>
@@ -89,16 +110,14 @@ apt install supe</summary>
     <link href="http://example.com/2023/07/19/nginx%E4%B9%8Blogrotate/"/>
     <id>http://example.com/2023/07/19/nginx%E4%B9%8Blogrotate/</id>
     <published>2023-07-19T01:14:27.000Z</published>
-    <updated>2023-07-19T03:36:42.913Z</updated>
+    <updated>2023-07-19T09:53:23.415Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><pre><code>yum install supervisor    #centos 系统apt install supervisor    #ubuntu 系统</code></pre><h1 id="二、配置守护进程"><a href="#二、配置守护进程" class="headerlink" title="二、配置守护进程"></a>二、配置守护进程</h1><p><font color='red'>在/etc/supervisord.d/下新建后缀名为ini的文件</font></p><pre><code>; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名[program:myblog] directory = /home/web/myblog          ; 程序的启动目录command=./start.sh start              ; 启动命令 最好绝对路径autostart = true                      ; 在 supervisord 启动的时候也自动启动numprocs=1                            ; 默认为1RestartSec=30process_name=%(program_name)s         ; 默认为 %(program_name)s，即 [program:x] 中的 xuser=root                             ; 使用 root 用户来启动该进程autorestart=true                      ; 程序崩溃时自动重启，重启次数是有限制的，默认为3次redirect_stderr=true                  ; 重定向输出的日志stderr_logfile= /home/web/myblog/myblog_stderr.logstdout_logfile = /home/web/myblog/myblog_stdout.logloglevel=info</code></pre><h1 id="三、supervisord管理"><a href="#三、supervisord管理" class="headerlink" title="三、supervisord管理"></a>三、supervisord管理</h1><pre><code>systemctl status  supervisordsystemctl start  supervisord  systemctl stop  supervisord  systemctl restart  supervisord  </code></pre><h1 id="四、supervisorctl管理"><a href="#四、supervisorctl管理" class="headerlink" title="四、supervisorctl管理"></a>四、supervisorctl管理</h1><pre><code>supervisorctl start server:myblog</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="一、logrotate介绍"><a href="#一、logrotate介绍" class="headerlink" title="一、logrotate介绍"></a>一、logrotate介绍</h1><p>logrotate是centos自带命令，其他linux操作系统可能需要自行安装，用来进行日志切割和定期删除，</p><p>简单来说就是将某个日志文件按照时间或大小分割成多份，删除时间久远的日志。</p><h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><pre><code>yum install -y logrotate     #centos 系统apt install -y logrotate    #ubuntu 系统</code></pre><h1 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h1><p>/etc/logrotate.conf是全局配置</p><pre><code>#指定日志文件保留几个副本rotate 4# 指定当发生滚动后，创建一个新的空日志文件（权限不变）create# 指定滚动文件的后缀是当前的日期dateext  # 指定是否对滚动日志进行压缩#compress# 加载子配置include /etc/logrotate.d# 指定对特定文件的滚动规则/var/log/wtmp &#123;    monthly    create 0664 root utmp    minsize 1M  #指定文件小于1m就不滚动    rotate 1&#125;/var/log/btmp &#123;    missingok    monthly    create 0600 root utmp    rotate 1&#125;</code></pre><p>/etc/logrotate.d/*（子配置）</p><h1 id="三、执行"><a href="#三、执行" class="headerlink" title="三、执行"></a>三、执行</h1><p>方案一<br>    通过 /etc/cron.daily/logrotate 配置<br>方案二<br>    crontab -e写入，内容为“  59 23 * * * /usr/sbin/logrotate -f /home/zmq/daily_logrotate  </p><h1 id="四、具体的配置文件"><a href="#四、具体的配置文件" class="headerlink" title="四、具体的配置文件"></a>四、具体的配置文件</h1><pre><code>/var/log/nginx/*.log &#123;          daily          missingok          rotate 52          compress          delaycompress          notifempty          create 640 nginx adm          sharedscripts          postrotate                 if [ -f /var/run/nginx.pid ]; then                         kill -USR1 `cat /var/run/nginx.pid`                 fi          endscript &#125;    /var/opt/remi/php71/log/php-fpm/*log &#123;        missingok        notifempty        sharedscripts        delaycompress        postrotate            /bin/kill -SIGUSR1 `cat /var/opt/remi/php71/run/php-fpm/php-fpm.pid 2&gt;/dev/null` 2&gt;/dev/null ||     true        endscript  &#125;</code></pre>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;一、安装&quot;&gt;&lt;a href=&quot;#一、安装&quot; class=&quot;headerlink&quot; title=&quot;一、安装&quot;&gt;&lt;/a&gt;一、安装&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;yum install supervisor    #centos 系统
-
-apt install supe</summary>
+    <summary type="html">&lt;h1 id=&quot;一、logrotate介绍&quot;&gt;&lt;a href=&quot;#一、logrotate介绍&quot; class=&quot;headerlink&quot; title=&quot;一、logrotate介绍&quot;&gt;&lt;/a&gt;一、logrotate介绍&lt;/h1&gt;&lt;p&gt;logrotate是centos自带命令，其他lin</summary>
       
     
     
@@ -359,26 +378,6 @@ apt install supe</summary>
       
       
     <summary type="html">&lt;h1 id=&quot;安装mysql服务&quot;&gt;&lt;a href=&quot;#安装mysql服务&quot; class=&quot;headerlink&quot; title=&quot;安装mysql服务&quot;&gt;&lt;/a&gt;安装mysql服务&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;1.下载地址：https://downloads.mysql.com</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>vue学习1</title>
-    <link href="http://example.com/2023/02/22/vue%E5%AD%A6%E4%B9%A01/"/>
-    <id>http://example.com/2023/02/22/vue%E5%AD%A6%E4%B9%A01/</id>
-    <published>2023-02-22T14:18:25.000Z</published>
-    <updated>2023-07-13T06:20:53.705Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="vuecli-vue脚手架"><a href="#vuecli-vue脚手架" class="headerlink" title="vuecli  vue脚手架"></a>vuecli  vue脚手架</h1><pre><code>vue 它是一个插件  最基础的项目架构 帮集成webpack 构建 打包 编译 包含基本的架子安装命令：    npm install -g @vue/cli            npm i -g @vue/cli            -g      表示全局安装查看脚手架版本         vue --version</code></pre><h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><pre><code>vue create [项目名称]默认安装项   [babel]  编译es6的语法    [eslint]     项目语法检查  可开关vue ui 启动vue ui操作界面</code></pre><h1 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h1><pre><code>/src/assets  目录存放 icon 图片/src/api     存放  api  文件夹/src/util    存放  一些工具方法/src/storage 存放 数据存储的工具箱/src/pages/src/router.js</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;vuecli-vue脚手架&quot;&gt;&lt;a href=&quot;#vuecli-vue脚手架&quot; class=&quot;headerlink&quot; title=&quot;vuecli  vue脚手架&quot;&gt;&lt;/a&gt;vuecli  vue脚手架&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;vue 它是一个插件  最基础的</summary>
       
     
     

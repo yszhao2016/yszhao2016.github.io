@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="一、安装yum install supervisor    #centos 系统  apt install supervisor    #ubuntu 系统  二、配置守护进程在&#x2F;etc&#x2F;supervisord.d&#x2F;下新建后缀名为ini的文件 ; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名 [program:myblog]  directory &#x3D; &#x2F;home&#x2F;">
+<meta name="description" content="一、logrotate介绍logrotate是centos自带命令，其他linux操作系统可能需要自行安装，用来进行日志切割和定期删除， 简单来说就是将某个日志文件按照时间或大小分割成多份，删除时间久远的日志。 一、安装yum install -y logrotate     #centos 系统  apt install -y logrotate    #ubuntu 系统  二、配置&#x2F;etc&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx之logrotate">
 <meta property="og:url" content="http://example.com/2023/07/19/nginx%E4%B9%8Blogrotate/index.html">
 <meta property="og:site_name" content="yszhao的博客">
-<meta property="og:description" content="一、安装yum install supervisor    #centos 系统  apt install supervisor    #ubuntu 系统  二、配置守护进程在&#x2F;etc&#x2F;supervisord.d&#x2F;下新建后缀名为ini的文件 ; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名 [program:myblog]  directory &#x3D; &#x2F;home&#x2F;">
+<meta property="og:description" content="一、logrotate介绍logrotate是centos自带命令，其他linux操作系统可能需要自行安装，用来进行日志切割和定期删除， 简单来说就是将某个日志文件按照时间或大小分割成多份，删除时间久远的日志。 一、安装yum install -y logrotate     #centos 系统  apt install -y logrotate    #ubuntu 系统  二、配置&#x2F;etc&#x2F;">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-07-19T01:14:27.000Z">
-<meta property="article:modified_time" content="2023-07-19T03:36:42.913Z">
+<meta property="article:modified_time" content="2023-07-19T09:53:23.415Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -321,32 +321,72 @@
       
 
       
-        <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><pre><code>yum install supervisor    #centos 系统
+        <h1 id="一、logrotate介绍"><a href="#一、logrotate介绍" class="headerlink" title="一、logrotate介绍"></a>一、logrotate介绍</h1><p>logrotate是centos自带命令，其他linux操作系统可能需要自行安装，用来进行日志切割和定期删除，</p>
+<p>简单来说就是将某个日志文件按照时间或大小分割成多份，删除时间久远的日志。</p>
+<h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><pre><code>yum install -y logrotate     #centos 系统
 
-apt install supervisor    #ubuntu 系统
+apt install -y logrotate    #ubuntu 系统
 </code></pre>
-<h1 id="二、配置守护进程"><a href="#二、配置守护进程" class="headerlink" title="二、配置守护进程"></a>二、配置守护进程</h1><p><font color='red'>在/etc/supervisord.d/下新建后缀名为ini的文件</font></p>
-<pre><code>; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名
-[program:myblog] 
-directory = /home/web/myblog          ; 程序的启动目录
-command=./start.sh start              ; 启动命令 最好绝对路径
-autostart = true                      ; 在 supervisord 启动的时候也自动启动
-numprocs=1                            ; 默认为1
-RestartSec=30
-process_name=%(program_name)s         ; 默认为 %(program_name)s，即 [program:x] 中的 x
-user=root                             ; 使用 root 用户来启动该进程
-autorestart=true                      ; 程序崩溃时自动重启，重启次数是有限制的，默认为3次
-redirect_stderr=true                  ; 重定向输出的日志
-stderr_logfile= /home/web/myblog/myblog_stderr.log
-stdout_logfile = /home/web/myblog/myblog_stdout.log
-loglevel=info
+<h1 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h1><p>/etc/logrotate.conf是全局配置</p>
+<pre><code>#指定日志文件保留几个副本
+rotate 4
+
+# 指定当发生滚动后，创建一个新的空日志文件（权限不变）
+create
+
+# 指定滚动文件的后缀是当前的日期
+dateext  
+
+# 指定是否对滚动日志进行压缩
+#compress
+
+# 加载子配置
+include /etc/logrotate.d
+
+# 指定对特定文件的滚动规则
+/var/log/wtmp &#123;
+    monthly
+    create 0664 root utmp
+    minsize 1M  #指定文件小于1m就不滚动
+    rotate 1
+&#125;
+
+/var/log/btmp &#123;
+    missingok
+    monthly
+    create 0600 root utmp
+    rotate 1
+&#125;
 </code></pre>
-<h1 id="三、supervisord管理"><a href="#三、supervisord管理" class="headerlink" title="三、supervisord管理"></a>三、supervisord管理</h1><pre><code>systemctl status  supervisord
-systemctl start  supervisord  
-systemctl stop  supervisord  
-systemctl restart  supervisord  
-</code></pre>
-<h1 id="四、supervisorctl管理"><a href="#四、supervisorctl管理" class="headerlink" title="四、supervisorctl管理"></a>四、supervisorctl管理</h1><pre><code>supervisorctl start server:myblog
+<p>/etc/logrotate.d/*（子配置）</p>
+<h1 id="三、执行"><a href="#三、执行" class="headerlink" title="三、执行"></a>三、执行</h1><p>方案一<br>    通过 /etc/cron.daily/logrotate 配置<br>方案二<br>    crontab -e写入，内容为“  59 23 * * * /usr/sbin/logrotate -f /home/zmq/daily_logrotate  </p>
+<h1 id="四、具体的配置文件"><a href="#四、具体的配置文件" class="headerlink" title="四、具体的配置文件"></a>四、具体的配置文件</h1><pre><code>/var/log/nginx/*.log &#123;
+          daily
+          missingok
+          rotate 52
+          compress
+          delaycompress
+          notifempty
+          create 640 nginx adm
+          sharedscripts
+          postrotate
+                 if [ -f /var/run/nginx.pid ]; then
+                         kill -USR1 `cat /var/run/nginx.pid`
+                 fi
+          endscript
+ &#125;
+ 
+ 
+ 
+ /var/opt/remi/php71/log/php-fpm/*log &#123;
+        missingok
+        notifempty
+        sharedscripts
+        delaycompress
+        postrotate
+            /bin/kill -SIGUSR1 `cat /var/opt/remi/php71/run/php-fpm/php-fpm.pid 2&gt;/dev/null` 2&gt;/dev/null ||     true
+        endscript
+  &#125;
 </code></pre>
 
       
@@ -461,7 +501,7 @@ systemctl restart  supervisord
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -514,7 +554,7 @@ systemctl restart  supervisord
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">一、安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">二、配置守护进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81supervisord%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">三、supervisord管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81supervisorctl%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">四、supervisorctl管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81logrotate%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一、logrotate介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">一、安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">二、配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%89%A7%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">三、执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%85%B7%E4%BD%93%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">四、具体的配置文件</span></a></li></ol></div>
             
 
           </div>
