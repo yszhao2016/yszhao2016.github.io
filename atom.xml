@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-07-13T12:08:15.753Z</updated>
+  <updated>2023-07-19T01:16:30.944Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>jenkins-发布php项目</title>
+    <link href="http://example.com/2023/07/19/jenkins-%E5%8F%91%E5%B8%83php%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://example.com/2023/07/19/jenkins-%E5%8F%91%E5%B8%83php%E9%A1%B9%E7%9B%AE/</id>
+    <published>2023-07-19T01:16:30.000Z</published>
+    <updated>2023-07-19T01:16:30.944Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux系统后台运行任务</title>
+    <link href="http://example.com/2023/07/19/linux%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E4%BB%BB%E5%8A%A1/"/>
+    <id>http://example.com/2023/07/19/linux%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E4%BB%BB%E5%8A%A1/</id>
+    <published>2023-07-19T01:15:25.000Z</published>
+    <updated>2023-07-19T01:15:25.544Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>php扩展安装</title>
+    <link href="http://example.com/2023/07/19/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85/"/>
+    <id>http://example.com/2023/07/19/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85/</id>
+    <published>2023-07-19T01:14:51.000Z</published>
+    <updated>2023-07-19T01:14:51.639Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>nginx之logrotate</title>
+    <link href="http://example.com/2023/07/19/nginx%E4%B9%8Blogrotate/"/>
+    <id>http://example.com/2023/07/19/nginx%E4%B9%8Blogrotate/</id>
+    <published>2023-07-19T01:14:27.000Z</published>
+    <updated>2023-07-19T01:14:27.055Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>hj212环保协议-2007</title>
@@ -313,97 +365,6 @@
       
     
     
-    
-    
-  </entry>
-  
-  <entry>
-    <title>搭建 mysql_server</title>
-    <link href="http://example.com/2022/04/17/mysql-server/"/>
-    <id>http://example.com/2022/04/17/mysql-server/</id>
-    <published>2022-04-17T14:53:37.000Z</published>
-    <updated>2023-07-13T11:05:57.735Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="centos-mysql安装"><a href="#centos-mysql安装" class="headerlink" title="centos mysql安装"></a>centos mysql安装</h1><p>1.网站：<a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p><p>2.mysql官网找到相应版本安装包</p><p>3.然后下载本地 tar -xvf mysql-5.7.21-1.el7.x86_64.rpm-bundle.tar</p><p>4.rpm -qa|grep mariadb 查看是否安装mariadb数据库，有就卸载  yum remove 包名 <font color='red'>不卸载干净，会报错哦</font></p><p>5.按下列包顺序安装</p><pre><code>rpm -ivh mysql-community-common-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-libs-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-devel-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-libs-compat-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-client-5.7.19-1.el7.x86_64.rpmrpm -ivh mysql-community-server-5.7.19-1.el7.x86_64.rpm</code></pre><p>6 安装完毕 初始密码一般在/var/log/mysqld.log文件中   cat   /var/log/mysqld.log |grep password</p><p>7.登录数据库 修改密码 mysql -u root -p</p><p>8.登录后修改密码 </p><pre><code>SET PASSWORD = PASSWORD(&#39;xxx@520Flzx3qc&#39;);</code></pre><p>9.优化配置    </p><pre><code>port=3306设置端口号datadir=/data/mysqldata#数据存在目录    ############## Slow Log   ######################slow_query_log=ON# 开启慢查询日志slow_query_log_file=/data/mysql/logs/slow.log# # 慢查询日志存放路径long_query_time=10# # 超过10秒的查询，记录到慢查询日志，默认值10log_queries_not_using_indexes=ON# # 没有使用索引的查询，记录到慢查询日志，可能引起慢查询日志快速增长log_slow_admin_statements=ON# # 执行缓慢的管理语句，记录到慢查询日志# # 例如 ALTER TABLE, ANALYZE TABLE, CHECK TABLE, CREATE INDEX, DROP INDEX, OPTIMIZE TABLE, and REPAIR TABLE.###################     Error Log   ####################log_error=/data/mysql/logs/mysqld.log## 错误日志存放路径log_error_verbosity = 2## 全局动态变量，默认3，范围：1～3###################     Bin Log    ######################server_id = 6###################     Error Log   ####################log_error=/data/mysql/logs/mysqld.log</code></pre><p>10.相关命令</p><pre><code>开机启动systemctl enable mysqldsystemctl stop mysqldsystemctl start mysqldsystemctl restart mysqld</code></pre><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;centos-mysql安装&quot;&gt;&lt;a href=&quot;#centos-mysql安装&quot; class=&quot;headerlink&quot; title=&quot;centos mysql安装&quot;&gt;&lt;/a&gt;centos mysql安装&lt;/h1&gt;&lt;p&gt;1.网站：&lt;a href=&quot;https://</summary>
-      
-    
-    
-    
-    <category term="server" scheme="http://example.com/categories/server/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>搭建php环境</title>
-    <link href="http://example.com/2022/04/17/php/"/>
-    <id>http://example.com/2022/04/17/php/</id>
-    <published>2022-04-17T14:53:21.000Z</published>
-    <updated>2022-05-09T01:58:55.879Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一、安装Remi源："><a href="#一、安装Remi源：" class="headerlink" title="一、安装Remi源："></a>一、安装Remi源：</h1><pre><code># CentOS 6 / RHEL 6yum install http://rpms.famillecollet.com/enterprise/remi-release-6.rpm# CentOS 7 / RHEL 7yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm</code></pre><h1 id="二、配置Remi源-可以不操作-："><a href="#二、配置Remi源-可以不操作-：" class="headerlink" title="二、配置Remi源(可以不操作)："></a>二、配置Remi源(可以不操作)：</h1><pre><code> 编辑remi源repo文件 /etc/yum.repos.d/remi.repo 启用 Remi Repository修改 enabled=0 为 enabled=1。 为 Remi Repository 设置合适的优先级在 [remi] 那一节的结尾另起一行添加下面的代码： priority=3    </code></pre><h1 id="三、安装-php"><a href="#三、安装-php" class="headerlink" title="三、安装 php"></a>三、安装 php</h1><pre><code> yum install php73 php73-php-fpm php73-php-opcache php73-php-gd php73-php-mbstring php73-php-xml php73-php-pdo php73-php-mysqlnd php73-php-pecl-mysql php73-php-bcmathphp73-php-mcrypt   </code></pre><h1 id="四-开机启动"><a href="#四-开机启动" class="headerlink" title="四.开机启动"></a>四.开机启动</h1><pre><code>systemctl enable  php73-php-fpm</code></pre><h1 id="五-服务相关命令"><a href="#五-服务相关命令" class="headerlink" title="五.服务相关命令"></a>五.服务相关命令</h1><pre><code>systemctl start  php73-php-fpmsystemctl stop  php73-php-fpmsystemctl status  php73-php-fpm</code></pre><h1 id="六-加入系统命令"><a href="#六-加入系统命令" class="headerlink" title="六.加入系统命令"></a>六.加入系统命令</h1><pre><code>ln -s  /opt/remi/php73/root/usr/bin/php /usr/bin/php</code></pre><h1 id="七-添加用户"><a href="#七-添加用户" class="headerlink" title="七.添加用户"></a>七.添加用户</h1><pre><code>groupadd wwwuseradd -g www -s /sbin/nologin www    </code></pre><h1 id="八-PHP-FPM配置文件www-conf"><a href="#八-PHP-FPM配置文件www-conf" class="headerlink" title="八.PHP-FPM配置文件www.conf"></a>八.PHP-FPM配置文件<a href="http://www.conf/">www.conf</a></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[www]</span><br><span class="line"></span><br><span class="line">user = www</span><br><span class="line">group = www</span><br><span class="line"></span><br><span class="line">;listen = 127.0.0.1:9000</span><br><span class="line">listen = /dev/shm/php71-fpm.socket</span><br><span class="line"></span><br><span class="line">listen.owner = www</span><br><span class="line">listen.group = www</span><br><span class="line">listen.mode = 0660</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">listen.allowed_clients = 127.0.0.1</span><br><span class="line"></span><br><span class="line">#如果选择static，则进程数就数固定的，由pm.max_children指定固定的子进程数。</span><br><span class="line">pm = static</span><br><span class="line">pm.max_children = 256</span><br><span class="line">pm.start_servers = 5</span><br><span class="line">#随着php-fpm一起启动时创建的子进程数目。默认值：min_spare_servers + (max_spare_servers - min_spare_servers) / 2。</span><br><span class="line">#这里表示，一起启动会有20个子进程</span><br><span class="line">pm.min_spare_servers = 5</span><br><span class="line">#设置服务器空闲时最小php-fpm进程数量。必须设置。如果空闲的时候，会检查如果少于10个，就会启动几个来补上。</span><br><span class="line">pm.max_spare_servers = 35</span><br><span class="line">#设置服务器空闲时最大php-fpm进程数量。必须设置。如果空闲时，会检查进程数，多于30个了，就会关闭几个，达到30个的状态。</span><br><span class="line">pm.max_requests = 5000</span><br><span class="line">#设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. </span><br><span class="line">#如果设置为 &#x27;0&#x27; 则一直接受请求. 等同于 PHP_FCGI_MAX_REQUESTS 环境变量. 默认值: 0.</span><br><span class="line">pm.status_path = /php7-php-fpm-status</span><br><span class="line"></span><br><span class="line">#当request_slowlog_timeout 设为一个具体秒时request_slowlog_timeout =5，表</span><br><span class="line">#示如果哪个脚本执行时间大于5秒，会记录这个脚本到慢日志文件中</span><br><span class="line">request_slowlog_timeout =10</span><br><span class="line">slowlog = /var/opt/remi/php71/log/php-fpm/www-slow.log</span><br><span class="line"></span><br><span class="line">php_admin_value[error_log] = /var/opt/remi/php71/log/php-fpm/www-error.log</span><br><span class="line">php_admin_flag[log_errors] = on</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">php_value[session.save_handler] = files</span><br><span class="line">php_value[session.save_path]    = /var/opt/remi/php71/lib/php/session</span><br><span class="line">php_value[soap.wsdl_cache_dir]  = /var/opt/remi/php71/lib/php/wsdlcache</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="九、php-ini配置文件"><a href="#九、php-ini配置文件" class="headerlink" title="九、php.ini配置文件"></a>九、php.ini配置文件</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#关闭PHP版本信息</span><br><span class="line">expose_php = On</span><br><span class="line"></span><br><span class="line">#.单个脚本等待输入的最长时间</span><br><span class="line">max_input_time = 60</span><br><span class="line"></span><br><span class="line">memory_limit = 128M</span><br><span class="line">error_reporting = E_ALL &amp; ~E_DEPRECATED &amp; ~E_STRICT</span><br><span class="line"></span><br><span class="line">#每个脚本最大允许执行时间(秒)，0表示没有限制</span><br><span class="line">max_execution_time = 300</span><br><span class="line"></span><br><span class="line">#上传文件的最大许可大小</span><br><span class="line">upload_max_filesize = 20M</span><br><span class="line"></span><br><span class="line">#post上传的大小，要&gt;=upload_max_filesize</span><br><span class="line">post_max_size = 20M</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#修改成如下设置：</span><br><span class="line">session.save_handler = memcache</span><br><span class="line">session.save_path = &quot;tcp://10.0.0.18:11211&quot;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;一、安装Remi源：&quot;&gt;&lt;a href=&quot;#一、安装Remi源：&quot; class=&quot;headerlink&quot; title=&quot;一、安装Remi源：&quot;&gt;&lt;/a&gt;一、安装Remi源：&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;# CentOS 6 / RHEL 6
-yum instal</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>搭建 nginx_server</title>
-    <link href="http://example.com/2022/04/17/nginx-server/"/>
-    <id>http://example.com/2022/04/17/nginx-server/</id>
-    <published>2022-04-17T14:53:07.000Z</published>
-    <updated>2022-06-24T08:25:50.700Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><h2 id="1-yum-安装（默认情况下使用yum安装的nginx包含ssl模块）"><a href="#1-yum-安装（默认情况下使用yum安装的nginx包含ssl模块）" class="headerlink" title="1.yum 安装（默认情况下使用yum安装的nginx包含ssl模块）"></a>1.yum 安装（默认情况下使用yum安装的nginx包含ssl模块）</h2><pre><code>    官方 yum 源链接 http://nginx.org/en/linux_packages.html#RHEL-CentOS        vim /etc/yum.repos.d/nginx.repo    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[nginx-stable]</span><br><span class="line">name=nginx stable repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br><span class="line"></span><br><span class="line">[nginx-mainline]</span><br><span class="line">name=nginx mainline repo</span><br><span class="line">baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br></pre></td></tr></table></figure>        yum-config-manager --enable nginx-stable        yum install nginx</code></pre><h2 id="2-源码编译安装"><a href="#2-源码编译安装" class="headerlink" title="2.源码编译安装"></a>2.源码编译安装</h2><pre><code>下载源码包  http://nginx.org/en/download.html  下载稳定版本Mainline version：Mainline 是 Nginx 目前主力在做的版本，可以说是开发版Stable version：最新稳定版，生产环境上建议使用的版本Legacy versions：遗留的老版本的稳定版下载命令wget http://nginx.org/download/nginx-1.22.0.tar.gz解压缩tar -zxvf nginx-1.22.0.tar.gz     ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-pcre  make &amp;&amp; make install  ln -s /usr/local/nginx/conf  /etc/nginx   </code></pre><h1 id="配置服务"><a href="#配置服务" class="headerlink" title="配置服务"></a>配置服务</h1><pre><code>vim /lib/systemd/system/nginx.service           <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s quit</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>软连接etc目录ln -s /usr/local/nginx/conf /etc/nginx   systemctl status nginxsystemctl reload nginxsystemctl start nginx开机启动systemctl enable nginx添加用户groupadd wwwuseradd -g www -s /sbin/nologin www  </code></pre><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><h6 id="etc-nginx-nginx-conf"><a href="#etc-nginx-nginx-conf" class="headerlink" title="/etc/nginx/nginx.conf"></a>/etc/nginx/nginx.conf</h6><pre><code>   user  www;   #cpu 几核 这进程就多少   worker_processes  2;   worker_cpu_affinity 01 10;      worker_rlimit_nofile 65535;  # 一般等于ulimit -n系统值      #error_log  logs/error.log;   #error_log  logs/error.log  notice;   #error_log  logs/error.log  info;      #pid        logs/nginx.pid;         events &#123;       worker_connections  10240;       use epoll;   &#125;         http &#123;       include       mime.types;       default_type  application/octet-stream;       server_tokens off;          #log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;       #                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;       #                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;          #access_log  logs/access.log  main;          sendfile        on;       #tcp_nopush     on;          #keepalive_timeout  0;       keepalive_timeout  65;          gzip on;       #表示开启压缩功能       gzip_min_length  1k; #表示允许压缩的页面最小字节数，页面字节数从header头的Content-Length中获取。默认值是0，表示不管页面多大都进行压缩，建议设置成大于1K。如果小于1K可能会&gt;越压越大       gzip_buffers     4 32k; #压缩缓存区大小       gzip_http_version 1.1; #压缩版本       gzip_comp_level 6; #压缩比率， 一般选择4-6，为了性能       gzip_types text/css text/xml application/javascript;       #指定压缩的类型 gzip_vary on;　#vary header支持             #配置空主机头 404       server &#123;           listen 80 default;           server_name _;           root html;           location / &#123; return 404;&#125;           location ~ /.ht &#123; deny all; &#125;          &#125;       include vhost/*.conf;   &#125;</code></pre><h6 id="vhost-conf"><a href="#vhost-conf" class="headerlink" title="vhost/*.conf"></a>vhost/*.conf</h6><pre><code>server&#123;    listen 80;    server_name tp.webstudy.cc;    set $wwwroot /home/www/htdocs/tp.webstudy.cc;    root $wwwroot;    access_log  logs/ai.access.log;    error_log logs/ai.error.log debug;    #ssl_certificate     /usr/local/nginx/conf/ssl/jinju.utooo.com/Nginx/1_jinju.utooo.com_bundle.crt;    #ssl_certificate_key /usr/local/nginx/conf/ssl/jinju.utooo.com/Nginx/2_jinju.utooo.com.key;    #ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;    location / &#123;        index  index.php index.html index.htm;        # 这里使用try_files进行url重写，不用rewrite了        # try_files $uri $uri/ /index.php?$query_string;    &#125;   #error_page   500 502 503 504  /50x.html;   location = /50x.html &#123;        root   html;    &#125;    location ~ .*\.php&#123;            include fastcgi_params;            fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;            fastcgi_pass 127.0.0.1:9000;            fastcgi_index index.php;    &#125;&#125;  </code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;安装nginx&quot;&gt;&lt;a href=&quot;#安装nginx&quot; class=&quot;headerlink&quot; title=&quot;安装nginx&quot;&gt;&lt;/a&gt;安装nginx&lt;/h1&gt;&lt;h2 id=&quot;1-yum-安装（默认情况下使用yum安装的nginx包含ssl模块）&quot;&gt;&lt;a href=</summary>
-      
-    
-    
-    
-    <category term="server" scheme="http://example.com/categories/server/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>通过vsftpd搭建ftp服务器</title>
-    <link href="http://example.com/2022/04/15/vsftpd-server/"/>
-    <id>http://example.com/2022/04/15/vsftpd-server/</id>
-    <published>2022-04-15T14:12:12.000Z</published>
-    <updated>2022-05-07T08:56:01.293Z</updated>
-    
-    <content type="html"><![CDATA[<p>1.yum 安装</p><pre><code>yum install vsftpd</code></pre><p>2.编译安装</p><pre><code>yum -y install epel-release &amp;&amp; yum -y install pam pam-devel db4-utilswget https://security.appspot.com/downloads/vsftpd-3.0.5.tar.gztar xf vsftpd-3.0.3.tar.gzmake clean &amp;&amp; make -j 4 &amp;&amp; make install如果编译的时候报错/usr/bin/ld: cannot find -lcap查找该 .so 文件find / -name &quot;*libcap.so*&quot;/usr/lib64/libcap.so.2.22/usr/lib64/libcap.so.2ln -sv /usr/lib64/libcap.so.2 /usr/lib64/libcap.so</code></pre><p>3./etc/vsftpd/vsftp.conf  配置文件    </p><pre><code>配置文件  vsftp.conf </code></pre><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#关闭匿名访问</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">local_enable=YES</span><br><span class="line">#启用虚拟账户</span><br><span class="line">guest_enable=YES</span><br><span class="line">##把虚拟账户映射到系统账户virftp</span><br><span class="line">guest_username=virftp</span><br><span class="line">##使用虚拟用户验证（PAM验证）</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">#设置存放各虚拟用户配置文件的目录（此目录下与虚拟用户名相同的文件为他的配置文件）</span><br><span class="line">user_config_dir=/etc/vsftpd/vsftpd_viruser</span><br><span class="line">##启用chroot时，虚拟用户根目录允许写入</span><br><span class="line">allow_writeable_chroot=YES</span><br><span class="line"></span><br><span class="line"># Uncomment this to enable any form of FTP write command.</span><br><span class="line">write_enable=YES</span><br><span class="line">#</span><br><span class="line"># Default umask for local users is 077. You may wish to change this to 022,</span><br><span class="line"># if your users expect that (022 is used by most other ftpd&#x27;s)</span><br><span class="line">local_umask=022</span><br><span class="line">#监听端口 默认21</span><br><span class="line">listen_port=10021</span><br><span class="line">#数据传输端口 默认20</span><br><span class="line">ftp_data_port=10020</span><br><span class="line"></span><br><span class="line">#被动模式 配置</span><br><span class="line">pasv_enable=YES</span><br><span class="line">pasv_min_port=20000</span><br><span class="line">pasv_max_port=20010</span><br><span class="line"># 可以发送消息当访问某个目录时</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line"># 开启上传下载记录</span><br><span class="line">xferlog_enable=YES</span><br><span class="line"># 日志标准输出</span><br><span class="line">xferlog_std_format=YES</span><br><span class="line"></span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">#监听ipv4</span><br><span class="line">listen=NO</span><br><span class="line"># 监听IPv6和监听IPv4</span><br><span class="line">listen_ipv6=YES</span><br><span class="line"></span><br><span class="line">userlist_enable=YES</span><br><span class="line"># 访问控制</span><br><span class="line">tcp_wrappers=YES</span><br></pre></td></tr></table></figure><p><strong>注意 根据需求自行修改<b><i>vsftp.conf</i></b>端口号以及模式：</strong><br><font color="#FF0000">#监听端口 默认21<br/>listen_port=10021<br/>#数据传输端口 默认20<br/>ftp_data_port=10020<br/>#被动模式 配置<br/>pasv_enable=YES<br/>pasv_min_port=20000<br/> pasv_max_port=20010<br/></font> </p><p>4、生成虚拟用户数据库：</p><pre><code>touch /etc/vsftpd/vir_uservir_user文件内容：    user1    password1    user2    password2yum -y install libdb-utilsdb_load -T -t hash -f /etc/vsftpd/vir_user /etc/vsftpd/vir_user.dbchmod 700 /etc/vsftpd/vir_user.db</code></pre><p>5、将auth及account的所有配置行均注释掉，添加如下两行</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pam.d/vsftpd</span><br><span class="line"></span><br><span class="line">auth                 required     pam_userdb.so   db=/etc/vsftpd/vir_user </span><br><span class="line">account              required     pam_userdb.so   db=/etc/vsftpd/vir_user</span><br></pre></td></tr></table></figure><p>6、增加一个系统用户</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/ftproot</span><br><span class="line">useradd -d /home/ftproot -s /sbin/nologin virftp</span><br><span class="line">chown -R virftp:virftp /home/ftproot</span><br></pre></td></tr></table></figure><p>7、创建和配置虚拟用户各自的配置文件，文件名称是‘虚拟用户名</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd_viruser/根据创建虚拟用户密码文件来(user1,user2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#允许写入</span><br><span class="line">write_enable=YES</span><br><span class="line">#允许浏览FTP目录和下载</span><br><span class="line">anon_world_readable_only=NO</span><br><span class="line">#允许虚拟用户上传文件</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">#允许虚拟用户创建目录</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">#允许虚拟用户执行其他操作（如改名、删除）</span><br><span class="line">anon_other_write_enable=YES</span><br><span class="line">#上传文件的掩码,如022时，上传目录权限为755,文件权限为644</span><br><span class="line">anon_umask=022</span><br><span class="line">#指定虚拟用户的虚拟目录（虚拟用户登录后的主目录） 可以指定其他目录  注意权限（给虚拟账号权限chown -R virftp:virftp 目录）</span><br><span class="line">local_root=/ftproot/admin/</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>8、各配置文件说明：</p><pre><code>/etc/vsftpd/vsftpd.conf                             ：vsftpd的主配置文件/etc/vsftpd/vir_user                                   ：虚拟用户的账号密码文件  /etc/vsftpd/vsftpd_viruser/user1            ：虚拟用户‘user1’的配置文件/etc/pam.d/vsftpd                                     ：启用虚拟用户验证功能的配置文件</code></pre><p>9、命令</p><pre><code>rename [filename]  [newfilename]，重命名远程Linux FTP服务器上指定的文件｡rename 1111.xlsx   processed/1111.xlsx</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;1.yum 安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yum install vsftpd
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;2.编译安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yum -y install epel-release &amp;amp;&amp;amp; yum -y install p</summary>
-      
-    
-    
-    
-    <category term="server" scheme="http://example.com/categories/server/"/>
     
     
   </entry>
