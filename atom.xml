@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-07-19T09:32:19.544Z</updated>
+  <updated>2023-07-25T08:29:31.815Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>php常用函数总结</title>
+    <link href="http://example.com/2023/07/25/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/"/>
+    <id>http://example.com/2023/07/25/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/</id>
+    <published>2023-07-25T07:54:20.000Z</published>
+    <updated>2023-07-25T08:29:31.815Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、字符串处理函数"><a href="#一、字符串处理函数" class="headerlink" title="一、字符串处理函数"></a>一、字符串处理函数</h1><h2 id="1-1-str-pad"><a href="#1-1-str-pad" class="headerlink" title="1.1 str_pad()"></a>1.1 str_pad()</h2><p>str_pad(【必填 需要处理的字符串】,【必填 填充的长度】，【 可选 填充的字符串，默认空白】，【可选 填充字符串的哪边】)</p><pre><code>规定填充字符串的哪边 可能的值：STR_PAD_BOTH - 填充字符串的两侧。如果不是偶数，则右侧获得额外的填充。STR_PAD_LEFT - 填充字符串的左侧。STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。</code></pre><p>示例 $str=10 ; echo str_pad($str,4,”0”,STR_PAD_LEFT);  <font color="red">意思就4位长度 不够就往左边补0</font></p><h2 id="2-1-strpos、stripos-、strrpos"><a href="#2-1-strpos、stripos-、strrpos" class="headerlink" title="2.1 strpos、stripos 、strrpos"></a>2.1 strpos、stripos 、strrpos</h2><h2 id="2-3-substr"><a href="#2-3-substr" class="headerlink" title="2.3 substr"></a>2.3 substr</h2><h2 id="2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用"><a href="#2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用" class="headerlink" title="2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用"></a>2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用</h2><pre><code>比较常用，不在赘述</code></pre><h1 id="二、数组处理函数"><a href="#二、数组处理函数" class="headerlink" title="二、数组处理函数"></a>二、数组处理函数</h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;一、字符串处理函数&quot;&gt;&lt;a href=&quot;#一、字符串处理函数&quot; class=&quot;headerlink&quot; title=&quot;一、字符串处理函数&quot;&gt;&lt;/a&gt;一、字符串处理函数&lt;/h1&gt;&lt;h2 id=&quot;1-1-str-pad&quot;&gt;&lt;a href=&quot;#1-1-str-pad&quot; c</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>跨域问题总结</title>
+    <link href="http://example.com/2023/07/21/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://example.com/2023/07/21/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</id>
+    <published>2023-07-21T08:26:13.000Z</published>
+    <updated>2023-07-21T08:26:13.871Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>session和cookie</title>
+    <link href="http://example.com/2023/07/21/session%E5%92%8Ccookie/"/>
+    <id>http://example.com/2023/07/21/session%E5%92%8Ccookie/</id>
+    <published>2023-07-21T08:25:34.000Z</published>
+    <updated>2023-07-21T08:25:34.576Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Linux服务之crond</title>
@@ -317,67 +363,6 @@ apt install supe</summary>
       
       
     <summary type="html">&lt;h1 id=&quot;一、-硬盘分区基础知识&quot;&gt;&lt;a href=&quot;#一、-硬盘分区基础知识&quot; class=&quot;headerlink&quot; title=&quot;一、 硬盘分区基础知识&quot;&gt;&lt;/a&gt;一、 硬盘分区基础知识&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;磁盘分区类型：硬盘分区最常见的类型为msdos和gp</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>laravel源码学习2</title>
-    <link href="http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A02/"/>
-    <id>http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A02/</id>
-    <published>2023-03-14T03:59:07.000Z</published>
-    <updated>2023-03-14T04:00:35.845Z</updated>
-    
-    <content type="html"><![CDATA[<p>#laravel 核心文件applications</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;#laravel 核心文件applications&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>laravel学习1</title>
-    <link href="http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/"/>
-    <id>http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/</id>
-    <published>2023-03-14T03:45:11.000Z</published>
-    <updated>2023-03-14T03:56:58.391Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="public-index-php文件解析"><a href="#public-index-php文件解析" class="headerlink" title="public/index.php文件解析"></a>public/index.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 引入自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../bootstrap/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Turn On The Lights</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| We need to illuminate PHP development, so let us turn on the lights.</span><br><span class="line">| This bootstraps the framework and gets it ready for use, then it</span><br><span class="line">| will load up this application so that we can run it and send</span><br><span class="line">| the responses back to the browser and delight our users.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$app = require_once __DIR__.&#x27;/../bootstrap/app.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Run The Application</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Once we have the application, we can handle the incoming request</span><br><span class="line">| through the kernel, and send the associated response back to</span><br><span class="line">| the client&#x27;s browser allowing them to enjoy the creative</span><br><span class="line">| and wonderful application we have prepared for them.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line"></span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$response-&gt;send();</span><br><span class="line"></span><br><span class="line">$kernel-&gt;terminate($request, $response);</span><br></pre></td></tr></table></figure><h1 id="bootstrap-autoload-php文件解析"><a href="#bootstrap-autoload-php文件解析" class="headerlink" title="/bootstrap/autoload.php文件解析"></a>/bootstrap/autoload.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">#定义记录时间的常量</span><br><span class="line">define(&#x27;LARAVEL_START&#x27;, microtime(true));</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Register The Composer Auto Loader</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Composer provides a convenient, automatically generated class loader</span><br><span class="line">| for our application. We just need to utilize it! We&#x27;ll require it</span><br><span class="line">| into the script here so that we do not have to worry about the</span><br><span class="line">| loading of any our classes &quot;manually&quot;. Feels great to relax.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line">#引入外部库   自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../vendor/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Include The Compiled Class File</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| To dramatically increase your application&#x27;s performance, you may use a</span><br><span class="line">| compiled class file which contains all of the classes commonly used</span><br><span class="line">| by a request. The Artisan &quot;optimize&quot; is used to create this file.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line">#引入laravel缓存文件</span><br><span class="line">$compiledPath = __DIR__.&#x27;/cache/compiled.php&#x27;;</span><br><span class="line"></span><br><span class="line">if (file_exists($compiledPath)) &#123;</span><br><span class="line">    require $compiledPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;public-index-php文件解析&quot;&gt;&lt;a href=&quot;#public-index-php文件解析&quot; class=&quot;headerlink&quot; title=&quot;public/index.php文件解析&quot;&gt;&lt;/a&gt;public/index.php文件解析&lt;/h1&gt;&lt;</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>windows搭建apache+php+mysql5.6</title>
-    <link href="http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/"/>
-    <id>http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/</id>
-    <published>2023-02-25T03:51:34.000Z</published>
-    <updated>2023-02-25T06:56:50.277Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="安装mysql服务"><a href="#安装mysql服务" class="headerlink" title="安装mysql服务"></a>安装mysql服务</h1><pre><code>1.下载地址：https://downloads.mysql.com/archives/community/2.下载相应windows版本3.解压后cmd cd到文件目录mysqld.exe  执行   mysqld.exe install【mysqld remove 移除服务 mysqld start 启动服务】4.设置开机启动  然后再win+r 输入services.msc  打开后找到mysql 右键点击属性   将启动类型设置为自动即可【注：期间不同版本可能会报奇奇怪怪的错，百度安装相关的版本vc库】</code></pre><h1 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h1><pre><code>1.下载地址：https://windows.php.net/downloads/releases/archives/2.下载版本必须有  php7apache2_4.dll  vc版本最好跟apache的版本一样3.配置php.ini 开启相应 扩展4.测试是否能用  到相应目录 执行 php.exe -v【注：期间不同版本可能会报奇奇怪怪的错，百度安装相关的版本vc库】</code></pre><h1 id="安装apache-服务器"><a href="#安装apache-服务器" class="headerlink" title="安装apache 服务器"></a>安装apache 服务器</h1><p>##apache 安装对接php<br>    下载：<a href="https://www.apachelounge.com/download/VC14/">https://www.apachelounge.com/download/VC14/</a></p><pre><code>到apache/config/httpd.conf文件找到&lt;IfModule unixd_module&gt;配置行 在其上面添加LoadModule php7_module C:/php/php7apache2_4.dll  【php7apache2_4.dll 不同版本不同  具体目录根据自己的配置】AddType application/x-httpd-php .php .html .htmPHPIniDir c:/php                                 【配置PHP所在目录  具体目录根据自己的配置】  然后通过bin目录下   **httpd.exe  -t** 测试配置是否通过bin目录下 ApacheMonitor.exe 可以用来启动关闭 httpd服务</code></pre><h2 id="配置apache项目访问"><a href="#配置apache项目访问" class="headerlink" title="配置apache项目访问"></a>配置apache项目访问</h2><h3 id="1-配置项"><a href="#1-配置项" class="headerlink" title="1.配置项"></a>1.配置项</h3><pre><code>    httpd.exe -k install -n &quot;apache2.4&quot;    1.ServerName     配置域名访问地址    例：ServerName 192.168.100.34:8080    ServerName www.baidu.com        2.ServerRoot  配置apache安装目录                 例     Define SRVROOT &quot;c:/httpd&quot;                    ServerRoot &quot;$&#123;SRVROOT&#125;&quot;                                    3.Listen      监听端口                 例     Listen 8080                 4.DocumentRoot    配置项目目录                 例：  DocumentRoot &quot;$&#123;SRVROOT&#125;/htdocs/jnyy.iguanwei.com/public&quot;        5.&lt;Directory 目录&gt;        权限    &lt;/&gt;Directory&gt;    配置目录权限相关            例：        &lt;Directory &quot;$&#123;SRVROOT&#125;/htdocs/jnyy.iguanwei.com/public&quot;&gt;                    Options Indexes FollowSymLinks                    AllowOverride All                    Require all granted         &lt;/Directory&gt;             6.配置默认访问文件            &lt;IfModule dir_module&gt;              DirectoryIndex  index.php index.html        &lt;/IfModule&gt;              </code></pre><h3 id="伪静态"><a href="#伪静态" class="headerlink" title="伪静态"></a>伪静态</h3><pre><code>1. httpd.conf配置文件 启动rewrite模块 如下：    LoadModule rewrite_module modules/mod_rewrite.so2.项目根目录.htaccess文件配置入下  没有则新建    &lt;IfModule mod_rewrite.c&gt;     RewriteEngine on     RewriteBase /     RewriteCond %&#123;REQUEST_FILENAME&#125; !-d     RewriteCond %&#123;REQUEST_FILENAME&#125; !-f     RewriteRule ^(.*)$ index.php?s=/$1 [QSA,PT,L]    &lt;/IfModule&gt;3.对应apache  httpd.conf配置文件     AllowOverride All    &lt;Directory 项目目录&gt;                            Options Indexes FollowSymLinks                            AllowOverride All                            Require all granted    &lt;/Directory&gt;      </code></pre><h3 id="配置开机启动"><a href="#配置开机启动" class="headerlink" title="配置开机启动"></a>配置开机启动</h3><pre><code>   1.将apache加入windows服务              apache的bin目录下 执行 httpd.exe -thttpd.exe -k install -n &quot;apache2.4&quot;         2.设置开机启动  然后再win+r 输入services.msc  打开后找到mysql 右键点击属性   将启动类型设置为自动即可   </code></pre><h1 id="apache相关知识"><a href="#apache相关知识" class="headerlink" title="apache相关知识"></a>apache相关知识</h1><h2 id="windows下apache常用命令"><a href="#windows下apache常用命令" class="headerlink" title="windows下apache常用命令"></a>windows下apache常用命令</h2><pre><code>httpd -k install                           安装apache服务httpd -k uninstall                         移除apache服务httpd -k start                             启动apache服务httpd -k restart                           重启apache服务httpd -k stop                              关闭已安装的apache服务httpd -v                                   查看apache版本httpd -t                                   查看apache配置文件状态    </code></pre><h2 id="重写规则"><a href="#重写规则" class="headerlink" title="重写规则"></a>重写规则</h2><pre><code>网站根目录下创建  .htaccess  文件1) R[=code](force redirect)  #强制外部重定向强制在替代字符串加上http://thishost[:thisport]/前缀重定向到外部的URL.如果code不指定，将用缺省的302 HTTP状态码。2) F(force URL to be forbidden)  #禁用URL,返回403HTTP状态码。3) G(force URL to be gone)  # 强制URL为GONE，返回410HTTP状态码。4) P(force proxy) # 强制使用代理转发。5) L(last rule) # 表明当前规则是最后一条规则，停止分析以后规则的重写。6) N(next round) # 重新从第一条规则开始运行重写过程。7) C(chained with next rule) # 与下一条规则关联如果规则匹配则正常处理，该标志无效，如果不匹配，那么下面所有关联的规则都跳过。8) T=MIME-type(force MIME type) # 强制MIME类型9) NS (used only if no internal sub-request) # 只用于不是内部子请求10) NC(no case) # 不区分大小写11) QSA(query string append) # 追加请求字符串12) NE(no URI escaping of output) # 不在输出转义特殊字符例如：RewriteRule /foo/(.*) /bar?arg=P1%3d$1 [R,NE] # 将能正确的将/foo/zoo转换成/bar?arg=P1=zoo13) PT(pass through to next handler) # 传递给下一个处理例如：RewriteRule ^/abc(.*) /def$1 [PT] # 将会交给/def规则处理Alias /def /ghi14) S=num(skip next rule(s)) # 跳过num条规则15) E=VAR:VAL(set environment variable) # 设置环境变量</code></pre><h2 id="HTTP-跳转至-HTTPS-示例"><a href="#HTTP-跳转至-HTTPS-示例" class="headerlink" title="HTTP 跳转至 HTTPS 示例"></a>HTTP 跳转至 HTTPS 示例</h2><pre><code>RewriteEngine on  # 开启重写RewriteCond %&#123;SERVER_PORT&#125; !^443$  # 如果访问的不是 443 端口RewriteCond %&#123;REQUEST_URI&#125; !^/tz.php  #如果访问的url 不是 /tz.phpRewriteRule (.*) https://%&#123;SERVER_NAME&#125;/$1 [R]     # 跳转到  https：//域名+$1</code></pre><h2 id="HTTP-80-强制转-HTTPS"><a href="#HTTP-80-强制转-HTTPS" class="headerlink" title="HTTP 80 强制转 HTTPS"></a>HTTP 80 强制转 HTTPS</h2><pre><code>RewriteEngine OnRewriteCond %&#123;SERVER_PORT&#125; 80  # 如果访问的是80 端口RewriteRule ^(.*)$ https://%&#123;HTTP_HOST&#125;/$1 [R,L]  # 跳转 https </code></pre><h2 id="强制301重定向-HTTPS"><a href="#强制301重定向-HTTPS" class="headerlink" title="强制301重定向 HTTPS"></a>强制301重定向 HTTPS</h2><pre><code>&lt;IfModule mod_rewrite.c&gt;RewriteEngine onRewriteBase /  # 表示项目根目录RewriteCond %&#123;SERVER_PORT&#125; !^443$  # 如果访问的不是443 端口RewriteRule (.*) https://%&#123;SERVER_NAME&#125;/$1 [R=301,L]  # 重定向到 301&lt;/IfModule&gt;</code></pre><h2 id="重命名目录"><a href="#重命名目录" class="headerlink" title="重命名目录"></a>重命名目录</h2><pre><code>RewriteRule   ^/?old_directory/([a-z\.]+)$   new_directory/$1   [R=301,L]</code></pre><h2 id="图片防盗链"><a href="#图片防盗链" class="headerlink" title="图片防盗链"></a>图片防盗链</h2><p>   RewriteCond   %{HTTP_REFERER}   !^$ # 如果上个页面地址为空<br>   RewriteCond    %{HTTP_REFERER}   !^http://(www.)?example.com/   [NC]    #或者不是来自你自己的域名<br>   RewriteRule   .(gif|jpg|png)$   - [F]  #禁止访问</p><h2 id="如果文件不存在重定向到404页面"><a href="#如果文件不存在重定向到404页面" class="headerlink" title="如果文件不存在重定向到404页面"></a>如果文件不存在重定向到404页面</h2><pre><code>RewriteCond   %&#123;REQUEST_FILENAME&#125;   !-f  # 如果访问的不是一个文件RewriteCond   %&#123;REQUEST_FILENAME&#125;   !-d  #如果访问的不是一个目录RewriteRule   .?   /404.php   [L]   #跳转到网站根目录# 也可携带参数#RewriteRule ^/?(.*)$ /404.php?url=$1 [L]</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;安装mysql服务&quot;&gt;&lt;a href=&quot;#安装mysql服务&quot; class=&quot;headerlink&quot; title=&quot;安装mysql服务&quot;&gt;&lt;/a&gt;安装mysql服务&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;1.下载地址：https://downloads.mysql.com</summary>
       
     
     

@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="git">
+<meta name="description" content="一、基本概念1.JavaEE 全称 Java Platform, Enterprise Edition， 它是对 JavaSE(Java Platform, Standard Edition) 的扩展 加入了面向企业开发（实际上就是网络和 Web 有关开发）的支持，包括 Servlet，WebSocket，EL，EJB 等  2.Servlet 和 Servlet Container Servle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java学习1">
 <meta property="og:url" content="http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/index.html">
 <meta property="og:site_name" content="yszhao的博客">
-<meta property="og:description" content="git">
+<meta property="og:description" content="一、基本概念1.JavaEE 全称 Java Platform, Enterprise Edition， 它是对 JavaSE(Java Platform, Standard Edition) 的扩展 加入了面向企业开发（实际上就是网络和 Web 有关开发）的支持，包括 Servlet，WebSocket，EL，EJB 等  2.Servlet 和 Servlet Container Servle">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-02-08T03:39:50.000Z">
-<meta property="article:modified_time" content="2023-02-25T03:48:43.900Z">
+<meta property="article:modified_time" content="2023-07-25T07:52:54.296Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -321,8 +321,95 @@
       
 
       
-        <p>git</p>
+        <h1 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h1><p>1.JavaEE 全称 Java Platform, Enterprise Edition，</p>
+<pre><code>它是对 JavaSE(Java Platform, Standard Edition) 的扩展
+加入了面向企业开发（实际上就是网络和 Web 有关开发）的支持，包括 Servlet，WebSocket，EL，EJB 等
+</code></pre>
+<p>2.Servlet 和 Servlet Container</p>
+<pre><code>Servlet
 
+Servlet 是一套用于处理 HTTP 请求的 API 标准
+JavaEE 当中只提供了 Servlet 的标准，
+要真正运行 Servlet，需要使用 Servlet Container
+
+Servlet Container
+
+如果 Servlet 是电器，Servlet Container 就是电源插座
+这层抽象让 Servlet 可以跑在任何一个 Container 当中，隔绝了对 Runtime 环境的依赖
+比较常用支持 Servlet Container 的 Server 软件有 Apache Tomcat，Glassfish，JBoss，Jetty 等等。
+
+
+Servlet 是 Java Web 开发的事实标准，不过也不代表所有 Java Web 框架都一定要使用或者兼容 Servlet。
+不使用 Servlet 也可以进行 Java Web 开发，例如 Play Framework，就是完全自立门户的一个框架。
+</code></pre>
+<p>3.EJB 和 EJB Container</p>
+<pre><code>EJB 全称 Enterprise JavaBean，和 Servlet 一样，也是 JavaEE 当中的一个组件，面向更加复杂的企业业务开发
+有一个概念需要明确，和 Servlet 类似，运行 EJB 也需要专门的 EJB Container
+Apache Tomcat 不支持 EJB，而 JBoss 提供了对 EJB 的支持。
+</code></pre>
+<p>4.JVM：java虚拟机，加载.class文件字节码文件并运行.class字节码文件    </p>
+<h1 id="二、在系统跑Java程序必要软件"><a href="#二、在系统跑Java程序必要软件" class="headerlink" title="二、在系统跑Java程序必要软件"></a>二、在系统跑Java程序必要软件</h1><p>Java Development Kit (JDK) 是Java开发工具包,用于开发和编译和调试Java程序</p>
+<pre><code>编译器（javac）：将Java源代码编译成字节码文件（.class文件），以便能够在Java虚拟机（JVM）上执行
+JDK提供了一些调试工具，用于帮助开发人员在开发和测试Java程序时进行调试。
+JDK用于开发和编译和调试Java程序
+</code></pre>
+<p>Java Runtime Environment (JRE)：JRE包含了运行Java程序所需的运行时环境。 用于运行Java程序</p>
+<pre><code>JRE：java 程序运行时环境，包括JVM虚拟机（java.exe等）和基本的类库（rt.jar等）。
+只包含Java虚拟机（JVM）和Java标准类库，用于执行Java程序
+JRE则用于运行Java程序。
+</code></pre>
+<h1 id="三、JavaEE-Servlet-应用"><a href="#三、JavaEE-Servlet-应用" class="headerlink" title="三、JavaEE Servlet 应用"></a>三、JavaEE Servlet 应用</h1><pre><code> package，然后在 package 上右键，创建一个 Java Class
+ 
+ Servlet API 是包含在 JavaEE 当中的。为了方便，我们直接使用 Tomcat 附带的 servlet-api.jar 包。
+ 
+ 
+</code></pre>
+<h2 id="3-1-Servlet接口"><a href="#3-1-Servlet接口" class="headerlink" title="3.1 Servlet接口"></a>3.1 Servlet接口</h2><pre><code>import javax.servlet.*;
+public class MyFirstServlet implements Servlet&#123;
+
+    public void init(ServletConfig config) throws ServletException &#123;
+        System.out.println(&quot;Init&quot;);
+    &#125;
+    
+    public void service(ServletRequest request, ServletResponse response)
+            throws ServletException, IOException &#123;
+        System.out.println(&quot;From service&quot;);
+        PrintWriter out = response.getWriter();
+        out.println(&quot;Hello, Java Web.&quot;);
+    &#125;
+    
+    public void destroy() &#123;
+        System.out.println(&quot;Destroy&quot;);
+    &#125;
+    public String getServletInfo() &#123;
+        return null;
+    &#125;
+    
+    public ServletConfig getServletConfig() &#123;
+        return null;
+    &#125;
+
+
+&#125;
+</code></pre>
+<h2 id="3-2-GenericServlet抽象类"><a href="#3-2-GenericServlet抽象类" class="headerlink" title="3.2 GenericServlet抽象类"></a>3.2 GenericServlet抽象类</h2><p>GenericServlet使编写Servlet变得更容易。<br>它提生命周期方法init和destroy的简单实现，要编写一般的Servlet，只需要重写service方法即可。</p>
+<pre><code>import javax.servlet.GenericServlet;
+public class classname extends GenericServlet&#123;
+&#125;     
+</code></pre>
+<h2 id="3-2-HttpServlet类"><a href="#3-2-HttpServlet类" class="headerlink" title="3.2 HttpServlet类"></a>3.2 HttpServlet类</h2><p>HttpServlet是在继承GenericServlet的基础上进一步的扩展。<br>提供将要被子类化以创建适用于Web站点的HTTP servlet的抽象类<br>要重写doGet和doPost方法</p>
+<p>HTTPServlet的子类至少必须重写一个方法，该方法通常是：</p>
+<p>doGet()：用于HTTP GET请求</p>
+<p>doPost()：用于HTTP POST请求</p>
+<p>doPut()：用于HTTP PUT请求</p>
+<p>doDelete()：用于HTTP DELETE请求</p>
+<pre><code>import javax.servlet.http.HttpServlet; 
+public class classname extends HttpServlet&#123;
+
+&#125;   
+ 
+</code></pre>
+<h1 id="四、Tomcat部署一个基于servlet项目"><a href="#四、Tomcat部署一个基于servlet项目" class="headerlink" title="四、Tomcat部署一个基于servlet项目"></a>四、Tomcat部署一个基于servlet项目</h1>
       
     </div>
     
@@ -410,8 +497,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -426,7 +522,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,6 +565,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一、基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9C%A8%E7%B3%BB%E7%BB%9F%E8%B7%91Java%E7%A8%8B%E5%BA%8F%E5%BF%85%E8%A6%81%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">二、在系统跑Java程序必要软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81JavaEE-Servlet-%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">三、JavaEE Servlet 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-Servlet%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Servlet接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-GenericServlet%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 GenericServlet抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-HttpServlet%E7%B1%BB"><span class="nav-number">3.3.</span> <span class="nav-text">3.2 HttpServlet类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Tomcat%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Eservlet%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">四、Tomcat部署一个基于servlet项目</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

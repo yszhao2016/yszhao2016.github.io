@@ -310,8 +310,95 @@ docker load：导入镜像
   <entry>
     <title>java学习1</title>
     <url>/2023/02/08/java%E5%AD%A6%E4%B9%A01/</url>
-    <content><![CDATA[<p>git</p>
-]]></content>
+    <content><![CDATA[<h1 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h1><p>1.JavaEE 全称 Java Platform, Enterprise Edition，</p>
+<pre><code>它是对 JavaSE(Java Platform, Standard Edition) 的扩展
+加入了面向企业开发（实际上就是网络和 Web 有关开发）的支持，包括 Servlet，WebSocket，EL，EJB 等
+</code></pre>
+<p>2.Servlet 和 Servlet Container</p>
+<pre><code>Servlet
+
+Servlet 是一套用于处理 HTTP 请求的 API 标准
+JavaEE 当中只提供了 Servlet 的标准，
+要真正运行 Servlet，需要使用 Servlet Container
+
+Servlet Container
+
+如果 Servlet 是电器，Servlet Container 就是电源插座
+这层抽象让 Servlet 可以跑在任何一个 Container 当中，隔绝了对 Runtime 环境的依赖
+比较常用支持 Servlet Container 的 Server 软件有 Apache Tomcat，Glassfish，JBoss，Jetty 等等。
+
+
+Servlet 是 Java Web 开发的事实标准，不过也不代表所有 Java Web 框架都一定要使用或者兼容 Servlet。
+不使用 Servlet 也可以进行 Java Web 开发，例如 Play Framework，就是完全自立门户的一个框架。
+</code></pre>
+<p>3.EJB 和 EJB Container</p>
+<pre><code>EJB 全称 Enterprise JavaBean，和 Servlet 一样，也是 JavaEE 当中的一个组件，面向更加复杂的企业业务开发
+有一个概念需要明确，和 Servlet 类似，运行 EJB 也需要专门的 EJB Container
+Apache Tomcat 不支持 EJB，而 JBoss 提供了对 EJB 的支持。
+</code></pre>
+<p>4.JVM：java虚拟机，加载.class文件字节码文件并运行.class字节码文件    </p>
+<h1 id="二、在系统跑Java程序必要软件"><a href="#二、在系统跑Java程序必要软件" class="headerlink" title="二、在系统跑Java程序必要软件"></a>二、在系统跑Java程序必要软件</h1><p>Java Development Kit (JDK) 是Java开发工具包,用于开发和编译和调试Java程序</p>
+<pre><code>编译器（javac）：将Java源代码编译成字节码文件（.class文件），以便能够在Java虚拟机（JVM）上执行
+JDK提供了一些调试工具，用于帮助开发人员在开发和测试Java程序时进行调试。
+JDK用于开发和编译和调试Java程序
+</code></pre>
+<p>Java Runtime Environment (JRE)：JRE包含了运行Java程序所需的运行时环境。 用于运行Java程序</p>
+<pre><code>JRE：java 程序运行时环境，包括JVM虚拟机（java.exe等）和基本的类库（rt.jar等）。
+只包含Java虚拟机（JVM）和Java标准类库，用于执行Java程序
+JRE则用于运行Java程序。
+</code></pre>
+<h1 id="三、JavaEE-Servlet-应用"><a href="#三、JavaEE-Servlet-应用" class="headerlink" title="三、JavaEE Servlet 应用"></a>三、JavaEE Servlet 应用</h1><pre><code> package，然后在 package 上右键，创建一个 Java Class
+ 
+ Servlet API 是包含在 JavaEE 当中的。为了方便，我们直接使用 Tomcat 附带的 servlet-api.jar 包。
+ 
+ 
+</code></pre>
+<h2 id="3-1-Servlet接口"><a href="#3-1-Servlet接口" class="headerlink" title="3.1 Servlet接口"></a>3.1 Servlet接口</h2><pre><code>import javax.servlet.*;
+public class MyFirstServlet implements Servlet&#123;
+
+    public void init(ServletConfig config) throws ServletException &#123;
+        System.out.println(&quot;Init&quot;);
+    &#125;
+    
+    public void service(ServletRequest request, ServletResponse response)
+            throws ServletException, IOException &#123;
+        System.out.println(&quot;From service&quot;);
+        PrintWriter out = response.getWriter();
+        out.println(&quot;Hello, Java Web.&quot;);
+    &#125;
+    
+    public void destroy() &#123;
+        System.out.println(&quot;Destroy&quot;);
+    &#125;
+    public String getServletInfo() &#123;
+        return null;
+    &#125;
+    
+    public ServletConfig getServletConfig() &#123;
+        return null;
+    &#125;
+
+
+&#125;
+</code></pre>
+<h2 id="3-2-GenericServlet抽象类"><a href="#3-2-GenericServlet抽象类" class="headerlink" title="3.2 GenericServlet抽象类"></a>3.2 GenericServlet抽象类</h2><p>GenericServlet使编写Servlet变得更容易。<br>它提生命周期方法init和destroy的简单实现，要编写一般的Servlet，只需要重写service方法即可。</p>
+<pre><code>import javax.servlet.GenericServlet;
+public class classname extends GenericServlet&#123;
+&#125;     
+</code></pre>
+<h2 id="3-2-HttpServlet类"><a href="#3-2-HttpServlet类" class="headerlink" title="3.2 HttpServlet类"></a>3.2 HttpServlet类</h2><p>HttpServlet是在继承GenericServlet的基础上进一步的扩展。<br>提供将要被子类化以创建适用于Web站点的HTTP servlet的抽象类<br>要重写doGet和doPost方法</p>
+<p>HTTPServlet的子类至少必须重写一个方法，该方法通常是：</p>
+<p>doGet()：用于HTTP GET请求</p>
+<p>doPost()：用于HTTP POST请求</p>
+<p>doPut()：用于HTTP PUT请求</p>
+<p>doDelete()：用于HTTP DELETE请求</p>
+<pre><code>import javax.servlet.http.HttpServlet; 
+public class classname extends HttpServlet&#123;
+
+&#125;   
+ 
+</code></pre>
+<h1 id="四、Tomcat部署一个基于servlet项目"><a href="#四、Tomcat部署一个基于servlet项目" class="headerlink" title="四、Tomcat部署一个基于servlet项目"></a>四、Tomcat部署一个基于servlet项目</h1>]]></content>
   </entry>
   <entry>
     <title>laravel源码学习2</title>
@@ -1575,5 +1662,30 @@ crontab -l
 <p> 配置好 /etc/anacrontab 文件</p>
 <p> 更具体学习参考<a href="http://c.biancheng.net/view/1095.html">http://c.biancheng.net/view/1095.html</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>跨域问题总结</title>
+    <url>/2023/07/21/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>session和cookie</title>
+    <url>/2023/07/21/session%E5%92%8Ccookie/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>php常用函数总结</title>
+    <url>/2023/07/25/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="一、字符串处理函数"><a href="#一、字符串处理函数" class="headerlink" title="一、字符串处理函数"></a>一、字符串处理函数</h1><h2 id="1-1-str-pad"><a href="#1-1-str-pad" class="headerlink" title="1.1 str_pad()"></a>1.1 str_pad()</h2><p>str_pad(【必填 需要处理的字符串】,【必填 填充的长度】，【 可选 填充的字符串，默认空白】，【可选 填充字符串的哪边】)</p>
+<pre><code>规定填充字符串的哪边 可能的值：
+
+STR_PAD_BOTH - 填充字符串的两侧。如果不是偶数，则右侧获得额外的填充。
+STR_PAD_LEFT - 填充字符串的左侧。
+STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
+</code></pre>
+<p>示例 $str=10 ; echo str_pad($str,4,”0”,STR_PAD_LEFT);  <font color="red">意思就4位长度 不够就往左边补0</font></p>
+<h2 id="2-1-strpos、stripos-、strrpos"><a href="#2-1-strpos、stripos-、strrpos" class="headerlink" title="2.1 strpos、stripos 、strrpos"></a>2.1 strpos、stripos 、strrpos</h2><h2 id="2-3-substr"><a href="#2-3-substr" class="headerlink" title="2.3 substr"></a>2.3 substr</h2><h2 id="2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用"><a href="#2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用" class="headerlink" title="2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用"></a>2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用</h2><pre><code>比较常用，不在赘述
+</code></pre>
+<h1 id="二、数组处理函数"><a href="#二、数组处理函数" class="headerlink" title="二、数组处理函数"></a>二、数组处理函数</h1>]]></content>
   </entry>
 </search>
