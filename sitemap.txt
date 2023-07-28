@@ -1,5 +1,8 @@
-http://example.com/2023/07/25/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/
+http://example.com/2023/07/27/nginx%E9%85%8D%E7%BD%AE/
 http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/
+http://example.com/2023/07/26/linux-iptables%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/
+http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/
+http://example.com/2023/07/25/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/
 http://example.com/2023/07/21/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/
 http://example.com/2023/07/21/session%E5%92%8Ccookie/
 http://example.com/2023/07/19/nginx%E4%B9%8Blogrotate/
@@ -31,7 +34,6 @@ http://example.com/2022/04/13/git-server/
 http://example.com/categories/index.html
 http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B02/
 http://example.com/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B01/
-http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/
 http://example.com/2022/04/13/make-lnmp/
 http://example.com/2022/02/26/js%E6%A8%A1%E5%9D%97%E5%8C%96/
 http://example.com/2021/12/23/web%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88/

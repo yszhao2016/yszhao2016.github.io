@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="#标签  git 一、基础知识  工作区(workspace)      就是你平时存放项目代码的地方  暂存区(stage)          git add  仓库区&#x2F;版本库(Repository)     git commit  远程仓库   二、回退问题1.git add 后回退git status 先看一下add 中的文件 git reset HEAD 如果后面什么都不跟的话 就是上一">
+<meta name="description" content="一、基础知识工作区(workspace)      就是你平时存放项目代码的地方 暂存区(stage)          git add 仓库区&#x2F;版本库(Repository)     git commit 远程仓库  二、回退问题1.git add 后回退git status 先看一下add 中的文件git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git总结">
 <meta property="og:url" content="http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="yszhao的博客">
-<meta property="og:description" content="#标签  git 一、基础知识  工作区(workspace)      就是你平时存放项目代码的地方  暂存区(stage)          git add  仓库区&#x2F;版本库(Repository)     git commit  远程仓库   二、回退问题1.git add 后回退git status 先看一下add 中的文件 git reset HEAD 如果后面什么都不跟的话 就是上一">
+<meta property="og:description" content="一、基础知识工作区(workspace)      就是你平时存放项目代码的地方 暂存区(stage)          git add 仓库区&#x2F;版本库(Repository)     git commit 远程仓库  二、回退问题1.git add 后回退git status 先看一下add 中的文件git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了git">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-01-08T14:19:16.000Z">
-<meta property="article:modified_time" content="2022-04-26T11:48:29.466Z">
+<meta property="article:modified_time" content="2023-07-26T07:56:35.814Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -321,16 +321,12 @@
       
 
       
-        <p> #标签</p>
-<ul>
-<li><p>git</p>
-<h1 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h1><p>  工作区(workspace)      就是你平时存放项目代码的地方<br>  暂存区(stage)          git add<br>  仓库区/版本库(Repository)     git commit<br>  远程仓库</p>
-</li>
-</ul>
-<h1 id="二、回退问题"><a href="#二、回退问题" class="headerlink" title="二、回退问题"></a>二、回退问题</h1><h2 id="1-git-add-后回退"><a href="#1-git-add-后回退" class="headerlink" title="1.git add 后回退"></a>1.git add 后回退</h2><pre><code>git status 先看一下add 中的文件
-git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了
-git reset HEAD XXX/XXX/XXX.java 就是对某个文件进行撤销了
+        <h1 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h1><pre><code>工作区(workspace)      就是你平时存放项目代码的地方
+暂存区(stage)          git add
+仓库区/版本库(Repository)     git commit
+远程仓库
 </code></pre>
+<h1 id="二、回退问题"><a href="#二、回退问题" class="headerlink" title="二、回退问题"></a>二、回退问题</h1><h2 id="1-git-add-后回退"><a href="#1-git-add-后回退" class="headerlink" title="1.git add 后回退"></a>1.git add 后回退</h2><p>git status 先看一下add 中的文件<br>git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了<br>git reset HEAD XXX/XXX/XXX.java 就是对某个文件进行撤销了</p>
 <h2 id="2-git-commit后回退"><a href="#2-git-commit后回退" class="headerlink" title="2.git commit后回退"></a>2.git commit后回退</h2><pre><code>git log    命令显示从最近到最远的提交日志
 
     [root@localhost test-jenkins]# git log
@@ -361,8 +357,8 @@ git reest --hard  commit_id
 强制push到对应的远程分支（如提交到develop分支）
 git push -f -u origin develop
 </code></pre>
-<h2 id="3-回退后悔药"><a href="#3-回退后悔药" class="headerlink" title="3.回退后悔药"></a>3.回退后悔药</h2><pre><code>git reflog用来记录你的每一次命令
-[root@localhost test-jenkins]# git reflog
+<h2 id="3-回退后悔药"><a href="#3-回退后悔药" class="headerlink" title="3.回退后悔药"></a>3.回退后悔药</h2><p>git reflog用来记录你的每一次命令</p>
+<pre><code>[root@localhost test-jenkins]# git reflog
 8943166 HEAD@&#123;0&#125;: reset: moving to 8943166480734ac5a760e482a887ee8da0140ec8
 e2c7f2d HEAD@&#123;1&#125;: commit: dev branch change
 8943166 HEAD@&#123;2&#125;: commit: dev branch add index.php
@@ -373,19 +369,18 @@ e2c7f2d HEAD@&#123;1&#125;: commit: dev branch change
 
 git reset --hard e2c7f2d
 </code></pre>
-<h2 id="4-已经提交远程分支"><a href="#4-已经提交远程分支" class="headerlink" title="4.已经提交远程分支"></a>4.已经提交远程分支</h2><pre><code>git reset 方法回退
-拉过的错误版本的本地分支  多需要回退
-回退  强制推送  远程
-
-git revert 版本号
-git revert HEAD 上个版本
-git revert HEAD~n 上n个版本
-git push 远程
-其他客户端正常拉取就可以
+<h2 id="4-已经提交远程分支"><a href="#4-已经提交远程分支" class="headerlink" title="4.已经提交远程分支"></a>4.已经提交远程分支</h2><p>git reset 方法回退<br>拉过的错误版本的本地分支  多需要回退<br>回退  强制推送  远程</p>
+<p>git revert 版本号<br>git revert HEAD 上个版本<br>git revert HEAD~n 上n个版本<br>git push 远程<br>其他客户端正常拉取就可以</p>
+<h1 id="三、Git-Reset-三种模式"><a href="#三、Git-Reset-三种模式" class="headerlink" title="三、Git Reset 三种模式"></a>三、Git Reset 三种模式</h1><p>–hard: 会清空工作目录和暂存区的改动</p>
+<pre><code>    git reset --hard  c3b320427ad2560140e20af23225d803b2fed6e0
+    
 </code></pre>
-<h1 id="三、Git-Reset-三种模式"><a href="#三、Git-Reset-三种模式" class="headerlink" title="三、Git Reset 三种模式"></a>三、Git Reset 三种模式</h1><pre><code>--hard: 会清空工作目录和暂存区的改动
---soft：保留工作目录，并把重置 HEAD 所带来的新的差异放进暂存区  **变得只是仓库区**
---mixed reset 不加参数(mixed)：保留工作目录，并清空暂存区
+<p><font color="red">–soft：保留工作目录，并把重置 HEAD 所带来的新的差异放进暂存区  <strong>变得只是仓库区</strong></font></p>
+<pre><code>    git reset --soft  c3b320427ad2560140e20af23225d803b2fed6e0
+    
+</code></pre>
+<p>–mixed reset 不加参数(mixed)：保留工作目录，并清空暂存区</p>
+<pre><code>    git reset c3b320427ad2560140e20af23225d803b2fed6e0
 </code></pre>
 <h1 id="四、修改远程url"><a href="#四、修改远程url" class="headerlink" title="四、修改远程url"></a>四、修改远程url</h1><pre><code>1.方法一
     git remote set-url origin [url]
@@ -398,6 +393,30 @@ git push 远程
 
 3.方法三
     直接修改config 文件
+</code></pre>
+<h1 id="五、常用命令"><a href="#五、常用命令" class="headerlink" title="五、常用命令"></a>五、常用命令</h1><p>git branch  :查看本地所有分钟</p>
+<pre><code>示例 ：git branch
+</code></pre>
+<p>git branch -a ：查看所有分支 包括远程</p>
+<pre><code>示例：git branch -a 
+</code></pre>
+<p>git branch 【分支名]：新建分支</p>
+<pre><code>示例：git branch  dev
+</code></pre>
+<p>git branch  -d 【分支名】    删除分支</p>
+<pre><code>示例 : git branch  -d  test
+</code></pre>
+<p>git branch -D 【分支名】     强制删除 分支</p>
+<pre><code>示例 : git branch  -D  test
+</code></pre>
+<p>git merge 【分支名】 ：合并分支，到当前分支</p>
+<pre><code>示例：git merge dev
+</code></pre>
+<p>git checkout 【分支名】：切换到那个分支</p>
+<pre><code>示例：git checkout dev
+</code></pre>
+<p><font color="red">git checkout -b 【分支名】 【远程分支名】：新建一个分支，来自远程分支</font></p>
+<pre><code>示例：git checkout -b  dev origin/dev
 </code></pre>
 
       
@@ -512,7 +531,7 @@ git push 远程
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -565,7 +584,7 @@ git push 远程
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">一、基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9B%9E%E9%80%80%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">二、回退问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-git-add-%E5%90%8E%E5%9B%9E%E9%80%80"><span class="nav-number">2.1.</span> <span class="nav-text">1.git add 后回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-git-commit%E5%90%8E%E5%9B%9E%E9%80%80"><span class="nav-number">2.2.</span> <span class="nav-text">2.git commit后回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9B%9E%E9%80%80%E5%90%8E%E6%82%94%E8%8D%AF"><span class="nav-number">2.3.</span> <span class="nav-text">3.回退后悔药</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="nav-number">2.4.</span> <span class="nav-text">4.已经提交远程分支</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Git-Reset-%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">三、Git Reset 三种模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8Burl"><span class="nav-number">4.</span> <span class="nav-text">四、修改远程url</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">一、基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9B%9E%E9%80%80%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">二、回退问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-git-add-%E5%90%8E%E5%9B%9E%E9%80%80"><span class="nav-number">2.1.</span> <span class="nav-text">1.git add 后回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-git-commit%E5%90%8E%E5%9B%9E%E9%80%80"><span class="nav-number">2.2.</span> <span class="nav-text">2.git commit后回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9B%9E%E9%80%80%E5%90%8E%E6%82%94%E8%8D%AF"><span class="nav-number">2.3.</span> <span class="nav-text">3.回退后悔药</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="nav-number">2.4.</span> <span class="nav-text">4.已经提交远程分支</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Git-Reset-%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">三、Git Reset 三种模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8Burl"><span class="nav-number">4.</span> <span class="nav-text">四、修改远程url</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">五、常用命令</span></a></li></ol></div>
             
 
           </div>

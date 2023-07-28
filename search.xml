@@ -145,89 +145,6 @@ fail2ban-client set nginx-cc unbanip  112.84.237.102
 ]]></content>
   </entry>
   <entry>
-    <title>git总结</title>
-    <url>/2022/01/08/git%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p> #标签</p>
-<ul>
-<li><p>git</p>
-<h1 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h1><p>  工作区(workspace)      就是你平时存放项目代码的地方<br>  暂存区(stage)          git add<br>  仓库区/版本库(Repository)     git commit<br>  远程仓库</p>
-</li>
-</ul>
-<h1 id="二、回退问题"><a href="#二、回退问题" class="headerlink" title="二、回退问题"></a>二、回退问题</h1><h2 id="1-git-add-后回退"><a href="#1-git-add-后回退" class="headerlink" title="1.git add 后回退"></a>1.git add 后回退</h2><pre><code>git status 先看一下add 中的文件
-git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了
-git reset HEAD XXX/XXX/XXX.java 就是对某个文件进行撤销了
-</code></pre>
-<h2 id="2-git-commit后回退"><a href="#2-git-commit后回退" class="headerlink" title="2.git commit后回退"></a>2.git commit后回退</h2><pre><code>git log    命令显示从最近到最远的提交日志
-
-    [root@localhost test-jenkins]# git log
-    commit e2c7f2d567cbdc36e4503479e15ea51d19816d33
-    Author: root &lt;root@localhost.localdomain&gt;
-    Date:   Fri Jan 7 11:17:27 2022 +0800
-
-    dev branch change
-
-    commit 8943166480734ac5a760e482a887ee8da0140ec8
-    Author: root &lt;root@localhost.localdomain&gt;
-    Date:   Fri Jan 7 10:56:22 2022 +0800
-
-    dev branch add index.php
-    。。。。
-
-git reest --hard  commit_id
-                  上一个版本就是HEAD^，
-                  上上一个版本就是HEAD^^，
-                  当然往上100个版本写100个^比较容易数不过来，
-                  所以写成HEAD~100。
-例：
-    git reset --hard 139dcfaa558e3276b30b6b2e5cbbb9c00bbdca96
-    git reset --hard HEAD^
-
-将会删除此版本之前添加
-
-强制push到对应的远程分支（如提交到develop分支）
-git push -f -u origin develop
-</code></pre>
-<h2 id="3-回退后悔药"><a href="#3-回退后悔药" class="headerlink" title="3.回退后悔药"></a>3.回退后悔药</h2><pre><code>git reflog用来记录你的每一次命令
-[root@localhost test-jenkins]# git reflog
-8943166 HEAD@&#123;0&#125;: reset: moving to 8943166480734ac5a760e482a887ee8da0140ec8
-e2c7f2d HEAD@&#123;1&#125;: commit: dev branch change
-8943166 HEAD@&#123;2&#125;: commit: dev branch add index.php
-1ca6f06 HEAD@&#123;3&#125;: checkout: moving from release to dev
-1ca6f06 HEAD@&#123;4&#125;: pull origin release: Fast-forward
-14fbb47 HEAD@&#123;5&#125;: checkout: moving from master to release
-14fbb47 HEAD@&#123;6&#125;: clone: from ssh://git@117.89.131.220:44222/zhaoyoushui/test-jenkins.git
-
-git reset --hard e2c7f2d
-</code></pre>
-<h2 id="4-已经提交远程分支"><a href="#4-已经提交远程分支" class="headerlink" title="4.已经提交远程分支"></a>4.已经提交远程分支</h2><pre><code>git reset 方法回退
-拉过的错误版本的本地分支  多需要回退
-回退  强制推送  远程
-
-git revert 版本号
-git revert HEAD 上个版本
-git revert HEAD~n 上n个版本
-git push 远程
-其他客户端正常拉取就可以
-</code></pre>
-<h1 id="三、Git-Reset-三种模式"><a href="#三、Git-Reset-三种模式" class="headerlink" title="三、Git Reset 三种模式"></a>三、Git Reset 三种模式</h1><pre><code>--hard: 会清空工作目录和暂存区的改动
---soft：保留工作目录，并把重置 HEAD 所带来的新的差异放进暂存区  **变得只是仓库区**
---mixed reset 不加参数(mixed)：保留工作目录，并清空暂存区
-</code></pre>
-<h1 id="四、修改远程url"><a href="#四、修改远程url" class="headerlink" title="四、修改远程url"></a>四、修改远程url</h1><pre><code>1.方法一
-    git remote set-url origin [url]
-    git remote -v 查看
-
-2.方法二
-    git remote rm origin
-    git remote add origin [url]
-    git remote -v 查看
-
-3.方法三
-    直接修改config 文件
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
     <title>docker学习1-Docker基础命令</title>
     <url>/2023/07/08/docker%E5%AD%A6%E4%B9%A01/</url>
     <content><![CDATA[<h1 id="Docker基础命令"><a href="#Docker基础命令" class="headerlink" title="Docker基础命令"></a>Docker基础命令</h1><h3 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h3><pre><code>Docker image ls 
@@ -396,9 +313,8 @@ public class classname extends GenericServlet&#123;
 public class classname extends HttpServlet&#123;
 
 &#125;   
- 
 </code></pre>
-<h1 id="四、Tomcat部署一个基于servlet项目"><a href="#四、Tomcat部署一个基于servlet项目" class="headerlink" title="四、Tomcat部署一个基于servlet项目"></a>四、Tomcat部署一个基于servlet项目</h1>]]></content>
+]]></content>
   </entry>
   <entry>
     <title>laravel源码学习2</title>
@@ -1687,5 +1603,282 @@ STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
 <h2 id="2-1-strpos、stripos-、strrpos"><a href="#2-1-strpos、stripos-、strrpos" class="headerlink" title="2.1 strpos、stripos 、strrpos"></a>2.1 strpos、stripos 、strrpos</h2><h2 id="2-3-substr"><a href="#2-3-substr" class="headerlink" title="2.3 substr"></a>2.3 substr</h2><h2 id="2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用"><a href="#2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用" class="headerlink" title="2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用"></a>2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用</h2><pre><code>比较常用，不在赘述
 </code></pre>
 <h1 id="二、数组处理函数"><a href="#二、数组处理函数" class="headerlink" title="二、数组处理函数"></a>二、数组处理函数</h1>]]></content>
+  </entry>
+  <entry>
+    <title>linux-iptables使用总结</title>
+    <url>/2023/07/26/linux-iptables%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>一、iptables<br>    iptables防火墙没有启用,iptables命令仍然会显示默认的规则.</p>
+<p>二、常用命令</p>
+<p>常用参数</p>
+<pre><code>-n 参数表示将 IP 地址和端口号显示为数字形式，而不是解析为主机名和服务名。
+
+-L 选项用于列出防火墙规则。
+
+-t nat 参数指定了要操作的表为 NAT 表，NAT 表用于处理网络地址转换相关的规则。
+</code></pre>
+<p>iptables -n -L           显示当前防火墙规则列表。</p>
+<p>iptables -t nat -n -L    看 iptables 中 NAT（Network Address Translation）表的规则。</p>
+<p>结果怎么看</p>
+<pre><code>Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     udp  --  0.0.0.0/0            0.0.0.0/0            state NEW udp dpt:2333
+ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0            state NEW tcp dpt:2333
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination         
+DOCKER-USER  all  --  0.0.0.0/0            0.0.0.0/0           
+DOCKER-ISOLATION-STAGE-1  all  --  0.0.0.0/0            0.0.0.0/0           
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+DOCKER     all  --  0.0.0.0/0            0.0.0.0/0           
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain DOCKER (1 references)
+target     prot opt source               destination         
+ACCEPT     udp  --  0.0.0.0/0            172.17.0.2           udp dpt:60050
+ACCEPT     udp  --  0.0.0.0/0            172.17.0.2           udp dpt:60049
+ACCEPT     udp  --  0.0.0.0/0            172.17.0.2           udp dpt:60048
+ACCEPT     udp  --  0.0.0.0/0            172.17.0.2           udp dpt:60047
+
+Chain DOCKER-ISOLATION-STAGE-1 (1 references)
+target     prot opt source               destination         
+DOCKER-ISOLATION-STAGE-2  all  --  0.0.0.0/0            0.0.0.0/0           
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-2 (1 references)
+target     prot opt source               destination         
+DROP       all  --  0.0.0.0/0            0.0.0.0/0           
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-USER (1 references)
+target     prot opt source               destination         
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0 
+ 
+&quot;LIBVIRT_FWI&quot;是一个iptables防火墙的链，并且该链已经被引用了一次
+
+允许所有协议（all）的流量从任意源IP地址（0.0.0.0/0）进入到目标IP地址为172.17.0.2  60047端口
+
+
+REJECT 拒绝
+
+ACCEPT 允许
+
+DROP   丢弃
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>git总结</title>
+    <url>/2022/01/08/git%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h1><pre><code>工作区(workspace)      就是你平时存放项目代码的地方
+暂存区(stage)          git add
+仓库区/版本库(Repository)     git commit
+远程仓库
+</code></pre>
+<h1 id="二、回退问题"><a href="#二、回退问题" class="headerlink" title="二、回退问题"></a>二、回退问题</h1><h2 id="1-git-add-后回退"><a href="#1-git-add-后回退" class="headerlink" title="1.git add 后回退"></a>1.git add 后回退</h2><p>git status 先看一下add 中的文件<br>git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了<br>git reset HEAD XXX/XXX/XXX.java 就是对某个文件进行撤销了</p>
+<h2 id="2-git-commit后回退"><a href="#2-git-commit后回退" class="headerlink" title="2.git commit后回退"></a>2.git commit后回退</h2><pre><code>git log    命令显示从最近到最远的提交日志
+
+    [root@localhost test-jenkins]# git log
+    commit e2c7f2d567cbdc36e4503479e15ea51d19816d33
+    Author: root &lt;root@localhost.localdomain&gt;
+    Date:   Fri Jan 7 11:17:27 2022 +0800
+
+    dev branch change
+
+    commit 8943166480734ac5a760e482a887ee8da0140ec8
+    Author: root &lt;root@localhost.localdomain&gt;
+    Date:   Fri Jan 7 10:56:22 2022 +0800
+
+    dev branch add index.php
+    。。。。
+
+git reest --hard  commit_id
+                  上一个版本就是HEAD^，
+                  上上一个版本就是HEAD^^，
+                  当然往上100个版本写100个^比较容易数不过来，
+                  所以写成HEAD~100。
+例：
+    git reset --hard 139dcfaa558e3276b30b6b2e5cbbb9c00bbdca96
+    git reset --hard HEAD^
+
+将会删除此版本之前添加
+
+强制push到对应的远程分支（如提交到develop分支）
+git push -f -u origin develop
+</code></pre>
+<h2 id="3-回退后悔药"><a href="#3-回退后悔药" class="headerlink" title="3.回退后悔药"></a>3.回退后悔药</h2><p>git reflog用来记录你的每一次命令</p>
+<pre><code>[root@localhost test-jenkins]# git reflog
+8943166 HEAD@&#123;0&#125;: reset: moving to 8943166480734ac5a760e482a887ee8da0140ec8
+e2c7f2d HEAD@&#123;1&#125;: commit: dev branch change
+8943166 HEAD@&#123;2&#125;: commit: dev branch add index.php
+1ca6f06 HEAD@&#123;3&#125;: checkout: moving from release to dev
+1ca6f06 HEAD@&#123;4&#125;: pull origin release: Fast-forward
+14fbb47 HEAD@&#123;5&#125;: checkout: moving from master to release
+14fbb47 HEAD@&#123;6&#125;: clone: from ssh://git@117.89.131.220:44222/zhaoyoushui/test-jenkins.git
+
+git reset --hard e2c7f2d
+</code></pre>
+<h2 id="4-已经提交远程分支"><a href="#4-已经提交远程分支" class="headerlink" title="4.已经提交远程分支"></a>4.已经提交远程分支</h2><p>git reset 方法回退<br>拉过的错误版本的本地分支  多需要回退<br>回退  强制推送  远程</p>
+<p>git revert 版本号<br>git revert HEAD 上个版本<br>git revert HEAD~n 上n个版本<br>git push 远程<br>其他客户端正常拉取就可以</p>
+<h1 id="三、Git-Reset-三种模式"><a href="#三、Git-Reset-三种模式" class="headerlink" title="三、Git Reset 三种模式"></a>三、Git Reset 三种模式</h1><p>–hard: 会清空工作目录和暂存区的改动</p>
+<pre><code>    git reset --hard  c3b320427ad2560140e20af23225d803b2fed6e0
+    
+</code></pre>
+<p><font color="red">–soft：保留工作目录，并把重置 HEAD 所带来的新的差异放进暂存区  <strong>变得只是仓库区</strong></font></p>
+<pre><code>    git reset --soft  c3b320427ad2560140e20af23225d803b2fed6e0
+    
+</code></pre>
+<p>–mixed reset 不加参数(mixed)：保留工作目录，并清空暂存区</p>
+<pre><code>    git reset c3b320427ad2560140e20af23225d803b2fed6e0
+</code></pre>
+<h1 id="四、修改远程url"><a href="#四、修改远程url" class="headerlink" title="四、修改远程url"></a>四、修改远程url</h1><pre><code>1.方法一
+    git remote set-url origin [url]
+    git remote -v 查看
+
+2.方法二
+    git remote rm origin
+    git remote add origin [url]
+    git remote -v 查看
+
+3.方法三
+    直接修改config 文件
+</code></pre>
+<h1 id="五、常用命令"><a href="#五、常用命令" class="headerlink" title="五、常用命令"></a>五、常用命令</h1><p>git branch  :查看本地所有分钟</p>
+<pre><code>示例 ：git branch
+</code></pre>
+<p>git branch -a ：查看所有分支 包括远程</p>
+<pre><code>示例：git branch -a 
+</code></pre>
+<p>git branch 【分支名]：新建分支</p>
+<pre><code>示例：git branch  dev
+</code></pre>
+<p>git branch  -d 【分支名】    删除分支</p>
+<pre><code>示例 : git branch  -d  test
+</code></pre>
+<p>git branch -D 【分支名】     强制删除 分支</p>
+<pre><code>示例 : git branch  -D  test
+</code></pre>
+<p>git merge 【分支名】 ：合并分支，到当前分支</p>
+<pre><code>示例：git merge dev
+</code></pre>
+<p>git checkout 【分支名】：切换到那个分支</p>
+<pre><code>示例：git checkout dev
+</code></pre>
+<p><font color="red">git checkout -b 【分支名】 【远程分支名】：新建一个分支，来自远程分支</font></p>
+<pre><code>示例：git checkout -b  dev origin/dev
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>nginx配置</title>
+    <url>/2023/07/27/nginx%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="一-、配置详解"><a href="#一-、配置详解" class="headerlink" title="一 、配置详解"></a>一 、配置详解</h1><h2 id="1-1nginx配置文件"><a href="#1-1nginx配置文件" class="headerlink" title="1.1nginx配置文件"></a>1.1nginx配置文件</h2><pre><code>#nginx 已那个用户身份访问文件
+user  www;  
+
+#指定nginx使用的worker进程数
+worker_processes 8;   
+
+#worker_cpu_affinity是一个用于配置工作进程CPU亲和性的选项。
+#CPU亲和性是指将进程或线程绑定到特定的CPU核心上，以提高性能和效率。
+#通常cpu几核，就配置几个
+worker_cpu_affinity 0000001 00000010 00000011 00000100 00000101 00000110 00000111 00001000;
+
+#PID配置项是用于指定保存主进程ID的文件路径
+pid        /var/run/nginx.pid;
+
+#用于限制每个worker进程可以打开的最大文件描述符数量。
+#ulimit -n 查看系统文件句柄数   设置为系统允许的最大文件句柄数的 80% - 90%
+worker_rlimit_nofile 65535;
+
+
+#用于控制Nginx服务器的事件模型和并发处理方式。
+events &#123;
+    #用于设置每个worker进程的最大并发连接数 即每个worker进程可以同时处理的最大客户端连接数
+    worker_connections 1024;
+    
+    #常见的事件模型包括epoll、kqueue和select等。
+    use epoll;
+    
+    #用于指定是否允许一个worker进程同时接受多个新连接
+    multi_accept on;
+&#125;
+
+#用于代理TCP和UDP流量，允许将Nginx作为代理服务器来处理网络流量
+#使用stream模块可以使Nginx具备代理TCP和UDP流量的能力
+stream &#123;
+       include /etc/nginx/stream/*.conf;
+&#125;
+
+#此模块用于配置HTTP服务器，允许主机作为Web服务器来处理HTTP请求
+http &#123;
+    #引入mime头文件  定义了Nginx的mime类型    
+    include       mime.types;
+    
+    #指令用于设置在请求无法匹配到任何MIME类型时的默认类型
+    default_type  application/octet-stream;
+    
+    #定义日志格式  main 为日志格式 名称
+    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+                      
+    #定义访问日志路径 main 指用那个日志格式名称                  
+    access_log  /var/log/nginx/access.log  main;
+    
+    # 当将sendfile设置为on时，Nginx使用sendfile()系统调用来直接将文件从磁盘传输到网络，
+    # 而无需将文件数据复制到用户空间。这样可以显着提高文件传输速度和效率。
+    sendfile on;
+    
+    #将tcp_nopush设置为on时，Nginx会禁用TCP_CORK
+    #允许在nginx worker进程发送数据时立即将响应发送到客户端，而无需等待TCP缓冲区填满。
+    #将tcp_nopush设置为on可以提高响应的实时性，允许立即发送数据到客户端
+    tcp_nopush on;
+    
+    #将tcp_nodelay设置为on时，Nginx会打开TCP_NODELAY，这将禁用TCP的Nagle算法，
+    #以便在发送小数据包或有延迟要求的数据时能够及时发送数据。
+    #将tcp_nodelay设置为on可以减少TCP延迟，适用于实时性要求高的应用场景。
+    tcp_nodelay on;
+    
+    
+    #配置空主机头 404 就是禁用http通过ip访问
+    server &#123;
+       listen 80 default;
+       server_name _;
+       root html;
+       location / &#123; return 404;&#125;
+       location ~ /.ht &#123; deny all; &#125;
+    &#125;
+    
+    include /etc/nginx/conf.d/*.conf;
+&#125;
+</code></pre>
+<h2 id="1-2log-format可用变量"><a href="#1-2log-format可用变量" class="headerlink" title="1.2log_format可用变量"></a>1.2log_format可用变量</h2><pre><code>$remote_addr：客户端的IP地址。
+$remote_user：客户端的用户名称（如果有授权）。
+$time_local：访问时间和日期（格式：[day/month/year:hour:minute:second zone]）。
+$request_method：HTTP请求的方法（例如GET或POST）。
+$request_uri：完整的请求URI。
+$request_length：请求的长度（包括请求行，请求头和请求体）。
+$status：HTTP响应的状态码。
+$body_bytes_sent：发送给客户端的响应体的字节数。
+$http_referer：请求中的“Referer”头部字段，包含了前一个页面的URL。
+$http_user_agent：请求的用户代理头部字段，表示发起请求的客户端工具或库。
+</code></pre>
+<h2 id="1-3host配置文件"><a href="#1-3host配置文件" class="headerlink" title="1.3host配置文件"></a>1.3host配置文件</h2><h1 id="常用示例"><a href="#常用示例" class="headerlink" title="常用示例"></a>常用示例</h1><h2 id="mysql-代理示例"><a href="#mysql-代理示例" class="headerlink" title="mysql 代理示例"></a>mysql 代理示例</h2><pre><code>stream &#123;
+        upstream mysql &#123;
+              server 192.168.0.108:3306;
+         &#125;
+          
+        server &#123;
+            listen 0.0.0.0:63306;
+            proxy_connect_timeout 8s;
+            proxy_timeout 24h;
+            proxy_pass mysql;
+        &#125;
+&#125;
+</code></pre>
+]]></content>
   </entry>
 </search>
