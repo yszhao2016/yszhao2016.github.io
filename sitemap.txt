@@ -1,4 +1,6 @@
+http://example.com/2023/07/29/nginx%E4%B9%8Blocation/
 http://example.com/2023/07/27/nginx%E9%85%8D%E7%BD%AE/
+http://example.com/2023/07/29/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A01-1/
 http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/
 http://example.com/2023/07/26/linux-iptables%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/
 http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/
