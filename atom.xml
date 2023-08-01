@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-08-01T12:09:29.795Z</updated>
+  <updated>2023-08-01T12:30:47.100Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springboot学习</title>
+    <link href="http://example.com/2023/08/01/springboot%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/08/01/springboot%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-08-01T12:20:47.000Z</published>
+    <updated>2023-08-01T12:30:47.100Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="创建基于springboot-项目"><a href="#创建基于springboot-项目" class="headerlink" title="创建基于springboot 项目"></a>创建基于springboot 项目</h2><h2 id="1-maven方式"><a href="#1-maven方式" class="headerlink" title="1.maven方式"></a>1.maven方式</h2><pre><code>pom.xml文件加入  &lt;parent&gt;        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;        &lt;version&gt;2.5.6&lt;/version&gt;   &lt;/parent&gt;         &lt;dependencies&gt;       &lt;!-- Web 依赖 --&gt;       &lt;dependency&gt;           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;           &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;       &lt;/dependency&gt;       &lt;!-- Web 依赖 --&gt;   &lt;/dependencies&gt;更新库就可以</code></pre><h2 id="2-通过官网的spring-initializr安装"><a href="#2-通过官网的spring-initializr安装" class="headerlink" title="2. 通过官网的spring initializr安装"></a>2. 通过官网的spring initializr安装</h2><pre><code>https://start.spring.io/  </code></pre><h2 id="3-idea旗舰版-新建时-可以选"><a href="#3-idea旗舰版-新建时-可以选" class="headerlink" title="3.idea旗舰版 新建时 可以选"></a>3.idea旗舰版 新建时 可以选</h2><h2 id="启动springboot"><a href="#启动springboot" class="headerlink" title="启动springboot"></a>启动springboot</h2><p> 在package创建类加上@SpringBootApplication</p><pre><code>package com.zysstudy;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;@SpringBootApplicationpublic class StartApplication &#123;    public static void main(String[] args) &#123;        SpringApplication.run(StartApplication.class,args);    &#125;&#125;</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;创建基于springboot-项目&quot;&gt;&lt;a href=&quot;#创建基于springboot-项目&quot; class=&quot;headerlink&quot; title=&quot;创建基于springboot 项目&quot;&gt;&lt;/a&gt;创建基于springboot 项目&lt;/h2&gt;&lt;h2 id=&quot;1-mav</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>升级openssh</title>
@@ -339,27 +359,6 @@ apt install supe</summary>
     <published>2023-07-09T06:16:41.000Z</published>
     <updated>2023-07-13T06:20:53.705Z</updated>
     
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>openEuler搭建lnmp</title>
-    <link href="http://example.com/2023/07/09/openEuler%E6%90%AD%E5%BB%BAlnmp/"/>
-    <id>http://example.com/2023/07/09/openEuler%E6%90%AD%E5%BB%BAlnmp/</id>
-    <published>2023-07-09T06:04:46.000Z</published>
-    <updated>2023-07-13T11:09:13.709Z</updated>
-    
-    <content type="html"><![CDATA[<p>#openEuler搭建lnmp</p><p>##安装php<br>wget <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a></p><p>rpm -ivh –nodeps epel-release-latest-7.noarch.rp</p><p>wget <a href="https://rpms.remirepo.net/enterprise/remi-release-7.rpm">https://rpms.remirepo.net/enterprise/remi-release-7.rpm</a></p><p>rpm -ivh –nodeps remi-release-7.rpm </p><p>yum-config-manager –enable remi-php73</p><p>yum install php73 php73-php-fpm php73-php-opcache php73-php-gd php73-php-mbstring php73-php-xml php73-php-pdo php73-php-mysqlnd php73-php-pecl-mysql php73-php-bcmath</p><p>##rpm包安装mysql</p><pre><code>Error:  Problem: cannot install the best candidate for the job  - nothing provides libcrypto.so.10()(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libssl.so.10()(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libcrypto.so.10(libcrypto.so.10)(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libssl.so.10(libssl.so.10)(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libcrypto.so.10(OPENSSL_1.0.1_EC)(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  - nothing provides libcrypto.so.10(OPENSSL_1.0.2)(64bit) needed by php73-php-fpm-7.3.33-10.el7.remi.x86_64  </code></pre><p>此报错处理办法      </p><pre><code>yum install compat-openssl10yum install http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-3.el8.x86_64.rpm</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;#openEuler搭建lnmp&lt;/p&gt;
-&lt;p&gt;##安装php&lt;br&gt;wget &lt;a href=&quot;https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm&quot;&gt;https://dl.fedor</summary>
-      
     
     
     

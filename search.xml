@@ -2033,4 +2033,45 @@ sudo apt-get remove openssh-server
 </code></pre>
 <h2 id="编译过程参考centos即可"><a href="#编译过程参考centos即可" class="headerlink" title="编译过程参考centos即可"></a>编译过程参考centos即可</h2>]]></content>
   </entry>
+  <entry>
+    <title>springboot学习</title>
+    <url>/2023/08/01/springboot%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="创建基于springboot-项目"><a href="#创建基于springboot-项目" class="headerlink" title="创建基于springboot 项目"></a>创建基于springboot 项目</h2><h2 id="1-maven方式"><a href="#1-maven方式" class="headerlink" title="1.maven方式"></a>1.maven方式</h2><pre><code>pom.xml文件加入
+
+  &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.5.6&lt;/version&gt;
+   &lt;/parent&gt;
+   
+   
+   &lt;dependencies&gt;
+       &lt;!-- Web 依赖 --&gt;
+       &lt;dependency&gt;
+           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+           &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+       &lt;/dependency&gt;
+       &lt;!-- Web 依赖 --&gt;
+   &lt;/dependencies&gt;
+
+更新库就可以
+</code></pre>
+<h2 id="2-通过官网的spring-initializr安装"><a href="#2-通过官网的spring-initializr安装" class="headerlink" title="2. 通过官网的spring initializr安装"></a>2. 通过官网的spring initializr安装</h2><pre><code>https://start.spring.io/  
+</code></pre>
+<h2 id="3-idea旗舰版-新建时-可以选"><a href="#3-idea旗舰版-新建时-可以选" class="headerlink" title="3.idea旗舰版 新建时 可以选"></a>3.idea旗舰版 新建时 可以选</h2><h2 id="启动springboot"><a href="#启动springboot" class="headerlink" title="启动springboot"></a>启动springboot</h2><p> 在package创建类加上@SpringBootApplication</p>
+<pre><code>package com.zysstudy;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class StartApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(StartApplication.class,args);
+    &#125;
+
+&#125;
+</code></pre>
+]]></content>
+  </entry>
 </search>
