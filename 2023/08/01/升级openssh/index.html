@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="vuecli  vue脚手架vue 它是一个插件  最基础的项目架构 帮集成webpack 构建 打包 编译 包含基本的架子  安装命令：    npm install -g @vue&#x2F;cli             npm i -g @vue&#x2F;cli             -g      表示全局安装   查看脚手架版本         vue --version  创建项目vue creat">
+<meta name="description" content="centos系统查看是否安装opensshrpm -qa|grep openssh 有则卸载  卸载用rpm -e 如果出现依赖包导致无法卸载，在最后面加上--nodeps即可 rpm -e openssl --nodeps yum remove openssh-server  卸载还可以手动删除   &#x2F;etc&#x2F;init.d&#x2F;sshd    &#x2F;etc&#x2F;ssh   &#x2F;usr&#x2F;bin&#x2F;ssh   &#x2F;u">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue学习1">
-<meta property="og:url" content="http://example.com/2023/02/22/vue%E5%AD%A6%E4%B9%A01/index.html">
+<meta property="og:title" content="升级openssh">
+<meta property="og:url" content="http://example.com/2023/08/01/%E5%8D%87%E7%BA%A7openssh/index.html">
 <meta property="og:site_name" content="yszhao的博客">
-<meta property="og:description" content="vuecli  vue脚手架vue 它是一个插件  最基础的项目架构 帮集成webpack 构建 打包 编译 包含基本的架子  安装命令：    npm install -g @vue&#x2F;cli             npm i -g @vue&#x2F;cli             -g      表示全局安装   查看脚手架版本         vue --version  创建项目vue creat">
+<meta property="og:description" content="centos系统查看是否安装opensshrpm -qa|grep openssh 有则卸载  卸载用rpm -e 如果出现依赖包导致无法卸载，在最后面加上--nodeps即可 rpm -e openssl --nodeps yum remove openssh-server  卸载还可以手动删除   &#x2F;etc&#x2F;init.d&#x2F;sshd    &#x2F;etc&#x2F;ssh   &#x2F;usr&#x2F;bin&#x2F;ssh   &#x2F;u">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-02-22T14:18:25.000Z">
-<meta property="article:modified_time" content="2023-07-13T06:20:53.705Z">
+<meta property="article:published_time" content="2023-08-01T11:48:14.000Z">
+<meta property="article:modified_time" content="2023-08-01T12:09:29.795Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/02/22/vue学习1/"/>
+  <link rel="canonical" href="http://example.com/2023/08/01/升级openssh/"/>
 
 
 
 
 
-  <title>vue学习1 | yszhao的博客</title>
+  <title>升级openssh | yszhao的博客</title>
   
 
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/22/vue%E5%AD%A6%E4%B9%A01/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/01/%E5%8D%87%E7%BA%A7openssh/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -271,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vue学习1</h1>
+          <h1 class="post-title" itemprop="name headline">升级openssh</h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-02-22T22:18:25+08:00">
-                2023-02-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-08-01T19:48:14+08:00">
+                2023-08-01
               </time>
             
 
@@ -321,29 +321,68 @@
       
 
       
-        <h1 id="vuecli-vue脚手架"><a href="#vuecli-vue脚手架" class="headerlink" title="vuecli  vue脚手架"></a>vuecli  vue脚手架</h1><pre><code>vue 它是一个插件  最基础的项目架构 帮集成webpack 构建 打包 编译 包含基本的架子
+        <h1 id="centos系统"><a href="#centos系统" class="headerlink" title="centos系统"></a>centos系统</h1><h2 id="查看是否安装openssh"><a href="#查看是否安装openssh" class="headerlink" title="查看是否安装openssh"></a>查看是否安装openssh</h2><pre><code>rpm -qa|grep openssh
+有则卸载
 
-安装命令：    npm install -g @vue/cli
-            npm i -g @vue/cli
-            -g      表示全局安装
+卸载用rpm -e 如果出现依赖包导致无法卸载，在最后面加上--nodeps即可
+rpm -e openssl --nodeps
+yum remove openssh-server
 
-
-查看脚手架版本         vue --version
+卸载还可以手动删除
+  /etc/init.d/sshd 
+  /etc/ssh
+  /usr/bin/ssh
+  /usr/sbin/sshd
+      
 </code></pre>
-<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><pre><code>vue create [项目名称]
-默认安装项   [babel]  编译es6的语法    [eslint]     项目语法检查  可开关
-
-
-vue ui 启动vue ui操作界面
+<h2 id="查当前openssh版本是否需要升级"><a href="#查当前openssh版本是否需要升级" class="headerlink" title="查当前openssh版本是否需要升级"></a>查当前openssh版本是否需要升级</h2><pre><code>ssh -V
 </code></pre>
-<h1 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h1><pre><code>/src/assets  目录存放 icon 图片
-/src/api     存放  api  文件夹
-/src/util    存放  一些工具方法
-/src/storage 存放 数据存储的工具箱
-/src/pages
-/src/router.js
+<h2 id="备份配置文件"><a href="#备份配置文件" class="headerlink" title="备份配置文件"></a>备份配置文件</h2><pre><code>mv /etc/ssh /etc/ssh.bak
 </code></pre>
+<h2 id="下载最新版本"><a href="#下载最新版本" class="headerlink" title="下载最新版本"></a>下载最新版本</h2><pre><code>https://www.openssh.com/openbsd.html    
+</code></pre>
+<h2 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h2><pre><code>./configure \
+  --prefix=/usr \
+  --sysconfdir=/etc/ssh \
+  --with-md5-passwords \
+  --with-pam \
+  --with-tcp-wrappers \
+  --with-ssl-dir=/usr/local/ssl
+  
+  
+  make &amp;&amp; make install
+    
+</code></pre>
+<h2 id="修改相关配置"><a href="#修改相关配置" class="headerlink" title="修改相关配置"></a>修改相关配置</h2><pre><code>cp -p contrib/redhat/sshd.init /etc/init.d/sshd 
 
+chmod u+x /etc/init.d/sshd 
+
+/etc/init.d/sshd start 此命令后就加入systemctl
+
+systemctl enable sshd 加入开机启动
+
+# vim /etc/ssh/sshd_config
+PermitRootLogin yes                #允许root账户登录，单root账户必须加上，其他的参数请自行修改
+</code></pre>
+<h2 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h2><pre><code>1.编译时报错
+
+    configure: error: PAM headers not found
+    
+解决方法
+    
+    yum -y install pam-devel
+    
+    
+2.编译别的目录，然后通过相应文件覆盖或者软连接方式更新
+  如果密码正确 就是登录不上
+  
+  删除重装     
+</code></pre>
+<h1 id="ubutun系统"><a href="#ubutun系统" class="headerlink" title="ubutun系统"></a>ubutun系统</h1><h2 id="查看是否安装"><a href="#查看是否安装" class="headerlink" title="查看是否安装"></a>查看是否安装</h2><pre><code>dpkg --list|grep ssh
+卸载
+sudo apt-get remove openssh-server 
+</code></pre>
+<h2 id="编译过程参考centos即可"><a href="#编译过程参考centos即可" class="headerlink" title="编译过程参考centos即可"></a>编译过程参考centos即可</h2>
       
     </div>
     
@@ -367,8 +406,8 @@ vue ui 启动vue ui操作界面
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/02/08/java%E5%AD%A6%E4%B9%A01/" rel="next" title="java学习1">
-                <i class="fa fa-chevron-left"></i> java学习1
+              <a href="/2023/07/29/nginx%E4%B9%8Blocation/" rel="next" title="nginx之location">
+                <i class="fa fa-chevron-left"></i> nginx之location
               </a>
             
           </div>
@@ -376,10 +415,6 @@ vue ui 启动vue ui操作界面
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/" rel="prev" title="windows搭建apache+php+mysql5.6">
-                windows搭建apache+php+mysql5.6 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -509,7 +544,7 @@ vue ui 启动vue ui操作界面
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vuecli-vue%E8%84%9A%E6%89%8B%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">vuecli  vue脚手架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">项目目录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#centos%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">centos系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85openssh"><span class="nav-number">1.1.</span> <span class="nav-text">查看是否安装openssh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E5%BD%93%E5%89%8Dopenssh%E7%89%88%E6%9C%AC%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81%E5%8D%87%E7%BA%A7"><span class="nav-number">1.2.</span> <span class="nav-text">查当前openssh版本是否需要升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">备份配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC"><span class="nav-number">1.4.</span> <span class="nav-text">下载最新版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85"><span class="nav-number">1.5.</span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">1.6.</span> <span class="nav-text">修改相关配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86"><span class="nav-number">1.7.</span> <span class="nav-text">报错处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ubutun%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">ubutun系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">查看是否安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E5%8F%82%E8%80%83centos%E5%8D%B3%E5%8F%AF"><span class="nav-number">2.2.</span> <span class="nav-text">编译过程参考centos即可</span></a></li></ol></li></ol></div>
             
 
           </div>

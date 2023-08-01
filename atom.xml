@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-07-29T07:33:47.373Z</updated>
+  <updated>2023-08-01T12:09:29.795Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>升级openssh</title>
+    <link href="http://example.com/2023/08/01/%E5%8D%87%E7%BA%A7openssh/"/>
+    <id>http://example.com/2023/08/01/%E5%8D%87%E7%BA%A7openssh/</id>
+    <published>2023-08-01T11:48:14.000Z</published>
+    <updated>2023-08-01T12:09:29.795Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="centos系统"><a href="#centos系统" class="headerlink" title="centos系统"></a>centos系统</h1><h2 id="查看是否安装openssh"><a href="#查看是否安装openssh" class="headerlink" title="查看是否安装openssh"></a>查看是否安装openssh</h2><pre><code>rpm -qa|grep openssh有则卸载卸载用rpm -e 如果出现依赖包导致无法卸载，在最后面加上--nodeps即可rpm -e openssl --nodepsyum remove openssh-server卸载还可以手动删除  /etc/init.d/sshd   /etc/ssh  /usr/bin/ssh  /usr/sbin/sshd      </code></pre><h2 id="查当前openssh版本是否需要升级"><a href="#查当前openssh版本是否需要升级" class="headerlink" title="查当前openssh版本是否需要升级"></a>查当前openssh版本是否需要升级</h2><pre><code>ssh -V</code></pre><h2 id="备份配置文件"><a href="#备份配置文件" class="headerlink" title="备份配置文件"></a>备份配置文件</h2><pre><code>mv /etc/ssh /etc/ssh.bak</code></pre><h2 id="下载最新版本"><a href="#下载最新版本" class="headerlink" title="下载最新版本"></a>下载最新版本</h2><pre><code>https://www.openssh.com/openbsd.html    </code></pre><h2 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h2><pre><code>./configure \  --prefix=/usr \  --sysconfdir=/etc/ssh \  --with-md5-passwords \  --with-pam \  --with-tcp-wrappers \  --with-ssl-dir=/usr/local/ssl      make &amp;&amp; make install    </code></pre><h2 id="修改相关配置"><a href="#修改相关配置" class="headerlink" title="修改相关配置"></a>修改相关配置</h2><pre><code>cp -p contrib/redhat/sshd.init /etc/init.d/sshd chmod u+x /etc/init.d/sshd /etc/init.d/sshd start 此命令后就加入systemctlsystemctl enable sshd 加入开机启动# vim /etc/ssh/sshd_configPermitRootLogin yes                #允许root账户登录，单root账户必须加上，其他的参数请自行修改</code></pre><h2 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h2><pre><code>1.编译时报错    configure: error: PAM headers not found    解决方法        yum -y install pam-devel        2.编译别的目录，然后通过相应文件覆盖或者软连接方式更新  如果密码正确 就是登录不上    删除重装     </code></pre><h1 id="ubutun系统"><a href="#ubutun系统" class="headerlink" title="ubutun系统"></a>ubutun系统</h1><h2 id="查看是否安装"><a href="#查看是否安装" class="headerlink" title="查看是否安装"></a>查看是否安装</h2><pre><code>dpkg --list|grep ssh卸载sudo apt-get remove openssh-server </code></pre><h2 id="编译过程参考centos即可"><a href="#编译过程参考centos即可" class="headerlink" title="编译过程参考centos即可"></a>编译过程参考centos即可</h2>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;centos系统&quot;&gt;&lt;a href=&quot;#centos系统&quot; class=&quot;headerlink&quot; title=&quot;centos系统&quot;&gt;&lt;/a&gt;centos系统&lt;/h1&gt;&lt;h2 id=&quot;查看是否安装openssh&quot;&gt;&lt;a href=&quot;#查看是否安装openssh&quot; c</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>nginx之location</title>
@@ -340,19 +360,6 @@ apt install supe</summary>
     <summary type="html">&lt;p&gt;#openEuler搭建lnmp&lt;/p&gt;
 &lt;p&gt;##安装php&lt;br&gt;wget &lt;a href=&quot;https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm&quot;&gt;https://dl.fedor</summary>
       
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu搭建lnmp环境</title>
-    <link href="http://example.com/2023/07/09/ubuntn%E6%90%AD%E5%BB%BAlnmp%E7%8E%AF%E5%A2%83/"/>
-    <id>http://example.com/2023/07/09/ubuntn%E6%90%AD%E5%BB%BAlnmp%E7%8E%AF%E5%A2%83/</id>
-    <published>2023-07-09T06:01:25.000Z</published>
-    <updated>2023-07-13T06:20:53.705Z</updated>
-    
     
     
     
