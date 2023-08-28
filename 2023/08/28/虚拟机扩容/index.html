@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="一、Cron介绍Cron被用来进行Linux系统的计划任务执行 二、相关目录cron.d&#x2F;*用来存放一些软件的Cron设置 cron.daily&#x2F;每天执行一次的任务 cron.hourly&#x2F;每小时执行一次的任务 cron.monthly&#x2F;每个月执行一次的任务 cron.weekly&#x2F;，每周执行一次的任务 每分钟执行一次脚本 crontab -e  三、crontab使用*  *  *   *  *">
+<meta name="description" content="修改硬盘大小 先虚拟机管理页面修改硬盘大小     注：不删除快照是 无法修改成功的  分区   fdisk &#x2F;dev&#x2F;sda     n p 默认确定 w  手动同步磁盘到系统内核 partprobe  创建物理卷 pvcreate &#x2F;dev&#x2F;sda3          #【&#x2F;dev&#x2F;sda3 是根据fdisk来的】  查看卷组 vgdisplay  添加物理卷（&#x2F;dev&#x2F;sda3）到卷组（ce">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux服务之crond">
-<meta property="og:url" content="http://example.com/2023/07/19/Linux%E6%9C%8D%E5%8A%A1%E4%B9%8Bcrond/index.html">
+<meta property="og:title" content="vmvare-esxi虚拟机扩容">
+<meta property="og:url" content="http://example.com/2023/08/28/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/index.html">
 <meta property="og:site_name" content="yszhao的博客">
-<meta property="og:description" content="一、Cron介绍Cron被用来进行Linux系统的计划任务执行 二、相关目录cron.d&#x2F;*用来存放一些软件的Cron设置 cron.daily&#x2F;每天执行一次的任务 cron.hourly&#x2F;每小时执行一次的任务 cron.monthly&#x2F;每个月执行一次的任务 cron.weekly&#x2F;，每周执行一次的任务 每分钟执行一次脚本 crontab -e  三、crontab使用*  *  *   *  *">
+<meta property="og:description" content="修改硬盘大小 先虚拟机管理页面修改硬盘大小     注：不删除快照是 无法修改成功的  分区   fdisk &#x2F;dev&#x2F;sda     n p 默认确定 w  手动同步磁盘到系统内核 partprobe  创建物理卷 pvcreate &#x2F;dev&#x2F;sda3          #【&#x2F;dev&#x2F;sda3 是根据fdisk来的】  查看卷组 vgdisplay  添加物理卷（&#x2F;dev&#x2F;sda3）到卷组（ce">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-07-19T06:20:19.000Z">
-<meta property="article:modified_time" content="2023-07-19T09:32:19.544Z">
+<meta property="article:published_time" content="2023-08-28T06:55:16.000Z">
+<meta property="article:modified_time" content="2023-08-28T07:19:29.037Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/07/19/Linux服务之crond/"/>
+  <link rel="canonical" href="http://example.com/2023/08/28/虚拟机扩容/"/>
 
 
 
 
 
-  <title>Linux服务之crond | yszhao的博客</title>
+  <title>vmvare-esxi虚拟机扩容 | yszhao的博客</title>
   
 
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/19/Linux%E6%9C%8D%E5%8A%A1%E4%B9%8Bcrond/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -271,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux服务之crond</h1>
+          <h1 class="post-title" itemprop="name headline">vmvare-esxi虚拟机扩容</h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-19T14:20:19+08:00">
-                2023-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-08-28T14:55:16+08:00">
+                2023-08-28
               </time>
             
 
@@ -321,41 +321,35 @@
       
 
       
-        <h1 id="一、Cron介绍"><a href="#一、Cron介绍" class="headerlink" title="一、Cron介绍"></a>一、Cron介绍</h1><p>Cron被用来进行Linux系统的计划任务执行</p>
-<h1 id="二、相关目录"><a href="#二、相关目录" class="headerlink" title="二、相关目录"></a>二、相关目录</h1><p>cron.d/*用来存放一些软件的Cron设置</p>
-<p>cron.daily/每天执行一次的任务</p>
-<p>cron.hourly/每小时执行一次的任务</p>
-<p>cron.monthly/每个月执行一次的任务</p>
-<p>cron.weekly/，每周执行一次的任务</p>
-<p>每分钟执行一次脚本</p>
-<pre><code>crontab -e
+        <p>修改硬盘大小</p>
+<pre><code>先虚拟机管理页面修改硬盘大小
+    注：不删除快照是 无法修改成功的
 </code></pre>
-<h1 id="三、crontab使用"><a href="#三、crontab使用" class="headerlink" title="三、crontab使用"></a>三、crontab使用</h1><pre><code>*  *  *   *  *  命令/脚本
-分 时 日 月 周
-
-1  *  *   *  *  命令/脚本   指的是每个小时的第一分钟
-*/1 * * * *     命令/脚本   每分钟执行脚本
-
-
-crontab -l
-查看计划任务列表   
+<p>分区  </p>
+<pre><code>fdisk /dev/sda    
+n
+p
+默认确定
+w
 </code></pre>
-<h1 id="四、-etc-cron-daily-与crontab-e-定义的区别"><a href="#四、-etc-cron-daily-与crontab-e-定义的区别" class="headerlink" title="四、/etc/cron.daily 与crontab -e 定义的区别"></a>四、/etc/cron.daily 与crontab -e 定义的区别</h1><pre><code>/etc/cron.daily 和 crontab -e 都是用来设置定时任务的方式，但它们有一些不同之处。
-
-/etc/cron.daily 是一个目录，里面存放着以 &quot;cron&quot; 格式命名的脚本文件。这些脚本会每天执行一次，通常在系统闲置时执行。这个目录中的脚本是全局的，适用于整个系统的所有用户。
-
-而 crontab -e 则是一个命令，用于编辑和管理用户个人的 crontab 文件。crontab 文件中定义了用户的定时任务计划。通过编辑 crontab 文件，用户可以设置自己的定时任务，包括每天、每周、每月或其他时间间隔的执行。
-
-因此，主要区别在于：
-
-/etc/cron.daily 适用于全局系统级别的定时任务，而 crontab -e 是用户级别的定时任务。
-/etc/cron.daily 中的脚本在每天执行一次，而 crontab -e 可以更精确地设置时间间隔。
-/etc/cron.daily 中的脚本对所有用户有效，而 crontab -e 只对当前用户有效。
-需要注意的是，修改 /etc/cron.daily 目录中的文件需要 root 权限，而 crontab -e 只需要用户自己的权限
+<p>手动同步磁盘到系统内核</p>
+<pre><code>partprobe
 </code></pre>
-<h1 id="五、Linux-anacron"><a href="#五、Linux-anacron" class="headerlink" title="五、Linux anacron"></a>五、Linux anacron</h1><p> 执行由于关机  忘记执行的任务</p>
-<p> 配置好 /etc/anacrontab 文件</p>
-<p> 更具体学习参考<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/1095.html">http://c.biancheng.net/view/1095.html</a></p>
+<p>创建物理卷</p>
+<pre><code>pvcreate /dev/sda3          #【/dev/sda3 是根据fdisk来的】
+</code></pre>
+<p>查看卷组</p>
+<pre><code>vgdisplay
+</code></pre>
+<p>添加物理卷（/dev/sda3）到卷组（centos）</p>
+<pre><code>vgextend centos /dev/sda3   #此处的centos根据vgdisplay查看得来
+</code></pre>
+<p>将空闲的空间都分配给root文件系统 </p>
+<pre><code> lvextend -L +250G /dev/centos/root   【/dev/centos/root  就是要扩容的目录通过df 可查看】
+</code></pre>
+<p>对root文件系统执行扩容</p>
+<pre><code>xfs_growfs /dev/centos/root
+</code></pre>
 
       
     </div>
@@ -380,8 +374,8 @@ crontab -l
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/07/19/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-supervisor/" rel="next" title="守护进程-supervisor">
-                <i class="fa fa-chevron-left"></i> 守护进程-supervisor
+              <a href="/2023/08/28/%E6%90%AD%E5%BB%BAopenvpn/" rel="next" title="搭建openvpn">
+                <i class="fa fa-chevron-left"></i> 搭建openvpn
               </a>
             
           </div>
@@ -389,10 +383,6 @@ crontab -l
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/07/21/session%E5%92%8Ccookie/" rel="prev" title="session和cookie">
-                session和cookie <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -444,17 +434,8 @@ crontab -l
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -512,22 +493,6 @@ crontab -l
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81Cron%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一、Cron介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%9B%B8%E5%85%B3%E7%9B%AE%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">二、相关目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81crontab%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">三、crontab使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-etc-cron-daily-%E4%B8%8Ecrontab-e-%E5%AE%9A%E4%B9%89%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">四、&#x2F;etc&#x2F;cron.daily 与crontab -e 定义的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81Linux-anacron"><span class="nav-number">5.</span> <span class="nav-text">五、Linux anacron</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

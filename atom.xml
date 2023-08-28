@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-08-01T12:30:47.100Z</updated>
+  <updated>2023-08-28T07:19:29.037Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,13 +17,63 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>vmvare-esxi虚拟机扩容</title>
+    <link href="http://example.com/2023/08/28/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/"/>
+    <id>http://example.com/2023/08/28/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/</id>
+    <published>2023-08-28T06:55:16.000Z</published>
+    <updated>2023-08-28T07:19:29.037Z</updated>
+    
+    <content type="html"><![CDATA[<p>修改硬盘大小</p><pre><code>先虚拟机管理页面修改硬盘大小    注：不删除快照是 无法修改成功的</code></pre><p>分区  </p><pre><code>fdisk /dev/sda    np默认确定w</code></pre><p>手动同步磁盘到系统内核</p><pre><code>partprobe</code></pre><p>创建物理卷</p><pre><code>pvcreate /dev/sda3          #【/dev/sda3 是根据fdisk来的】</code></pre><p>查看卷组</p><pre><code>vgdisplay</code></pre><p>添加物理卷（/dev/sda3）到卷组（centos）</p><pre><code>vgextend centos /dev/sda3   #此处的centos根据vgdisplay查看得来</code></pre><p>将空闲的空间都分配给root文件系统 </p><pre><code> lvextend -L +250G /dev/centos/root   【/dev/centos/root  就是要扩容的目录通过df 可查看】</code></pre><p>对root文件系统执行扩容</p><pre><code>xfs_growfs /dev/centos/root</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;修改硬盘大小&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;先虚拟机管理页面修改硬盘大小
+    注：不删除快照是 无法修改成功的
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;分区  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;fdisk /dev/sda    
+n
+p
+默认确定
+w
+&lt;/code&gt;&lt;/pre</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搭建openvpn</title>
+    <link href="http://example.com/2023/08/28/%E6%90%AD%E5%BB%BAopenvpn/"/>
+    <id>http://example.com/2023/08/28/%E6%90%AD%E5%BB%BAopenvpn/</id>
+    <published>2023-08-28T05:42:06.000Z</published>
+    <updated>2023-08-28T06:52:47.424Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="1-1、安装epel库和openvpn软件"><a href="#1-1、安装epel库和openvpn软件" class="headerlink" title="1.1、安装epel库和openvpn软件"></a>1.1、安装epel库和openvpn软件</h2><pre><code>yum -y install openvpn easy-rsa firewalldyum install epel-release -y</code></pre><h2 id="1-2、开启路由转发"><a href="#1-2、开启路由转发" class="headerlink" title="1.2、开启路由转发"></a>1.2、开启路由转发</h2><pre><code> echo  &quot;net.ipv4.ip_forward = 1&quot; &gt;&gt;/etc/sysctl.conf sysctl -p</code></pre><h2 id="1-3、创建OpenVPN相关的密钥"><a href="#1-3、创建OpenVPN相关的密钥" class="headerlink" title="1.3、创建OpenVPN相关的密钥"></a>1.3、创建OpenVPN相关的密钥</h2><pre><code> cp -rf /usr/share/easy-rsa/3.0/* /etc/openvpn/easy-rsa/ cp -p /usr/share/doc/easy-rsa-3.0.6/vars.example /etc/openvpn/easy-rsa/vars cd /etc/openvpn/easy-rsa/</code></pre><h3 id="1-3-1、创建ca证书"><a href="#1-3-1、创建ca证书" class="headerlink" title="1.3.1、创建ca证书"></a>1.3.1、创建ca证书</h3><pre><code>/usr/share/easy-rsa/3/easyrsa init-pki/usr/share/easy-rsa/3/easyrsa build-ca nopass</code></pre><h3 id="1-3-2、创建client证书和签名"><a href="#1-3-2、创建client证书和签名" class="headerlink" title="1.3..2、创建client证书和签名"></a>1.3..2、创建client证书和签名</h3><pre><code>/usr/share/easy-rsa/3/easyrsa gen-req client1 nopass           #Enter/usr/share/easy-rsa/3/easyrsa sign-req client client1          #需要输入yes创建dh、tls、crl（证书撤销秘钥）/usr/share/easy-rsa/3/easyrsa gen-dhopenvpn --genkey --secret /etc/openvpn/easy-rsa/ta.key/usr/share/easy-rsa/3/easyrsa  gen-crl</code></pre><h3 id="1-3-3、将秘钥拷贝至相应目录"><a href="#1-3-3、将秘钥拷贝至相应目录" class="headerlink" title="1.3.3、将秘钥拷贝至相应目录"></a>1.3.3、将秘钥拷贝至相应目录</h3><pre><code>cp -p pki/ca.crt /etc/openvpn/server/cp -p pki/issued/server1.crt /etc/openvpn/server/cp -p pki/private/server1.key /etc/openvpn/server/cp -p ta.key /etc/openvpn/server/cp -p pki/ca.crt /etc/openvpn/client/cp -p pki/issued/client1.crt /etc/openvpn/client/cp -p pki/private/client1.key /etc/openvpn/client/cp -p ta.key /etc/openvpn/client/cp pki/dh.pem /etc/openvpn/server/cp pki/crl.pem /etc/openvpn/server/cp /usr/share/doc/openvpn-2.4.11/sample/sample-config-files/server.conf /etc/openvpn/</code></pre><h1 id="二、配置-openvpn"><a href="#二、配置-openvpn" class="headerlink" title="二、配置 openvpn"></a>二、配置 openvpn</h1><h2 id="2-1、编辑配置文件-etc-openvpn-server-conf"><a href="#2-1、编辑配置文件-etc-openvpn-server-conf" class="headerlink" title="2.1、编辑配置文件 /etc/openvpn/server.conf"></a>2.1、编辑配置文件 /etc/openvpn/server.conf</h2><pre><code>cp /usr/share/doc/openvpn-2.4.11/sample/sample-config-files/server.conf /etc/openvpn/      #拷贝实例修改或直接拷贝以下内容vim /etc/openvpn/server.conflocal 0.0.0.0    #监听地址port 1194        #监听端口proto tcp        #监听协议dev tun          #采用路由隧道模式ca /etc/openvpn/server/ca.crt              #ca证书路径cert /etc/openvpn/server/server1.crt       #服务器证书key /etc/openvpn/server/server1.key        #服务器秘钥dh /etc/openvpn/server/dh.pem              #密钥交换协议文件#####注意在设备中加一条到10.100.100.0虚拟网段的路由！！！！server 10.100.100.0 255.255.255.0          ####给客户端分配地址池，注意：不能和VPN服务器内网网段有相同#####注意在设备中加一条到10.100.100.0虚拟网段的路由！！！！ifconfig-pool-persist ipp.txt#push &quot;redirect-gateway def1 bypass-dhcp&quot;      #推送默认路由（所有流量走vpn）push &quot;route 192.168.0.0 255.255.255.0&quot;           #推送客户端常用路由（根据自己内网网段来写或修改客户端配置添加路由）push &quot;dhcp-option DNS 192.168.5.251&quot;           #dhcp分配dnsclient-to-client       #客户端之间互相通信keepalive 10 120       #存活时间，10秒ping一次,120 如未收到响应则视为断线comp-lzo               #传输数据压缩max-clients 100        #最多允许 100 客户端连接user openvpn           #用户group openvpn          #用户组cipher AES-256-CBC     #加密方式--客户端必须一致persist-keypersist-tunstatus /var/log/openvpn-status.loglog         /var/log/openvpn.logverb 3#以下参数为用户认证使用script-security 3auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env    #指定用户认证脚本username-as-common-nameverify-client-cert none</code></pre><h2 id="2-2虚拟网段的路由"><a href="#2-2虚拟网段的路由" class="headerlink" title="2.2虚拟网段的路由"></a>2.2虚拟网段的路由</h2><pre><code>iptables -t nat -A POSTROUTING -s 10.100.100.0/24 -j MASQUERADE</code></pre><h1 id="三、用户认证"><a href="#三、用户认证" class="headerlink" title="三、用户认证"></a>三、用户认证</h1><h2 id="3-1编写用户认证脚本文件-脚本是由openvpn官网提供"><a href="#3-1编写用户认证脚本文件-脚本是由openvpn官网提供" class="headerlink" title="3.1编写用户认证脚本文件 (脚本是由openvpn官网提供)"></a>3.1编写用户认证脚本文件 (脚本是由openvpn官网提供)</h2><pre><code>vim /etc/openvpn/checkpsw.sh#!/bin/sh############################################################ checkpsw.sh (C) 2004 Mathias Sundman # This script will authenticate OpenVPN users against# a plain text file. The passfile should simply contain# one row per user with the username first followed by# one or more space(s) or tab(s) and then the password.PASSFILE=&quot;/etc/openvpn/psw-file&quot;LOG_FILE=&quot;/etc/openvpn/openvpn-password.log&quot;TIME_STAMP=`date &quot;+%Y-%m-%d %T&quot;`###########################################################if [ ! -r &quot;$&#123;PASSFILE&#125;&quot; ]; then  echo &quot;$&#123;TIME_STAMP&#125;: Could not open password file \&quot;$&#123;PASSFILE&#125;\&quot; for reading.&quot; &gt;&gt;$&#123;LOG_FILE&#125;  exit 1fiCORRECT_PASSWORD=`awk &#39;!/^;/&amp;&amp;!/^#/&amp;&amp;$1==&quot;&#39;$&#123;username&#125;&#39;&quot;&#123;print $2;exit&#125;&#39; $&#123;PASSFILE&#125;`if [ &quot;$&#123;CORRECT_PASSWORD&#125;&quot; = &quot;&quot; ]; then   echo &quot;$&#123;TIME_STAMP&#125;: User does not exist: username=\&quot;$&#123;username&#125;\&quot;, password=\&quot;$&#123;password&#125;\&quot;.&quot; &gt;&gt; $&#123;LOG_FILE&#125;  exit 1fiif [ &quot;$&#123;password&#125;&quot; = &quot;$&#123;CORRECT_PASSWORD&#125;&quot; ]; then   echo &quot;$&#123;TIME_STAMP&#125;: Successful authentication: username=\&quot;$&#123;username&#125;\&quot;.&quot; &gt;&gt; $&#123;LOG_FILE&#125;  exit 0fiecho &quot;$&#123;TIME_STAMP&#125;: Incorrect password: username=\&quot;$&#123;username&#125;\&quot;,     password=\&quot;$&#123;password&#125;\&quot;.&quot; &gt;&gt; $&#123;LOG_FILE&#125;exit 1</code></pre><h2 id="3-2-加权限及添加用户账号"><a href="#3-2-加权限及添加用户账号" class="headerlink" title="3.2 加权限及添加用户账号"></a>3.2 加权限及添加用户账号</h2><pre><code>给脚本添加执行权限chmod 755 /etc/openvpn/checkpsw.sh编辑密码文件vim /etc/openvpn/psw-filetom  123456Jerry 654321#前面为用户名，后面为密码。 中间使用空格分开</code></pre><h1 id="四、客户端配置"><a href="#四、客户端配置" class="headerlink" title="四、客户端配置"></a>四、客户端配置</h1><pre><code>client.ovpn##---------以下为将ca.crt证书写入到客户端文件的方式（直接给一个client.ovpn文件即可）------------##clientdev tunproto tcp   #根据服务端的来remote utnanjing.tpddns.cn 11194resolv-retry infinitenobindpersist-keypersist-tun&lt;ca&gt;-----BEGIN CERTIFICATE-----MIIDNTCCAh2gAwIBAgIJAJgy1QReG9VmMA0GCSqGSIb3DQEBCwUAMBYxFDASBgNVBAMMC0Vhc3ktUlNBIENBMB4XDTIzMDgyNDA5NTgzN1oXDTMzMDgyMTA5NTgzN1owFjEUMBIGA1UEAwwLRWFzeS1SU0EgQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDLutXX/OaN1muPGKQV2uiEaZbQy9F0PptJxM3ZTHdyn+HuQ/3xqYHzz6hgIr2IjWtD5pqZXGMwIxbpNFKfPfJtwU5xpuUA6hxWV3yYtaXGsaLvFA0StL/NP5/3VgL1KpdcivjMejgVCwX5CkN97hsS6uk9Z/PUB9OEAWygeRHS8CYQ37PhXmDCh/1VeXWZDHJzxCD1fqoo2dB8MGFJjvg3FVQ0o8Gf0XE9cvj5dtk73f6AyiuYTeLLnD8vY8jbCVGeLcnoDnduK6y6ZLFOUHWfEPH+a1jDFLpXIby0oo3yBWcldzaKJMzfUP7HoczkDaUo5ykecDjxGkD8kpTmwyQPAgMBAAGjgYUwgYIwHQYDVR0OBBYEFPCYFNHxZ/eBKLRh009Bm08j8zurMEYGA1UdIwQ/MD2AFPCYFNHxZ/eBKLRh009Bm08j8zuroRqkGDAWMRQwEgYDVQQDDAtFYXN5LVJTQSBDQYIJAJgy1QReG9VmMAwGA1UdEwQFMAMBAf8wCwYDVR0PBAQDAgEGMA0GCSqGSIb3DQEBCwUAA4IBAQCYFaym5wCrlti+7p9MqLm4UF7pOmZQ2NamZjP1cQuMh2SgdJphddZEhEUO5NOQms8gMJsZ3sd7DIul+XkDcbhjKNNxD4oeXiITR8BgLsCkqtLStwWtOSLGxgHHWD3S+IBSM21A4RxyhE4VUr81i9XUM2lI7ml5RgCVTvbWosCnVFuXypaYs4/c1yJJ1I578M6oVWjahJOxENoeYYSI/V+2ySTtRQlW8HQEc4GhSeybhmXgrfLKhmHTVl/ZqZg5zp3kwBcnsrUQjunuLBLMMYSLPXhJQFU/10EMxv/9AAdBGiO3RL0G2qYc0JF11qVpmD9nwP9f/YR3Yvs7E2kwDViH-----END CERTIFICATE-----&lt;/ca&gt;cipher AES-256-CBCcomp-lzoverb 3auth-user-pass              #使用用户名密码登录openvpn服务器auth-nocache证书方式clientdev tunproto tcpremote 公网ipxxx.xxx.xxx.xxx 1194resolv-retry infinitenobindpersist-keypersist-tunca ca.crtcert client1.crt  #拷贝自服务端key client1.key   #拷贝自服务端 remote-cert-tls servercipher AES-256-CBCcomp-lzoverb 3</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;一、安装&quot;&gt;&lt;a href=&quot;#一、安装&quot; class=&quot;headerlink&quot; title=&quot;一、安装&quot;&gt;&lt;/a&gt;一、安装&lt;/h1&gt;&lt;h2 id=&quot;1-1、安装epel库和openvpn软件&quot;&gt;&lt;a href=&quot;#1-1、安装epel库和openvpn软件&quot; c</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>springboot学习</title>
     <link href="http://example.com/2023/08/01/springboot%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2023/08/01/springboot%E5%AD%A6%E4%B9%A0/</id>
     <published>2023-08-01T12:20:47.000Z</published>
-    <updated>2023-08-01T12:30:47.100Z</updated>
+    <updated>2023-08-02T02:27:33.604Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="创建基于springboot-项目"><a href="#创建基于springboot-项目" class="headerlink" title="创建基于springboot 项目"></a>创建基于springboot 项目</h2><h2 id="1-maven方式"><a href="#1-maven方式" class="headerlink" title="1.maven方式"></a>1.maven方式</h2><pre><code>pom.xml文件加入  &lt;parent&gt;        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;        &lt;version&gt;2.5.6&lt;/version&gt;   &lt;/parent&gt;         &lt;dependencies&gt;       &lt;!-- Web 依赖 --&gt;       &lt;dependency&gt;           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;           &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;       &lt;/dependency&gt;       &lt;!-- Web 依赖 --&gt;   &lt;/dependencies&gt;更新库就可以</code></pre><h2 id="2-通过官网的spring-initializr安装"><a href="#2-通过官网的spring-initializr安装" class="headerlink" title="2. 通过官网的spring initializr安装"></a>2. 通过官网的spring initializr安装</h2><pre><code>https://start.spring.io/  </code></pre><h2 id="3-idea旗舰版-新建时-可以选"><a href="#3-idea旗舰版-新建时-可以选" class="headerlink" title="3.idea旗舰版 新建时 可以选"></a>3.idea旗舰版 新建时 可以选</h2><h2 id="启动springboot"><a href="#启动springboot" class="headerlink" title="启动springboot"></a>启动springboot</h2><p> 在package创建类加上@SpringBootApplication</p><pre><code>package com.zysstudy;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;@SpringBootApplicationpublic class StartApplication &#123;    public static void main(String[] args) &#123;        SpringApplication.run(StartApplication.class,args);    &#125;&#125;</code></pre>]]></content>
+    <content type="html"><![CDATA[<h2 id="创建基于springboot-项目"><a href="#创建基于springboot-项目" class="headerlink" title="创建基于springboot 项目"></a>创建基于springboot 项目</h2><h2 id="1-maven方式"><a href="#1-maven方式" class="headerlink" title="1.maven方式"></a>1.maven方式</h2><pre><code>pom.xml文件加入  &lt;parent&gt;        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;        &lt;version&gt;2.5.6&lt;/version&gt;   &lt;/parent&gt;         &lt;dependencies&gt;       &lt;!-- Web 依赖 --&gt;       &lt;dependency&gt;           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;           &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;       &lt;/dependency&gt;       &lt;!-- Web 依赖 --&gt;   &lt;/dependencies&gt;更新库就可以</code></pre><h2 id="2-通过官网的spring-initializr安装"><a href="#2-通过官网的spring-initializr安装" class="headerlink" title="2. 通过官网的spring initializr安装"></a>2. 通过官网的spring initializr安装</h2><pre><code>https://start.spring.io/  </code></pre><h2 id="3-idea旗舰版-新建时-可以选"><a href="#3-idea旗舰版-新建时-可以选" class="headerlink" title="3.idea旗舰版 新建时 可以选"></a>3.idea旗舰版 新建时 可以选</h2><h2 id="Spring-Boot-应用启动类，"><a href="#Spring-Boot-应用启动类，" class="headerlink" title="Spring Boot 应用启动类，"></a>Spring Boot 应用启动类，</h2><p> 在package创建类加上@SpringBootApplication</p><pre><code>package com.zysstudy;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;@SpringBootApplicationpublic class StartApplication &#123;    public static void main(String[] args) &#123;        SpringApplication.run(StartApplication.class,args);    &#125;&#125;</code></pre>]]></content>
     
     
       
@@ -324,41 +374,6 @@ apt install supe</summary>
         server_name  [域名或者ip];
         index        index.php in</summary>
       
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>fail2ban软件使用</title>
-    <link href="http://example.com/2023/07/09/fail2ban%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/"/>
-    <id>http://example.com/2023/07/09/fail2ban%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/</id>
-    <published>2023-07-09T06:19:39.000Z</published>
-    <updated>2023-07-13T12:27:58.423Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><pre><code>CentOS 中使用fail2ban和firewalld限制IP拦截cc攻击</code></pre><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre><code>yum -y install fail2ban</code></pre><h1 id="新建规则"><a href="#新建规则" class="headerlink" title="新建规则"></a>新建规则</h1><pre><code>/etc/fail2ban/filter.d/  编写过滤规则的目录 vi /etc/fail2ban/filter.d/nginx-cc.conf[Definition]#failregex = &lt;HOST&gt;-.*-.*HTTP/1.*(404|301|503).*$failregex = ^&lt;HOST&gt; -.*&quot;(GET|POST).* HTTP\/.*$ignoreregex =</code></pre><h1 id="正则规则检查"><a href="#正则规则检查" class="headerlink" title="正则规则检查"></a>正则规则检查</h1><pre><code>fail2ban-regex /var/log/nginx/access.log &quot;&lt;HOST&gt; -.*- .*HTTP/1.* .* .*$&quot;  </code></pre><h1 id="根据配置文件检查"><a href="#根据配置文件检查" class="headerlink" title="根据配置文件检查"></a>根据配置文件检查</h1><pre><code>fail2ban-regex /var/log/nginx/access.log /etc/fail2ban/filter.d/nginx-cc.conf  </code></pre><h1 id="控制规则配置文件"><a href="#控制规则配置文件" class="headerlink" title="控制规则配置文件"></a>控制规则配置文件</h1><pre><code>[DEFAULT]ignoreip = 127.0.0.1/8  117.89.130.84 117.89.134.183/16  218.2.244.241/16 49.82.132.215/16 122.195.252.237/16 114.238.64.157/16 180.110.114.152/16#放行的ip 可以带网段ignorecommand =bantime  = 60#屏蔽时间，-1是永久屏蔽findtime  = 60#设置限定时间内超过 最大尝试次数 限制次数即被封锁maxretry = 5#最大尝试次数backend = auto#日志修改后检测机制usedns = warn#ssh链接加速logencoding = autoenabled = false[sshd]## 分类设置（基于 SSHD 服务的防护） enabled = true## 是否开启防护，false 为关闭 filter = sshd## 过滤规则 filter 名称，对应 filter.d 目录下的 sshd.conf  action   = iptables[name=SSH, port=22, protocol=tcp] #《###action = iptables[name=SSH, port=ssh, protocol=tcp] ## 动作参数#sendmail-whois[name=SSH, dest=you@example.com, sender=fail2ban@example.com,   sendername=&quot;Fail2Ban&quot;]## 邮件通知参数## 收件人地址           ## 发件人地址####》   这是个例子 logpath = /var/log/secure## 检测系统登陆日志文件 maxretry = 3## 最大尝试次数banaction=iptables-allportsbantime = 3600[nginx-cc] #过滤规则名称 下方就是 规律规则 相关 限制条件enabled = trueport=http,httpsfilter = nginx-ccfindtime = 1#1秒钟检查一次maxretry = 100#最多100个bantime = 3600#封锁ip的时间banaction=iptables-multiport#匹配的哪些日志文件logpath = /var/log/nginx/*access.log          /var/log/nginx/access.log</code></pre><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><pre><code>#启动systemctl start fail2ban#停止systemctl stop fail2ban#查看具体规则限制了哪些ipfail2ban-client status 规则名称示例：   fail2ban-client status nginx-cc#解封某条过滤规则封锁的ipfail2ban-client set nginx-cc unbanip  112.84.237.102</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;CentOS 中使用fail2ban和firewalld限制IP拦截cc攻击
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h1 id=&quot;安</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>web安全</title>
-    <link href="http://example.com/2023/07/09/web%E5%AE%89%E5%85%A8/"/>
-    <id>http://example.com/2023/07/09/web%E5%AE%89%E5%85%A8/</id>
-    <published>2023-07-09T06:16:41.000Z</published>
-    <updated>2023-07-13T06:20:53.705Z</updated>
-    
     
     
     
