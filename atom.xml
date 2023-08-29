@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-08-29T07:50:18.078Z</updated>
+  <updated>2023-08-29T07:57:04.116Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://example.com/2023/08/29/%E6%90%AD%E5%BB%BAnps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>http://example.com/2023/08/29/%E6%90%AD%E5%BB%BAnps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</id>
     <published>2023-08-29T07:19:19.000Z</published>
-    <updated>2023-08-29T07:50:18.078Z</updated>
+    <updated>2023-08-29T07:57:04.116Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>内网穿透的方式有很多种，什么Frp、Ngrok、NPS、蒲公英等等，</p><h1 id="NPS简介"><a href="#NPS简介" class="headerlink" title="NPS简介"></a>NPS简介</h1><p>nps是一款轻量级、高性能、功能强大的内网穿透代理服务器。目前支持tcp、udp流量转发，<br>可支持任何tcp、udp上层协议（访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析等等……），<br>此外还支持内网http代理、内网socks5代理、p2p等，并带有功能强大的web管理端</p><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><pre><code>配置docker阿里云 镜像yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo    yum install docker-ce docker-ce-cli containerd.io</code></pre><h1 id="安装nps"><a href="#安装nps" class="headerlink" title="安装nps"></a>安装nps</h1><pre><code>拉取镜像docker pull ffdfgdfg/nps添加配置文件创建nps挂载文件目录(自己随意设置)mkdir -p /docker/nps/conf配置下载地址 https://github.com/ehang-io/nps/blob/master/conf修改刚下载的conf文件夹里的/docker/nps/conf/nps.conf文件：web_host=a.o.com   #修改为你的域名admin.nps.youdomain.comweb_username=admin web_password=123   #修改为一个强密码，毕竟是放在公网上的服务运行npsdocker run -d   --restart=always --name nps --net=host -v /docker/nps/conf:/conf ffdfgdfg/nps</code></pre><h1 id="客户端安装npc"><a href="#客户端安装npc" class="headerlink" title="客户端安装npc"></a>客户端安装npc</h1><pre><code>拉取npc镜像docker pull ffdfgdfg/npcdocker run -d --restart=always --name npc-227 --net=host ffdfgdfg/npc -server=111.231.69.227:8024 -vkey=dle31e3ry1yl616p【参数 -server 服务端获取  -vkey 服务端获取】 </code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>内网穿透的方式有很多种，什么Frp、Ngrok、NPS、蒲公英等等，</p><h1 id="NPS简介"><a href="#NPS简介" class="headerlink" title="NPS简介"></a>NPS简介</h1><p>nps是一款轻量级、高性能、功能强大的内网穿透代理服务器。目前支持tcp、udp流量转发，<br>可支持任何tcp、udp上层协议（访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析等等……），<br>此外还支持内网http代理、内网socks5代理、p2p等，并带有功能强大的web管理端</p><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><pre><code>配置docker阿里云 镜像yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo    yum install docker-ce docker-ce-cli containerd.io</code></pre><h1 id="安装nps"><a href="#安装nps" class="headerlink" title="安装nps"></a>安装nps</h1><pre><code>拉取镜像docker pull ffdfgdfg/nps添加配置文件创建nps挂载文件目录(自己随意设置)mkdir -p /docker/nps/conf配置下载地址 https://github.com/ehang-io/nps/blob/master/conf修改刚下载的conf文件夹里的/docker/nps/conf/nps.conf文件：web_host=a.o.com   #修改为你的域名admin.nps.youdomain.comweb_username=admin web_password=123   #修改为一个强密码，毕竟是放在公网上的服务web_port = 8090    访问的端口号web_ip=0.0.0.0运行npsdocker run -d   --restart=always --name nps --net=host -v /docker/nps/conf:/conf ffdfgdfg/nps</code></pre><h1 id="客户端安装npc"><a href="#客户端安装npc" class="headerlink" title="客户端安装npc"></a>客户端安装npc</h1><pre><code>拉取npc镜像docker pull ffdfgdfg/npcdocker run -d --restart=always --name npc-227 --net=host ffdfgdfg/npc -server=111.231.69.227:8024 -vkey=dle31e3ry1yl616p【参数 -server 服务端获取  -vkey 服务端获取】 </code></pre><h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><pre><code>http://ip/8090  账号密码 配置文件中   </code></pre>]]></content>
     
     
       

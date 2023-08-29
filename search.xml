@@ -2330,6 +2330,9 @@ mkdir -p /docker/nps/conf
 web_host=a.o.com   #修改为你的域名admin.nps.youdomain.com
 web_username=admin 
 web_password=123   #修改为一个强密码，毕竟是放在公网上的服务
+web_port = 8090    访问的端口号
+web_ip=0.0.0.0
+
 
 运行nps
 docker run -d   --restart=always --name nps --net=host -v /docker/nps/conf:/conf ffdfgdfg/nps
@@ -2340,6 +2343,8 @@ docker pull ffdfgdfg/npc
 
 docker run -d --restart=always --name npc-227 --net=host ffdfgdfg/npc -server=111.231.69.227:8024 -vkey=dle31e3ry1yl616p
 【参数 -server 服务端获取  -vkey 服务端获取】 
+</code></pre>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><pre><code>http://ip/8090  账号密码 配置文件中   
 </code></pre>
 ]]></content>
   </entry>
