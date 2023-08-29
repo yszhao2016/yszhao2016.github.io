@@ -1,3 +1,4 @@
+http://example.com/2022/04/17/mysql-server/
 http://example.com/2023/08/28/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/
 http://example.com/2023/08/28/%E6%90%AD%E5%BB%BAopenvpn/
 http://example.com/2023/08/01/springboot%E5%AD%A6%E4%B9%A0/
@@ -22,7 +23,6 @@ http://example.com/2023/07/13/hj212%E7%8E%AF%E4%BF%9D%E5%8D%8F%E8%AE%AE-2007/
 http://example.com/2023/07/13/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A01/
 http://example.com/2023/07/13/nginx-vhost-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E6%A8%A1%E7%89%88/
 http://example.com/2023/07/09/openEuler%E6%90%AD%E5%BB%BAlnmp/
-http://example.com/2022/04/17/mysql-server/
 http://example.com/2023/03/16/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA/
 http://example.com/2023/07/09/docker%E5%AD%A6%E4%B9%A03/
 http://example.com/2023/07/09/ubuntn%E6%90%AD%E5%BB%BAlnmp%E7%8E%AF%E5%A2%83/
