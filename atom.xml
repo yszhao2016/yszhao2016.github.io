@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-08-28T07:19:29.037Z</updated>
+  <updated>2023-08-29T07:50:18.078Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建nps内网穿透</title>
+    <link href="http://example.com/2023/08/29/%E6%90%AD%E5%BB%BAnps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    <id>http://example.com/2023/08/29/%E6%90%AD%E5%BB%BAnps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</id>
+    <published>2023-08-29T07:19:19.000Z</published>
+    <updated>2023-08-29T07:50:18.078Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>内网穿透的方式有很多种，什么Frp、Ngrok、NPS、蒲公英等等，</p><h1 id="NPS简介"><a href="#NPS简介" class="headerlink" title="NPS简介"></a>NPS简介</h1><p>nps是一款轻量级、高性能、功能强大的内网穿透代理服务器。目前支持tcp、udp流量转发，<br>可支持任何tcp、udp上层协议（访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析等等……），<br>此外还支持内网http代理、内网socks5代理、p2p等，并带有功能强大的web管理端</p><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><pre><code>配置docker阿里云 镜像yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo    yum install docker-ce docker-ce-cli containerd.io</code></pre><h1 id="安装nps"><a href="#安装nps" class="headerlink" title="安装nps"></a>安装nps</h1><pre><code>拉取镜像docker pull ffdfgdfg/nps添加配置文件创建nps挂载文件目录(自己随意设置)mkdir -p /docker/nps/conf配置下载地址 https://github.com/ehang-io/nps/blob/master/conf修改刚下载的conf文件夹里的/docker/nps/conf/nps.conf文件：web_host=a.o.com   #修改为你的域名admin.nps.youdomain.comweb_username=admin web_password=123   #修改为一个强密码，毕竟是放在公网上的服务运行npsdocker run -d   --restart=always --name nps --net=host -v /docker/nps/conf:/conf ffdfgdfg/nps</code></pre><h1 id="客户端安装npc"><a href="#客户端安装npc" class="headerlink" title="客户端安装npc"></a>客户端安装npc</h1><pre><code>拉取npc镜像docker pull ffdfgdfg/npcdocker run -d --restart=always --name npc-227 --net=host ffdfgdfg/npc -server=111.231.69.227:8024 -vkey=dle31e3ry1yl616p【参数 -server 服务端获取  -vkey 服务端获取】 </code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;内网穿透的方式有很多种，什么Frp、Ngrok、NPS、蒲公英等等，&lt;/p&gt;
+&lt;h1 id=&quot;NPS简介&quot;&gt;&lt;a href=&quot;#NPS简介&quot;</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>vmvare-esxi虚拟机扩容</title>
@@ -350,30 +371,6 @@ apt install supe</summary>
     <published>2023-07-13T11:57:19.000Z</published>
     <updated>2023-07-13T11:57:19.015Z</updated>
     
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>nginx-vhost-安全配置模版</title>
-    <link href="http://example.com/2023/07/13/nginx-vhost-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E6%A8%A1%E7%89%88/"/>
-    <id>http://example.com/2023/07/13/nginx-vhost-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E6%A8%A1%E7%89%88/</id>
-    <published>2023-07-13T11:11:30.000Z</published>
-    <updated>2023-07-13T11:12:24.875Z</updated>
-    
-    <content type="html"><![CDATA[<p>#nginx-vhost-安全配置模版</p><pre><code>server&#123;        listen 443 ssl ;        server_name  [域名或者ip];        index        index.php index.html index.htm;        root [项目路径];        access_log  /var/log/nginx/[项目名称].access.log;        error_log   /var/log/nginx/[项目名称].error.log;        #证书文件名称        ssl_certificate [证书路径 公钥];        #私钥文件名称        ssl_certificate_key [证书路径 私钥];        ssl_session_timeout 5m;        #请按照以下协议配置        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;        #请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;        ssl_prefer_server_ciphers on        #允许cookie        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;        #安全头        add_header X-Xss-header &quot;1;mode=block&quot;;        add_header Set-Cookie &quot;HttpOnly&quot;;        add_header Set-Cookie &quot;Secure&quot;;        add_header X-Frame-Options &quot;SAMEORIGIN&quot;;        location ~ \.(json|lock|git)$ &#123;                 deny all;        &#125;        location ~ ^/(uploads|assets)/.*\.(php|php5|jsp|shtml)$ &#123;            deny all;        &#125;        location ~ .*\.(txt|doc|pdf|rar|gz|zip|docx|exe|xlsx|ppt|pptx)$ &#123;            add_header Content-Disposition attachment;        &#125;        location =/assets/libs/bootstrap/Gemfile &#123;                       return 404;        &#125;        location ~ /\. &#123;            deny  all;        &#125;        location / &#123;                proxy_cookie_path / &quot;/; httponly; secure; SameSite=None&quot;;                if (!-e $request_filename) &#123;                        rewrite  ^(.*)$  /index.php?s=/$1  last;                        break;                &#125;        &#125;        location ~ \.php(.*)$ &#123;                fastcgi_pass   [访问php方式];                fastcgi_index  index.php;                fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;                fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;                fastcgi_param  PATH_INFO  $fastcgi_path_info;                fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;                include        fastcgi_params;        &#125;        #timeout        large_client_header_buffers 4 16k;        client_max_body_size 180m;        client_body_buffer_size 128k;        fastcgi_connect_timeout 600;        fastcgi_read_timeout 600;        fastcgi_send_timeout 600;        fastcgi_buffer_size 128k;        fastcgi_buffers   2 256k;        fastcgi_busy_buffers_size 256k;        fastcgi_temp_file_write_size 256k;        proxy_read_timeout  240s;&#125;</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;#nginx-vhost-安全配置模版&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;server&amp;#123;
-        listen 443 ssl ;
-        server_name  [域名或者ip];
-        index        index.php in</summary>
-      
     
     
     
