@@ -1,3 +1,5 @@
+http://example.com/2023/07/29/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A02/
+http://example.com/2023/07/13/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A01/
 http://example.com/2023/08/29/%E6%90%AD%E5%BB%BAnps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/
 http://example.com/2022/04/17/mysql-server/
 http://example.com/2023/08/28/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/
@@ -6,7 +8,6 @@ http://example.com/2023/08/01/springboot%E5%AD%A6%E4%B9%A0/
 http://example.com/2023/08/01/%E5%8D%87%E7%BA%A7openssh/
 http://example.com/2023/07/29/nginx%E4%B9%8Blocation/
 http://example.com/2023/07/27/nginx%E9%85%8D%E7%BD%AE/
-http://example.com/2023/07/29/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A01-1/
 http://example.com/2023/02/08/java%E5%AD%A6%E4%B9%A01/
 http://example.com/2023/07/26/linux-iptables%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/
 http://example.com/2022/01/08/git%E6%80%BB%E7%BB%93/
@@ -21,7 +22,6 @@ http://example.com/2023/07/19/jenkins-%E5%8F%91%E5%B8%83php%E9%A1%B9%E7%9B%AE/
 http://example.com/2023/07/19/linux%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E4%BB%BB%E5%8A%A1/
 http://example.com/2023/07/09/fail2ban%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/
 http://example.com/2023/07/13/hj212%E7%8E%AF%E4%BF%9D%E5%8D%8F%E8%AE%AE-2007/
-http://example.com/2023/07/13/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A01/
 http://example.com/2023/07/13/nginx-vhost-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E6%A8%A1%E7%89%88/
 http://example.com/2023/07/09/openEuler%E6%90%AD%E5%BB%BAlnmp/
 http://example.com/2023/03/16/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA/
