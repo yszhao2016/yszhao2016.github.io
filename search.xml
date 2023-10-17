@@ -2444,6 +2444,191 @@ docker run -d --restart=always --name npc-227 --net=host ffdfgdfg/npc -server=11
   <entry>
     <title>shell脚本学习2</title>
     <url>/2023/07/29/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A02/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>搜索出当前目录下包含某个字符串的文件  并替换文件中的xx字符串为bb字符串<br>    sed -i “s/xx/bb/g” <code>grep -rl &quot;xx ./</code><br>    sed -i “s/http://121.229.56.251:8082/https://zkzp.jyrcfzjt.com:8082/g” <code>grep -rl &quot;http://121.229.56.251:8082&quot; ./</code></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>php扩展安装</title>
+    <url>/2023/10/16/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85-1/</url>
+    <content><![CDATA[<p>#下载相应的扩展并phpize</p>
+<pre><code>到扩展目录下
+执行phpize
+
+1.phpize 不是系统命令时候
+
+find / -name phpize 
+
+后找到相应版本的phpize
+
+2.报错can‘t find PHP headers in path/php
+
+yum install -y php-devel
+</code></pre>
+<h1 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h1><p> 项目目录下<br> 执行 ./configure</p>
+<p> 1.报错：configure: error: Cannot find php-config. Please use –with-php-config=PATH</p>
+<p> 执行 find / -name php-config</p>
+<p> 找到相应版本php的 php-config</p>
+<p> ./configure –with-php-config=【php-config路径】</p>
+<h1 id="make-amp-amp-make-install"><a href="#make-amp-amp-make-install" class="headerlink" title="make &amp;&amp; make install"></a>make &amp;&amp; make install</h1>]]></content>
+  </entry>
+  <entry>
+    <title>redis基本数据结构</title>
+    <url>/2023/09/26/redis%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><pre><code>Redis五大数据类型：String、Hash、List、Set、Sorted set
+</code></pre>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>String类型的最大能存储512M 应用场景 【缓存】</p>
+<pre><code>1.SET key value [EX seconds] [PX milliseconds] [NX|XX]
+
+EX和PX参数可选，用于设置键的过期时间，单位分别为秒和毫秒
+
+NX表示只在键不存在时创建，XX表示只在键已存在时执行操作。
+
+将键 &quot;abc&quot; 设置为值 &quot;123&quot; 并设置过期时间为 12 秒
+
+    set abc 123 ex 12
+
+2. MSET key1 value1 [key2 value2 ...]  设置多条
+     mset a 1 b 2 
+       
+3.EXPIRE key seconds    设置过期时间
+
+4.SETEX key seconds value 可用于一次设置带有过期时间的键值对
+
+select命令切换数据库，分库的作用主要用来业务分片：
+dbsize查看当前数据库的key的数量
+flushdb清除当前库所有key(当前库)：
+</code></pre>
+<h1 id="Hash-哈希表"><a href="#Hash-哈希表" class="headerlink" title="Hash(哈希表)"></a>Hash(哈希表)</h1><pre><code>hget：通过key值，从hash里取对应的value
+
+hset：往hash里，添加key-value
+
+hmset
+hmget：一次性获取多个key的value
+
+hmset user:2 name:kati age 28 sex woman
+
+hmget user:2 name age sex
+</code></pre>
+<h1 id="List-列表"><a href="#List-列表" class="headerlink" title="List(列表)"></a>List(列表)</h1><pre><code>lpush：从列表List的左边插入一个元素。
+
+lpop：从列表List的左边移出一个元素。
+
+rpush：从列表List的右边插入一个元素。
+
+rpop：从列表List的右边移出一个元素。
+
+llen：打印当前列表List中的元素个数。
+</code></pre>
+<h1 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set(集合)"></a>Set(集合)</h1><h1 id="Sorted-set-有序集合"><a href="#Sorted-set-有序集合" class="headerlink" title="Sorted set(有序集合)"></a>Sorted set(有序集合)</h1>]]></content>
+  </entry>
+  <entry>
+    <title>redis基础</title>
+    <url>/2023/09/25/redis%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="redis-简介"><a href="#redis-简介" class="headerlink" title="redis 简介"></a>redis 简介</h1><p>Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用<br>Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储<br>Redis支持数据的备份，即master-slave模式的数据备份</p>
+<p>Redis是单进程的</p>
+<h1 id="redis-持久化方案"><a href="#redis-持久化方案" class="headerlink" title="redis 持久化方案"></a>redis 持久化方案</h1><h2 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h2><p>三种写回策略<br>always，同步写回，每个子命令执行完，都立即将日志写回磁盘。</p>
+<p>everysec，每个命令执行完，只是先把日志写到AOF内存缓冲区，每隔一秒同步到磁盘。</p>
+<p>no：只是先把日志写到AOF内存缓冲区，有操作系统去决定何时写入磁盘</p>
+<p>数据保证：我们可以设置fsync策略，一般默认是everysec，也可以设置每次写入追加，<br>所以即使服务死掉了，也最多丢失一秒数据</p>
+<h2 id="RDB持久化"><a href="#RDB持久化" class="headerlink" title="RDB持久化"></a>RDB持久化</h2><p>体积更小：相同的数据量rdb数据比aof的小，因为rdb是紧凑型文件。<br>恢复更快：因为rdb是数据的快照，基本上就是数据的复制，不用重新读取再写入内存。<br>性能更高:父进程在保存rdb时候只需要fork一个子进程，无需父进程的进行其他io操作，也保证了服务器的性能。</p>
+<h2 id="如何选择RDB和AOF"><a href="#如何选择RDB和AOF" class="headerlink" title="如何选择RDB和AOF"></a>如何选择RDB和AOF</h2><p>如果数据不能丢失，RDB和AOF混用<br>如果只作为缓存使用，可以承受几分钟的数据丢失的话，可以只使用RDB。<br>如果只使用AOF，优先使用everysec的写回策略。</p>
+<h1 id="RDB-快照-持久化-配置"><a href="#RDB-快照-持久化-配置" class="headerlink" title="RDB(快照)持久化 配置"></a>RDB(快照)持久化 配置</h1><pre><code>#   900秒（15分钟）内至少1个key值改变（则进行数据库保存--持久化）  
+#   300秒（5分钟）内至少10个key值改变（则进行数据库保存--持久化）  
+#   60秒（1分钟）内至少10000个key值改变（则进行数据库保存--持久化） 
+save 900 1  
+save 300 10  
+save 60 10000 
+
+
+#在默认情况下，如果RDB快照持久化操作被激活（至少一个条件被激活）并且持久化操作失败，Redis则会停止接受更新操作。  
+#这样会让用户了解到数据没有被正确的存储到磁盘上。否则没人会注意到这个问题，可能会造成灾难。  
+#  
+#如果后台存储（持久化）操作进程再次工作，Redis会自动允许更新操作。  
+#  
+#然而，如果你已经恰当的配置了对Redis服务器的监视和备份，你也许想关掉这项功能。  
+#如此一来即使后台保存操作出错,redis也仍然可以继续像平常一样工作。  
+stop-writes-on-bgsave-error yes
+
+#是否压缩数据
+rdbcompression yes
+#没有校验的RDB文件会有一个0校验位，来告诉加载代码跳过校验检查。  
+rdbchecksum yes 
+# 导出数据库的文件名称  
+dbfilename dump.rdb
+
+dir ./
+</code></pre>
+<h1 id="AOF-Append-Only-File-日志-配置"><a href="#AOF-Append-Only-File-日志-配置" class="headerlink" title="AOF(Append Only File 日志)  配置"></a>AOF(Append Only File 日志)  配置</h1><pre><code>appendonly yes
+appendfilename &quot;appendonly_6379.aof&quot;
+appendfsync everysec
+1、不适用fsync模式，仅仅使用操作系统的写数据策略；（no）
+2、总是启动用fsync；（always） 
+3、每秒同步一次。（everyse）
+
+#在rewrite的时候不进行fsync，避免响应过慢。为了避免丢数据建议设置成no
+#rewrite操作时，appendfsync会被阻塞。如果当前AOF文件很大，
+#那么相应的rewrite时间会变长，appendfsync被阻塞的时间也会更长
+no-appendfsync-on-rewrite no
+
+#AOF文件如果不执行rewrite，文件会不断的增长。
+#可以设置达到一定量就开始执行rewrite，避免磁盘耗尽
+auto-aof-rewrite-percentage 100
+
+#过最后一次rewrite文件大小的百分比，如果设置为0表示不自动aof。
+#如果数据量比较小，设置百分比就会一直执行rewrite，消耗信息，这时候就可以设置最小rewrite的大小。
+auto-aof-rewrite-min-size 64mb
+
+#如果redis异常推出，会导致aof不完整，
+#如果设置为yes，启动时就会加载aof异常文件，如果设置为no，就不会加载，启动失败。
+aof-load-truncated yes
+
+#启动的时候使用rdb文件会加载数据比较快，再执行aof操作，可以减少数据加载时间
+aof-use-rdb-preamble yes
+</code></pre>
+<h1 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h1><pre><code>redis默认是没有使用守护进程进行运行。可以通过daemonize参数进行设置  
+daemonize yes
+loglevel notice
+requirepass  密码
+
+#有限时间内,移除那些TTL值最小的key,ttl最小代表最近要过期
+maxmemory-policy  allkeys-lru
+
+设置在执行淘汰策略时，要考虑的样本数量。
+较大的样本数可以提高淘汰算法的准确性，但也会增加CPU负载。
+默认值为5，您可以根据实际情况进行调整
+maxmemory-samples 10
+
+noeviction(默认策略)：对于写请求不再提供服务，直接返回错误（DEL请求和部分特殊请求除外）
+allkeys-lru：从所有key中使用LRU算法进行淘汰
+volatile-lru：从设置了过期时间的key中使用LRU算法进行淘汰
+allkeys-random：从所有key中随机淘汰数据
+volatile-random：从设置了过期时间的key中随机淘汰
+volatile-ttl：在设置了过期时间的key中，根据key的过期时间进行淘汰，越早过期的越优先被淘汰
+
+#用于设置慢查询的评定时间，也就是说超过此配置项的命令，
+将会被当成慢操作记录在慢查询日志中，
+它执行单位是微秒 (1 秒等于 1000000 微秒)
+slowlog-log-slower-than:100
+
+#用来配置慢查询日志的最大记录数
+slowlog-max-len:100
+
+#表示当 Redis 运行内存超过最大内存时，是否开启 lazy free 机制删除
+lazyfree-lazy-eviction no 
+
+#表示设置了过期时间的键值，当过期之后是否开启 lazy free 机制删除
+lazyfree-lazy-expire no 
+
+#有些指令在处理已存在的键时，会带有一个隐式的 del 键的操作，
+比如rename(修改key的名称) 命令，当目标键已存在，Redis 会先删除目标键，如果这些目标键是一个 big key，
+就会造成阻塞删除的问题，此配置表示在这种场景中是否开启 lazy free 机制删除
+lazyfree-lazy-server-del no 
+
+#针对 slave(从节点) 进行全量数据同步，slave 在加载 master 的 RDB 文件前，
+会运行 flushall 来清理自己的数据，
+它表示此时是否开启 lazy free 机制删除
+slave-lazy-flush no
+</code></pre>
+]]></content>
   </entry>
 </search>
