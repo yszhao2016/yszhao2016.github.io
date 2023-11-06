@@ -32,7 +32,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>docker学习2</title>
+    <title>docker学习2-DockerFile</title>
     <url>/2023/07/08/docker%E5%AD%A6%E4%B9%A02/</url>
     <content><![CDATA[<h1 id="Dockerfile-学习"><a href="#Dockerfile-学习" class="headerlink" title="Dockerfile 学习"></a>Dockerfile 学习</h1><h2 id="相关语法"><a href="#相关语法" class="headerlink" title="相关语法"></a>相关语法</h2><pre><code>FROM  scratch
 ADD hello /
@@ -44,16 +44,43 @@ FROM centos    //使用  base image
 
 FROM ubuntu:14.4
 </code></pre>
-<h2 id="LABEL语法"><a href="#LABEL语法" class="headerlink" title="LABEL语法"></a>LABEL语法</h2><pre><code>LABEL maintainer=&quot;xiaoquwl@gmail.com&quot;
+<h2 id="LABEL语法（类似注释作用）"><a href="#LABEL语法（类似注释作用）" class="headerlink" title="LABEL语法（类似注释作用）"></a>LABEL语法（类似注释作用）</h2><pre><code>LABEL maintainer=&quot;xiaoquwl@gmail.com&quot;
 LABEL version=&quot;1.0&quot;
 LABEL description=&quot;This is description&quot;
-注：Metadata不可少
+注：Metadata(元数据)不可少
+
+示例：
+LABEL org.opencontainers.image.authors=&quot;yeasy&quot;
+LABEL org.opencontainers.image.documentation=&quot;https://yeasy.gitbooks.io&quot;
 </code></pre>
 <h2 id="RUN-语法"><a href="#RUN-语法" class="headerlink" title="RUN 语法"></a>RUN 语法</h2><pre><code>RUN yum update &amp;&amp; yum install -y vim \
 python-dev 
 注：反斜杠换行
 
 RUN
+</code></pre>
+<h2 id="WORKDIR-语法"><a href="#WORKDIR-语法" class="headerlink" title="WORKDIR 语法"></a>WORKDIR 语法</h2><pre><code>设置工作目录，目录不存在，会自动创建
+
+示列：
+WORKDIR /test
+WORKDIR abc
+这样就工作在/test/abc目录下
+注：
+    1、RUN cd 能实现类似效果 但不推荐
+    2、目录尽量示绝对目录
+</code></pre>
+<h2 id="ADD-amp-amp-COPY-语法"><a href="#ADD-amp-amp-COPY-语法" class="headerlink" title="ADD&amp;&amp;COPY 语法"></a>ADD&amp;&amp;COPY 语法</h2><pre><code>功能类似添加文件到容器
+ADD 有解压缩功能
+
+示列：
+ ADD test.tar.gz /app/web
+</code></pre>
+<h2 id="ENV-语法"><a href="#ENV-语法" class="headerlink" title="ENV 语法"></a>ENV 语法</h2><pre><code>定义变量
+示列：
+    ENV  MYSQL_VERSION 5.6
+    RUM yum install mysql_server=&quot;$&#123;MYSQL_VERSION&#125;&quot;
+</code></pre>
+<h2 id="VOLUME-amp-amp-EXPOSE"><a href="#VOLUME-amp-amp-EXPOSE" class="headerlink" title="VOLUME&amp;&amp;EXPOSE"></a>VOLUME&amp;&amp;EXPOSE</h2><pre><code>存储和网络
 </code></pre>
 ]]></content>
   </entry>
@@ -152,6 +179,8 @@ fail2ban-client set nginx-cc unbanip  112.84.237.102
 <h3 id="查看运行中的容器container"><a href="#查看运行中的容器container" class="headerlink" title="查看运行中的容器container"></a>查看运行中的容器container</h3><pre><code>docker ps      展示 正在运行的
 
 docker ps -a   所有  启动与未启动的 
+
+docker ps -q
 </code></pre>
 <h3 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h3><pre><code>docker run 容器名称
 
@@ -2469,7 +2498,10 @@ yum install -y php-devel
 <p> 执行 find / -name php-config</p>
 <p> 找到相应版本php的 php-config</p>
 <p> ./configure –with-php-config=【php-config路径】</p>
-<h1 id="make-amp-amp-make-install"><a href="#make-amp-amp-make-install" class="headerlink" title="make &amp;&amp; make install"></a>make &amp;&amp; make install</h1>]]></content>
+<h1 id="make-amp-amp-make-install"><a href="#make-amp-amp-make-install" class="headerlink" title="make &amp;&amp; make install"></a>make &amp;&amp; make install</h1><pre><code>执行成功后会提示.so文件的路径
+</code></pre>
+<p> #配置php.ini</p>
+]]></content>
   </entry>
   <entry>
     <title>redis基本数据结构</title>
@@ -2628,6 +2660,62 @@ lazyfree-lazy-server-del no
 会运行 flushall 来清理自己的数据，
 它表示此时是否开启 lazy free 机制删除
 slave-lazy-flush no
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>Linux之LVM(逻辑卷管理)</title>
+    <url>/2023/10/19/Linux%E4%B9%8BLVM-%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>docker学习4-网络</title>
+    <url>/2023/10/26/docker%E5%AD%A6%E4%B9%A04-%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<h1 id="原理linux-network-namespace"><a href="#原理linux-network-namespace" class="headerlink" title="原理linux network namespace"></a>原理linux network namespace</h1><h1 id="docker-bridge-网络"><a href="#docker-bridge-网络" class="headerlink" title="docker  bridge 网络"></a>docker  bridge 网络</h1><h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><h2 id="自定义-docker-网络"><a href="#自定义-docker-网络" class="headerlink" title="自定义 docker 网络"></a>自定义 docker 网络</h2><h1 id="docker端口映射"><a href="#docker端口映射" class="headerlink" title="docker端口映射"></a>docker端口映射</h1><h1 id="docker-host-网络"><a href="#docker-host-网络" class="headerlink" title="docker host 网络"></a>docker host 网络</h1>]]></content>
+  </entry>
+  <entry>
+    <title>mysql的常用应用</title>
+    <url>/2023/10/17/mysql%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<p>#mysql忘记密码,重置密码</p>
+<p>1.修改my.cnf</p>
+<p>添加</p>
+<pre><code>--skip-grant-tables
+</code></pre>
+<p>2.进入数据</p>
+<pre><code>执行
+use mysql;
+mysql&gt; update user set password=password(&#39;123&#39;) where user=&#39;root&#39; and host=&#39;localhost&#39;;
+mysql&gt; flush privileges;
+</code></pre>
+<p>#mysql导出、导入数据命令</p>
+<p>导出<br>mysqldump -u &lt;用户名&gt; -p&lt;密码&gt; &lt;数据库名&gt; &gt; &lt;输出文件路径&gt;</p>
+<p>示例</p>
+<pre><code> mysqldump  -u root -p wastewater.iguanwei.com &gt;bak.sql
+</code></pre>
+<p>导入</p>
+<pre><code>方法一：
+mysql -u用户名 -p 数据库名 &lt; 123.sql
+方法二：
+source 123.sql;
+</code></pre>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
+  </entry>
+  <entry>
+    <title>wordpress相关</title>
+    <url>/2023/11/01/wordpress%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="wordpress-迁移后还是访问之前的域名"><a href="#wordpress-迁移后还是访问之前的域名" class="headerlink" title="wordpress 迁移后还是访问之前的域名"></a>wordpress 迁移后还是访问之前的域名</h1><pre><code>1.找到 前缀_options 表修改 siteurl  home字段 
+2.或者登录后台修改
+</code></pre>
+<h1 id="wordpress-迁移后栏目打开是404"><a href="#wordpress-迁移后栏目打开是404" class="headerlink" title="wordpress 迁移后栏目打开是404"></a>wordpress 迁移后栏目打开是404</h1><pre><code>nginx加上如下配置
+
+location / &#123;
+ try_files $uri $uri/ /index.php?$args;
+&#125;
+# Add trailing slash to */wp-admin requests.
+rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+</code></pre>
+<h1 id="修改忘记密码-修改"><a href="#修改忘记密码-修改" class="headerlink" title="修改忘记密码 修改"></a>修改忘记密码 修改</h1><pre><code>修改 前缀_users 表    user_pass 字段 
+MD5 加密
 </code></pre>
 ]]></content>
   </entry>

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-10-16T11:02:58.723Z</updated>
+  <updated>2023-11-01T03:13:31.043Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,13 +17,94 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>wordpress相关</title>
+    <link href="http://example.com/2023/11/01/wordpress%E7%9B%B8%E5%85%B3/"/>
+    <id>http://example.com/2023/11/01/wordpress%E7%9B%B8%E5%85%B3/</id>
+    <published>2023-11-01T03:01:22.000Z</published>
+    <updated>2023-11-01T03:13:31.043Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="wordpress-迁移后还是访问之前的域名"><a href="#wordpress-迁移后还是访问之前的域名" class="headerlink" title="wordpress 迁移后还是访问之前的域名"></a>wordpress 迁移后还是访问之前的域名</h1><pre><code>1.找到 前缀_options 表修改 siteurl  home字段 2.或者登录后台修改</code></pre><h1 id="wordpress-迁移后栏目打开是404"><a href="#wordpress-迁移后栏目打开是404" class="headerlink" title="wordpress 迁移后栏目打开是404"></a>wordpress 迁移后栏目打开是404</h1><pre><code>nginx加上如下配置location / &#123; try_files $uri $uri/ /index.php?$args;&#125;# Add trailing slash to */wp-admin requests.rewrite /wp-admin$ $scheme://$host$uri/ permanent;</code></pre><h1 id="修改忘记密码-修改"><a href="#修改忘记密码-修改" class="headerlink" title="修改忘记密码 修改"></a>修改忘记密码 修改</h1><pre><code>修改 前缀_users 表    user_pass 字段 MD5 加密</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;wordpress-迁移后还是访问之前的域名&quot;&gt;&lt;a href=&quot;#wordpress-迁移后还是访问之前的域名&quot; class=&quot;headerlink&quot; title=&quot;wordpress 迁移后还是访问之前的域名&quot;&gt;&lt;/a&gt;wordpress 迁移后还是访问之前的</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>docker学习4-网络</title>
+    <link href="http://example.com/2023/10/26/docker%E5%AD%A6%E4%B9%A04-%E7%BD%91%E7%BB%9C/"/>
+    <id>http://example.com/2023/10/26/docker%E5%AD%A6%E4%B9%A04-%E7%BD%91%E7%BB%9C/</id>
+    <published>2023-10-26T13:56:52.000Z</published>
+    <updated>2023-11-01T02:48:52.627Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="原理linux-network-namespace"><a href="#原理linux-network-namespace" class="headerlink" title="原理linux network namespace"></a>原理linux network namespace</h1><h1 id="docker-bridge-网络"><a href="#docker-bridge-网络" class="headerlink" title="docker  bridge 网络"></a>docker  bridge 网络</h1><h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><h2 id="自定义-docker-网络"><a href="#自定义-docker-网络" class="headerlink" title="自定义 docker 网络"></a>自定义 docker 网络</h2><h1 id="docker端口映射"><a href="#docker端口映射" class="headerlink" title="docker端口映射"></a>docker端口映射</h1><h1 id="docker-host-网络"><a href="#docker-host-网络" class="headerlink" title="docker host 网络"></a>docker host 网络</h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;原理linux-network-namespace&quot;&gt;&lt;a href=&quot;#原理linux-network-namespace&quot; class=&quot;headerlink&quot; title=&quot;原理linux network namespace&quot;&gt;&lt;/a&gt;原理linux net</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux之LVM(逻辑卷管理)</title>
+    <link href="http://example.com/2023/10/19/Linux%E4%B9%8BLVM-%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/"/>
+    <id>http://example.com/2023/10/19/Linux%E4%B9%8BLVM-%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/</id>
+    <published>2023-10-19T04:50:58.000Z</published>
+    <updated>2023-10-19T04:50:58.587Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>mysql的常用应用</title>
+    <link href="http://example.com/2023/10/17/mysql%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/"/>
+    <id>http://example.com/2023/10/17/mysql%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/</id>
+    <published>2023-10-17T02:12:16.000Z</published>
+    <updated>2023-10-17T02:23:35.409Z</updated>
+    
+    <content type="html"><![CDATA[<p>#mysql忘记密码,重置密码</p><p>1.修改my.cnf</p><p>添加</p><pre><code>--skip-grant-tables</code></pre><p>2.进入数据</p><pre><code>执行use mysql;mysql&gt; update user set password=password(&#39;123&#39;) where user=&#39;root&#39; and host=&#39;localhost&#39;;mysql&gt; flush privileges;</code></pre><p>#mysql导出、导入数据命令</p><p>导出<br>mysqldump -u &lt;用户名&gt; -p&lt;密码&gt; &lt;数据库名&gt; &gt; &lt;输出文件路径&gt;</p><p>示例</p><pre><code> mysqldump  -u root -p wastewater.iguanwei.com &gt;bak.sql</code></pre><p>导入</p><pre><code>方法一：mysql -u用户名 -p 数据库名 &lt; 123.sql方法二：source 123.sql;</code></pre><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#mysql忘记密码,重置密码&lt;/p&gt;
+&lt;p&gt;1.修改my.cnf&lt;/p&gt;
+&lt;p&gt;添加&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;--skip-grant-tables
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2.进入数据&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;执行
+use mysql;
+mysql</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>php扩展安装</title>
     <link href="http://example.com/2023/10/16/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85-1/"/>
     <id>http://example.com/2023/10/16/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85-1/</id>
     <published>2023-10-16T10:54:48.000Z</published>
-    <updated>2023-10-16T11:02:58.723Z</updated>
+    <updated>2023-10-17T01:20:03.751Z</updated>
     
-    <content type="html"><![CDATA[<p>#下载相应的扩展并phpize</p><pre><code>到扩展目录下执行phpize1.phpize 不是系统命令时候find / -name phpize 后找到相应版本的phpize2.报错can‘t find PHP headers in path/phpyum install -y php-devel</code></pre><h1 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h1><p> 项目目录下<br> 执行 ./configure</p><p> 1.报错：configure: error: Cannot find php-config. Please use –with-php-config=PATH</p><p> 执行 find / -name php-config</p><p> 找到相应版本php的 php-config</p><p> ./configure –with-php-config=【php-config路径】</p><h1 id="make-amp-amp-make-install"><a href="#make-amp-amp-make-install" class="headerlink" title="make &amp;&amp; make install"></a>make &amp;&amp; make install</h1>]]></content>
+    <content type="html"><![CDATA[<p>#下载相应的扩展并phpize</p><pre><code>到扩展目录下执行phpize1.phpize 不是系统命令时候find / -name phpize 后找到相应版本的phpize2.报错can‘t find PHP headers in path/phpyum install -y php-devel</code></pre><h1 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h1><p> 项目目录下<br> 执行 ./configure</p><p> 1.报错：configure: error: Cannot find php-config. Please use –with-php-config=PATH</p><p> 执行 find / -name php-config</p><p> 找到相应版本php的 php-config</p><p> ./configure –with-php-config=【php-config路径】</p><h1 id="make-amp-amp-make-install"><a href="#make-amp-amp-make-install" class="headerlink" title="make &amp;&amp; make install"></a>make &amp;&amp; make install</h1><pre><code>执行成功后会提示.so文件的路径</code></pre><p> #配置php.ini</p>]]></content>
     
     
       
@@ -335,74 +416,6 @@ w
       
     <summary type="html">&lt;h1 id=&quot;一、Cron介绍&quot;&gt;&lt;a href=&quot;#一、Cron介绍&quot; class=&quot;headerlink&quot; title=&quot;一、Cron介绍&quot;&gt;&lt;/a&gt;一、Cron介绍&lt;/h1&gt;&lt;p&gt;Cron被用来进行Linux系统的计划任务执行&lt;/p&gt;
 &lt;h1 id=&quot;二、相关目录&quot;&gt;&lt;a</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>守护进程-supervisor</title>
-    <link href="http://example.com/2023/07/19/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-supervisor/"/>
-    <id>http://example.com/2023/07/19/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-supervisor/</id>
-    <published>2023-07-19T03:38:09.000Z</published>
-    <updated>2023-07-19T03:40:33.473Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><pre><code>yum install supervisor    #centos 系统apt install supervisor    #ubuntu 系统</code></pre><h1 id="二、配置守护进程"><a href="#二、配置守护进程" class="headerlink" title="二、配置守护进程"></a>二、配置守护进程</h1><p><font color='red'>在/etc/supervisord.d/下新建后缀名为ini的文件</font></p><pre><code>; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名[program:myblog] directory = /home/web/myblog          ; 程序的启动目录command=./start.sh start              ; 启动命令 最好绝对路径autostart = true                      ; 在 supervisord 启动的时候也自动启动numprocs=1                            ; 默认为1RestartSec=30process_name=%(program_name)s         ; 默认为 %(program_name)s，即 [program:x] 中的 xuser=root                             ; 使用 root 用户来启动该进程autorestart=true                      ; 程序崩溃时自动重启，重启次数是有限制的，默认为3次redirect_stderr=true                  ; 重定向输出的日志stderr_logfile= /home/web/myblog/myblog_stderr.logstdout_logfile = /home/web/myblog/myblog_stdout.logloglevel=info</code></pre><h1 id="三、supervisord管理"><a href="#三、supervisord管理" class="headerlink" title="三、supervisord管理"></a>三、supervisord管理</h1><pre><code>systemctl status  supervisordsystemctl start  supervisord  systemctl stop  supervisord  systemctl restart  supervisord  </code></pre><h1 id="四、supervisorctl管理"><a href="#四、supervisorctl管理" class="headerlink" title="四、supervisorctl管理"></a>四、supervisorctl管理</h1><pre><code>supervisorctl start server:myblog</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;一、安装&quot;&gt;&lt;a href=&quot;#一、安装&quot; class=&quot;headerlink&quot; title=&quot;一、安装&quot;&gt;&lt;/a&gt;一、安装&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;yum install supervisor    #centos 系统
-
-apt install supe</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>jenkins-发布php项目</title>
-    <link href="http://example.com/2023/07/19/jenkins-%E5%8F%91%E5%B8%83php%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://example.com/2023/07/19/jenkins-%E5%8F%91%E5%B8%83php%E9%A1%B9%E7%9B%AE/</id>
-    <published>2023-07-19T01:16:30.000Z</published>
-    <updated>2023-07-19T01:16:30.944Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux系统后台运行任务</title>
-    <link href="http://example.com/2023/07/19/linux%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E4%BB%BB%E5%8A%A1/"/>
-    <id>http://example.com/2023/07/19/linux%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E4%BB%BB%E5%8A%A1/</id>
-    <published>2023-07-19T01:15:25.000Z</published>
-    <updated>2023-07-19T01:15:25.544Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>php扩展编译安装</title>
-    <link href="http://example.com/2023/07/19/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85/"/>
-    <id>http://example.com/2023/07/19/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85/</id>
-    <published>2023-07-19T01:14:51.000Z</published>
-    <updated>2023-07-19T03:24:39.799Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一、找点phpize-和-php-config路径"><a href="#一、找点phpize-和-php-config路径" class="headerlink" title="一、找点phpize 和 php-config路径"></a>一、找点phpize 和 php-config路径</h1><pre><code>find / -name phpizefind / -name php-config</code></pre><h1 id="二、找到"><a href="#二、找到" class="headerlink" title="二、找到"></a>二、找到</h1><p>项目目录下执行 查找到的phpize </p><pre><code>/opt/remi/php74/root/usr/bin/phpize如报错Can&#39;t find PHP headers in /usr/include/php The php-devel package is required for use of this command...安装php-devel即可yum install -y php-develremi安装如下安装yum install -y php73-php-devel</code></pre><h1 id="三、编译"><a href="#三、编译" class="headerlink" title="三、编译"></a>三、编译</h1><pre><code> 1.进入项目目录下 ./configure --with-php-config=【第一步查询到的路径】  示例    ./configure --with-php-config=/www/server/php/71/bin/php-config 2. 执行  make &amp;&amp; make install</code></pre><h1 id="四、添加配置"><a href="#四、添加配置" class="headerlink" title="四、添加配置"></a>四、添加配置</h1><pre><code>vi /具体路径/php.ini extension=swoole.so如是remi 安装的php 在/etc/opt/remi/php73/php.d下新建新建ini文件  参考其他设置下万变方案 phpinfo 看下是如何加载扩展的 具体的目录 多有</code></pre><h1 id="五、重启服务"><a href="#五、重启服务" class="headerlink" title="五、重启服务"></a>五、重启服务</h1><pre><code>systemctl restart php-fpm   </code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;一、找点phpize-和-php-config路径&quot;&gt;&lt;a href=&quot;#一、找点phpize-和-php-config路径&quot; class=&quot;headerlink&quot; title=&quot;一、找点phpize 和 php-config路径&quot;&gt;&lt;/a&gt;一、找点phpize </summary>
       
     
     
