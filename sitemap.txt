@@ -1,3 +1,4 @@
+http://example.com/2023/11/08/%E7%89%B9%E6%AE%8A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5/
 http://example.com/2023/11/01/wordpress%E7%9B%B8%E5%85%B3/
 http://example.com/2023/07/08/docker%E5%AD%A6%E4%B9%A02/
 http://example.com/2023/10/26/docker%E5%AD%A6%E4%B9%A04-%E7%BD%91%E7%BB%9C/

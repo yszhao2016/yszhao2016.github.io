@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="public&#x2F;index.php文件解析1234567891011121314151617181920212223242526272829303132333435363738# 引入自动加载文件require __DIR__.&amp;#x27;&#x2F;..&#x2F;bootstrap&#x2F;autoload.php&amp;#x27;;&#x2F;*|---------------------------------------------">
+<meta name="description" content="使用逗号分割拆分查询出field字段中有value的记录SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0  FIND_IN_SET(‘value’, field)&gt;0   查询的是字段中包含了查询字符value的 FIND_IN_SET(‘value’, field)&#x3D;0   查询的是字段中不包含了查询字符value的 SU">
 <meta property="og:type" content="article">
-<meta property="og:title" content="laravel学习1">
-<meta property="og:url" content="http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/index.html">
+<meta property="og:title" content="特殊的SQL语句">
+<meta property="og:url" content="http://example.com/2023/11/08/%E7%89%B9%E6%AE%8A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5/index.html">
 <meta property="og:site_name" content="yszhao的博客">
-<meta property="og:description" content="public&#x2F;index.php文件解析1234567891011121314151617181920212223242526272829303132333435363738# 引入自动加载文件require __DIR__.&amp;#x27;&#x2F;..&#x2F;bootstrap&#x2F;autoload.php&amp;#x27;;&#x2F;*|---------------------------------------------">
+<meta property="og:description" content="使用逗号分割拆分查询出field字段中有value的记录SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0  FIND_IN_SET(‘value’, field)&gt;0   查询的是字段中包含了查询字符value的 FIND_IN_SET(‘value’, field)&#x3D;0   查询的是字段中不包含了查询字符value的 SU">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-03-14T03:45:11.000Z">
-<meta property="article:modified_time" content="2023-03-14T03:56:58.391Z">
+<meta property="article:published_time" content="2023-11-08T09:54:07.000Z">
+<meta property="article:modified_time" content="2023-11-10T03:46:19.233Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/03/14/laravel学习1/"/>
+  <link rel="canonical" href="http://example.com/2023/11/08/特殊的SQL语句/"/>
 
 
 
 
 
-  <title>laravel学习1 | yszhao的博客</title>
+  <title>特殊的SQL语句 | yszhao的博客</title>
   
 
 
@@ -288,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/08/%E7%89%B9%E6%AE%8A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -305,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">laravel学习1</h1>
+          <h1 class="post-title" itemprop="name headline">特殊的SQL语句</h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-14T11:45:11+08:00">
-                2023-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-08T17:54:07+08:00">
+                2023-11-08
               </time>
             
 
@@ -355,10 +355,20 @@
       
 
       
-        <h1 id="public-index-php文件解析"><a href="#public-index-php文件解析" class="headerlink" title="public/index.php文件解析"></a>public/index.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 引入自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../bootstrap/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Turn On The Lights</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| We need to illuminate PHP development, so let us turn on the lights.</span><br><span class="line">| This bootstraps the framework and gets it ready for use, then it</span><br><span class="line">| will load up this application so that we can run it and send</span><br><span class="line">| the responses back to the browser and delight our users.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$app = require_once __DIR__.&#x27;/../bootstrap/app.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Run The Application</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Once we have the application, we can handle the incoming request</span><br><span class="line">| through the kernel, and send the associated response back to</span><br><span class="line">| the client&#x27;s browser allowing them to enjoy the creative</span><br><span class="line">| and wonderful application we have prepared for them.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line"></span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$response-&gt;send();</span><br><span class="line"></span><br><span class="line">$kernel-&gt;terminate($request, $response);</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="bootstrap-autoload-php文件解析"><a href="#bootstrap-autoload-php文件解析" class="headerlink" title="/bootstrap/autoload.php文件解析"></a>/bootstrap/autoload.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">#定义记录时间的常量</span><br><span class="line">define(&#x27;LARAVEL_START&#x27;, microtime(true));</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Register The Composer Auto Loader</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Composer provides a convenient, automatically generated class loader</span><br><span class="line">| for our application. We just need to utilize it! We&#x27;ll require it</span><br><span class="line">| into the script here so that we do not have to worry about the</span><br><span class="line">| loading of any our classes &quot;manually&quot;. Feels great to relax.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line">#引入外部库   自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../vendor/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Include The Compiled Class File</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| To dramatically increase your application&#x27;s performance, you may use a</span><br><span class="line">| compiled class file which contains all of the classes commonly used</span><br><span class="line">| by a request. The Artisan &quot;optimize&quot; is used to create this file.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line">#引入laravel缓存文件</span><br><span class="line">$compiledPath = __DIR__.&#x27;/cache/compiled.php&#x27;;</span><br><span class="line"></span><br><span class="line">if (file_exists($compiledPath)) &#123;</span><br><span class="line">    require $compiledPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="使用逗号分割拆分"><a href="#使用逗号分割拆分" class="headerlink" title="使用逗号分割拆分"></a>使用逗号分割拆分</h1><p>查询出field字段中有value的记录<br>SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0</p>
+<p> FIND_IN_SET(‘value’, field)&gt;0   查询的是字段中包含了查询字符value的<br> FIND_IN_SET(‘value’, field)=0   查询的是字段中不包含了查询字符value的</p>
+<h1 id="SUBSTRING-INDEX-函数"><a href="#SUBSTRING-INDEX-函数" class="headerlink" title="SUBSTRING_INDEX 函数"></a>SUBSTRING_INDEX 函数</h1><p>string：用于截取目标字符串的字符串。可为字段，表达式等。</p>
+<p>sep：分隔符，string存在且用于分割的字符，比如“，”、“.”等。</p>
+<p>num：序号 负数 从右边取   正数从左边取 取几个值</p>
+<p>示例 field  a1,b2,c3<br>SUBSTRING_INDEX(field, ‘,’, 1) 取值就是 a1<br>SUBSTRING_INDEX(field, ‘,’, 2) 取值就是 a1,b2</p>
+<p>SELECT SUBSTRING_INDEX(field, ‘,’, 1) AS value1,<br>    SUBSTRING_INDEX(SUBSTRING_INDEX(field, ‘,’, 2), ‘,’, -1) AS value2,<br>    SUBSTRING_INDEX(SUBSTRING_INDEX(field, ‘,’, 3), ‘,’, -1) AS value3<br>    SUBSTRING_INDEX(field, ‘,’, -1) AS value4<br>FROM table</p>
+<h2 id="根据，隔开字段-分组统计"><a href="#根据，隔开字段-分组统计" class="headerlink" title="根据，隔开字段 分组统计"></a>根据，隔开字段 分组统计</h2><p>s<br>根据，隔开字段拆分成多行数据 多会拆分成3行了<br>SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(comInputField163, ‘,’,numbers.n), ‘,’, -1) AS tag ,numbers.n,a.*<br>      #,COUNT(*) AS count<br>FROM mida_gd_2023101116015948 a<br>JOIN (<br>  SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3                                   #这边SELECT 数 根据，隔开最多项来，只有2项它也要关联5个出来<br>) AS numbers<br>WHERE CHAR_LENGTH(comInputField163) - CHAR_LENGTH(REPLACE(comInputField163, ‘,’, ‘’)) &gt;= numbers.n-1  #通过这个来限制,统计，数量判断需要几个<br>GROUP BY tag;</p>
+<h1 id="两表连接的SQL语句"><a href="#两表连接的SQL语句" class="headerlink" title="两表连接的SQL语句"></a>两表连接的SQL语句</h1><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A,table2 B<br>where A.id=B.id</p>
+<p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A join table2 B<br>on A.id=B.id</p>
+<p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A inner join table2 B<br>on A.id=B.id</p>
+<p>join on与inner join on是相同</p>
+<p>默认JOIN就是指的INNER JOIN</p>
+<p>内连接推荐 join 方式 通过where 的方式 性能较差<br>有的数据库底层 认为是交叉 连接</p>
 
       
     </div>
@@ -383,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/" rel="next" title="windows搭建apache+php+mysql5.6">
-                <i class="fa fa-chevron-left"></i> windows搭建apache+php+mysql5.6
+              <a href="/2023/11/01/wordpress%E7%9B%B8%E5%85%B3/" rel="next" title="wordpress相关">
+                <i class="fa fa-chevron-left"></i> wordpress相关
               </a>
             
           </div>
@@ -392,10 +402,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/03/14/laravel%E5%AD%A6%E4%B9%A02/" rel="prev" title="laravel源码学习2">
-                laravel源码学习2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -525,7 +531,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#public-index-php%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">public&#x2F;index.php文件解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bootstrap-autoload-php%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">&#x2F;bootstrap&#x2F;autoload.php文件解析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%80%97%E5%8F%B7%E5%88%86%E5%89%B2%E6%8B%86%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">使用逗号分割拆分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SUBSTRING-INDEX-%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">SUBSTRING_INDEX 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%EF%BC%8C%E9%9A%94%E5%BC%80%E5%AD%97%E6%AE%B5-%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">根据，隔开字段 分组统计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%A4%E8%A1%A8%E8%BF%9E%E6%8E%A5%E7%9A%84SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">两表连接的SQL语句</span></a></li></ol></div>
             
 
           </div>

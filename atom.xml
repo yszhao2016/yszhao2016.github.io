@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-01T03:13:31.043Z</updated>
+  <updated>2023-11-10T03:46:19.233Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>特殊的SQL语句</title>
+    <link href="http://example.com/2023/11/08/%E7%89%B9%E6%AE%8A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5/"/>
+    <id>http://example.com/2023/11/08/%E7%89%B9%E6%AE%8A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5/</id>
+    <published>2023-11-08T09:54:07.000Z</published>
+    <updated>2023-11-10T03:46:19.233Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="使用逗号分割拆分"><a href="#使用逗号分割拆分" class="headerlink" title="使用逗号分割拆分"></a>使用逗号分割拆分</h1><p>查询出field字段中有value的记录<br>SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0</p><p> FIND_IN_SET(‘value’, field)&gt;0   查询的是字段中包含了查询字符value的<br> FIND_IN_SET(‘value’, field)=0   查询的是字段中不包含了查询字符value的</p><h1 id="SUBSTRING-INDEX-函数"><a href="#SUBSTRING-INDEX-函数" class="headerlink" title="SUBSTRING_INDEX 函数"></a>SUBSTRING_INDEX 函数</h1><p>string：用于截取目标字符串的字符串。可为字段，表达式等。</p><p>sep：分隔符，string存在且用于分割的字符，比如“，”、“.”等。</p><p>num：序号 负数 从右边取   正数从左边取 取几个值</p><p>示例 field  a1,b2,c3<br>SUBSTRING_INDEX(field, ‘,’, 1) 取值就是 a1<br>SUBSTRING_INDEX(field, ‘,’, 2) 取值就是 a1,b2</p><p>SELECT SUBSTRING_INDEX(field, ‘,’, 1) AS value1,<br>    SUBSTRING_INDEX(SUBSTRING_INDEX(field, ‘,’, 2), ‘,’, -1) AS value2,<br>    SUBSTRING_INDEX(SUBSTRING_INDEX(field, ‘,’, 3), ‘,’, -1) AS value3<br>    SUBSTRING_INDEX(field, ‘,’, -1) AS value4<br>FROM table</p><h2 id="根据，隔开字段-分组统计"><a href="#根据，隔开字段-分组统计" class="headerlink" title="根据，隔开字段 分组统计"></a>根据，隔开字段 分组统计</h2><p>s<br>根据，隔开字段拆分成多行数据 多会拆分成3行了<br>SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(comInputField163, ‘,’,numbers.n), ‘,’, -1) AS tag ,numbers.n,a.*<br>      #,COUNT(*) AS count<br>FROM mida_gd_2023101116015948 a<br>JOIN (<br>  SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3                                   #这边SELECT 数 根据，隔开最多项来，只有2项它也要关联5个出来<br>) AS numbers<br>WHERE CHAR_LENGTH(comInputField163) - CHAR_LENGTH(REPLACE(comInputField163, ‘,’, ‘’)) &gt;= numbers.n-1  #通过这个来限制,统计，数量判断需要几个<br>GROUP BY tag;</p><h1 id="两表连接的SQL语句"><a href="#两表连接的SQL语句" class="headerlink" title="两表连接的SQL语句"></a>两表连接的SQL语句</h1><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A,table2 B<br>where A.id=B.id</p><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A join table2 B<br>on A.id=B.id</p><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A inner join table2 B<br>on A.id=B.id</p><p>join on与inner join on是相同</p><p>默认JOIN就是指的INNER JOIN</p><p>内连接推荐 join 方式 通过where 的方式 性能较差<br>有的数据库底层 认为是交叉 连接</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;使用逗号分割拆分&quot;&gt;&lt;a href=&quot;#使用逗号分割拆分&quot; class=&quot;headerlink&quot; title=&quot;使用逗号分割拆分&quot;&gt;&lt;/a&gt;使用逗号分割拆分&lt;/h1&gt;&lt;p&gt;查询出field字段中有value的记录&lt;br&gt;SELECT * FROM table WH</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>wordpress相关</title>
@@ -396,27 +416,6 @@ w
     <published>2023-07-21T08:25:34.000Z</published>
     <updated>2023-07-21T08:25:34.576Z</updated>
     
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux服务之crond</title>
-    <link href="http://example.com/2023/07/19/Linux%E6%9C%8D%E5%8A%A1%E4%B9%8Bcrond/"/>
-    <id>http://example.com/2023/07/19/Linux%E6%9C%8D%E5%8A%A1%E4%B9%8Bcrond/</id>
-    <published>2023-07-19T06:20:19.000Z</published>
-    <updated>2023-07-19T09:32:19.544Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一、Cron介绍"><a href="#一、Cron介绍" class="headerlink" title="一、Cron介绍"></a>一、Cron介绍</h1><p>Cron被用来进行Linux系统的计划任务执行</p><h1 id="二、相关目录"><a href="#二、相关目录" class="headerlink" title="二、相关目录"></a>二、相关目录</h1><p>cron.d/*用来存放一些软件的Cron设置</p><p>cron.daily/每天执行一次的任务</p><p>cron.hourly/每小时执行一次的任务</p><p>cron.monthly/每个月执行一次的任务</p><p>cron.weekly/，每周执行一次的任务</p><p>每分钟执行一次脚本</p><pre><code>crontab -e</code></pre><h1 id="三、crontab使用"><a href="#三、crontab使用" class="headerlink" title="三、crontab使用"></a>三、crontab使用</h1><pre><code>*  *  *   *  *  命令/脚本分 时 日 月 周1  *  *   *  *  命令/脚本   指的是每个小时的第一分钟*/1 * * * *     命令/脚本   每分钟执行脚本crontab -l查看计划任务列表   </code></pre><h1 id="四、-etc-cron-daily-与crontab-e-定义的区别"><a href="#四、-etc-cron-daily-与crontab-e-定义的区别" class="headerlink" title="四、/etc/cron.daily 与crontab -e 定义的区别"></a>四、/etc/cron.daily 与crontab -e 定义的区别</h1><pre><code>/etc/cron.daily 和 crontab -e 都是用来设置定时任务的方式，但它们有一些不同之处。/etc/cron.daily 是一个目录，里面存放着以 &quot;cron&quot; 格式命名的脚本文件。这些脚本会每天执行一次，通常在系统闲置时执行。这个目录中的脚本是全局的，适用于整个系统的所有用户。而 crontab -e 则是一个命令，用于编辑和管理用户个人的 crontab 文件。crontab 文件中定义了用户的定时任务计划。通过编辑 crontab 文件，用户可以设置自己的定时任务，包括每天、每周、每月或其他时间间隔的执行。因此，主要区别在于：/etc/cron.daily 适用于全局系统级别的定时任务，而 crontab -e 是用户级别的定时任务。/etc/cron.daily 中的脚本在每天执行一次，而 crontab -e 可以更精确地设置时间间隔。/etc/cron.daily 中的脚本对所有用户有效，而 crontab -e 只对当前用户有效。需要注意的是，修改 /etc/cron.daily 目录中的文件需要 root 权限，而 crontab -e 只需要用户自己的权限</code></pre><h1 id="五、Linux-anacron"><a href="#五、Linux-anacron" class="headerlink" title="五、Linux anacron"></a>五、Linux anacron</h1><p> 执行由于关机  忘记执行的任务</p><p> 配置好 /etc/anacrontab 文件</p><p> 更具体学习参考<a href="http://c.biancheng.net/view/1095.html">http://c.biancheng.net/view/1095.html</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;一、Cron介绍&quot;&gt;&lt;a href=&quot;#一、Cron介绍&quot; class=&quot;headerlink&quot; title=&quot;一、Cron介绍&quot;&gt;&lt;/a&gt;一、Cron介绍&lt;/h1&gt;&lt;p&gt;Cron被用来进行Linux系统的计划任务执行&lt;/p&gt;
-&lt;h1 id=&quot;二、相关目录&quot;&gt;&lt;a</summary>
-      
     
     
     
