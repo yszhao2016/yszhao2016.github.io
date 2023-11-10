@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="使用逗号分割拆分查询出field字段中有value的记录SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0  FIND_IN_SET(‘value’, field)&gt;0   查询的是字段中包含了查询字符value的 FIND_IN_SET(‘value’, field)&#x3D;0   查询的是字段中不包含了查询字符value的 SU">
+<meta name="description" content="使用逗号分割拆分查询出field字段中有value的记录SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0  FIND_IN_SET(‘value’, field)&gt;0  查询的是字段中包含了查询字符value的 FIND_IN_SET(‘value’, field)&#x3D;0   查询的是字段中不包含了查询字符value的 SUB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="特殊的SQL语句">
 <meta property="og:url" content="http://example.com/2023/11/08/%E7%89%B9%E6%AE%8A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5/index.html">
 <meta property="og:site_name" content="yszhao的博客">
-<meta property="og:description" content="使用逗号分割拆分查询出field字段中有value的记录SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0  FIND_IN_SET(‘value’, field)&gt;0   查询的是字段中包含了查询字符value的 FIND_IN_SET(‘value’, field)&#x3D;0   查询的是字段中不包含了查询字符value的 SU">
+<meta property="og:description" content="使用逗号分割拆分查询出field字段中有value的记录SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0  FIND_IN_SET(‘value’, field)&gt;0  查询的是字段中包含了查询字符value的 FIND_IN_SET(‘value’, field)&#x3D;0   查询的是字段中不包含了查询字符value的 SUB">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-11-08T09:54:07.000Z">
-<meta property="article:modified_time" content="2023-11-10T03:46:19.233Z">
+<meta property="article:modified_time" content="2023-11-10T03:56:46.009Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -356,13 +356,20 @@
 
       
         <h1 id="使用逗号分割拆分"><a href="#使用逗号分割拆分" class="headerlink" title="使用逗号分割拆分"></a>使用逗号分割拆分</h1><p>查询出field字段中有value的记录<br>SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0</p>
-<p> FIND_IN_SET(‘value’, field)&gt;0   查询的是字段中包含了查询字符value的<br> FIND_IN_SET(‘value’, field)=0   查询的是字段中不包含了查询字符value的</p>
+<p> FIND_IN_SET(‘value’, field)<font color=Red>&gt;0</font>  查询的是字段中<font color=Red>包含了</font>查询字符value的<br> FIND_IN_SET(‘value’, field)<font color=Red>=0</font>   查询的是字段中<font color=Red>不包含</font>了查询字符value的</p>
 <h1 id="SUBSTRING-INDEX-函数"><a href="#SUBSTRING-INDEX-函数" class="headerlink" title="SUBSTRING_INDEX 函数"></a>SUBSTRING_INDEX 函数</h1><p>string：用于截取目标字符串的字符串。可为字段，表达式等。</p>
 <p>sep：分隔符，string存在且用于分割的字符，比如“，”、“.”等。</p>
-<p>num：序号 负数 从右边取   正数从左边取 取几个值</p>
-<p>示例 field  a1,b2,c3<br>SUBSTRING_INDEX(field, ‘,’, 1) 取值就是 a1<br>SUBSTRING_INDEX(field, ‘,’, 2) 取值就是 a1,b2</p>
-<p>SELECT SUBSTRING_INDEX(field, ‘,’, 1) AS value1,<br>    SUBSTRING_INDEX(SUBSTRING_INDEX(field, ‘,’, 2), ‘,’, -1) AS value2,<br>    SUBSTRING_INDEX(SUBSTRING_INDEX(field, ‘,’, 3), ‘,’, -1) AS value3<br>    SUBSTRING_INDEX(field, ‘,’, -1) AS value4<br>FROM table</p>
-<h2 id="根据，隔开字段-分组统计"><a href="#根据，隔开字段-分组统计" class="headerlink" title="根据，隔开字段 分组统计"></a>根据，隔开字段 分组统计</h2><p>s<br>根据，隔开字段拆分成多行数据 多会拆分成3行了<br>SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(comInputField163, ‘,’,numbers.n), ‘,’, -1) AS tag ,numbers.n,a.*<br>      #,COUNT(*) AS count<br>FROM mida_gd_2023101116015948 a<br>JOIN (<br>  SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3                                   #这边SELECT 数 根据，隔开最多项来，只有2项它也要关联5个出来<br>) AS numbers<br>WHERE CHAR_LENGTH(comInputField163) - CHAR_LENGTH(REPLACE(comInputField163, ‘,’, ‘’)) &gt;= numbers.n-1  #通过这个来限制,统计，数量判断需要几个<br>GROUP BY tag;</p>
+<p>num：序号 <font color=Red>负数 从右边取   正数从左边取 取几个值</font></p>
+<p>示例 field  a1,b2,c3<br>SUBSTRING_INDEX(field, ‘,’, 1) 取值就是 a1<br><font color=Red>SUBSTRING_INDEX(field, ‘,’, 2) 取值就是 a1,b2</font></p>
+<p><font color=Red>根据，分割拆分多条数据sql：</font></p>
+<pre><code>SELECT SUBSTRING_INDEX(field, &#39;,&#39;, 1) AS value1,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(field, &#39;,&#39;, 2), &#39;,&#39;, -1) AS value2,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(field, &#39;,&#39;, 3), &#39;,&#39;, -1) AS value3
+    SUBSTRING_INDEX(field, &#39;,&#39;, -1) AS value4
+FROM table
+</code></pre>
+<h2 id="根据，隔开字段-分组统计"><a href="#根据，隔开字段-分组统计" class="headerlink" title="根据，隔开字段 分组统计"></a>根据，隔开字段 分组统计</h2><p>根据，隔开字段拆分成多行数据 多会拆分成3行了</p>
+<p>SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(comInputField163, ‘,’,numbers.n), ‘,’, -1) AS tag ,numbers.n,a.*<br>      #,COUNT(*) AS count<br>FROM mida_gd_2023101116015948 a<br>JOIN (<br>  SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3                                   <font color=Red>#这边SELECT 数 根据，隔开最多项来，写到SELECT 5只有数据中只有2项它也要关联5个出来</font><br>) AS numbers<br>WHERE CHAR_LENGTH(comInputField163) - CHAR_LENGTH(REPLACE(comInputField163, ‘,’, ‘’)) &gt;= numbers.n-1  #通过这个来限制,<font color=Red>统计，数量</font> 判断需要几个<br>GROUP BY tag;</p>
 <h1 id="两表连接的SQL语句"><a href="#两表连接的SQL语句" class="headerlink" title="两表连接的SQL语句"></a>两表连接的SQL语句</h1><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A,table2 B<br>where A.id=B.id</p>
 <p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A join table2 B<br>on A.id=B.id</p>
 <p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A inner join table2 B<br>on A.id=B.id</p>
@@ -402,6 +409,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/11/10/openEuler%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98/" rel="prev" title="openEuler系统安装遇到问题">
+                openEuler系统安装遇到问题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -478,7 +489,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
