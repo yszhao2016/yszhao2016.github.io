@@ -81,13 +81,15 @@
 
 
 
+<meta name="description" content="#yum 安装报依赖库找不到问题 openEuler release 22.03版本  替换centos 7的源就可以  具体命令：wget -O &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-7.repo  然后 将文件中$releasever替换7  具体命令：vim 后  %s&#x2F;$release">
 <meta property="og:type" content="article">
 <meta property="og:title" content="openEuler系统安装遇到问题">
 <meta property="og:url" content="http://example.com/2023/11/10/openEuler%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="yszhao的博客">
+<meta property="og:description" content="#yum 安装报依赖库找不到问题 openEuler release 22.03版本  替换centos 7的源就可以  具体命令：wget -O &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-7.repo  然后 将文件中$releasever替换7  具体命令：vim 后  %s&#x2F;$release">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-11-10T03:59:43.000Z">
-<meta property="article:modified_time" content="2023-11-10T03:59:43.648Z">
+<meta property="article:modified_time" content="2023-11-10T06:02:30.369Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -353,7 +355,18 @@
       
 
       
-        
+        <p>#yum 安装报依赖库找不到问题</p>
+<pre><code>openEuler release 22.03版本
+
+替换centos 7的源就可以
+
+具体命令：wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+然后 将文件中$releasever替换7
+
+具体命令：vim 后  %s/$releasever/7/g
+</code></pre>
+
       
     </div>
     
@@ -457,7 +470,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

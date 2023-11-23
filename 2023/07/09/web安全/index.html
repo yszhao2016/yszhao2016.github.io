@@ -81,13 +81,15 @@
 
 
 
+<meta name="description" content="php安全配置主要控制php执行危险函数，默认是关闭：Off sql.safe_mode&#x3D;On 禁止显示PHP版本号 expose_php &#x3D; Off 关闭重定向执行php文件（你的网站url&#x2F;as&#x3D;你的网站url&#x2F;sdf&#x2F;muma.php） cgi.force_redirect &#x3D; 0 禁止解析非法php文件 cgi.fix_pathinfo &#x3D; 0 关闭错误信息输出 display_error">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web安全">
 <meta property="og:url" content="http://example.com/2023/07/09/web%E5%AE%89%E5%85%A8/index.html">
 <meta property="og:site_name" content="yszhao的博客">
+<meta property="og:description" content="php安全配置主要控制php执行危险函数，默认是关闭：Off sql.safe_mode&#x3D;On 禁止显示PHP版本号 expose_php &#x3D; Off 关闭重定向执行php文件（你的网站url&#x2F;as&#x3D;你的网站url&#x2F;sdf&#x2F;muma.php） cgi.force_redirect &#x3D; 0 禁止解析非法php文件 cgi.fix_pathinfo &#x3D; 0 关闭错误信息输出 display_error">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-07-09T06:16:41.000Z">
-<meta property="article:modified_time" content="2023-07-13T06:20:53.705Z">
+<meta property="article:modified_time" content="2023-11-23T03:19:04.574Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -353,7 +355,63 @@
       
 
       
-        
+        <h1 id="php安全配置"><a href="#php安全配置" class="headerlink" title="php安全配置"></a>php安全配置</h1><pre><code>主要控制php执行危险函数，默认是关闭：Off
+sql.safe_mode=On
+禁止显示PHP版本号
+expose_php = Off
+关闭重定向执行php文件（你的网站url/as=你的网站url/sdf/muma.php）
+cgi.force_redirect = 0
+禁止解析非法php文件
+cgi.fix_pathinfo = 0
+关闭错误信息输出
+display_error = Off
+error_reporting = E_WARNING &amp; E_ERROR
+记录错误日志至后台, 方便追溯
+log_errors = On
+error_log = /var/log/php_error.log
+禁止远程执行phpshell
+allow_url_include = Off
+静止file_get_content函数获取资源
+allow_url_fopen = Off
+格式化时间
+date.timezone=Asia/Shanghai
+</code></pre>
+<h1 id="nginx安全配置"><a href="#nginx安全配置" class="headerlink" title="nginx安全配置"></a>nginx安全配置</h1><pre><code>add_header X-Content-Type-Options nosniff;
+add_header &#39;Referrer-Policy&#39; &#39;origin&#39;;
+add_header X-Download-Options &quot;noopen&quot; always;
+add_header Strict-Transport-Security &quot;max-age=63072000; includeSubdomains; preload&quot;;
+add_header X-Permitted-Cross-Domain-Policies  &quot;master-only&quot;;
+add_header X-Frame-Options SAMEORIGIN;
+#add_header Content-Security-Policy &quot;default-src &#39;self&#39; data: *.xxx.com  &#39;unsaf
+add_header X-XSS-Protection &quot;1; mode=block&quot;;
+# add_header Content-Security-Policy &quot;default-src *;style-src &#39;self&#39; &#39;unsafe-inline&#39;;script-src &#39;self&#39; &#39;unsafe-inline&#39; &#39;unsafe-eval&#39;;img-src * data:;worker-src * blob:;font-src &#39;self&#39; data:;&quot;
+
+
+location / &#123;
+    if ($http_origin ~* (https?://[^/]*\.kuaidasoft\.com))&#123;
+              add_header &#39;Access-Control-Allow-Origin&#39; &quot;$http_origin&quot;;
+    &#125;
+    try_files $uri $uri/ /index.html;
+&#125;  
+
+
+
+#指定允许跨域的方法，*代表所有
+add_header Access-Control-Allow-Methods &#39;GET,PUT,POST,DELETE,OPTIONS&#39;;
+
+# 预检命令的缓存，如果不缓存每次会发送两次请求
+add_header Access-Control-Max-Age 3600;
+
+#带cookie请求需要加上这个字段，并设置为true
+add_header Access-Control-Allow-Credentials true;
+
+#   表示允许这个域跨域调用（客户端发送请求的域名和端口） 
+#   $http_origin动态获取请求客户端请求的域   不用*的原因是带cookie的请求不支持*号
+#add_header Access-Control-Allow-Origin $http_origin;
+#   表示请求头的字段 动态获取
+add_header Access-Control-Allow-Headers $http_access_control_request_headers;
+</code></pre>
+<h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1>
       
     </div>
     
@@ -441,8 +499,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -457,7 +524,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -500,6 +567,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#php%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">php安全配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">nginx安全配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql"><span class="nav-number">3.</span> <span class="nav-text">mysql</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

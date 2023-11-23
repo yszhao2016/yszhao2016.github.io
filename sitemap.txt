@@ -1,3 +1,4 @@
+http://example.com/2023/07/09/web%E5%AE%89%E5%85%A8/
 http://example.com/2023/11/10/%E6%90%AD%E5%BB%BAk8s/
 http://example.com/2023/11/10/openEuler%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98/
 http://example.com/2023/11/08/%E7%89%B9%E6%AE%8A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5/
@@ -7,7 +8,6 @@ http://example.com/2023/10/26/docker%E5%AD%A6%E4%B9%A04-%E7%BD%91%E7%BB%9C/
 http://example.com/2023/07/08/docker%E5%AD%A6%E4%B9%A01/
 http://example.com/2023/10/19/Linux%E4%B9%8BLVM-%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/
 http://example.com/2023/10/17/mysql%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/
-http://example.com/2023/10/16/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85-1/
 http://example.com/2023/09/26/redis%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/
 http://example.com/2023/09/25/redis%E5%9F%BA%E7%A1%80/
 http://example.com/2023/07/29/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A02/
@@ -40,7 +40,6 @@ http://example.com/2023/03/16/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA/
 http://example.com/2023/07/09/docker%E5%AD%A6%E4%B9%A03/
 http://example.com/2023/07/09/ubuntn%E6%90%AD%E5%BB%BAlnmp%E7%8E%AF%E5%A2%83/
 http://example.com/2023/02/22/vue%E5%AD%A6%E4%B9%A01/
-http://example.com/2023/07/09/web%E5%AE%89%E5%85%A8/
 http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A02/
 http://example.com/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/
 http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/
