@@ -669,8 +669,25 @@ systemctl restart mysqld
 
 解决方案
 
+wget https://rpmfind.net/linux/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-4.el8.x86_64.rpm
 yum install compat-openssl10
+或者
 yum install http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-3.el8.x86_64.rpm
+或者
+yum install -y ./compat-openssl10-1.0.2o-4.el8.x86_64.rpm
+
+
+
+[root@ecs-41618143 ~]# rpm -ivh mysql-community-client-5.7.34-1.el7.x86_64.rpm 
+warning: mysql-community-client-5.7.34-1.el7.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY
+error: Failed dependencies:
+    libncurses.so.5()(64bit) is needed by mysql-community-client-5.7.34-1.el7.x86_64
+    libtinfo.so.5()(64bit) is needed by mysql-community-client-5.7.34-1.el7.x86_64
+    
+    
+ 解决方案    
+ 
+ yum install libncurses*
 </code></pre>
 ]]></content>
       <categories>
