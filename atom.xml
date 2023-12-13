@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-10T06:46:26.026Z</updated>
+  <updated>2023-12-13T09:42:08.740Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/2023/12/13/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://example.com/2023/12/13/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2023-12-13T09:42:08.740Z</published>
+    <updated>2023-12-13T09:42:08.740Z</updated>
+    
+    <content type="html"><![CDATA[<p>#奇怪的问题</p><h2 id="无法访问php文件，总是报错-file-not-found"><a href="#无法访问php文件，总是报错-file-not-found" class="headerlink" title="无法访问php文件，总是报错 file not found"></a>无法访问php文件，总是报错 file not found</h2><pre><code>解决思路        1.首先查询 文件是否存在    2.查询nginx php访问的配置    3.关闭selinux     </code></pre><h2 id="配置ssh-免密码-登录总是提示需要输入密码"><a href="#配置ssh-免密码-登录总是提示需要输入密码" class="headerlink" title="配置ssh 免密码 登录总是提示需要输入密码"></a>配置ssh 免密码 登录总是提示需要输入密码</h2><pre><code>解决思路    1.排查下authorized_keys 是否存在key    2.排查/etc/sshd/sshd_config下是否关闭了 证书登录【PubkeyAuthentication no】</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#奇怪的问题&lt;/p&gt;
+&lt;h2 id=&quot;无法访问php文件，总是报错-file-not-found&quot;&gt;&lt;a href=&quot;#无法访问php文件，总是报错-file-not-found&quot; class=&quot;headerlink&quot; title=&quot;无法访问php文件，总是报错 file </summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>搭建k8s</title>
@@ -398,19 +419,6 @@ w
       
     <summary type="html">&lt;h1 id=&quot;一、字符串处理函数&quot;&gt;&lt;a href=&quot;#一、字符串处理函数&quot; class=&quot;headerlink&quot; title=&quot;一、字符串处理函数&quot;&gt;&lt;/a&gt;一、字符串处理函数&lt;/h1&gt;&lt;h2 id=&quot;1-1-str-pad&quot;&gt;&lt;a href=&quot;#1-1-str-pad&quot; c</summary>
       
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>跨域问题总结</title>
-    <link href="http://example.com/2023/07/21/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>http://example.com/2023/07/21/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</id>
-    <published>2023-07-21T08:26:13.000Z</published>
-    <updated>2023-07-21T08:26:13.871Z</updated>
-    
     
     
     

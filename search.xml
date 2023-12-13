@@ -2822,4 +2822,22 @@ FROM table
     <url>/2023/11/10/%E6%90%AD%E5%BB%BAk8s/</url>
     <content><![CDATA[]]></content>
   </entry>
+  <entry>
+    <title></title>
+    <url>/2023/12/13/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>#奇怪的问题</p>
+<h2 id="无法访问php文件，总是报错-file-not-found"><a href="#无法访问php文件，总是报错-file-not-found" class="headerlink" title="无法访问php文件，总是报错 file not found"></a>无法访问php文件，总是报错 file not found</h2><pre><code>解决思路
+    
+    1.首先查询 文件是否存在
+    2.查询nginx php访问的配置
+    3.关闭selinux 
+    
+</code></pre>
+<h2 id="配置ssh-免密码-登录总是提示需要输入密码"><a href="#配置ssh-免密码-登录总是提示需要输入密码" class="headerlink" title="配置ssh 免密码 登录总是提示需要输入密码"></a>配置ssh 免密码 登录总是提示需要输入密码</h2><pre><code>解决思路
+
+    1.排查下authorized_keys 是否存在key
+    2.排查/etc/sshd/sshd_config下是否关闭了 证书登录【PubkeyAuthentication no】
+</code></pre>
+]]></content>
+  </entry>
 </search>
