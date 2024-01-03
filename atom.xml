@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-12-13T09:42:08.740Z</updated>
+  <updated>2024-01-03T05:07:11.661Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>云主机硬盘扩容</title>
+    <link href="http://example.com/2024/01/03/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/"/>
+    <id>http://example.com/2024/01/03/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/</id>
+    <published>2024-01-03T04:52:02.000Z</published>
+    <updated>2024-01-03T05:07:11.661Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.查看分区容量是否增加</p><pre><code>lsblk</code></pre><ol start="2"><li><p>扩容MBR分区和ext4文件系统</p><p> #redhat类系统<br> type growpart || sudo yum install -y cloud-utils-growpart</p><p> #debian类系统<br> type growpart || sudo apt-get install -y cloud-guest-utils</p><p> sudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 1</p><p> sudo resize2fs /dev/vdb1</p></li><li><p>扩容GPT分区和xfs文件系统</p><p> sudo apt-get update<br> type growpart || sudo apt-get install -y cloud-guest-utils</p><p> type sgdisk || sudo yum install -y gdisk</p><h1 id="扩容分区"><a href="#扩容分区" class="headerlink" title="扩容分区"></a>扩容分区</h1><p> sudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 2</p><p> #扩容文件系统<br> type xfs_growfs || sudo yum install -y xfsprogs<br> sudo xfs_growfs /mnt</p></li><li><p>扩容裸数据盘</p><p>  sudo resize2fs /dev/vdb</p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;1.查看分区容量是否增加&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;lsblk
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;&lt;p&gt;扩容MBR分区和ext4文件系统&lt;/p&gt;
+&lt;p&gt; #redhat类系统&lt;br&gt; type growpart || sudo yum i</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/2023/12/13/ansible%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/12/13/ansible%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-12-13T09:58:37.238Z</published>
+    <updated>2023-12-13T09:58:37.238Z</updated>
+    
+    <content type="html"><![CDATA[<p>#ansible学习</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install -y epel-releaseyum install -y ansible#ansible配置文件：/etc/ansible/ansible.cfg/etc/ansible/hosts生成秘钥：ssh-keygen -t rsa  #在/root/.ssh/目录下生成秘钥#被控端：(复制主机端公钥到被控端)ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.7.99 ssh-copy-id  被控端ip</code></pre><h2 id="配置-etc-ansible-hosts"><a href="#配置-etc-ansible-hosts" class="headerlink" title="配置/etc/ansible/hosts"></a>配置/etc/ansible/hosts</h2><p>##ansible的copy模块</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;#ansible学习&lt;/p&gt;
+&lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;yum install -y epel-release
+yum install -y a</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title></title>
@@ -375,49 +422,6 @@ w
       
       
     <summary type="html">&lt;h1 id=&quot;一-、配置详解&quot;&gt;&lt;a href=&quot;#一-、配置详解&quot; class=&quot;headerlink&quot; title=&quot;一 、配置详解&quot;&gt;&lt;/a&gt;一 、配置详解&lt;/h1&gt;&lt;h2 id=&quot;1-1nginx配置文件&quot;&gt;&lt;a href=&quot;#1-1nginx配置文件&quot; class=&quot;</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux-iptables使用总结</title>
-    <link href="http://example.com/2023/07/26/linux-iptables%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
-    <id>http://example.com/2023/07/26/linux-iptables%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</id>
-    <published>2023-07-26T07:31:32.000Z</published>
-    <updated>2023-07-26T08:17:15.314Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、iptables<br>    iptables防火墙没有启用,iptables命令仍然会显示默认的规则.</p><p>二、常用命令</p><p>常用参数</p><pre><code>-n 参数表示将 IP 地址和端口号显示为数字形式，而不是解析为主机名和服务名。-L 选项用于列出防火墙规则。-t nat 参数指定了要操作的表为 NAT 表，NAT 表用于处理网络地址转换相关的规则。</code></pre><p>iptables -n -L           显示当前防火墙规则列表。</p><p>iptables -t nat -n -L    看 iptables 中 NAT（Network Address Translation）表的规则。</p><p>结果怎么看</p><pre><code>Chain INPUT (policy ACCEPT)target     prot opt source               destination         ACCEPT     udp  --  0.0.0.0/0            0.0.0.0/0            state NEW udp dpt:2333ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0            state NEW tcp dpt:2333Chain FORWARD (policy DROP)target     prot opt source               destination         DOCKER-USER  all  --  0.0.0.0/0            0.0.0.0/0           DOCKER-ISOLATION-STAGE-1  all  --  0.0.0.0/0            0.0.0.0/0           ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHEDDOCKER     all  --  0.0.0.0/0            0.0.0.0/0           ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           Chain OUTPUT (policy ACCEPT)target     prot opt source               destination         Chain DOCKER (1 references)target     prot opt source               destination         ACCEPT     udp  --  0.0.0.0/0            172.17.0.2           udp dpt:60050ACCEPT     udp  --  0.0.0.0/0            172.17.0.2           udp dpt:60049ACCEPT     udp  --  0.0.0.0/0            172.17.0.2           udp dpt:60048ACCEPT     udp  --  0.0.0.0/0            172.17.0.2           udp dpt:60047Chain DOCKER-ISOLATION-STAGE-1 (1 references)target     prot opt source               destination         DOCKER-ISOLATION-STAGE-2  all  --  0.0.0.0/0            0.0.0.0/0           RETURN     all  --  0.0.0.0/0            0.0.0.0/0           Chain DOCKER-ISOLATION-STAGE-2 (1 references)target     prot opt source               destination         DROP       all  --  0.0.0.0/0            0.0.0.0/0           RETURN     all  --  0.0.0.0/0            0.0.0.0/0           Chain DOCKER-USER (1 references)target     prot opt source               destination         RETURN     all  --  0.0.0.0/0            0.0.0.0/0  &quot;LIBVIRT_FWI&quot;是一个iptables防火墙的链，并且该链已经被引用了一次允许所有协议（all）的流量从任意源IP地址（0.0.0.0/0）进入到目标IP地址为172.17.0.2  60047端口REJECT 拒绝ACCEPT 允许DROP   丢弃</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;一、iptables&lt;br&gt;    iptables防火墙没有启用,iptables命令仍然会显示默认的规则.&lt;/p&gt;
-&lt;p&gt;二、常用命令&lt;/p&gt;
-&lt;p&gt;常用参数&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;-n 参数表示将 IP 地址和端口号显示为数字形式，而不是解析为主机名和服务名。</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>php常用函数总结</title>
-    <link href="http://example.com/2023/07/25/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/"/>
-    <id>http://example.com/2023/07/25/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/</id>
-    <published>2023-07-25T07:54:20.000Z</published>
-    <updated>2023-07-25T08:29:31.815Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一、字符串处理函数"><a href="#一、字符串处理函数" class="headerlink" title="一、字符串处理函数"></a>一、字符串处理函数</h1><h2 id="1-1-str-pad"><a href="#1-1-str-pad" class="headerlink" title="1.1 str_pad()"></a>1.1 str_pad()</h2><p>str_pad(【必填 需要处理的字符串】,【必填 填充的长度】，【 可选 填充的字符串，默认空白】，【可选 填充字符串的哪边】)</p><pre><code>规定填充字符串的哪边 可能的值：STR_PAD_BOTH - 填充字符串的两侧。如果不是偶数，则右侧获得额外的填充。STR_PAD_LEFT - 填充字符串的左侧。STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。</code></pre><p>示例 $str=10 ; echo str_pad($str,4,”0”,STR_PAD_LEFT);  <font color="red">意思就4位长度 不够就往左边补0</font></p><h2 id="2-1-strpos、stripos-、strrpos"><a href="#2-1-strpos、stripos-、strrpos" class="headerlink" title="2.1 strpos、stripos 、strrpos"></a>2.1 strpos、stripos 、strrpos</h2><h2 id="2-3-substr"><a href="#2-3-substr" class="headerlink" title="2.3 substr"></a>2.3 substr</h2><h2 id="2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用"><a href="#2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用" class="headerlink" title="2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用"></a>2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用</h2><pre><code>比较常用，不在赘述</code></pre><h1 id="二、数组处理函数"><a href="#二、数组处理函数" class="headerlink" title="二、数组处理函数"></a>二、数组处理函数</h1>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;一、字符串处理函数&quot;&gt;&lt;a href=&quot;#一、字符串处理函数&quot; class=&quot;headerlink&quot; title=&quot;一、字符串处理函数&quot;&gt;&lt;/a&gt;一、字符串处理函数&lt;/h1&gt;&lt;h2 id=&quot;1-1-str-pad&quot;&gt;&lt;a href=&quot;#1-1-str-pad&quot; c</summary>
       
     
     

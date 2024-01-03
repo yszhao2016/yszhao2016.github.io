@@ -1412,6 +1412,13 @@ vue ui 启动vue ui操作界面
 4.设置开机启动  然后再win+r 输入services.msc  打开后找到mysql 右键点击属性   将启动类型设置为自动即可
 
 【注：期间不同版本可能会报奇奇怪怪的错，百度安装相关的版本vc库】
+
+ 1.缺少msvcr100.dll文件如何解决
+
+ 百度Visual C++ 2010 Redistributable Package 搜索相关 下载安装
+</code></pre>
+<h2 id="mysql-相关操作"><a href="#mysql-相关操作" class="headerlink" title="mysql 相关操作"></a>mysql 相关操作</h2><pre><code> 修改密码
+ GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;%&#39;IDENTIFIED BY &#39;Storage@202312&#39; WITH GRANT OPTION;
 </code></pre>
 <h1 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h1><pre><code>1.下载地址：https://windows.php.net/downloads/releases/archives/
 
@@ -1423,6 +1430,8 @@ vue ui 启动vue ui操作界面
 
 
 【注：期间不同版本可能会报奇奇怪怪的错，百度安装相关的版本vc库】
+
+【注：建议放在c:\php目录，不然可能出现无法加载到ddl扩展】
 </code></pre>
 <h1 id="安装apache-服务器"><a href="#安装apache-服务器" class="headerlink" title="安装apache 服务器"></a>安装apache 服务器</h1><p>##apache 安装对接php<br>    下载：<a href="https://www.apachelounge.com/download/VC14/">https://www.apachelounge.com/download/VC14/</a></p>
 <pre><code>到apache/config/httpd.conf文件
@@ -1475,9 +1484,52 @@ bin目录下 ApacheMonitor.exe 可以用来启动关闭 httpd服务
               DirectoryIndex  index.php index.html
         &lt;/IfModule&gt;     
      
+</code></pre>
+<h3 id="vhost配置示例"><a href="#vhost配置示例" class="headerlink" title="vhost配置示例"></a>vhost配置示例</h3><pre><code>主配置文件httpd.conf
+LoadModule rewrite_module modules/mod_rewrite.so
+
+LoadModule vhost_alias_module modules/mod_vhost_alias.so
+
+Include conf/extra/httpd-vhosts.conf
     
 </code></pre>
-<h3 id="伪静态"><a href="#伪静态" class="headerlink" title="伪静态"></a>伪静态</h3><pre><code>1. httpd.conf配置文件 启动rewrite模块 如下：
+<h4 id="vhost配置文件"><a href="#vhost配置文件" class="headerlink" title="vhost配置文件"></a>vhost配置文件</h4><pre><code>    &lt;VirtualHost *:8081&gt;
+            ServerAdmin webmaster@localhost
+            DocumentRoot &quot;E:/wwwroot/storage/public&quot;
+            DirectoryIndex index.php
+            ErrorLog &quot;logs/storage-error.log&quot;
+            CustomLog &quot;logs/storage-access.log&quot; common
+            &lt;Directory &quot;E:/wwwroot/storage/public&quot;&gt;
+              Options Indexes FollowSymLinks
+              AllowOverride all
+              Require all granted
+              DirectoryIndex index.php index.html
+              ;图片等 资源可下载
+              AddType application/octet-stream .jpg .jpeg .png .gif .mp4 .avi .mov .flv
+            &lt;/Directory&gt;
+    &lt;/VirtualHost&gt;
+    
+    
+    
+    
+    &lt;VirtualHost *:8082&gt;
+            ServerAdmin webmaster@localhost
+            DocumentRoot &quot;E:/wwwroot/storage-web&quot;
+            DirectoryIndex index.html
+            ErrorLog &quot;logs/storage-web-error.log&quot;
+            CustomLog &quot;logs/storage-web-access.log&quot; common
+            &lt;Directory &quot;E:/wwwroot/storage-web&quot;&gt;
+              Options Indexes FollowSymLinks
+              AllowOverride all
+              Require all granted
+              DirectoryIndex  index.html
+            &lt;/Directory&gt;
+    &lt;/VirtualHost&gt;
+    
+    
+    
+</code></pre>
+<h3 id="2-php伪静态"><a href="#2-php伪静态" class="headerlink" title="2.php伪静态"></a>2.php伪静态</h3><pre><code>1. httpd.conf配置文件 启动rewrite模块 如下：
 
     LoadModule rewrite_module modules/mod_rewrite.so
 
@@ -1503,7 +1555,15 @@ bin目录下 ApacheMonitor.exe 可以用来启动关闭 httpd服务
                             Require all granted
     &lt;/Directory&gt;
     
-  
+</code></pre>
+<h3 id="3-vue项目伪静态"><a href="#3-vue项目伪静态" class="headerlink" title="3.vue项目伪静态"></a>3.vue项目伪静态</h3><pre><code>&lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %&#123;REQUEST_FILENAME&#125; !-f
+    RewriteCond %&#123;REQUEST_FILENAME&#125; !-d
+    RewriteRule . /index.html [L]
+&lt;/ifModule&gt;          
 </code></pre>
 <h3 id="配置开机启动"><a href="#配置开机启动" class="headerlink" title="配置开机启动"></a>配置开机启动</h3><pre><code>   1.将apache加入windows服务   
    
@@ -2838,6 +2898,49 @@ FROM table
     1.排查下authorized_keys 是否存在key
     2.排查/etc/sshd/sshd_config下是否关闭了 证书登录【PubkeyAuthentication no】
 </code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/12/13/ansible%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>#ansible学习</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install -y epel-release
+yum install -y ansible
+#ansible配置文件：
+/etc/ansible/ansible.cfg
+/etc/ansible/hosts
+生成秘钥：
+ssh-keygen -t rsa  #在/root/.ssh/目录下生成秘钥
+#被控端：(复制主机端公钥到被控端)
+ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.7.99 
+ssh-copy-id  被控端ip
+</code></pre>
+<h2 id="配置-etc-ansible-hosts"><a href="#配置-etc-ansible-hosts" class="headerlink" title="配置/etc/ansible/hosts"></a>配置/etc/ansible/hosts</h2><p>##ansible的copy模块</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>云主机硬盘扩容</title>
+    <url>/2024/01/03/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/</url>
+    <content><![CDATA[<p>1.查看分区容量是否增加</p>
+<pre><code>lsblk
+</code></pre>
+<ol start="2">
+<li><p>扩容MBR分区和ext4文件系统</p>
+<p> #redhat类系统<br> type growpart || sudo yum install -y cloud-utils-growpart</p>
+<p> #debian类系统<br> type growpart || sudo apt-get install -y cloud-guest-utils</p>
+<p> sudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 1</p>
+<p> sudo resize2fs /dev/vdb1</p>
+</li>
+<li><p>扩容GPT分区和xfs文件系统</p>
+<p> sudo apt-get update<br> type growpart || sudo apt-get install -y cloud-guest-utils</p>
+<p> type sgdisk || sudo yum install -y gdisk</p>
+<h1 id="扩容分区"><a href="#扩容分区" class="headerlink" title="扩容分区"></a>扩容分区</h1><p> sudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 2</p>
+<p> #扩容文件系统<br> type xfs_growfs || sudo yum install -y xfsprogs<br> sudo xfs_growfs /mnt</p>
+</li>
+<li><p>扩容裸数据盘</p>
+<p>  sudo resize2fs /dev/vdb</p>
+</li>
+</ol>
 ]]></content>
   </entry>
 </search>

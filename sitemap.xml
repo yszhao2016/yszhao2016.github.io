@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2024/01/03/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/</loc>
+    
+    <lastmod>2024-01-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/</loc>
+    
+    <lastmod>2023-12-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2023/12/13/ansible%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2023-12-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2023/12/13/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
     
     <lastmod>2023-12-13</lastmod>
@@ -407,15 +434,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/</loc>
-    
-    <lastmod>2023-02-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/2022/04/17/nginx-server/</loc>
     
     <lastmod>2022-06-24</lastmod>
@@ -544,7 +562,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2023-12-13</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -554,14 +572,14 @@
   
   <url>
     <loc>http://example.com/categories/server/</loc>
-    <lastmod>2023-12-13</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/%E5%BF%83%E7%90%86%E5%AD%A6/</loc>
-    <lastmod>2023-12-13</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
