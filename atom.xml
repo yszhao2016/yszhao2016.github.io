@@ -39,11 +39,11 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://example.com/2023/12/13/ansible%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://example.com/2023/12/13/ansible%E5%AD%A6%E4%B9%A0/</id>
-    <published>2023-12-13T09:58:37.238Z</published>
-    <updated>2023-12-13T09:58:37.238Z</updated>
+    <title>ansible学习</title>
+    <link href="http://example.com/2023/12/01/ansible%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/12/01/ansible%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-12-01T11:48:14.000Z</published>
+    <updated>2024-01-04T06:31:11.200Z</updated>
     
     <content type="html"><![CDATA[<p>#ansible学习</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install -y epel-releaseyum install -y ansible#ansible配置文件：/etc/ansible/ansible.cfg/etc/ansible/hosts生成秘钥：ssh-keygen -t rsa  #在/root/.ssh/目录下生成秘钥#被控端：(复制主机端公钥到被控端)ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.7.99 ssh-copy-id  被控端ip</code></pre><h2 id="配置-etc-ansible-hosts"><a href="#配置-etc-ansible-hosts" class="headerlink" title="配置/etc/ansible/hosts"></a>配置/etc/ansible/hosts</h2><p>##ansible的copy模块</p>]]></content>
     
@@ -61,11 +61,11 @@ yum install -y a</summary>
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://example.com/2023/12/13/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://example.com/2023/12/13/%E5%A5%87%E6%80%AA%E7%9A%84%E9%97%AE%E9%A2%98/</id>
-    <published>2023-12-13T09:42:08.740Z</published>
-    <updated>2023-12-13T09:42:08.740Z</updated>
+    <title>奇怪问题总结</title>
+    <link href="http://example.com/2023/11/12/%E5%A5%87%E6%80%AA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://example.com/2023/11/12/%E5%A5%87%E6%80%AA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</id>
+    <published>2023-11-12T11:48:14.000Z</published>
+    <updated>2024-01-04T06:32:46.032Z</updated>
     
     <content type="html"><![CDATA[<p>#奇怪的问题</p><h2 id="无法访问php文件，总是报错-file-not-found"><a href="#无法访问php文件，总是报错-file-not-found" class="headerlink" title="无法访问php文件，总是报错 file not found"></a>无法访问php文件，总是报错 file not found</h2><pre><code>解决思路        1.首先查询 文件是否存在    2.查询nginx php访问的配置    3.关闭selinux     </code></pre><h2 id="配置ssh-免密码-登录总是提示需要输入密码"><a href="#配置ssh-免密码-登录总是提示需要输入密码" class="headerlink" title="配置ssh 免密码 登录总是提示需要输入密码"></a>配置ssh 免密码 登录总是提示需要输入密码</h2><pre><code>解决思路    1.排查下authorized_keys 是否存在key    2.排查/etc/sshd/sshd_config下是否关闭了 证书登录【PubkeyAuthentication no】</code></pre>]]></content>
     
