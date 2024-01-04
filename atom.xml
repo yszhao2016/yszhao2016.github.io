@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-01-03T05:07:11.661Z</updated>
+  <updated>2024-01-04T06:26:05.984Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,19 +21,16 @@
     <link href="http://example.com/2024/01/03/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/"/>
     <id>http://example.com/2024/01/03/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/</id>
     <published>2024-01-03T04:52:02.000Z</published>
-    <updated>2024-01-03T05:07:11.661Z</updated>
+    <updated>2024-01-04T06:26:05.984Z</updated>
     
-    <content type="html"><![CDATA[<p>1.查看分区容量是否增加</p><pre><code>lsblk</code></pre><ol start="2"><li><p>扩容MBR分区和ext4文件系统</p><p> #redhat类系统<br> type growpart || sudo yum install -y cloud-utils-growpart</p><p> #debian类系统<br> type growpart || sudo apt-get install -y cloud-guest-utils</p><p> sudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 1</p><p> sudo resize2fs /dev/vdb1</p></li><li><p>扩容GPT分区和xfs文件系统</p><p> sudo apt-get update<br> type growpart || sudo apt-get install -y cloud-guest-utils</p><p> type sgdisk || sudo yum install -y gdisk</p><h1 id="扩容分区"><a href="#扩容分区" class="headerlink" title="扩容分区"></a>扩容分区</h1><p> sudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 2</p><p> #扩容文件系统<br> type xfs_growfs || sudo yum install -y xfsprogs<br> sudo xfs_growfs /mnt</p></li><li><p>扩容裸数据盘</p><p>  sudo resize2fs /dev/vdb</p></li></ol>]]></content>
+    <content type="html"><![CDATA[<h1 id="1-查看分区容量是否增加"><a href="#1-查看分区容量是否增加" class="headerlink" title="1.查看分区容量是否增加"></a>1.查看分区容量是否增加</h1><pre><code>lsblk</code></pre><h1 id="2-扩容MBR分区和ext4文件系统"><a href="#2-扩容MBR分区和ext4文件系统" class="headerlink" title="2. 扩容MBR分区和ext4文件系统"></a>2. 扩容MBR分区和ext4文件系统</h1><pre><code>#redhat类系统type growpart || sudo yum install -y cloud-utils-growpart#debian类系统type growpart || sudo apt-get install -y cloud-guest-utilssudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 1sudo resize2fs /dev/vdb1</code></pre><h1 id="3-扩容GPT分区和xfs文件系统"><a href="#3-扩容GPT分区和xfs文件系统" class="headerlink" title="3. 扩容GPT分区和xfs文件系统"></a>3. 扩容GPT分区和xfs文件系统</h1><pre><code>sudo apt-get updatetype growpart || sudo apt-get install -y cloud-guest-utilstype sgdisk || sudo yum install -y gdisk# 扩容分区sudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 2#扩容文件系统type xfs_growfs || sudo yum install -y xfsprogssudo xfs_growfs /mnt</code></pre><h1 id="4-扩容裸数据盘"><a href="#4-扩容裸数据盘" class="headerlink" title="4.扩容裸数据盘"></a>4.扩容裸数据盘</h1><pre><code>sudo resize2fs /dev/vdb</code></pre>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;1.查看分区容量是否增加&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;lsblk
+    <summary type="html">&lt;h1 id=&quot;1-查看分区容量是否增加&quot;&gt;&lt;a href=&quot;#1-查看分区容量是否增加&quot; class=&quot;headerlink&quot; title=&quot;1.查看分区容量是否增加&quot;&gt;&lt;/a&gt;1.查看分区容量是否增加&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;lsblk
 &lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;&lt;p&gt;扩容MBR分区和ext4文件系统&lt;/p&gt;
-&lt;p&gt; #redhat类系统&lt;br&gt; type growpart || sudo yum i</summary>
+&lt;h</summary>
       
     
     

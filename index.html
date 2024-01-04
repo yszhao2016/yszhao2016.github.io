@@ -356,13 +356,13 @@
       
         
           
-          1.查看分区容量是否增加
-lsblk
+          1.查看分区容量是否增加lsblk
 
+2. 扩容MBR分区和ext4文件系统#redhat类系统
+type growpart || sudo yum install -y cloud-utils-growpart
 
-扩容MBR分区和ext4文件系统
- #redhat类系统 type growpart || sudo yum install -y cloud-utils-growpart
- #debian类系统 type growpart || sudo apt-get 
+#debian类系统
+type growpart || sudo apt-get i
           ...
           <!--noindex-->
           <div class="post-button text-center">

@@ -4,7 +4,7 @@
   <url>
     <loc>http://example.com/2024/01/03/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/</loc>
     
-    <lastmod>2024-01-03</lastmod>
+    <lastmod>2024-01-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -562,7 +562,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2024-01-03</lastmod>
+    <lastmod>2024-01-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -572,14 +572,14 @@
   
   <url>
     <loc>http://example.com/categories/server/</loc>
-    <lastmod>2024-01-03</lastmod>
+    <lastmod>2024-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/%E5%BF%83%E7%90%86%E5%AD%A6/</loc>
-    <lastmod>2024-01-03</lastmod>
+    <lastmod>2024-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
