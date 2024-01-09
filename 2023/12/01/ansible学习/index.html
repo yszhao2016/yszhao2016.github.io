@@ -89,7 +89,7 @@
 <meta property="og:description" content="#ansible学习 安装yum install -y epel-release yum install -y ansible #ansible配置文件： &#x2F;etc&#x2F;ansible&#x2F;ansible.cfg &#x2F;etc&#x2F;ansible&#x2F;hosts 生成秘钥： ssh-keygen -t rsa  #在&#x2F;root&#x2F;.ssh&#x2F;目录下生成秘钥 #被控端：(复制主机端公钥到被控端) ssh-copy-id -">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-12-01T11:48:14.000Z">
-<meta property="article:modified_time" content="2024-01-04T06:31:11.200Z">
+<meta property="article:modified_time" content="2024-01-09T09:13:51.549Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -367,7 +367,12 @@ ssh-keygen -t rsa  #在/root/.ssh/目录下生成秘钥
 ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.7.99 
 ssh-copy-id  被控端ip
 </code></pre>
-<h2 id="配置-etc-ansible-hosts"><a href="#配置-etc-ansible-hosts" class="headerlink" title="配置/etc/ansible/hosts"></a>配置/etc/ansible/hosts</h2><p>##ansible的copy模块</p>
+<h2 id="配置-etc-ansible-hosts"><a href="#配置-etc-ansible-hosts" class="headerlink" title="配置/etc/ansible/hosts"></a>配置/etc/ansible/hosts</h2><pre><code>gs157 ansible_ssh_host=1.11.1.11 ansible_ssh_port=65022
+kh251 ansible_ssh_host=2.22.222.2
+</code></pre>
+<p>##ansible的copy模块</p>
+<pre><code>ansible khweb  -m copy -a &quot;src=/home/soft/node_exporter-1.6.1.linux-amd64.tar.gz  dest=/home/soft/  backup=yes mode=644&quot;
+</code></pre>
 
       
     </div>
@@ -481,7 +486,7 @@ ssh-copy-id  被控端ip
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
