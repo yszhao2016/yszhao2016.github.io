@@ -89,7 +89,7 @@
 <meta property="og:description" content="#yum 安装报依赖库找不到问题 openEuler release 22.03版本  替换centos 7的源就可以  具体命令：wget -O &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-7.repo  然后 将文件中$releasever替换7  具体命令：vim 后  %s&#x2F;$release">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-11-10T03:59:43.000Z">
-<meta property="article:modified_time" content="2023-11-10T06:02:30.369Z">
+<meta property="article:modified_time" content="2024-01-15T06:43:45.191Z">
 <meta property="article:author" content="yszhao">
 <meta name="twitter:card" content="summary">
 
@@ -366,6 +366,30 @@
 
 具体命令：vim 后  %s/$releasever/7/g
 </code></pre>
+<h1 id="安装-yum-install-nginx-报错"><a href="#安装-yum-install-nginx-报错" class="headerlink" title="安装 yum install nginx 报错"></a>安装 yum install nginx 报错</h1><pre><code>Error: 
+ Problem: 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libcrypto.so.10()(64bit)，但没有提供者可以被安装
+  - 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libcrypto.so.10(libcrypto.so.10)(64bit)，但没有提供者可以被安装
+  - 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libssl.so.10()(64bit)，但没有提供者可以被安装
+  - 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libssl.so.10(libssl.so.10)(64bit)，但没有提供者可以被安装
+  - 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libcrypto.so.10(OPENSSL_1.0.2)(64bit)，但没有提供者可以被安装
+  - 无法同时安装 openssl-libs-1:1.0.2k-19.el7.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64
+  - 无法同时安装 openssl-libs-1:1.0.2k-21.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64
+  - 无法同时安装 openssl-libs-1:1.0.2k-22.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64
+  - 无法同时安装 openssl-libs-1:1.0.2k-24.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64
+  - 无法同时安装 openssl-libs-1:1.0.2k-25.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64
+  - 无法同时安装 openssl-libs-1:1.0.2k-26.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64
+  - 软件包 ima-evm-utils-libs-1.3.2-8.oe2203sp1.x86_64 需要 libcrypto.so.1.1()(64bit)，但没有提供者可以被安装
+  - 软件包 ima-evm-utils-libs-1.3.2-8.oe2203sp1.x86_64 需要 libcrypto.so.1.1(OPENSSL_1_1_0)(64bit)，但没有提供者可以被安装
+  - 软件包 ima-evm-utils-libs-1.3.2-8.oe2203sp1.x86_64 需要 libcrypto.so.1.1(OPENSSL_1_1_1)(64bit)，但没有提供者可以被安装
+  - 无法为该任务安装最佳候选
+  - 安装的软件包的问题 ima-evm-utils-libs-1.3.2-8.oe2203sp1.x86_64
+(try to add &#39;--allowerasing&#39; to command line to replace conflicting packages or &#39;--skip-broken&#39; to skip uninstallable packages or &#39;--nobest&#39; to use not only best candidate packages)
+
+
+解决方案
+yum install compat-openssl10
+yum install http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-3.el8.x86_64.rpm
+</code></pre>
 
       
     </div>
@@ -454,8 +478,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -513,6 +546,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-yum-install-nginx-%E6%8A%A5%E9%94%99"><span class="nav-number">1.</span> <span class="nav-text">安装 yum install nginx 报错</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
