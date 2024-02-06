@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hexo基础应用</title>
-    <url>/2021/12/10/Hexo%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>1.首先安装node,具体参考<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p>
 <p>2.初始化 项目</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
@@ -33,12 +33,12 @@
   </entry>
   <entry>
     <title>Linux-firewalld使用总结</title>
-    <url>/2024/01/09/Linux-firewalld%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Linux之LVM(逻辑卷管理)</title>
-    <url>/2023/10/19/Linux%E4%B9%8BLVM-%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h1><p>一个  分区 对应 一个PV <font color="red">【pvcreate /dev/sdb1 /dev/sdb2 /dev/sdc1 /dev/sdc2】</font></p>
 <p>多个PV 对应 一个VG <font color="red">【 vgcreate vgdata /dev/sdb1 /dev/sdb2 /dev/sdc1 /dev/sdc2】 </font></p>
 <p>一个VG 中可以  分出多个LV <font color="red">【 lvcreate -L 11G -n lv001 vgdata 】</font></p>
@@ -140,13 +140,13 @@ xfs_growfs /nas #xfs文件系统，该命令后面直接跟的是挂载点
   </entry>
   <entry>
     <title>ansible学习-playbook之nginx安装</title>
-    <url>/2024/01/17/ansible%E5%AD%A6%E4%B9%A0-playbook%E4%B9%8Bnginx%E5%AE%89%E8%A3%85/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line"> - name: install nginx</span><br><span class="line">   hosts: test</span><br><span class="line">   tasks:</span><br><span class="line">    - name: Print ansible_os_family</span><br><span class="line">      debug:</span><br><span class="line">       var: ansible_os_family    </span><br><span class="line">    #关闭selinux     </span><br><span class="line">    - name: disable selinux</span><br><span class="line">      shell: &quot;setenforce 0&quot;</span><br><span class="line">      ignore_errors: true</span><br><span class="line">    - name: Update apt package cache</span><br><span class="line">      apt:</span><br><span class="line">        update_cache: yes</span><br><span class="line">      ignore_errors: true</span><br><span class="line">      when: ansible_os_family in [&quot;Debian&quot;,&quot;ubuntu&quot;]     </span><br><span class="line">    - name: ubuntu install nginx</span><br><span class="line">      apt:</span><br><span class="line">        name: nginx</span><br><span class="line">        state: present   </span><br><span class="line">      when: ansible_os_family in [&quot;Debian&quot;,&quot;ubuntu&quot;]</span><br><span class="line">    - name: Add repo </span><br><span class="line">      yum_repository:</span><br><span class="line">       name: nginx</span><br><span class="line">       description: nginx repo</span><br><span class="line">       baseurl: http://nginx.org/packages/centos/7/$basearch/</span><br><span class="line">       gpgcheck: no</span><br><span class="line">       enabled: 1</span><br><span class="line">      when: ansible_os_family in  [&quot;RedHat&quot;,&quot;openEuler&quot;]</span><br><span class="line">    - name: redhat install nginx</span><br><span class="line">      yum:</span><br><span class="line">       name: nginx</span><br><span class="line">       state: latest</span><br><span class="line">      when: ansible_os_family in [&quot;RedHat&quot;,&quot;openEuler&quot;]</span><br><span class="line">    - name: start nginx server</span><br><span class="line">      service: name=nginx state=started</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
     <title>Linux服务之crond</title>
-    <url>/2023/07/19/Linux%E6%9C%8D%E5%8A%A1%E4%B9%8Bcrond/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、Cron介绍"><a href="#一、Cron介绍" class="headerlink" title="一、Cron介绍"></a>一、Cron介绍</h1><p>Cron被用来进行Linux系统的计划任务执行</p>
 <h1 id="二、相关目录"><a href="#二、相关目录" class="headerlink" title="二、相关目录"></a>二、相关目录</h1><p>cron.d/*用来存放一些软件的Cron设置</p>
 <p>cron.daily/每天执行一次的任务</p>
@@ -186,7 +186,7 @@ crontab -l
   </entry>
   <entry>
     <title>ansible学习</title>
-    <url>/2023/12/01/ansible%E5%AD%A6%E4%B9%A0/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p> yum install -y epel-release</p>
 <p> yum install -y ansible</p>
 <p> ansible配置文件：</p>
@@ -353,7 +353,7 @@ tag标签可以单独使用
   </entry>
   <entry>
     <title>docker学习1-Docker基础命令</title>
-    <url>/2023/07/08/docker%E5%AD%A6%E4%B9%A01/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="Docker基础命令"><a href="#Docker基础命令" class="headerlink" title="Docker基础命令"></a>Docker基础命令</h1><h3 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h3><pre><code>Docker image ls 
 </code></pre>
 <h3 id="查看运行中的容器container"><a href="#查看运行中的容器container" class="headerlink" title="查看运行中的容器container"></a>查看运行中的容器container</h3><pre><code>docker ps      展示 正在运行的
@@ -406,12 +406,12 @@ docker load：导入镜像
   </entry>
   <entry>
     <title>docker学习3</title>
-    <url>/2023/07/09/docker%E5%AD%A6%E4%B9%A03/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="docker-compose使用"><a href="#docker-compose使用" class="headerlink" title="docker-compose使用"></a>docker-compose使用</h1><h2 id="docker-compose安装"><a href="#docker-compose安装" class="headerlink" title="docker-compose安装"></a>docker-compose安装</h2>]]></content>
   </entry>
   <entry>
     <title>docker学习2-DockerFile</title>
-    <url>/2023/07/08/docker%E5%AD%A6%E4%B9%A02/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="Dockerfile-学习"><a href="#Dockerfile-学习" class="headerlink" title="Dockerfile 学习"></a>Dockerfile 学习</h1><h2 id="相关语法"><a href="#相关语法" class="headerlink" title="相关语法"></a>相关语法</h2><pre><code>FROM  scratch
 ADD hello /
 CMD [&quot;/hello&quot;]
@@ -464,7 +464,7 @@ ADD 有解压缩功能
   </entry>
   <entry>
     <title>fail2ban软件使用</title>
-    <url>/2023/07/09/fail2ban%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><pre><code>CentOS 中使用fail2ban和firewalld限制IP拦截cc攻击
 </code></pre>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre><code>yum -y install fail2ban
@@ -546,12 +546,12 @@ fail2ban-client set nginx-cc unbanip  112.84.237.102
   </entry>
   <entry>
     <title>docker学习4-网络</title>
-    <url>/2023/10/26/docker%E5%AD%A6%E4%B9%A04-%E7%BD%91%E7%BB%9C/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="原理linux-network-namespace"><a href="#原理linux-network-namespace" class="headerlink" title="原理linux network namespace"></a>原理linux network namespace</h1><h1 id="docker-bridge-网络"><a href="#docker-bridge-网络" class="headerlink" title="docker  bridge 网络"></a>docker  bridge 网络</h1><h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><h2 id="自定义-docker-网络"><a href="#自定义-docker-网络" class="headerlink" title="自定义 docker 网络"></a>自定义 docker 网络</h2><h1 id="docker端口映射"><a href="#docker端口映射" class="headerlink" title="docker端口映射"></a>docker端口映射</h1><h1 id="docker-host-网络"><a href="#docker-host-网络" class="headerlink" title="docker host 网络"></a>docker host 网络</h1>]]></content>
   </entry>
   <entry>
     <title>fastadmin使用总结</title>
-    <url>/2024/01/25/fastadmin%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、常用设置"><a href="#一、常用设置" class="headerlink" title="一、常用设置"></a>一、常用设置</h1><h2 id="1-1-通用搜索栏设置"><a href="#1-1-通用搜索栏设置" class="headerlink" title="1.1 通用搜索栏设置"></a>1.1 通用搜索栏设置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 初始化表格</span><br><span class="line"> table.bootstrapTable(&#123;</span><br><span class="line">     url: $.fn.bootstrapTable.defaults.extend.index_url,</span><br><span class="line">     pk: &#x27;id&#x27;,</span><br><span class="line">     sortName: &#x27;id&#x27;,</span><br><span class="line">     fixedColumns: true,</span><br><span class="line">     fixedRightNumber: 1,</span><br><span class="line">     //切换列表显示样式开关</span><br><span class="line">     showToggle: false,</span><br><span class="line">     //是否显示右上角的搜索框</span><br><span class="line">     search: false,</span><br><span class="line">     //控制显示列开关</span><br><span class="line">     showColumns:false,</span><br><span class="line">     showExport: false,</span><br><span class="line">     //显示搜索字段框</span><br><span class="line">     searchFormVisible: true,</span><br><span class="line">     //导出开关            </span><br><span class="line">     showExport: true,</span><br><span class="line">     //设置导出  格式</span><br><span class="line">     exportTypes: [&#x27;json&#x27;, &#x27;xml&#x27;, &#x27;csv&#x27;, &#x27;txt&#x27;, &#x27;doc&#x27;, &#x27;excel&#x27;],</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
 <h2 id="1-2-input-常用设置"><a href="#1-2-input-常用设置" class="headerlink" title="1.2 input 常用设置"></a>1.2 input 常用设置</h2><p>data-rule 设置 检查规则 可以自定义验证方法 checksite JS并相关设置<br>data-source select 可以设置数据源<br>示例</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//input设置</span><br><span class="line"></span><br><span class="line">&lt;input id=&quot;c-site_id&quot; data-rule=&quot;checksite&quot; data-source=&quot;hj212/pollutionsite/index&quot; data-field=&quot;site_name&quot; class=&quot;form-control selectpage&quot; name=&quot;row[site_id]&quot; type=&quot;text&quot; value=&quot;&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//js中设置</span><br><span class="line"></span><br><span class="line">var Controller = &#123;</span><br><span class="line">        index: function () &#123;</span><br><span class="line">            // 初始化表格参数配置</span><br><span class="line">            Table.api.init(&#123;</span><br><span class="line">                ...</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            var table = $(&quot;#table&quot;);</span><br><span class="line"></span><br><span class="line">            // 初始化表格</span><br><span class="line">            table.bootstrapTable(&#123;</span><br><span class="line">                url: $.fn.bootstrapTable.defaults.extend.index_url,</span><br><span class="line">                pk: &#x27;id&#x27;,</span><br><span class="line">                sortName: &#x27;id&#x27;,</span><br><span class="line"></span><br><span class="line">                columns: [</span><br><span class="line">                    [</span><br><span class="line">                        &#123;checkbox: true&#125;,</span><br><span class="line">                        &#123;field: &#x27;id&#x27;, title: __(&#x27;Id&#x27;),operate:false&#125;,</span><br><span class="line">                  </span><br><span class="line">                        &#123;field: &#x27;operate&#x27;, title: __(&#x27;Operate&#x27;), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate,</span><br><span class="line">                                 buttons:[</span><br><span class="line">                                     &#123;</span><br><span class="line">                                      &#x27;name&#x27;:&#x27;bindsite&#x27;,</span><br><span class="line">                                      &#x27;title&#x27;:function(row)&#123;</span><br><span class="line">                                          return &#x27;更换站点[ &#x27;+row.device_code+&#x27;]&#x27;;</span><br><span class="line">                                      &#125;,</span><br><span class="line">                                      &#x27;icon&#x27;:&#x27;fa fa-pencil&#x27;,</span><br><span class="line">                                      &#x27;text&#x27;:&#x27;更换站点&#x27;,</span><br><span class="line">                                      &#x27;classname&#x27;: &#x27;btn btn-xs btn-info btn-dialog&#x27;,</span><br><span class="line">                                      &#x27;url&#x27;:&#x27;hj212/device/bindsite/deviceId/&#123;ids&#125;&#x27;,</span><br><span class="line">                                      &#x27;extend&#x27;: &#x27;data-area=\&#x27;[&quot;95%&quot;,&quot;95%&quot;]\&#x27;&#x27;</span><br><span class="line">                                     &#125;,</span><br><span class="line">                                     &#123;</span><br><span class="line">                                      &#x27;name&#x27;:&#x27;siteInfo&#x27;,</span><br><span class="line">                                      &#x27;title&#x27;:function(row)&#123;</span><br><span class="line">                                          return &#x27;站点信息[ &#x27;+row.site+&#x27;]&#x27;;</span><br><span class="line">                                      &#125;,</span><br><span class="line">                                      &#x27;text&#x27;:&#x27;站点信息&#x27;,</span><br><span class="line">                                      &#x27;classname&#x27;: &#x27;btn btn-xs btn-primary btn-dialog&#x27;,</span><br><span class="line">                                      &#x27;url&#x27;:function(row)&#123;</span><br><span class="line">                                          return &#x27;hj212/pollutionsite/siteinfo/site_id/&#x27;+row.site_id;</span><br><span class="line">                                       &#125;,</span><br><span class="line">                                      &#x27;extend&#x27;: &#x27;data-area=\&#x27;[&quot;95%&quot;,&quot;95%&quot;]\&#x27;&#x27;</span><br><span class="line">                                     &#125;,</span><br><span class="line">                                 ]&#125;</span><br><span class="line">                    ]</span><br><span class="line">                ],</span><br><span class="line">                exportTypes: [ &#x27;excel&#x27;],</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            // 为表格绑定事件</span><br><span class="line">            Table.api.bindevent(table);</span><br><span class="line">        &#125;,</span><br><span class="line">        add: function () &#123;</span><br><span class="line">            Controller.api.bindevent();</span><br><span class="line">        &#125;,</span><br><span class="line">        edit: function () &#123;</span><br><span class="line">            Controller.api.bindevent();</span><br><span class="line">        &#125;,</span><br><span class="line">        bindsite:function()&#123;</span><br><span class="line">            Controller.api.bindevent();</span><br><span class="line">        &#125;,</span><br><span class="line">        api: &#123;</span><br><span class="line">            bindevent: function () &#123;</span><br><span class="line">	                $.validator.config(&#123;</span><br><span class="line">                    rules: &#123;</span><br><span class="line">                        checksite: function (element) &#123;</span><br><span class="line">                            return $.ajax(&#123;</span><br><span class="line">                                url: &#x27;hj212/device/checksite&#x27;,</span><br><span class="line">                                type: &#x27;POST&#x27;,</span><br><span class="line">                                data: &#123;</span><br><span class="line">                                    site_id: $(&quot;#c-site_id&quot;).val(),</span><br><span class="line">                                    id:$(&quot;#c-id&quot;).val()</span><br><span class="line">                                &#125;,</span><br><span class="line">                                dataType: &#x27;json&#x27;</span><br><span class="line">                            &#125;);</span><br><span class="line">                        &#125;,</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">                Form.api.bindevent($(&quot;form[role=form]&quot;));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -559,7 +559,7 @@ fail2ban-client set nginx-cc unbanip  112.84.237.102
   </entry>
   <entry>
     <title>hj212环保协议-2007</title>
-    <url>/2023/07/13/hj212%E7%8E%AF%E4%BF%9D%E5%8D%8F%E8%AE%AE-2007/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><pre><code>1、基于TCP/IP
 
 
@@ -975,7 +975,7 @@ class Hj212Server extends Command
   </entry>
   <entry>
     <title>java学习1</title>
-    <url>/2023/02/08/java%E5%AD%A6%E4%B9%A01/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h1><p>1.JavaEE 全称 Java Platform, Enterprise Edition，</p>
 <pre><code>它是对 JavaSE(Java Platform, Standard Edition) 的扩展
 加入了面向企业开发（实际上就是网络和 Web 有关开发）的支持，包括 Servlet，WebSocket，EL，EJB 等
@@ -1067,7 +1067,7 @@ public class classname extends HttpServlet&#123;
   </entry>
   <entry>
     <title>搭建git服务（适用小团队开发）</title>
-    <url>/2022/04/13/git-server/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p> #标签</p>
 <ul>
 <li><p>git<br>#添加账号<br>  useradd git </p>
@@ -1086,12 +1086,12 @@ public class classname extends HttpServlet&#123;
   </entry>
   <entry>
     <title>jenkins-发布php项目</title>
-    <url>/2023/07/19/jenkins-%E5%8F%91%E5%B8%83php%E9%A1%B9%E7%9B%AE/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>git总结</title>
-    <url>/2022/01/08/git%E6%80%BB%E7%BB%93/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h1><pre><code>工作区(workspace)      就是你平时存放项目代码的地方
 暂存区(stage)          git add
 仓库区/版本库(Repository)     git commit
@@ -1193,7 +1193,7 @@ git reset --hard e2c7f2d
   </entry>
   <entry>
     <title>JS模块化</title>
-    <url>/2022/02/26/js%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h2 id="CommonJs规范简"><a href="#CommonJs规范简" class="headerlink" title="CommonJs规范简"></a>CommonJs规范简</h2><pre><code>前端模块化
 
 最初是服务于服务端的 但它的载体是前端语言 JavaScript
@@ -1241,7 +1241,7 @@ exports 是模块内的私有局部变量，它只是指向了 module.exports
   </entry>
   <entry>
     <title>laravel源码学习2</title>
-    <url>/2023/03/14/laravel%E5%AD%A6%E4%B9%A02/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>#laravel 核心文件applications</p>
 ]]></content>
       <tags>
@@ -1250,7 +1250,7 @@ exports 是模块内的私有局部变量，它只是指向了 module.exports
   </entry>
   <entry>
     <title>laravel学习1</title>
-    <url>/2023/03/14/laravel%E5%AD%A6%E4%B9%A01/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="public-index-php文件解析"><a href="#public-index-php文件解析" class="headerlink" title="public/index.php文件解析"></a>public/index.php文件解析</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 引入自动加载文件</span><br><span class="line">require __DIR__.&#x27;/../bootstrap/autoload.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Turn On The Lights</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| We need to illuminate PHP development, so let us turn on the lights.</span><br><span class="line">| This bootstraps the framework and gets it ready for use, then it</span><br><span class="line">| will load up this application so that we can run it and send</span><br><span class="line">| the responses back to the browser and delight our users.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$app = require_once __DIR__.&#x27;/../bootstrap/app.php&#x27;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Run The Application</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Once we have the application, we can handle the incoming request</span><br><span class="line">| through the kernel, and send the associated response back to</span><br><span class="line">| the client&#x27;s browser allowing them to enjoy the creative</span><br><span class="line">| and wonderful application we have prepared for them.</span><br><span class="line">|</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line"></span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$response-&gt;send();</span><br><span class="line"></span><br><span class="line">$kernel-&gt;terminate($request, $response);</span><br></pre></td></tr></table></figure>
 
 
@@ -1262,7 +1262,7 @@ exports 是模块内的私有局部变量，它只是指向了 module.exports
   </entry>
   <entry>
     <title>linux-iptables使用总结</title>
-    <url>/2023/07/26/linux-iptables%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>一、iptables<br>    iptables防火墙没有启用,iptables命令仍然会显示默认的规则.</p>
 <p>二、常用命令</p>
 <p>常用参数</p>
@@ -1328,12 +1328,12 @@ DROP   丢弃
   </entry>
   <entry>
     <title>linux系统后台运行任务</title>
-    <url>/2023/07/19/linux%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E4%BB%BB%E5%8A%A1/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>linux硬盘以及分区</title>
-    <url>/2023/03/16/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、-硬盘分区基础知识"><a href="#一、-硬盘分区基础知识" class="headerlink" title="一、 硬盘分区基础知识"></a>一、 硬盘分区基础知识</h1><pre><code>磁盘分区类型：硬盘分区最常见的类型为msdos和gpt，
 前者表示MBR分区，而后者表示GPT分区。传统的BIOS只支持MBR分区硬盘启动，
 一个硬盘只能分成四个分区，并且单个分区最大不超过2TB。
@@ -1499,7 +1499,7 @@ vim /etc/fstab
   </entry>
   <entry>
     <title>搭建 mysql_server</title>
-    <url>/2022/04/17/mysql-server/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="centos-mysql安装"><a href="#centos-mysql安装" class="headerlink" title="centos mysql安装"></a>centos mysql安装</h1><p>1.网站：<a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
 <p>2.mysql官网找到相应版本安装包</p>
 <p>3.然后下载本地 tar -xvf mysql-5.7.21-1.el7.x86_64.rpm-bundle.tar</p>
@@ -1619,7 +1619,7 @@ error: Failed dependencies:
   </entry>
   <entry>
     <title>mysql的常用应用</title>
-    <url>/2023/10/17/mysql%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>#mysql忘记密码,重置密码</p>
 <p>1.修改my.cnf</p>
 <p>添加</p>
@@ -1648,7 +1648,7 @@ source 123.sql;
   </entry>
   <entry>
     <title>搭建 nginx_server</title>
-    <url>/2022/04/17/nginx-server/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><h2 id="1-yum-安装（默认情况下使用yum安装的nginx包含ssl模块）"><a href="#1-yum-安装（默认情况下使用yum安装的nginx包含ssl模块）" class="headerlink" title="1.yum 安装（默认情况下使用yum安装的nginx包含ssl模块）"></a>1.yum 安装（默认情况下使用yum安装的nginx包含ssl模块）</h2><pre><code>    官方 yum 源链接 http://nginx.org/en/linux_packages.html#RHEL-CentOS
     
     vim /etc/yum.repos.d/nginx.repo
@@ -1796,12 +1796,12 @@ useradd -g www -s /sbin/nologin www
   </entry>
   <entry>
     <title>搭建lnmp环境</title>
-    <url>/2022/04/13/make-lnmp/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>nginx-vhost-安全配置模版</title>
-    <url>/2023/07/13/nginx-vhost-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E6%A8%A1%E7%89%88/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>#nginx-vhost-安全配置模版</p>
 <pre><code>server&#123;
         listen 443 ssl ;
@@ -1884,12 +1884,12 @@ useradd -g www -s /sbin/nologin www
   </entry>
   <entry>
     <title>nginx之location</title>
-    <url>/2023/07/29/nginx%E4%B9%8Blocation/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>nginx之logrotate</title>
-    <url>/2023/07/19/nginx%E4%B9%8Blogrotate/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、logrotate介绍"><a href="#一、logrotate介绍" class="headerlink" title="一、logrotate介绍"></a>一、logrotate介绍</h1><p>logrotate是centos自带命令，其他linux操作系统可能需要自行安装，用来进行日志切割和定期删除，</p>
 <p>简单来说就是将某个日志文件按照时间或大小分割成多份，删除时间久远的日志。</p>
 <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><pre><code>yum install -y logrotate     #centos 系统
@@ -1961,7 +1961,7 @@ include /etc/logrotate.d
   </entry>
   <entry>
     <title>nginx配置</title>
-    <url>/2023/07/27/nginx%E9%85%8D%E7%BD%AE/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一-、配置详解"><a href="#一-、配置详解" class="headerlink" title="一 、配置详解"></a>一 、配置详解</h1><h2 id="1-1nginx配置文件"><a href="#1-1nginx配置文件" class="headerlink" title="1.1nginx配置文件"></a>1.1nginx配置文件</h2><pre><code>#nginx 已那个用户身份访问文件
 user  www;  
 
@@ -2157,7 +2157,7 @@ server&#123;
   </entry>
   <entry>
     <title>redis基础</title>
-    <url>/2023/09/25/redis%E5%9F%BA%E7%A1%80/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="redis-简介"><a href="#redis-简介" class="headerlink" title="redis 简介"></a>redis 简介</h1><p>Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用<br>Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储<br>Redis支持数据的备份，即master-slave模式的数据备份</p>
 <p>Redis是单进程的</p>
 <h1 id="redis-持久化方案"><a href="#redis-持久化方案" class="headerlink" title="redis 持久化方案"></a>redis 持久化方案</h1><h2 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h2><p>三种写回策略<br>always，同步写回，每个子命令执行完，都立即将日志写回磁盘。</p>
@@ -2267,7 +2267,7 @@ slave-lazy-flush no
   </entry>
   <entry>
     <title>php常用函数总结</title>
-    <url>/2023/07/25/php%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、字符串处理函数"><a href="#一、字符串处理函数" class="headerlink" title="一、字符串处理函数"></a>一、字符串处理函数</h1><h2 id="1-1-str-pad"><a href="#1-1-str-pad" class="headerlink" title="1.1 str_pad()"></a>1.1 str_pad()</h2><p>str_pad(【必填 需要处理的字符串】,【必填 填充的长度】，【 可选 填充的字符串，默认空白】，【可选 填充字符串的哪边】)</p>
 <pre><code>规定填充字符串的哪边 可能的值：
 
@@ -2285,7 +2285,7 @@ STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
   </entry>
   <entry>
     <title>openEuler系统安装遇到问题</title>
-    <url>/2023/11/10/openEuler%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>#yum 安装报依赖库找不到问题</p>
 <pre><code>openEuler release 22.03版本
 
@@ -2325,7 +2325,7 @@ yum install http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Package
   </entry>
   <entry>
     <title>搭建php环境</title>
-    <url>/2022/04/17/php/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、安装Remi源："><a href="#一、安装Remi源：" class="headerlink" title="一、安装Remi源："></a>一、安装Remi源：</h1><pre><code># CentOS 6 / RHEL 6
 yum install http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 # CentOS 7 / RHEL 7
@@ -2358,7 +2358,7 @@ useradd -g www -s /sbin/nologin www
   </entry>
   <entry>
     <title>openEuler搭建lnmp</title>
-    <url>/2023/07/09/openEuler%E6%90%AD%E5%BB%BAlnmp/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>#openEuler搭建lnmp</p>
 <p>##安装php<br>wget <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a></p>
 <p>rpm -ivh –nodeps epel-release-latest-7.noarch.rp</p>
@@ -2385,7 +2385,7 @@ yum install http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Package
   </entry>
   <entry>
     <title>php扩展编译安装</title>
-    <url>/2023/07/19/php%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、找点phpize-和-php-config路径"><a href="#一、找点phpize-和-php-config路径" class="headerlink" title="一、找点phpize 和 php-config路径"></a>一、找点phpize 和 php-config路径</h1><pre><code>find / -name phpize
 
 find / -name php-config
@@ -2429,7 +2429,7 @@ extension=swoole.so
   </entry>
   <entry>
     <title>redis基本数据结构</title>
-    <url>/2023/09/26/redis%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><pre><code>Redis五大数据类型：String、Hash、List、Set、Sorted set
 </code></pre>
 <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>String类型的最大能存储512M 应用场景 【缓存】</p>
@@ -2479,7 +2479,7 @@ llen：打印当前列表List中的元素个数。
   </entry>
   <entry>
     <title>rsyslog日志上报服务</title>
-    <url>/2024/02/01/rsyslog%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="rsyslog-基础"><a href="#rsyslog-基础" class="headerlink" title="rsyslog 基础"></a>rsyslog 基础</h1><h2 id="日志类别"><a href="#日志类别" class="headerlink" title="日志类别"></a>日志类别</h2><pre><code>日志类型 日志内容
 auth 用户认证时产生的日志
 syslog 系统日志
@@ -2601,7 +2601,7 @@ logger -it local1 -p local1.info &quot;hello&quot;
   </entry>
   <entry>
     <title>shell脚本学习1</title>
-    <url>/2023/07/13/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A01/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>开头声明</p>
 <pre><code>#!/bin/bash   表示使用bash作为解释器来执行shell脚本
 
@@ -2704,12 +2704,12 @@ fi
   </entry>
   <entry>
     <title>ubuntu搭建lnmp环境</title>
-    <url>/2023/07/09/ubuntn%E6%90%AD%E5%BB%BAlnmp%E7%8E%AF%E5%A2%83/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>springboot学习</title>
-    <url>/2023/08/01/springboot%E5%AD%A6%E4%B9%A0/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h2 id="创建基于springboot-项目"><a href="#创建基于springboot-项目" class="headerlink" title="创建基于springboot 项目"></a>创建基于springboot 项目</h2><h2 id="1-maven方式"><a href="#1-maven方式" class="headerlink" title="1.maven方式"></a>1.maven方式</h2><pre><code>pom.xml文件加入
 
   &lt;parent&gt;
@@ -2750,13 +2750,13 @@ public class StartApplication &#123;
   </entry>
   <entry>
     <title>shell脚本学习2</title>
-    <url>/2023/07/29/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A02/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>搜索出当前目录下包含某个字符串的文件  并替换文件中的xx字符串为bb字符串<br>    sed -i “s/xx/bb/g” <code>grep -rl &quot;xx ./</code><br>    sed -i “s/http://121.229.56.251:8082/https://zkzp.jyrcfzjt.com:8082/g” <code>grep -rl &quot;http://121.229.56.251:8082&quot; ./</code></p>
 ]]></content>
   </entry>
   <entry>
     <title>webpack学习笔记1</title>
-    <url>/2022/01/01/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>#1. webpack 安装</p>
 <pre><code>全局安装 nodejs
     验证  node -v
@@ -2788,7 +2788,7 @@ npm init -y
   </entry>
   <entry>
     <title>通过vsftpd搭建ftp服务器</title>
-    <url>/2022/04/15/vsftpd-server/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>1.yum 安装</p>
 <pre><code>yum install vsftpd
 </code></pre>
@@ -2852,12 +2852,12 @@ rename 1111.xlsx   processed/1111.xlsx
   </entry>
   <entry>
     <title>session和cookie</title>
-    <url>/2023/07/21/session%E5%92%8Ccookie/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>vue学习1</title>
-    <url>/2023/02/22/vue%E5%AD%A6%E4%B9%A01/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="vuecli-vue脚手架"><a href="#vuecli-vue脚手架" class="headerlink" title="vuecli  vue脚手架"></a>vuecli  vue脚手架</h1><pre><code>vue 它是一个插件  最基础的项目架构 帮集成webpack 构建 打包 编译 包含基本的架子
 
 安装命令：    npm install -g @vue/cli
@@ -2884,7 +2884,7 @@ vue ui 启动vue ui操作界面
   </entry>
   <entry>
     <title>web备份方案</title>
-    <url>/2021/12/23/web%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h2 id="一、服务器环境"><a href="#一、服务器环境" class="headerlink" title="一、服务器环境"></a>一、服务器环境</h2><pre><code>    192.168.100.230 web服务器
     192.168.100.20  备份服务器 （rsync服务端）
 </code></pre>
@@ -2942,7 +2942,7 @@ systemctl start rsyncd
   </entry>
   <entry>
     <title>web安全</title>
-    <url>/2023/07/09/web%E5%AE%89%E5%85%A8/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="php安全配置"><a href="#php安全配置" class="headerlink" title="php安全配置"></a>php安全配置</h1><pre><code>主要控制php执行危险函数，默认是关闭：Off
 sql.safe_mode=On
 禁止显示PHP版本号
@@ -3003,7 +3003,7 @@ add_header Access-Control-Allow-Headers $http_access_control_request_headers;
   </entry>
   <entry>
     <title>wordpress相关</title>
-    <url>/2023/11/01/wordpress%E7%9B%B8%E5%85%B3/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="wordpress-迁移后还是访问之前的域名"><a href="#wordpress-迁移后还是访问之前的域名" class="headerlink" title="wordpress 迁移后还是访问之前的域名"></a>wordpress 迁移后还是访问之前的域名</h1><pre><code>1.找到 前缀_options 表修改 siteurl  home字段 
 2.或者登录后台修改
 </code></pre>
@@ -3022,7 +3022,7 @@ MD5 加密
   </entry>
   <entry>
     <title>升级openssh</title>
-    <url>/2023/08/01/%E5%8D%87%E7%BA%A7openssh/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="centos系统"><a href="#centos系统" class="headerlink" title="centos系统"></a>centos系统</h1><h2 id="查看是否安装openssh"><a href="#查看是否安装openssh" class="headerlink" title="查看是否安装openssh"></a>查看是否安装openssh</h2><pre><code>rpm -qa|grep openssh
 有则卸载
 
@@ -3088,7 +3088,7 @@ sudo apt-get remove openssh-server
   </entry>
   <entry>
     <title>windows搭建apache+php+mysql5.6</title>
-    <url>/2023/02/25/windows%E6%90%AD%E5%BB%BAapache-php-mysql5-6/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="安装mysql服务"><a href="#安装mysql服务" class="headerlink" title="安装mysql服务"></a>安装mysql服务</h1><pre><code>1.下载地址：https://downloads.mysql.com/archives/community/
 
 2.下载相应windows版本
@@ -3322,7 +3322,7 @@ RewriteRule   .?   /404.php   [L]   #跳转到网站根目录
   </entry>
   <entry>
     <title>奇怪问题总结</title>
-    <url>/2023/11/12/%E5%A5%87%E6%80%AA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>#奇怪的问题</p>
 <h2 id="无法访问php文件，总是报错-file-not-found"><a href="#无法访问php文件，总是报错-file-not-found" class="headerlink" title="无法访问php文件，总是报错 file not found"></a>无法访问php文件，总是报错 file not found</h2><pre><code>解决思路
     
@@ -3340,7 +3340,7 @@ RewriteRule   .?   /404.php   [L]   #跳转到网站根目录
   </entry>
   <entry>
     <title>云主机硬盘扩容</title>
-    <url>/2024/01/03/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="1-查看分区容量是否增加"><a href="#1-查看分区容量是否增加" class="headerlink" title="1.查看分区容量是否增加"></a>1.查看分区容量是否增加</h1><pre><code>lsblk
 </code></pre>
 <h1 id="2-扩容MBR分区和ext4文件系统"><a href="#2-扩容MBR分区和ext4文件系统" class="headerlink" title="2. 扩容MBR分区和ext4文件系统"></a>2. 扩容MBR分区和ext4文件系统</h1><pre><code>#redhat类系统
@@ -3370,12 +3370,12 @@ sudo xfs_growfs /mnt
   </entry>
   <entry>
     <title>搭建k8s</title>
-    <url>/2023/11/10/%E6%90%AD%E5%BB%BAk8s/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>守护进程-supervisor</title>
-    <url>/2023/07/19/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-supervisor/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><pre><code>yum install supervisor    #centos 系统
 
 apt install supervisor    #ubuntu 系统
@@ -3407,7 +3407,7 @@ systemctl restart  supervisord
   </entry>
   <entry>
     <title>搭建openvpn</title>
-    <url>/2023/08/28/%E6%90%AD%E5%BB%BAopenvpn/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="1-1、安装epel库和openvpn软件"><a href="#1-1、安装epel库和openvpn软件" class="headerlink" title="1.1、安装epel库和openvpn软件"></a>1.1、安装epel库和openvpn软件</h2><pre><code>yum -y install openvpn easy-rsa firewalld
 
 yum install epel-release -y
@@ -3596,7 +3596,7 @@ verb 3
   </entry>
   <entry>
     <title>普通心理学笔记1</title>
-    <url>/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B01/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>#心理学</p>
 <pre><code>心理学研究行为和心理过程
 一门多个专业领域的的科学
@@ -3649,7 +3649,7 @@ verb 3
   </entry>
   <entry>
     <title>搭建nps内网穿透</title>
-    <url>/2023/08/29/%E6%90%AD%E5%BB%BAnps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>内网穿透的方式有很多种，什么Frp、Ngrok、NPS、蒲公英等等，</p>
 <h1 id="NPS简介"><a href="#NPS简介" class="headerlink" title="NPS简介"></a>NPS简介</h1><p>nps是一款轻量级、高性能、功能强大的内网穿透代理服务器。目前支持tcp、udp流量转发，<br>可支持任何tcp、udp上层协议（访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析等等……），<br>此外还支持内网http代理、内网socks5代理、p2p等，并带有功能强大的web管理端</p>
 <h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><pre><code>配置docker阿里云 镜像
@@ -3690,7 +3690,7 @@ docker run -d --restart=always --name npc-227 --net=host ffdfgdfg/npc -server=11
   </entry>
   <entry>
     <title>特殊的SQL语句</title>
-    <url>/2023/11/08/%E7%89%B9%E6%AE%8A%E7%9A%84SQL%E8%AF%AD%E5%8F%A5/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="使用逗号分割拆分"><a href="#使用逗号分割拆分" class="headerlink" title="使用逗号分割拆分"></a>使用逗号分割拆分</h1><p>查询出field字段中有value的记录<br>SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0</p>
 <p> FIND_IN_SET(‘value’, field)<font color=Red>&gt;0</font>  查询的是字段中<font color=Red>包含了</font>查询字符value的<br> FIND_IN_SET(‘value’, field)<font color=Red>=0</font>   查询的是字段中<font color=Red>不包含</font>了查询字符value的</p>
 <h1 id="SUBSTRING-INDEX-函数"><a href="#SUBSTRING-INDEX-函数" class="headerlink" title="SUBSTRING_INDEX 函数"></a>SUBSTRING_INDEX 函数</h1><p>string：用于截取目标字符串的字符串。可为字段，表达式等。</p>
@@ -3716,7 +3716,7 @@ FROM table
   </entry>
   <entry>
     <title>vmvare-esxi虚拟机扩容</title>
-    <url>/2023/08/28/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<p>修改硬盘大小</p>
 <pre><code>先虚拟机管理页面修改硬盘大小
     注：不删除快照是 无法修改成功的
@@ -3750,7 +3750,7 @@ w
   </entry>
   <entry>
     <title>普通心理学笔记2</title>
-    <url>/2021/12/21/%E6%99%AE%E9%80%9A%E5%BF%83%E7%90%86%E5%AD%A6%E7%AC%94%E8%AE%B02/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<h1 id="现代心理学6个视角"><a href="#现代心理学6个视角" class="headerlink" title="现代心理学6个视角"></a>现代心理学6个视角</h1><pre><code>起源：古希腊哲学家 苏格拉底 柏拉图 亚里士多德 意识和疯癫的理解
 亚洲和非洲 瑜伽和佛教 探索意识 通过冥想控制意识
 天主教
@@ -3797,17 +3797,17 @@ w
   </entry>
   <entry>
     <title>高德地图-点位展示开发</title>
-    <url>/2024/02/01/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE-%E7%82%B9%E4%BD%8D%E5%B1%95%E7%A4%BA%E5%BC%80%E5%8F%91/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>跨域问题总结</title>
-    <url>/2023/07/21/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>ansible学习-playbook之nginx配置</title>
-    <url>/2024/01/17/ansible%E5%AD%A6%E4%B9%A0-playbook%E4%B9%8Bnginx%E9%85%8D%E7%BD%AE/</url>
+    <url>/posts/undefined.html</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">- name: install nginx</span><br><span class="line">  hosts: test</span><br><span class="line">  gather_facts: yes      </span><br><span class="line">#  vars:</span><br><span class="line">#       createuser:</span><br><span class="line">#        - tomcat</span><br><span class="line">#        - www</span><br><span class="line">#        - mysql</span><br><span class="line">  vars:</span><br><span class="line">   username: www      </span><br><span class="line">  tasks:</span><br><span class="line">   - name: Print ansible_os_family</span><br><span class="line">     debug:</span><br><span class="line">   #利用循环创建多个用户</span><br><span class="line">   # - name: create user</span><br><span class="line">   #  user: name=&#123;&#123;item&#125;&#125; state=present</span><br><span class="line">   #  with_items: &quot;&#123;&#123;createuser&#125;&#125;&quot;     </span><br><span class="line">   - name: Create Nginx User</span><br><span class="line">     user: name=&#123;&#123;username&#125;&#125; state=present createhome=no shell=/sbin/nologin</span><br><span class="line">   - name: template config to remote hosts</span><br><span class="line">     template: src=template/nginx.conf.j2 dest=/etc/nginx/nginx.conf</span><br><span class="line">#   - name: add virtualhost config</span><br><span class="line">#      copy: src=my.conf dest=/etc/nginx/conf.d/</span><br><span class="line">#      tags: updateconfig</span><br><span class="line">   #检查nginx是否运行</span><br><span class="line">   - name: check nginx running</span><br><span class="line">     stat: path=/var/run/nginx.pid</span><br><span class="line">     register: nginxrunning</span><br><span class="line">     tags: updateconfig</span><br><span class="line">   #检查nginx配置文件是否有问题          </span><br><span class="line">   - name: check nginx syntax</span><br><span class="line">     command: /usr/sbin/nginx -t</span><br><span class="line">     register: nginxsyntax   </span><br><span class="line">     check_mode: False   </span><br><span class="line">#     changed_when: true</span><br><span class="line">#     ignore_errors: true   </span><br><span class="line">     tags: updateconfig</span><br><span class="line">#删除上一步产生的pid</span><br><span class="line">#   - name: delete pid</span><br><span class="line">#     shell: rm -rf /var/run/nginx.pid</span><br><span class="line">   #debug  nginx状态</span><br><span class="line">   - name: print nginx syntax</span><br><span class="line">     debug:</span><br><span class="line">      var: &quot;nginxrunning, nginxsyntax&quot;</span><br><span class="line">   - name: reload nginx server</span><br><span class="line">     service: name=nginx state=reloaded</span><br><span class="line">     when: nginxsyntax.rc == 0  and nginxrunning.stat.exists == true</span><br><span class="line">     tags: updateconfig     </span><br><span class="line">   - name: start nginx server</span><br><span class="line">     service: name=nginx state=started</span><br><span class="line">     when: </span><br><span class="line">      - nginxsyntax.rc == 0</span><br><span class="line">      - nginxrunning.stat.exists == false</span><br><span class="line">     tags: updateconfig</span><br><span class="line">     </span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
   </entry>
 </search>
