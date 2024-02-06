@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="php开发," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yszhao的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="基础1、基于TCP&#x2F;IP   2、数据包示例      ##0069QN&#x3D;20230812235921004;ST&#x3D;91;CN&#x3D;9021;PW&#x3D;123456;MN&#x3D;000202;Flag&#x3D;4;CP&#x3D;&amp;&amp;&amp;&amp;1540          ##0106QN&#x3D;20230812233003569;ST&#x3D;32;CN&#x3D;3020;PW&#x3D;123456;MN&#x3D;000102;Flag&#x3D;5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hj212环保协议-2007">
+<meta property="og:url" content="http://example.com/posts/8e3b07ac.html">
+<meta property="og:site_name" content="yszhao的博客">
+<meta property="og:description" content="基础1、基于TCP&#x2F;IP   2、数据包示例      ##0069QN&#x3D;20230812235921004;ST&#x3D;91;CN&#x3D;9021;PW&#x3D;123456;MN&#x3D;000202;Flag&#x3D;4;CP&#x3D;&amp;&amp;&amp;&amp;1540          ##0106QN&#x3D;20230812233003569;ST&#x3D;32;CN&#x3D;3020;PW&#x3D;123456;MN&#x3D;000102;Flag&#x3D;5">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-07-13T12:08:15.000Z">
+<meta property="article:modified_time" content="2024-02-06T05:50:34.838Z">
+<meta property="article:author" content="yszhao">
+<meta property="article:tag" content="php开发">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/posts/8e3b07ac.html"/>
+
+
+
+
+
+  <title>hj212环保协议-2007 | yszhao的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yszhao的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录我的生活 学习</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/8e3b07ac.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yszhao的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hj212环保协议-2007</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-13T20:08:15+08:00">
+                2023-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><pre><code>1、基于TCP/IP
+
+
+2、数据包示例
+
+    ##0069QN=20230812235921004;ST=91;CN=9021;PW=123456;MN=000202;Flag=4;CP=&amp;&amp;&amp;&amp;1540
+    
+    ##0106QN=20230812233003569;ST=32;CN=3020;PW=123456;MN=000102;Flag=5;CP=&amp;&amp;DataTime=20230812233003;i12001-Info=4&amp;&amp;7D00
+    
+    ##0580QN=20230914000010688;ST=32;CN=2061;PW=123456;MN=3207xuweixinqu0000000233;Flag=4;CP=&amp;&amp;DataTime=20230913230000;w21001-Min=23.592,w21001-Max=23.592,w21001-Avg=23.592,w21001-Cou=0.000,w21001-Flag=N;w21011-Min=0.476,w21011-Max=0.476,w21011-Avg=0.476,w21011-Cou=0.000,w21011-Flag=N;w01018-Min=181.574,w01018-Max=181.574,w01018-Avg=181.574,w01018-Cou=0.000,w01018-Flag=N;w21003-Min=5.036,w21003-Max=5.036,w21003-Avg=5.036,w21003-Cou=0.000,w21003-Flag=N;w01001-Min=6.856,w01001-Max=6.874,w01001-Avg=6.864,w01001-Flag=N;w01010-Min=23.284,w01010-Max=23.411,w01010-Avg=23.349,w01010-Flag=N&amp;&amp;F6C1
+
+    ##0620QN=20230813000015114;ST=32;CN=2051;PW=123456;MN=000101;Flag=5;CP=&amp;&amp;DataTime=20230812235000;w01018-Cou=0.0,w01018-Min=3547.8,w01018-Avg=3547.8,w01018-Max=3547.8,w01018-Flag=N;w21003-Cou=0.00,w21003-Min=129.63,w21003-Avg=129.63,w21003-Max=129.63,w21003-Flag=N;w21011-Cou=0.00,w21011-Min=0.43,w21011-Avg=0.43,w21011-Max=0.43,w21011-Flag=N;w21001-Cou=0.00,w21001-Min=67.35,w21001-Avg=67.35,w21001-Max=67.35,w21001-Flag=N;w01001-Min=6.65,w01001-Avg=6.65,w01001-Max=6.65,w01001-Flag=N;w01010-Min=26.2,w01010-Avg=26.5,w01010-Max=26.7,w01010-Flag=N;w00000-Cou=0.00,w00000-Min=0.00,w00000-Avg=0.00,w00000-Max=0.00,w00000-Flag=N&amp;&amp;2BC0
+</code></pre>
+<h1 id="hj212解析"><a href="#hj212解析" class="headerlink" title="hj212解析"></a>hj212解析</h1><pre><code>&lt;?php
+namespace app\hj212;
+
+use app\hj212\feature\ParserFeature;
+use app\hj212\model\verify\PacketElement;
+
+/**
+ * T212通信包解析器
+ * Class T212Parser
+ * @package App\core
+ */
+class T212Parser &#123;
+
+    public static $HEADER = &#39;##&#39;;
+    //需要双引号(&quot;&quot;)
+    public static $FOOTER = &quot;\r\n&quot;;
+
+    protected $reader;
+    //位置
+    protected $readerIndex = 0;
+
+    private $parserFeature;
+
+    //TEMP
+    private $count;
+//    private PacketElement token;
+
+    function __construct($reader = &#39;&#39;)&#123;
+        $this-&gt;reader = $reader;
+
+    &#125;
+
+    public function setReader($reader) &#123;
+        $this-&gt;reader = $reader;
+        $this-&gt;readerIndex = 0;
+    &#125;
+
+    /**
+     * 设置解析特性
+     * @param parserFeature 解析特性
+     */
+    function setParserFeature(int $parserFeature) &#123;
+        $this-&gt;parserFeature = $parserFeature;
+    &#125;
+
+    /**
+     * 读取 包头
+     * @return mixed
+     * @throws IOException
+     */
+    public function readHeader() &#123;
+
+//        $header = new char[2];
+//        $count = $reader.read($header);
+
+        $header = substr($this-&gt;reader,$this-&gt;readerIndex,PacketElement::HEADER);
+        $this-&gt;readerIndex = $this-&gt;readerIndex + PacketElement::HEADER;
+        $count = strlen($header);
+        VerifyUtil::verifyEqualLen($count, PacketElement::HEADER, PacketElement::getElementVar());
+        VerifyUtil::verifyChar($header, self::$HEADER, PacketElement::getElementVar());
+
+        return $header;
+    &#125;
+
+    /**
+     * 读取 数据段长度
+     * @see PacketElement#DATA_LEN
+     * @return chars
+     * @throws T212FormatException
+     * @throws IOException
+     */
+    function readDataLen()&#123;
+        $len = substr($this-&gt;reader,$this-&gt;readerIndex,PacketElement::DATA_LEN);
+        $this-&gt;readerIndex = $this-&gt;readerIndex + PacketElement::DATA_LEN;
+        $count = strlen($len);
+        VerifyUtil::verifyEqualLen($count,PacketElement::DATA_LEN, PacketElement::getElementVar());
+        return $len;
+    &#125;
+
+    /**
+     * 读取 数据段
+     * @see PacketElement#DATA
+     * @return chars
+     * @throws IOException
+     */
+    public function readData(int $segmentLen) &#123;
+        $segment = substr($this-&gt;reader,$this-&gt;readerIndex, $segmentLen);
+        $this-&gt;readerIndex = $this-&gt;readerIndex + $segmentLen;
+        $count = strlen($segment);
+        VerifyUtil::verifyEqualLen($count,$segmentLen, PacketElement::getElementVar());
+        return $segment;
+    &#125;
+
+    /**
+     * 读取 DATA_CRC 校验
+     * @see PacketElement#DATA_CRC
+     * @return header chars
+     * @throws IOException
+     */
+    function readCrc() &#123;
+        $crc = substr($this-&gt;reader,$this-&gt;readerIndex, PacketElement::DATA_CRC);
+        $this-&gt;readerIndex = $this-&gt;readerIndex + PacketElement::DATA_CRC;
+        $count = strlen($crc);
+        VerifyUtil::verifyEqualLen($count,PacketElement::DATA_CRC, PacketElement::getElementVar());
+        return $crc;
+    &#125;
+
+    /**
+     * 读取 包尾
+     * @see PacketElement
+     * @return chars
+     * @throws IOException
+     */
+    function readFooter() &#123;
+        $footer = substr($this-&gt;reader,$this-&gt;readerIndex,PacketElement::FOOTER);
+        $this-&gt;readerIndex = $this-&gt;readerIndex + PacketElement::FOOTER;
+        $count = strlen($footer);
+
+        VerifyUtil::verifyEqualLen($count, PacketElement::FOOTER, PacketElement::getElementVar());
+        VerifyUtil::verifyChar($footer, self::$FOOTER, PacketElement::getElementVar());
+
+        return $footer;
+    &#125;
+
+    /**
+     * 读取 4字节Integer
+     * @param radix 进制
+     * @return Integer
+     * @throws IOException
+     */
+    public function readCrcInt16() &#123;
+        $crc = substr($this-&gt;reader,$this-&gt;readerIndex, PacketElement::DATA_CRC);
+//        $this-&gt;readerIndex = $this-&gt;readerIndex + PacketElement::DATA_CRC;
+        $count = strlen($crc);
+
+        if($count != 4)&#123;
+            return -1;
+        &#125;
+        //本身为十六进制字符串
+        return $crc;
+    &#125;
+
+    /**
+     * 读取 data + 校验
+     * @see PacketElement
+     * @return chars
+\     * @throws IOException
+     */
+    function readDataAndCrc(int $dataLen) &#123;
+        $data = substr($this-&gt;reader,$this-&gt;readerIndex, $dataLen);
+        $this-&gt;readerIndex = $this-&gt;readerIndex + $dataLen;
+        $count = strlen($data);
+        VerifyUtil::verifyEqualLen($count,$dataLen, PacketElement::getElementVar());
+
+        $crc = $this-&gt;readCrcInt16();
+        $check_crc = self::crc16Checkout($data,$dataLen);
+
+        if($crc != -1 &amp;&amp; $check_crc == $crc)&#123;
+            return $data;
+        &#125;
+        return null;
+    &#125;
+
+    /**
+     * CRC校验
+     * @param msg 消息
+     * @param length 长度
+     * @return DATA_CRC 校验码
+     */
+    public static function crc16Checkout($msg, int $length) &#123;
+        $crc_reg = 0xFFFF;
+        for($i=0; $i&lt;$length; $i++) &#123;
+            $crc_reg = ($crc_reg&gt;&gt;8) ^ ord($msg[$i]);
+//            echo $crc_reg . &quot;\r\n&quot;;
+            for($j=0;$j&lt;8;$j++) &#123;
+                $check = $crc_reg &amp; 0x0001;
+                $crc_reg &gt;&gt;= 1;
+                if ($check == 0x0001) &#123;
+                    $crc_reg ^= 0xA001;
+                &#125;
+            &#125;
+        &#125;
+        $res = strtoupper(dechex($crc_reg));
+        $res = str_pad($res, 4, &quot;0&quot;, STR_PAD_LEFT);
+        return $res;
+    &#125;
+
+
+
+&#125;
+</code></pre>
+<h1 id="Swoole接收处理"><a href="#Swoole接收处理" class="headerlink" title="Swoole接收处理"></a>Swoole接收处理</h1><pre><code>&lt;?php
+/**
+ * Created by PhpStorm
+ * USER: Zhaoys
+ * Date: 2022/2/8 19:09
+ */
+
+namespace app\hj212\command;
+
+use app\hj212\model\Data;
+use app\hj212\model\Pollution;
+use app\hj212\segment\converter\DataConverter;
+use app\hj212\VerifyUtil;
+use Swoole\Server as SwooleServer;
+use app\hj212\T212Parser;
+use think\console\Command;
+use think\console\Input;
+use think\console\Output;
+use think\Exception;
+use think\Db;
+
+class Hj212Server extends Command
+&#123;
+    // Server 实例
+    protected $server;
+
+    protected $t212Parser;
+
+    protected $buffer;
+
+    protected function configure()
+    &#123;
+        $this-&gt;setName(&#39;hj212:start&#39;)-&gt;setDescription(&#39;Start hj212 Server!&#39;);
+    &#125;
+
+    protected function execute(Input $input, Output $output)
+    &#123;
+//        // 监听所有地址，监听端口f
+        $this-&gt;server = new SwooleServer(&#39;0.0.0.0&#39;, 65212);
+
+        $this-&gt;server-&gt;set(array(
+            &#39;worker_num&#39; =&gt; 10,
+//            &#39;task_worker_num&#39; =&gt; 2,   //必须设置 on task
+            &#39;max_request&#39; =&gt; 10000,
+//            &#39;open_length_check&#39; =&gt; true,
+//            &#39;package_length_func&#39; =&gt; &#39;&#39;,
+            &#39;daemonize&#39; =&gt; true,
+            &#39;log_file&#39; =&gt; &quot;runtime/log/swoole.log&quot;,
+            &#39;dispatch_mode&#39; =&gt; 2,
+        ));
+        $this-&gt;t212Parser = new T212Parser();
+        $this-&gt;server-&gt;on(&#39;start&#39;, array($this, &#39;onStart&#39;));
+
+        $this-&gt;server-&gt;on(&#39;connect&#39;, array($this, &#39;onConnect&#39;));
+        $this-&gt;server-&gt;on(&#39;receive&#39;, array($this, &#39;onReceive&#39;));
+
+        $this-&gt;server-&gt;on(&#39;close&#39;, array($this, &#39;onClose&#39;));
+        $this-&gt;server-&gt;start();
+
+    &#125;
+
+
+    public function onStart($serv)
+    &#123;
+        echo &quot;TCP Server is started at tcp://\n&quot;;
+    &#125;
+
+
+    public function onConnect($serv, $fd)
+    &#123;
+        echo &quot;connection open: &#123;$fd&#125;\n&quot;;
+        file_put_contents(&#39;runtime/log/hj212connect_&#39; . date(&quot;Ymd&quot;) . &#39;.log&#39;, date(&#39;Y-m-d H:i:s&#39;) .&quot;ip&quot;.$this-&gt;getIP().&quot;open: &#123;$fd&#125;&quot;);
+    &#125;
+
+    public function onReceive($serv, $fd, $reactor_id, $data)
+    &#123;
+        file_put_contents(&#39;runtime/log/hj212receive_&#39; . date(&quot;Ymd&quot;) . &#39;.log&#39;, date(&#39;Y-m-d H:i:s&#39;) . &quot;receive:  &quot; . $data . PHP_EOL, FILE_APPEND);
+
+        $tempdata = rtrim($data, &quot;\r\n&quot;);
+        $strlen = strlen($tempdata);
+        $endstr = substr($tempdata, $strlen - 6, 2);
+        $strartstr = substr($data, 0, 2);
+        if ($strartstr == &quot;##&quot; &amp;&amp; $endstr != &quot;&amp;&amp;&quot;) &#123;
+            $this-&gt;buffer = $data;
+            return;
+        &#125; else if ($strartstr != &quot;##&quot; &amp;&amp; $endstr == &quot;&amp;&amp;&quot; &amp;&amp; $this-&gt;buffer &amp;&amp; VerifyUtil::verifyCrc($this-&gt;buffer . $tempdata)) &#123;
+            $data = rtrim($this-&gt;buffer, &quot;\r\n&quot;) . $data;
+        &#125; else if ($strartstr != &quot;##&quot; &amp;&amp; $endstr == &quot;&amp;&amp;&quot; &amp;&amp; $this-&gt;buffer &amp;&amp; !VerifyUtil::verifyCrc($this-&gt;buffer . $tempdata)) &#123;
+            $this-&gt;buffer = rtrim($this-&gt;buffer, &quot;\r\n&quot;) . $tempdata;
+            return;
+        //##1715QN=20230727145559023;ST=32;CN=3020;PW=123456;MN=000102;Flag=5;CP=&amp;&amp;Data
+        &#125;else if($strartstr == &quot;##&quot; &amp;&amp; $endstr == &quot;&amp;&amp;&quot; &amp;&amp; !VerifyUtil::verifyCrc($this-&gt;buffer . $tempdata))&#123;
+            $this-&gt;buffer = $data;
+            return;
+        &#125;
+        $sourceData = $data;
+        $this-&gt;t212Parser-&gt;setReader($data);
+        $this-&gt;t212Parser-&gt;readHeader();
+        $dataLen = $this-&gt;t212Parser-&gt;readDataLen();
+        $data = $this-&gt;t212Parser-&gt;readDataAndCrc($dataLen);
+        $dataConverter = new DataConverter($data);
+        $insetdata = $dataConverter-&gt;convertData();
+        $insetdata[&#39;data_len&#39;] = $dataLen;
+        $insetdata[&#39;crc&#39;] = $this-&gt;t212Parser-&gt;readCrcInt16();
+        $insetdata[&#39;source_data&#39;] = $sourceData;
+        $cpData = $dataConverter-&gt;convertCpData();
+        //存在数据空的情况 ##0069QN=20230723080035006;ST=91;CN=9021;PW=123456;MN=000201;Flag=4;CP=&amp;&amp;&amp;&amp;BDC1
+        $insetdata[&#39;cp_datatime&#39;] = isset($cpData[&#39;cpData&#39;][&#39;datatime&#39;]) ? $cpData[&#39;cpData&#39;][&#39;datatime&#39;] : 0;
+        Db::startTrans();
+        try &#123;
+            $dataModel = new Data($insetdata);
+            $dataModel-&gt;save();
+            //            $pollutionModel = new Pollution();
+            //            foreach ($cpData[&#39;pollution&#39;] as $k =&gt; $val) &#123;
+            //                $pModel = clone $pollutionModel;
+            //                $val[&#39;data_id&#39;] = $dataModel-&gt;id;
+            //                $val[&#39;code&#39;] = $k;
+            //                $pModel-&gt;data($val);
+            //                $pModel-&gt;save();
+            //            &#125;
+            Db::commit();
+        &#125; catch (Exception $e) &#123;
+            Db::rollback();
+        &#125;
+        $str = &quot;QN=&#123;$insetdata[&#39;qn&#39;]&#125;;ST=91;CN=9014;PW=&#123;$insetdata[&#39;pw&#39;]&#125;;MN=&#123;$insetdata[&#39;mn&#39;]&#125;;Flag=4;CP=&amp;&amp;&amp;&amp;\r\n&quot;;
+        $num = strlen($str);
+        $newNum = str_pad($num, 4, &quot;0&quot;, STR_PAD_LEFT);
+        $resStr = &quot;##&quot; . $newNum . $str;
+        $this-&gt;buffer = &quot;&quot;;
+        $this-&gt;server-&gt;send($fd, $resStr);
+
+    &#125;
+
+    public function onClose($serv, $fd)
+    &#123;
+        echo &quot;connection close: &#123;$fd&#125;\n&quot;;
+    &#125;
+
+    /**
+     * 同步任务
+     * $this-&gt;serv-&gt;taskwait($data); 触发
+     * @param $server
+     * @param $task_id
+     * @param $data
+     */
+    function onSyncTask($serv, $task_id, $from_id, $data)
+    &#123;
+        echo &quot;Sync task Callback: &quot; . $data;
+
+        $this-&gt;t212Parser-&gt;setReader($data);
+        $header = $this-&gt;t212Parser-&gt;readHeader();
+        $dataLen = $this-&gt;t212Parser-&gt;readDataLen();
+        $data = $this-&gt;t212Parser-&gt;readDataAndCrc($dataLen);
+        echo $data;
+
+        $result = $data;
+        // 通知完成
+        $this-&gt;server-&gt;finish($result);
+    &#125;
+
+    /**
+     * 异步任务
+     * $this-&gt;serv-&gt;task($data); 触发
+     * @param $server
+     * @param $task_id
+     * @param $data
+     */
+    function onAsynTask($serv, $task_id, $from_id, $data)
+    &#123;
+        echo &quot;Asyn task Callback: &quot;;
+        // 通知完成
+        $this-&gt;server-&gt;finish($data . &quot;cccccsssss&quot;);
+
+    &#125;
+
+    public function onFinish($serv, $task_id, $data)
+    &#123;
+        echo &quot;任务完成&quot;;//taskwait  不触发这个函数。。
+    &#125;
+
+    public function getIP()
+    &#123;
+        if (isset($_SERVER))&#123;
+            if (isset($_SERVER[&quot;HTTP_X_FORWARDED_FOR&quot;]))&#123;
+                $realip = $_SERVER[&quot;HTTP_X_FORWARDED_FOR&quot;];
+            &#125; else if (isset($_SERVER[&quot;HTTP_CLIENT_IP&quot;])) &#123;
+                $realip = $_SERVER[&quot;HTTP_CLIENT_IP&quot;];
+            &#125; else &#123;
+                $realip = isset($_SERVER[&quot;REMOTE_ADDR&quot;]) ? $_SERVER[&quot;REMOTE_ADDR&quot;] : &#39;127.0.0.1&#39;;
+            &#125;
+        &#125; else &#123;
+            if (getenv(&quot;HTTP_X_FORWARDED_FOR&quot;))&#123;
+                $realip = getenv(&quot;HTTP_X_FORWARDED_FOR&quot;);
+            &#125; else if (getenv(&quot;HTTP_CLIENT_IP&quot;)) &#123;
+                $realip = getenv(&quot;HTTP_CLIENT_IP&quot;);
+            &#125; else &#123;
+                $realip = getenv(&quot;REMOTE_ADDR&quot;);
+            &#125;
+        &#125;
+        return $realip;
+    &#125;
+
+&#125;
+</code></pre>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php%E5%BC%80%E5%8F%91/" rel="tag"># php开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/13919d44.html" rel="next" title="shell脚本学习1">
+                <i class="fa fa-chevron-left"></i> shell脚本学习1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/a61dc71f.html" rel="prev" title="nginx之logrotate">
+                nginx之logrotate <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hj212%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">hj212解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swoole%E6%8E%A5%E6%94%B6%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">Swoole接收处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yszhao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
