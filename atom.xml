@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-02-06T05:50:35.023Z</updated>
+  <updated>2024-02-08T03:50:38.129Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,14 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>php开发-ftp下载上传</title>
+    <link href="http://example.com/posts/eae5a656.html"/>
+    <id>http://example.com/posts/eae5a656.html</id>
+    <published>2024-02-06T08:43:04.000Z</published>
+    <updated>2024-02-08T03:50:38.129Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="检查ftp"><a href="#检查ftp" class="headerlink" title="检查ftp"></a>检查ftp</h1><p>1.使用ftp 客户端 连接ftp</p><p>windows系统      winscp<br>redhat发行版本   yum install ftp<br>debian发行版本   apt install ftp</p><pre><code>示例（一定要ls get 下，才能证明能传输数据）    ftp 192.14.23.23 22221    ls                         </code></pre><h1 id="基础方法"><a href="#基础方法" class="headerlink" title="基础方法"></a>基础方法</h1><pre><code>    ftp_connect(ip,port)                            #连接服务器  默认21  返回值 连接资源    ftp_login($conn,$username,$passwd)              #登录  返回值是 bool    ftp_pasv($conn,true)                            #设置被动模式  默认ftp 主动模式       ftp_nlist($conn,$path)                          #查看当前目录 文件列表 类ls功能    ftp_pwd($conn)                                  #查看当前目录    ftp_get($conn,$localpath,$filename,FTP_ASCII)   #下载远程 文件到 本地    ftp_put($conn,$filename,$localpath,FTP_ASCII)   #上传本地文件 到服务器</code></pre><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p><font color="red">ftp 默认是主动模式 传输数据端口是随机的</font></p><p><font color="red">ftp 被动模式  是端口需要配置定义 </font></p><p><font color="red">防火墙需要放开端口</font></p><p>排查方案 用步骤一</p><h1 id="代码摘录示例"><a href="#代码摘录示例" class="headerlink" title="代码摘录示例"></a>代码摘录示例</h1><pre><code class="php">        $conn = ftp_connect($ip, $port);        if ($conn) &#123;            // 登录FTP服务器            $login = ftp_login($conn, $username, $passwd);            if ($login&amp;&amp;$pasv) &#123;//                ftp_set_option($conn, FTP_USEPASVADDRESS, false);                  // 切换到主动模式                  ftp_pasv($conn, true);            &#125;        &#125; else &#123;            throw new Exception(&quot;登录失败&quot;);        &#125;                //查看目录下 列表 类似ls功能        $dirList = ftp_nlist($conn, $dir);                #下载文件        $ret = ftp_get($conn, $local_filepath.$filename, $filename, FTP_ASCII);                #上传文件               ftp_put($conn, $filename, $local_filepath . $filename, FTP_ASCII);</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;检查ftp&quot;&gt;&lt;a href=&quot;#检查ftp&quot; class=&quot;headerlink&quot; title=&quot;检查ftp&quot;&gt;&lt;/a&gt;检查ftp&lt;/h1&gt;&lt;p&gt;1.使用ftp 客户端 连接ftp&lt;/p&gt;
+&lt;p&gt;windows系统      winscp&lt;br&gt;redhat发行</summary>
+      
+    
+    
+    
+    <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="PHP开发" scheme="http://example.com/tags/PHP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>高德地图-点位展示开发</title>
     <link href="http://example.com/posts/fa30932c.html"/>
     <id>http://example.com/posts/fa30932c.html</id>
     <published>2024-02-01T10:53:51.000Z</published>
-    <updated>2024-02-06T05:50:35.023Z</updated>
+    <updated>2024-02-06T11:02:25.300Z</updated>
     
     
     
+    
+    <category term="前端" scheme="http://example.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
   </entry>
@@ -34,7 +61,7 @@
     <link href="http://example.com/posts/aaedf8b3.html"/>
     <id>http://example.com/posts/aaedf8b3.html</id>
     <published>2024-02-01T10:52:54.000Z</published>
-    <updated>2024-02-06T05:50:34.957Z</updated>
+    <updated>2024-02-06T11:03:30.168Z</updated>
     
     <content type="html"><![CDATA[<h1 id="rsyslog-基础"><a href="#rsyslog-基础" class="headerlink" title="rsyslog 基础"></a>rsyslog 基础</h1><h2 id="日志类别"><a href="#日志类别" class="headerlink" title="日志类别"></a>日志类别</h2><pre><code>日志类型 日志内容auth 用户认证时产生的日志syslog 系统日志local0~local7 自定义程序使用等等</code></pre><h2 id="Properties模板元素属性"><a href="#Properties模板元素属性" class="headerlink" title="Properties模板元素属性"></a>Properties模板元素属性</h2><p>常用的变量</p><pre><code>hostname 打印该日志的主机名。fromhost 接收的信息来自于哪个节点。这里是DNS解析的名字。fromhost-ip 接收的信息来自于哪个节点，这里是IP，本地的是127.0.0.1。syslogtag 信息标签。大致形如 programed[14321] 。programname 文件名Properties与时间相关的属性属性 释义$now 当前日期时间戳，格式为YYYY-MM-DD (2020-07-08)$year 当前年份， 四位数 (2020)$month 当前月份， 两位数 (07)$day 当前月份的日期，两位数 (08)$wday 当前天数周几 ：0=Sunday,...6=Saturday$hour 当前小时（24小时机制），两位数(16)$hhour 半小时机值，就是0-29分钟显示0，30-59分钟显示1。$qhour 一刻钟机值，通过0-3显示，每15分钟一截。$minute 当前分钟数，两位数(57)</code></pre><p>示例<br>    定义日志目录</p><pre><code>$template RemoteTestlogs,&quot;/var/log/syslog/%fromhost-ip%/test.log&quot;/var/log/syslog/%$YEAR%-%$MONTH%-%$DAY%/%FROMHOST-IP%-%programname%.log</code></pre><p>##日志文件权限 </p><p>日志文件权限新生成的目录和文件权限可以在配置文件设置</p><pre><code> vim /etc/rsyslog.conf #尽量在开头设置 $FileOwner root $FileGroup root $FileCreateMode 0755 #文件权限 $DirCreateMode 0755 #目录权限 $Umask 0022 </code></pre><h2 id="模版配置"><a href="#模版配置" class="headerlink" title="模版配置"></a>模版配置</h2><p> 1、示例1</p><pre><code> $template DynamicFile,&quot;/var/log/test_logs/%timegenerated%-test.log&quot; *.* ?DynamicFile</code></pre><p> 2、示例2</p><pre><code> $template RemoteHost,&quot;/home/rsyslog-data/%$YEAR%-%$MONTH%-%$DAY%/%FROMHOST-IP%.log *.* ?RemoteHost #    &amp; ~ 忽略所有的日志. &amp; ~</code></pre><p> 3、示例3</p><pre><code> #配置文件存储模板 $template RemoteAuditLogs,&quot;/data/auditd/%FROMHOST-IP%/audit.log&quot; * $template RemoteNetworkLogs,&quot;/data/network-log/%HOSTNAME%/network.log&quot; * #引用模板 local6.* ?RemoteNetworkLogs local2.* ?RemoteAuditLog   </code></pre><h1 id="配置案例"><a href="#配置案例" class="headerlink" title="配置案例"></a>配置案例</h1><h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><p>1.2 相关配置</p><p> 增加imfile模块配置，【不然自定义的日志，无法发送到服务端】</p><pre><code>$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)$ModLoad imjournal # provides access to the systemd journal# 下发添加 方法一module(load=&quot;imfile&quot; PollingInterval=&quot;1&quot;) # 方法二$ModLoad imfilelocal7.* /var/log/local7.log#只发送local7 类型日志#local7.* @@121.4.27.111#将所有日志 多发送  *.* @@121.4.27.111</code></pre><p> 新增/etc/rsyslog.d/local7.conf</p><pre><code>  #工作目录 这个可不配 默认/var/log/下  #$WorkDirectory /var/log/rsyslog    #输入文件模式  input(type=&quot;imfile&quot;       File=&quot;/var/log/local7.log&quot;   #可指定任意文件，但需要将文件权限置为777       Tag=&quot;local7&quot;      #文件标识，服务器接收到消息可以使用这个tag分类       Severity=&quot;info&quot;            #日志级别       Facility=&quot;local7&quot;                    PersistStateInterval=&quot;1&quot;     #回写偏移量数据到文件间隔时间(秒)       ruleset=&quot;remote&quot;)          #规则集，rsyslog.conf中定义的rule名称</code></pre><h2 id="服务端配置"><a href="#服务端配置" class="headerlink" title="服务端配置"></a>服务端配置</h2><p>定义开启 接收的协议 以及端口</p><pre><code># Provides UDP syslog reception$ModLoad imudp$UDPServerRun 514 # Provides TCP syslog reception$ModLoad imtcp$InputTCPServerRun 514</code></pre><p>定义模版</p><p>   1.示例1</p><pre><code>#生成模板$template SpiceTmpl,&quot;%msg:2:$%\n&quot;$template CatalinaDynaFile,&quot;/var/log/rsyslog/%fromhost-ip%/catalina_%$YEAR%-%$MONTH%-%$DAY%.log&quot;  #匹配规则，文章后面将分享其他配置类型:fromhost-ip,contains,&quot;192.168.88.132&quot; ?CatalinaDynaFile;SpiceTmpl</code></pre><p>   2.示例2</p><pre><code>$template RemoteLogs,&quot;/var/log/syslog/%$YEAR%-%$MONTH%-%$DAY%/%FROMHOST-IP%-%programname%.log&quot;*.* ?RemoteLogs&amp; ~</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre><code>-it error：这是两个选项的组合。-i选项指定附加进程ID（PID）到日志消息中，-t error选项指定将&quot;error&quot;作为消息的标记（TAG）。-p local5.crit：这是指定日志消息的优先级的选项。在这个例子中，local5.crit表示使用syslog的local5设施和crit（严重）优先级。&quot;hello world&quot;：这是要记录的实际消息内容。该命令用于向系统日志中添加一条日志消息logger -it local1 -p local1.info &quot;hello&quot;</code></pre>]]></content>
     
@@ -46,6 +73,8 @@
     
     
     
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
+    
     
   </entry>
   
@@ -54,7 +83,7 @@
     <link href="http://example.com/posts/ae0c2972.html"/>
     <id>http://example.com/posts/ae0c2972.html</id>
     <published>2024-01-25T03:12:26.000Z</published>
-    <updated>2024-02-06T05:50:34.826Z</updated>
+    <updated>2024-02-06T10:58:37.700Z</updated>
     
     <content type="html"><![CDATA[<h1 id="一、常用设置"><a href="#一、常用设置" class="headerlink" title="一、常用设置"></a>一、常用设置</h1><h2 id="1-1-通用搜索栏设置"><a href="#1-1-通用搜索栏设置" class="headerlink" title="1.1 通用搜索栏设置"></a>1.1 通用搜索栏设置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 初始化表格</span><br><span class="line"> table.bootstrapTable(&#123;</span><br><span class="line">     url: $.fn.bootstrapTable.defaults.extend.index_url,</span><br><span class="line">     pk: &#x27;id&#x27;,</span><br><span class="line">     sortName: &#x27;id&#x27;,</span><br><span class="line">     fixedColumns: true,</span><br><span class="line">     fixedRightNumber: 1,</span><br><span class="line">     //切换列表显示样式开关</span><br><span class="line">     showToggle: false,</span><br><span class="line">     //是否显示右上角的搜索框</span><br><span class="line">     search: false,</span><br><span class="line">     //控制显示列开关</span><br><span class="line">     showColumns:false,</span><br><span class="line">     showExport: false,</span><br><span class="line">     //显示搜索字段框</span><br><span class="line">     searchFormVisible: true,</span><br><span class="line">     //导出开关            </span><br><span class="line">     showExport: true,</span><br><span class="line">     //设置导出  格式</span><br><span class="line">     exportTypes: [&#x27;json&#x27;, &#x27;xml&#x27;, &#x27;csv&#x27;, &#x27;txt&#x27;, &#x27;doc&#x27;, &#x27;excel&#x27;],</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure><h2 id="1-2-input-常用设置"><a href="#1-2-input-常用设置" class="headerlink" title="1.2 input 常用设置"></a>1.2 input 常用设置</h2><p>data-rule 设置 检查规则 可以自定义验证方法 checksite JS并相关设置<br>data-source select 可以设置数据源<br>示例</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">//input设置</span><br><span class="line"></span><br><span class="line">&lt;input id=&quot;c-site_id&quot; data-rule=&quot;checksite&quot; data-source=&quot;hj212/pollutionsite/index&quot; data-field=&quot;site_name&quot; class=&quot;form-control selectpage&quot; name=&quot;row[site_id]&quot; type=&quot;text&quot; value=&quot;&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//js中设置</span><br><span class="line"></span><br><span class="line">var Controller = &#123;</span><br><span class="line">        index: function () &#123;</span><br><span class="line">            // 初始化表格参数配置</span><br><span class="line">            Table.api.init(&#123;</span><br><span class="line">                ...</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            var table = $(&quot;#table&quot;);</span><br><span class="line"></span><br><span class="line">            // 初始化表格</span><br><span class="line">            table.bootstrapTable(&#123;</span><br><span class="line">                url: $.fn.bootstrapTable.defaults.extend.index_url,</span><br><span class="line">                pk: &#x27;id&#x27;,</span><br><span class="line">                sortName: &#x27;id&#x27;,</span><br><span class="line"></span><br><span class="line">                columns: [</span><br><span class="line">                    [</span><br><span class="line">                        &#123;checkbox: true&#125;,</span><br><span class="line">                        &#123;field: &#x27;id&#x27;, title: __(&#x27;Id&#x27;),operate:false&#125;,</span><br><span class="line">                  </span><br><span class="line">                        &#123;field: &#x27;operate&#x27;, title: __(&#x27;Operate&#x27;), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate,</span><br><span class="line">                                 buttons:[</span><br><span class="line">                                     &#123;</span><br><span class="line">                                      &#x27;name&#x27;:&#x27;bindsite&#x27;,</span><br><span class="line">                                      &#x27;title&#x27;:function(row)&#123;</span><br><span class="line">                                          return &#x27;更换站点[ &#x27;+row.device_code+&#x27;]&#x27;;</span><br><span class="line">                                      &#125;,</span><br><span class="line">                                      &#x27;icon&#x27;:&#x27;fa fa-pencil&#x27;,</span><br><span class="line">                                      &#x27;text&#x27;:&#x27;更换站点&#x27;,</span><br><span class="line">                                      &#x27;classname&#x27;: &#x27;btn btn-xs btn-info btn-dialog&#x27;,</span><br><span class="line">                                      &#x27;url&#x27;:&#x27;hj212/device/bindsite/deviceId/&#123;ids&#125;&#x27;,</span><br><span class="line">                                      &#x27;extend&#x27;: &#x27;data-area=\&#x27;[&quot;95%&quot;,&quot;95%&quot;]\&#x27;&#x27;</span><br><span class="line">                                     &#125;,</span><br><span class="line">                                     &#123;</span><br><span class="line">                                      &#x27;name&#x27;:&#x27;siteInfo&#x27;,</span><br><span class="line">                                      &#x27;title&#x27;:function(row)&#123;</span><br><span class="line">                                          return &#x27;站点信息[ &#x27;+row.site+&#x27;]&#x27;;</span><br><span class="line">                                      &#125;,</span><br><span class="line">                                      &#x27;text&#x27;:&#x27;站点信息&#x27;,</span><br><span class="line">                                      &#x27;classname&#x27;: &#x27;btn btn-xs btn-primary btn-dialog&#x27;,</span><br><span class="line">                                      &#x27;url&#x27;:function(row)&#123;</span><br><span class="line">                                          return &#x27;hj212/pollutionsite/siteinfo/site_id/&#x27;+row.site_id;</span><br><span class="line">                                       &#125;,</span><br><span class="line">                                      &#x27;extend&#x27;: &#x27;data-area=\&#x27;[&quot;95%&quot;,&quot;95%&quot;]\&#x27;&#x27;</span><br><span class="line">                                     &#125;,</span><br><span class="line">                                 ]&#125;</span><br><span class="line">                    ]</span><br><span class="line">                ],</span><br><span class="line">                exportTypes: [ &#x27;excel&#x27;],</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            // 为表格绑定事件</span><br><span class="line">            Table.api.bindevent(table);</span><br><span class="line">        &#125;,</span><br><span class="line">        add: function () &#123;</span><br><span class="line">            Controller.api.bindevent();</span><br><span class="line">        &#125;,</span><br><span class="line">        edit: function () &#123;</span><br><span class="line">            Controller.api.bindevent();</span><br><span class="line">        &#125;,</span><br><span class="line">        bindsite:function()&#123;</span><br><span class="line">            Controller.api.bindevent();</span><br><span class="line">        &#125;,</span><br><span class="line">        api: &#123;</span><br><span class="line">            bindevent: function () &#123;</span><br><span class="line">                $.validator.config(&#123;</span><br><span class="line">                    rules: &#123;</span><br><span class="line">                        checksite: function (element) &#123;</span><br><span class="line">                            return $.ajax(&#123;</span><br><span class="line">                                url: &#x27;hj212/device/checksite&#x27;,</span><br><span class="line">                                type: &#x27;POST&#x27;,</span><br><span class="line">                                data: &#123;</span><br><span class="line">                                    site_id: $(&quot;#c-site_id&quot;).val(),</span><br><span class="line">                                    id:$(&quot;#c-id&quot;).val()</span><br><span class="line">                                &#125;,</span><br><span class="line">                                dataType: &#x27;json&#x27;</span><br><span class="line">                            &#125;);</span><br><span class="line">                        &#125;,</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">                Form.api.bindevent($(&quot;form[role=form]&quot;));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="二、数据库操作"><a href="#二、数据库操作" class="headerlink" title="二、数据库操作"></a>二、数据库操作</h1><h1 id="三、redis相关操作"><a href="#三、redis相关操作" class="headerlink" title="三、redis相关操作"></a>三、redis相关操作</h1><h1 id="四、消息队列设置"><a href="#四、消息队列设置" class="headerlink" title="四、消息队列设置"></a>四、消息队列设置</h1><h1 id="五、命令行开发"><a href="#五、命令行开发" class="headerlink" title="五、命令行开发"></a>五、命令行开发</h1>]]></content>
     
@@ -66,6 +95,8 @@
     
     
     
+    <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
+    
     
   </entry>
   
@@ -74,7 +105,7 @@
     <link href="http://example.com/posts/45805688.html"/>
     <id>http://example.com/posts/45805688.html</id>
     <published>2024-01-17T07:41:48.000Z</published>
-    <updated>2024-02-06T05:50:34.816Z</updated>
+    <updated>2024-02-06T11:04:36.948Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">- name: install nginx</span><br><span class="line">  hosts: test</span><br><span class="line">  gather_facts: yes      </span><br><span class="line">#  vars:</span><br><span class="line">#       createuser:</span><br><span class="line">#        - tomcat</span><br><span class="line">#        - www</span><br><span class="line">#        - mysql</span><br><span class="line">  vars:</span><br><span class="line">   username: www      </span><br><span class="line">  tasks:</span><br><span class="line">   - name: Print ansible_os_family</span><br><span class="line">     debug:</span><br><span class="line">   #利用循环创建多个用户</span><br><span class="line">   # - name: create user</span><br><span class="line">   #  user: name=&#123;&#123;item&#125;&#125; state=present</span><br><span class="line">   #  with_items: &quot;&#123;&#123;createuser&#125;&#125;&quot;     </span><br><span class="line">   - name: Create Nginx User</span><br><span class="line">     user: name=&#123;&#123;username&#125;&#125; state=present createhome=no shell=/sbin/nologin</span><br><span class="line">   - name: template config to remote hosts</span><br><span class="line">     template: src=template/nginx.conf.j2 dest=/etc/nginx/nginx.conf</span><br><span class="line">#   - name: add virtualhost config</span><br><span class="line">#      copy: src=my.conf dest=/etc/nginx/conf.d/</span><br><span class="line">#      tags: updateconfig</span><br><span class="line">   #检查nginx是否运行</span><br><span class="line">   - name: check nginx running</span><br><span class="line">     stat: path=/var/run/nginx.pid</span><br><span class="line">     register: nginxrunning</span><br><span class="line">     tags: updateconfig</span><br><span class="line">   #检查nginx配置文件是否有问题          </span><br><span class="line">   - name: check nginx syntax</span><br><span class="line">     command: /usr/sbin/nginx -t</span><br><span class="line">     register: nginxsyntax   </span><br><span class="line">     check_mode: False   </span><br><span class="line">#     changed_when: true</span><br><span class="line">#     ignore_errors: true   </span><br><span class="line">     tags: updateconfig</span><br><span class="line">#删除上一步产生的pid</span><br><span class="line">#   - name: delete pid</span><br><span class="line">#     shell: rm -rf /var/run/nginx.pid</span><br><span class="line">   #debug  nginx状态</span><br><span class="line">   - name: print nginx syntax</span><br><span class="line">     debug:</span><br><span class="line">      var: &quot;nginxrunning, nginxsyntax&quot;</span><br><span class="line">   - name: reload nginx server</span><br><span class="line">     service: name=nginx state=reloaded</span><br><span class="line">     when: nginxsyntax.rc == 0  and nginxrunning.stat.exists == true</span><br><span class="line">     tags: updateconfig     </span><br><span class="line">   - name: start nginx server</span><br><span class="line">     service: name=nginx state=started</span><br><span class="line">     when: </span><br><span class="line">      - nginxsyntax.rc == 0</span><br><span class="line">      - nginxrunning.stat.exists == false</span><br><span class="line">     tags: updateconfig</span><br><span class="line">     </span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
     
@@ -86,6 +117,8 @@
     
     
     
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
+    
     
   </entry>
   
@@ -94,7 +127,7 @@
     <link href="http://example.com/posts/78909e13.html"/>
     <id>http://example.com/posts/78909e13.html</id>
     <published>2024-01-17T07:41:33.000Z</published>
-    <updated>2024-02-06T05:50:34.814Z</updated>
+    <updated>2024-02-06T11:04:23.514Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"> - name: install nginx</span><br><span class="line">   hosts: test</span><br><span class="line">   tasks:</span><br><span class="line">    - name: Print ansible_os_family</span><br><span class="line">      debug:</span><br><span class="line">       var: ansible_os_family    </span><br><span class="line">    #关闭selinux     </span><br><span class="line">    - name: disable selinux</span><br><span class="line">      shell: &quot;setenforce 0&quot;</span><br><span class="line">      ignore_errors: true</span><br><span class="line">    - name: Update apt package cache</span><br><span class="line">      apt:</span><br><span class="line">        update_cache: yes</span><br><span class="line">      ignore_errors: true</span><br><span class="line">      when: ansible_os_family in [&quot;Debian&quot;,&quot;ubuntu&quot;]     </span><br><span class="line">    - name: ubuntu install nginx</span><br><span class="line">      apt:</span><br><span class="line">        name: nginx</span><br><span class="line">        state: present   </span><br><span class="line">      when: ansible_os_family in [&quot;Debian&quot;,&quot;ubuntu&quot;]</span><br><span class="line">    - name: Add repo </span><br><span class="line">      yum_repository:</span><br><span class="line">       name: nginx</span><br><span class="line">       description: nginx repo</span><br><span class="line">       baseurl: http://nginx.org/packages/centos/7/$basearch/</span><br><span class="line">       gpgcheck: no</span><br><span class="line">       enabled: 1</span><br><span class="line">      when: ansible_os_family in  [&quot;RedHat&quot;,&quot;openEuler&quot;]</span><br><span class="line">    - name: redhat install nginx</span><br><span class="line">      yum:</span><br><span class="line">       name: nginx</span><br><span class="line">       state: latest</span><br><span class="line">      when: ansible_os_family in [&quot;RedHat&quot;,&quot;openEuler&quot;]</span><br><span class="line">    - name: start nginx server</span><br><span class="line">      service: name=nginx state=started</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -105,6 +138,8 @@
       
     
     
+    
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
     
     
   </entry>
@@ -127,7 +162,7 @@
     <link href="http://example.com/posts/18f37986.html"/>
     <id>http://example.com/posts/18f37986.html</id>
     <published>2024-01-03T04:52:02.000Z</published>
-    <updated>2024-02-06T05:50:34.992Z</updated>
+    <updated>2024-02-06T11:03:57.226Z</updated>
     
     <content type="html"><![CDATA[<h1 id="1-查看分区容量是否增加"><a href="#1-查看分区容量是否增加" class="headerlink" title="1.查看分区容量是否增加"></a>1.查看分区容量是否增加</h1><pre><code>lsblk</code></pre><h1 id="2-扩容MBR分区和ext4文件系统"><a href="#2-扩容MBR分区和ext4文件系统" class="headerlink" title="2. 扩容MBR分区和ext4文件系统"></a>2. 扩容MBR分区和ext4文件系统</h1><pre><code>#redhat类系统type growpart || sudo yum install -y cloud-utils-growpart#debian类系统type growpart || sudo apt-get install -y cloud-guest-utilssudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 1sudo resize2fs /dev/vdb1</code></pre><h1 id="3-扩容GPT分区和xfs文件系统"><a href="#3-扩容GPT分区和xfs文件系统" class="headerlink" title="3. 扩容GPT分区和xfs文件系统"></a>3. 扩容GPT分区和xfs文件系统</h1><pre><code>sudo apt-get updatetype growpart || sudo apt-get install -y cloud-guest-utilstype sgdisk || sudo yum install -y gdisk# 扩容分区sudo LC_ALL=en_US.UTF-8 growpart /dev/vdb 2#扩容文件系统type xfs_growfs || sudo yum install -y xfsprogssudo xfs_growfs /mnt</code></pre><h1 id="4-扩容裸数据盘"><a href="#4-扩容裸数据盘" class="headerlink" title="4.扩容裸数据盘"></a>4.扩容裸数据盘</h1><pre><code>sudo resize2fs /dev/vdb</code></pre>]]></content>
     
@@ -141,6 +176,8 @@
     
     
     
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
+    
     
   </entry>
   
@@ -149,7 +186,7 @@
     <link href="http://example.com/posts/901bc739.html"/>
     <id>http://example.com/posts/901bc739.html</id>
     <published>2023-12-01T11:48:14.000Z</published>
-    <updated>2024-02-06T05:50:34.817Z</updated>
+    <updated>2024-02-06T11:04:31.996Z</updated>
     
     <content type="html"><![CDATA[<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p> yum install -y epel-release</p><p> yum install -y ansible</p><p> ansible配置文件：</p><pre><code>/etc/ansible/ansible.cfg/etc/ansible/hosts</code></pre><p> 生成秘钥：</p><pre><code>ssh-keygen -t rsa  #在/root/.ssh/目录下生成秘钥#被控端：(复制主机端公钥到被控端)ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.7.99 ssh-copy-id  被控端ip</code></pre><h2 id="二、管理服务器：Inventory文件"><a href="#二、管理服务器：Inventory文件" class="headerlink" title="二、管理服务器：Inventory文件"></a>二、管理服务器：Inventory文件</h2><p>用于管理主机与主机组的文件 也叫主机清单<br>默认文件  /etc/ansible/hosts 最好不要用这  不然一不小心  没指定hosts 就执行这个了</p><p>文件示例</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[gs]</span><br><span class="line">gs157 ansible_ssh_host=1.11.1.11 ansible_ssh_port=65022</span><br><span class="line">[remote]</span><br><span class="line">kh251 ansible_ssh_host=2.22.222.2</span><br></pre></td></tr></table></figure><h2 id="三、基础命令"><a href="#三、基础命令" class="headerlink" title="三、基础命令"></a>三、基础命令</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>查看具体主机配置</p><pre><code>grep -v ^# /etc/ansible/hosts |grep -v ^$ansible all --list-host     </code></pre><h3 id="基础参数"><a href="#基础参数" class="headerlink" title="基础参数"></a>基础参数</h3><p>-m 指定模块【command copy shell】<br><font color="red">   忽略时，就默认是 -m command </font></p><pre><code>示例：  ansible -i ./hosts -a ifconfig  test</code></pre><p>-a 模块中使用的参数</p><pre><code>示例：  ansible -i ./hosts -m shell -a &quot;free -mh&quot;  test</code></pre><p>-i 指定hosts文件</p><pre><code>示例  ansible -i ./hosts -m ping test</code></pre><h3 id="检查能否在受管主机上运行python模块"><a href="#检查能否在受管主机上运行python模块" class="headerlink" title="检查能否在受管主机上运行python模块"></a>检查能否在受管主机上运行python模块</h3><pre><code>ansible host-pattern -m module [-a &#39;module arguments&#39;] [-i inventory]示例    ansible gsweb -m ping        ansible -i /etc/ansible/hosts gsweb -m ping   </code></pre><h3 id="command模块"><a href="#command模块" class="headerlink" title="command模块"></a>command模块</h3><pre><code>执行shell命令-m 不使用 默认使用command模块ansible -m command -a &quot;frem -mh&quot; test   ansible -m command -a &quot;frem -mh&quot; test     ansible  -a &quot;frem -mh&quot; test </code></pre><h3 id="shell模块"><a href="#shell模块" class="headerlink" title="shell模块"></a>shell模块</h3><p> 与command模块有些相似,但是command 有些命令无法执行</p><p>  命令行示例</p><pre><code> ansible -m shell -a &quot;cat /etc/*release&quot; test</code></pre><h3 id="copy模块"><a href="#copy模块" class="headerlink" title="copy模块"></a>copy模块</h3><p>   参数</p><pre><code>src：    待copy的文件或目录dest：   目标copy到远程主机的具体目录（必要参数）owner：  目标copy到远程主机后的属主（远程主机上必须有对应的用户，否则报错）group：  目标copy到远程主机后的属组（远程主机上必须有对应的组，否则报错）mode：   目标copy到远程主机后的权限content： 若不用src指定拷贝的文件，必须用content直接指定文件内容，2选一。 force：   当远程主机的目标路径中已经存在同名文件，并且与ansible主机中的文件内容不同时，          是否强制覆盖，可选值有yes和no。默认值为yes，表示覆盖，          如果设置为no，则不会执行覆盖拷贝操作，远程主机中的文件保持不变。          backup：  当远程主机的目标路径中已经存在同名文件，并且与ansible主机中的文件内容不同时，          是否对远程主机的文件进行备份，          可选值有yes和no，当设置为yes时，会先备份远程主机中的文件，          然后再将ansible主机中的文件拷贝到远程主机。</code></pre><p>   命令行 示例</p><pre><code>   ansible khweb  -m copy -a &quot;src=/home/soft/node_exporter-1.6.1.linux-amd64.tar.gz  dest=/home/soft/  backup=yes mode=644&quot;</code></pre><p>   playbook 示例</p><pre><code>   - name: Copy a file from local to remote     copy:      src: /path/to/local/file.txt      dest: /path/to/remote/file.txt               - name: &quot;copy files&quot;         copy:         src: &quot;&#123;&#123; item.src &#125;&#125;&quot;         dest: &quot;&#123;&#123; item.dest &#125;&#125;&quot;         owner: root         group: root         mode: 755         with_items:            - &#123;src: &quot;/root/aaa.txt&quot;, dest: &quot;/tmp&quot; &#125;            - &#123;src: &quot;/root/bbb.txt&quot;, dest: &quot;/tmp&quot; &#125;</code></pre><h3 id="setup模块"><a href="#setup模块" class="headerlink" title="setup模块"></a>setup模块</h3><h3 id="file模块"><a href="#file模块" class="headerlink" title="file模块"></a>file模块</h3><h3 id="debug模块"><a href="#debug模块" class="headerlink" title="debug模块"></a>debug模块</h3><h3 id="yum模块"><a href="#yum模块" class="headerlink" title="yum模块"></a>yum模块</h3><h3 id="user模块"><a href="#user模块" class="headerlink" title="user模块"></a>user模块</h3><h3 id="register模块"><a href="#register模块" class="headerlink" title="register模块"></a>register模块</h3><p> register 捕获 task 的输出，并将它保存到一个变量中，方便在以后的任务中调用</p><p> change： 表示执行命令的状态，如果命令执行了，则为 true；</p><p> cmd： 表示的则是你当前执行的命令；</p><p> delta： 表示命令执行所花费的时间</p><p> start： 表示命令开始执行的时间</p><p> end： 表示命令结束的时间</p><p> failed： 表示命令执行的结果，如果为 false 则表示命令执行成功，true 则表示命令执行失败</p><p> rc： 表示命令执行的返回码（return code），0 表示执行成功；</p><p> stderr：命令输出的标准错误信息</p><p> stderr_lines： 按换行符分割输出的内容，在多行输出时，显示的效果比 stderr 更加直观</p><p> stdout： 命令的标准输出信息</p><p> stdout_lines： 按换行符分割输出的内容，在多行输出时，结果更加直观    </p><pre><code>示例：- name: View the logged in user name  shell: whoami  register: user- debug:    var: user       - name: check nginx running   stat: path=/var/run/nginx.pid   register: nginxrunning   - name: check nginx syntax  shell: /usr/sbin/nginx -t  register: nginxsyntax# check_mode  true  -C测试 会跳过  check_mode: false  debug:    var: &quot;nginxsyntax,nginxrunning&quot;- name: reload nginx server  service: name=nginx state=reloaded  when: nginxsyntax.rc == 0  and nginxrunning.stat.exists == true           </code></pre><h2 id="when模块"><a href="#when模块" class="headerlink" title="when模块"></a>when模块</h2><h2 id="debug与when连用"><a href="#debug与when连用" class="headerlink" title="debug与when连用"></a>debug与when连用</h2><h2 id="剧本（Playbooks）"><a href="#剧本（Playbooks）" class="headerlink" title="剧本（Playbooks）"></a>剧本（Playbooks）</h2><pre><code>Playbook可以运行多个任务，并提供一些更高级的功能。让我们将上述任务移到一本剧本中。在ansible中剧本（playbooks）和角色（roles）都使用Yaml文件定义</code></pre><h3 id="常用标签"><a href="#常用标签" class="headerlink" title="常用标签"></a>常用标签</h3><pre><code>gather_facts: no只要是使用了ansible-playbook，默认情况，第 1 个步骤总是执行 Gathering Facts 这个TASK 这个主要收集目标主机的常用信息，如：主机名、内核版本、网卡接口、IP 地址、操作系统版本、CPU、内存、磁盘 等等tag标签可以单独使用#启动nginx    - name: start nginx server      service: name=nginx state=started      when:         - nginxsyntax.rc == 0        - nginxrunning.stat.exists == false      tags: updateconfig       ansible-playbook -i hosts site.yml -t updateconfig           通过debug模块去确认返回结果的数据结构   - name: print nginx syntax result  debug: var=nginxsyntax   </code></pre><h3 id="定义变量-循环示例"><a href="#定义变量-循环示例" class="headerlink" title="定义变量 循环示例"></a>定义变量 循环示例</h3><pre><code> vars:    createuser:      - tomcat      - www      - mysql        tasks:   #利用循环创建多个用户    - name: create user      user: name=&#123;&#123;item&#125;&#125; state=present      with_items: &quot;&#123;&#123;createuser&#125;&#125;&quot;</code></pre>]]></content>
     
@@ -161,6 +198,8 @@
       
     
     
+    
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
     
     
   </entry>
@@ -191,10 +230,12 @@
     <link href="http://example.com/posts/6f994fe6.html"/>
     <id>http://example.com/posts/6f994fe6.html</id>
     <published>2023-11-10T04:00:16.000Z</published>
-    <updated>2024-02-06T05:50:35.005Z</updated>
+    <updated>2024-02-06T11:04:17.270Z</updated>
     
     
     
+    
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
     
     
   </entry>
@@ -204,7 +245,7 @@
     <link href="http://example.com/posts/a9da9b42.html"/>
     <id>http://example.com/posts/a9da9b42.html</id>
     <published>2023-11-10T03:59:43.000Z</published>
-    <updated>2024-02-06T05:50:34.917Z</updated>
+    <updated>2024-02-06T11:00:18.612Z</updated>
     
     <content type="html"><![CDATA[<p>#yum 安装报依赖库找不到问题</p><pre><code>openEuler release 22.03版本替换centos 7的源就可以具体命令：wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo然后 将文件中$releasever替换7具体命令：vim 后  %s/$releasever/7/g</code></pre><h1 id="安装-yum-install-nginx-报错"><a href="#安装-yum-install-nginx-报错" class="headerlink" title="安装 yum install nginx 报错"></a>安装 yum install nginx 报错</h1><pre><code>Error:  Problem: 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libcrypto.so.10()(64bit)，但没有提供者可以被安装  - 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libcrypto.so.10(libcrypto.so.10)(64bit)，但没有提供者可以被安装  - 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libssl.so.10()(64bit)，但没有提供者可以被安装  - 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libssl.so.10(libssl.so.10)(64bit)，但没有提供者可以被安装  - 软件包 nginx-1:1.24.0-1.el7.ngx.x86_64 需要 libcrypto.so.10(OPENSSL_1.0.2)(64bit)，但没有提供者可以被安装  - 无法同时安装 openssl-libs-1:1.0.2k-19.el7.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64  - 无法同时安装 openssl-libs-1:1.0.2k-21.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64  - 无法同时安装 openssl-libs-1:1.0.2k-22.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64  - 无法同时安装 openssl-libs-1:1.0.2k-24.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64  - 无法同时安装 openssl-libs-1:1.0.2k-25.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64  - 无法同时安装 openssl-libs-1:1.0.2k-26.el7_9.x86_64 和 openssl-libs-1:1.1.1m-22.oe2203.x86_64  - 软件包 ima-evm-utils-libs-1.3.2-8.oe2203sp1.x86_64 需要 libcrypto.so.1.1()(64bit)，但没有提供者可以被安装  - 软件包 ima-evm-utils-libs-1.3.2-8.oe2203sp1.x86_64 需要 libcrypto.so.1.1(OPENSSL_1_1_0)(64bit)，但没有提供者可以被安装  - 软件包 ima-evm-utils-libs-1.3.2-8.oe2203sp1.x86_64 需要 libcrypto.so.1.1(OPENSSL_1_1_1)(64bit)，但没有提供者可以被安装  - 无法为该任务安装最佳候选  - 安装的软件包的问题 ima-evm-utils-libs-1.3.2-8.oe2203sp1.x86_64(try to add &#39;--allowerasing&#39; to command line to replace conflicting packages or &#39;--skip-broken&#39; to skip uninstallable packages or &#39;--nobest&#39; to use not only best candidate packages)解决方案yum install compat-openssl10yum install http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/compat-openssl10-1.0.2o-3.el8.x86_64.rpm</code></pre>]]></content>
     
@@ -221,6 +262,8 @@
     
     
     
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
+    
     
   </entry>
   
@@ -229,7 +272,7 @@
     <link href="http://example.com/posts/ee8708d7.html"/>
     <id>http://example.com/posts/ee8708d7.html</id>
     <published>2023-11-08T09:54:07.000Z</published>
-    <updated>2024-02-06T05:50:35.006Z</updated>
+    <updated>2024-02-06T11:01:37.748Z</updated>
     
     <content type="html"><![CDATA[<h1 id="使用逗号分割拆分"><a href="#使用逗号分割拆分" class="headerlink" title="使用逗号分割拆分"></a>使用逗号分割拆分</h1><p>查询出field字段中有value的记录<br>SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0</p><p> FIND_IN_SET(‘value’, field)<font color=Red>&gt;0</font>  查询的是字段中<font color=Red>包含了</font>查询字符value的<br> FIND_IN_SET(‘value’, field)<font color=Red>=0</font>   查询的是字段中<font color=Red>不包含</font>了查询字符value的</p><h1 id="SUBSTRING-INDEX-函数"><a href="#SUBSTRING-INDEX-函数" class="headerlink" title="SUBSTRING_INDEX 函数"></a>SUBSTRING_INDEX 函数</h1><p>string：用于截取目标字符串的字符串。可为字段，表达式等。</p><p>sep：分隔符，string存在且用于分割的字符，比如“，”、“.”等。</p><p>num：序号 <font color=Red>负数 从右边取   正数从左边取 取几个值</font></p><p>示例 field  a1,b2,c3<br>SUBSTRING_INDEX(field, ‘,’, 1) 取值就是 a1<br><font color=Red>SUBSTRING_INDEX(field, ‘,’, 2) 取值就是 a1,b2</font></p><p><font color=Red>根据，分割拆分多条数据sql：</font></p><pre><code>SELECT SUBSTRING_INDEX(field, &#39;,&#39;, 1) AS value1,    SUBSTRING_INDEX(SUBSTRING_INDEX(field, &#39;,&#39;, 2), &#39;,&#39;, -1) AS value2,    SUBSTRING_INDEX(SUBSTRING_INDEX(field, &#39;,&#39;, 3), &#39;,&#39;, -1) AS value3    SUBSTRING_INDEX(field, &#39;,&#39;, -1) AS value4FROM table</code></pre><h2 id="根据，隔开字段-分组统计"><a href="#根据，隔开字段-分组统计" class="headerlink" title="根据，隔开字段 分组统计"></a>根据，隔开字段 分组统计</h2><p>根据，隔开字段拆分成多行数据 多会拆分成3行了</p><p>SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(comInputField163, ‘,’,numbers.n), ‘,’, -1) AS tag ,numbers.n,a.*<br>      #,COUNT(*) AS count<br>FROM mida_gd_2023101116015948 a<br>JOIN (<br>  SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3                                   <font color=Red>#这边SELECT 数 根据，隔开最多项来，写到SELECT 5只有数据中只有2项它也要关联5个出来</font><br>) AS numbers<br>WHERE CHAR_LENGTH(comInputField163) - CHAR_LENGTH(REPLACE(comInputField163, ‘,’, ‘’)) &gt;= numbers.n-1  #通过这个来限制,<font color=Red>统计，数量</font> 判断需要几个<br>GROUP BY tag;</p><h1 id="两表连接的SQL语句"><a href="#两表连接的SQL语句" class="headerlink" title="两表连接的SQL语句"></a>两表连接的SQL语句</h1><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A,table2 B<br>where A.id=B.id</p><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A join table2 B<br>on A.id=B.id</p><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A inner join table2 B<br>on A.id=B.id</p><p>join on与inner join on是相同</p><p>默认JOIN就是指的INNER JOIN</p><p>内连接推荐 join 方式 通过where 的方式 性能较差<br>有的数据库底层 认为是交叉 连接</p>]]></content>
     
@@ -241,6 +284,8 @@
     
     
     
+    <category term="MYSQL" scheme="http://example.com/categories/MYSQL/"/>
+    
     
   </entry>
   
@@ -249,7 +294,7 @@
     <link href="http://example.com/posts/4aea2b73.html"/>
     <id>http://example.com/posts/4aea2b73.html</id>
     <published>2023-11-01T03:01:22.000Z</published>
-    <updated>2024-02-06T05:50:34.973Z</updated>
+    <updated>2024-02-06T10:59:02.131Z</updated>
     
     <content type="html"><![CDATA[<h1 id="wordpress-迁移后还是访问之前的域名"><a href="#wordpress-迁移后还是访问之前的域名" class="headerlink" title="wordpress 迁移后还是访问之前的域名"></a>wordpress 迁移后还是访问之前的域名</h1><pre><code>1.找到 前缀_options 表修改 siteurl  home字段 2.或者登录后台修改</code></pre><h1 id="wordpress-迁移后栏目打开是404"><a href="#wordpress-迁移后栏目打开是404" class="headerlink" title="wordpress 迁移后栏目打开是404"></a>wordpress 迁移后栏目打开是404</h1><pre><code>nginx加上如下配置location / &#123; try_files $uri $uri/ /index.php?$args;&#125;# Add trailing slash to */wp-admin requests.rewrite /wp-admin$ $scheme://$host$uri/ permanent;</code></pre><h1 id="修改忘记密码-修改"><a href="#修改忘记密码-修改" class="headerlink" title="修改忘记密码 修改"></a>修改忘记密码 修改</h1><pre><code>修改 前缀_users 表    user_pass 字段 MD5 加密</code></pre>]]></content>
     
@@ -261,6 +306,8 @@
     
     
     
+    <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
+    
     
   </entry>
   
@@ -269,7 +316,7 @@
     <link href="http://example.com/posts/32b808f5.html"/>
     <id>http://example.com/posts/32b808f5.html</id>
     <published>2023-10-26T13:56:52.000Z</published>
-    <updated>2024-02-06T05:50:34.825Z</updated>
+    <updated>2024-02-06T11:04:51.689Z</updated>
     
     <content type="html"><![CDATA[<h1 id="原理linux-network-namespace"><a href="#原理linux-network-namespace" class="headerlink" title="原理linux network namespace"></a>原理linux network namespace</h1><h1 id="docker-bridge-网络"><a href="#docker-bridge-网络" class="headerlink" title="docker  bridge 网络"></a>docker  bridge 网络</h1><h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><h2 id="自定义-docker-网络"><a href="#自定义-docker-网络" class="headerlink" title="自定义 docker 网络"></a>自定义 docker 网络</h2><h1 id="docker端口映射"><a href="#docker端口映射" class="headerlink" title="docker端口映射"></a>docker端口映射</h1><h1 id="docker-host-网络"><a href="#docker-host-网络" class="headerlink" title="docker host 网络"></a>docker host 网络</h1>]]></content>
     
@@ -280,6 +327,8 @@
       
     
     
+    
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
     
     
   </entry>
@@ -388,36 +437,6 @@ mysql</summary>
       
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;内网穿透的方式有很多种，什么Frp、Ngrok、NPS、蒲公英等等，&lt;/p&gt;
 &lt;h1 id=&quot;NPS简介&quot;&gt;&lt;a href=&quot;#NPS简介&quot;</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>vmvare-esxi虚拟机扩容</title>
-    <link href="http://example.com/posts/undefined.html"/>
-    <id>http://example.com/posts/undefined.html</id>
-    <published>2023-08-28T06:55:16.000Z</published>
-    <updated>2023-08-28T07:19:29.037Z</updated>
-    
-    <content type="html"><![CDATA[<p>修改硬盘大小</p><pre><code>先虚拟机管理页面修改硬盘大小    注：不删除快照是 无法修改成功的</code></pre><p>分区  </p><pre><code>fdisk /dev/sda    np默认确定w</code></pre><p>手动同步磁盘到系统内核</p><pre><code>partprobe</code></pre><p>创建物理卷</p><pre><code>pvcreate /dev/sda3          #【/dev/sda3 是根据fdisk来的】</code></pre><p>查看卷组</p><pre><code>vgdisplay</code></pre><p>添加物理卷（/dev/sda3）到卷组（centos）</p><pre><code>vgextend centos /dev/sda3   #此处的centos根据vgdisplay查看得来</code></pre><p>将空闲的空间都分配给root文件系统 </p><pre><code> lvextend -L +250G /dev/centos/root   【/dev/centos/root  就是要扩容的目录通过df 可查看】</code></pre><p>对root文件系统执行扩容</p><pre><code>xfs_growfs /dev/centos/root</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;修改硬盘大小&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;先虚拟机管理页面修改硬盘大小
-    注：不删除快照是 无法修改成功的
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;分区  &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;fdisk /dev/sda    
-n
-p
-默认确定
-w
-&lt;/code&gt;&lt;/pre</summary>
       
     
     
