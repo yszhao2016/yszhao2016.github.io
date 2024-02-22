@@ -3972,4 +3972,47 @@ STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
         <tag>PHP开发</tag>
       </tags>
   </entry>
+  <entry>
+    <title>php开发-常见加密使用</title>
+    <url>/posts/78f26761.html</url>
+    <content><![CDATA[<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><pre><code>数字签名 就是明文+私钥密文  这样就能保证数据没有被篡改  
+
+非对称加密 RSA、DSA
+
+对称加密 DES、AES
+
+密码散列算法有 SHA-1、MD5
+    算出来就不可逆了
+</code></pre>
+<h1 id="签名算法-SHA1withRSA"><a href="#签名算法-SHA1withRSA" class="headerlink" title="签名算法-SHA1withRSA"></a>签名算法-SHA1withRSA</h1><p>用SHA算法进行签名，用RSA算法进行加密</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$str</span>        = chunk_split(<span class="variable">$myPrivateKeyStr</span>, <span class="number">64</span>, <span class="string">&quot;\n&quot;</span>);</span><br><span class="line"><span class="variable">$privateKey</span> = <span class="string">&quot;-----BEGIN RSA PRIVATE KEY-----\n<span class="subst">$str</span>-----END RSA PRIVATE KEY-----\n&quot;</span>;</span><br><span class="line">openssl_sign(<span class="variable">$paramStr</span>, <span class="variable">$sign</span>, <span class="variable">$privateKey</span>);</span><br><span class="line"><span class="variable">$resSign</span> = base64_encode(<span class="variable">$sign</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="RSA加密"><a href="#RSA加密" class="headerlink" title="RSA加密"></a>RSA加密</h1><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * RSA分段加密</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $context string 待加密字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $type string  &#x27;private&#x27; or &#x27;public&#x27;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $key string 公钥 or 私钥</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">encrypt</span>(<span class="params"><span class="variable">$context</span>, <span class="variable">$type</span>, <span class="variable">$key</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//http://www.php.net/manual/en/function.openssl-public-encrypt.php#95307</span></span><br><span class="line">    <span class="comment">//Assumes 1024 bit key and encrypts in chunks.</span></span><br><span class="line">    <span class="variable">$maxlength</span> = <span class="number">117</span>;</span><br><span class="line">    <span class="variable">$output</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="variable">$context</span>) &#123;</span><br><span class="line">        <span class="variable">$input</span> = substr(<span class="variable">$context</span>, <span class="number">0</span>, <span class="variable">$maxlength</span>);</span><br><span class="line">        <span class="variable">$context</span> = substr(<span class="variable">$context</span>, <span class="variable">$maxlength</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$type</span> == <span class="string">&#x27;private&#x27;</span>) &#123;</span><br><span class="line">            <span class="variable">$ok</span> = openssl_private_encrypt(<span class="variable">$input</span>, <span class="variable">$encrypted</span>, <span class="variable">$key</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$ok</span> = openssl_public_encrypt(<span class="variable">$input</span>, <span class="variable">$encrypted</span>, <span class="variable">$key</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$output</span> .= <span class="variable">$encrypted</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> base64_encode(<span class="variable">$output</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="AES加密"><a href="#AES加密" class="headerlink" title="AES加密"></a>AES加密</h1><p>openssl_encrypt($data,$method,$key,$options=0,$iv=””,&amp;$tag=NULL,$aad=””,$tag_length=16)</p>
+<p>1.$data：加密明文</p>
+<p>2.$method：加密方法： 可以通过openssl_get_cipher_methods()获取有哪些加密方式</p>
+<p>3.$passwd：加密密钥[密码]</p>
+<p>4.$options：数据格式选项（可选）【选项有：】：0,OPENSSL_RAW_DATA=1,OPENSSL_ZERO_PADDING=2,OPENSSL_NO_PADDING=3</p>
+<p>5.$iv：密初始化向量（可选),需要注意：如果method为DES−ECB，则iv无需填写</p>
+<p>6.$tag：使用 AEAD 密码模式（GCM 或 CCM）时传引用的验证标签(可选)</p>
+<p>7.$aad：附加的验证数据。（可选）</p>
+<p>8.$tag_length：验证 tag 的长度。GCM 模式时，它的范围是 4 到 16(可选)</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">openssl_encrypt(json_encode(<span class="variable">$body</span>), <span class="string">&#x27;AES-128-CBC&#x27;</span>, <span class="keyword">$this</span>-&gt;key, OPENSSL_RAW_DATA, <span class="keyword">$this</span>-&gt;iv)</span><br><span class="line"></span><br><span class="line">bin2hex(openssl_encrypt(<span class="variable">$str</span>, <span class="string">&#x27;DES-ECB&#x27;</span>, <span class="keyword">$this</span>-&gt;appSecret, OPENSSL_RAW_DATA));</span><br><span class="line"></span><br><span class="line"><span class="comment">#一般多需要转换为base64传输</span></span><br><span class="line">base64_encode(openssl_encrypt(json_encode(<span class="variable">$body</span>), <span class="string">&#x27;AES-128-CBC&#x27;</span>, <span class="keyword">$this</span>-&gt;key, OPENSSL_RAW_DATA, <span class="keyword">$this</span>-&gt;iv));</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="HMAC-散列消息身份验证码"><a href="#HMAC-散列消息身份验证码" class="headerlink" title="HMAC 散列消息身份验证码"></a>HMAC 散列消息身份验证码</h1><p>它不是散列函数，而是采用了将MD5或SHA1散列函数与共享机密秘钥（与公钥/秘钥对不同）一起使用的消息身份验证机制。</p>
+<p>目前hmac主要应用在身份验证中，在用户登录传递密码的过程中可以利用，签名来防止密码明文传递。</p>
+<p>在php中hash_hmac函数就能将HMAC和一部分哈希加密算法相结合起来实现HMAC-SHA1  HMAC-SHA256 HMAC-MD5等等算法</p>
+<p>string hash_hmac(string $algo, string $data, string $key, bool $raw_output = false)</p>
+<p>algo：要使用的哈希算法名称，可以是上述提到的md5,sha1等</p>
+<p>data：要进行哈希运算的消息，也就是需要加密的明文。</p>
+<p>key：使用HMAC生成信息摘要是所使用的密钥。</p>
+<p>raw_output：该参数为可选参数，默认为false，如果设为true，则返回原始二进制数据表示的信息摘要，<br>否则返回16进制小写字符串格式表示的信息摘要（注意是16进制数，而非简单的字母加数字）。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">方案一：hash_hmac(<span class="string">&quot;sha1&quot;</span>, <span class="variable">$str</span>, <span class="variable">$secret</span>)</span><br><span class="line">方案二：bin2hex(hash_hmac(<span class="string">&quot;sha1&quot;</span>, <span class="variable">$str</span>, <span class="variable">$secret</span>, <span class="literal">true</span>));</span><br><span class="line"></span><br><span class="line">hash_hmac( <span class="string">&#x27;md5&#x27;</span>,<span class="variable">$data</span>, <span class="keyword">$this</span>-&gt;appSecret)</span><br><span class="line"></span><br><span class="line">hash_hmac(<span class="string">&#x27;sha256&#x27;</span>, <span class="variable">$data</span>,<span class="keyword">$this</span>-&gt;appSecret)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>PHP开发</category>
+      </categories>
+  </entry>
 </search>
