@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-19T05:52:10.199Z</updated>
+  <updated>2024-03-20T09:47:15.788Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,13 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>php开发-微信授权登录</title>
+    <link href="http://example.com/posts/dc9d89c5.html"/>
+    <id>http://example.com/posts/dc9d89c5.html</id>
+    <published>2024-03-19T11:21:50.000Z</published>
+    <updated>2024-03-20T09:47:15.788Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、注册微信开放平台"><a href="#一、注册微信开放平台" class="headerlink" title="一、注册微信开放平台"></a>一、注册微信开放平台</h1><pre><code>网址：https://open.weixin.qq.com/需要哪些资质  </code></pre><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;一、注册微信开放平台&quot;&gt;&lt;a href=&quot;#一、注册微信开放平台&quot; class=&quot;headerlink&quot; title=&quot;一、注册微信开放平台&quot;&gt;&lt;/a&gt;一、注册微信开放平台&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;网址：https://open.weixin.qq.com/</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>php开发-thinkphp钩子与行为</title>
     <link href="http://example.com/posts/9d1b4110.html"/>
     <id>http://example.com/posts/9d1b4110.html</id>
     <published>2024-03-19T03:11:00.000Z</published>
-    <updated>2024-03-19T05:52:10.199Z</updated>
+    <updated>2024-03-19T05:53:37.873Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="系统预留钩子"><a href="#系统预留钩子" class="headerlink" title="系统预留钩子"></a>系统预留钩子</h1><pre><code>app_init        应用初始化标签位app_dispatch    应用调度标签位app_begin       应用开始标签位module_init     模块初始化标签位action_begin    控制器开始标签位view_filter     视图输出过滤标签位app_end         应用结束标签位log_write       日志write方法标签位log_wrire_done  日志写入完成标签位reponse_send    响应发送标签位reponse_end     输出结束标签位</code></pre><h1 id="绑定钩子"><a href="#绑定钩子" class="headerlink" title="绑定钩子"></a>绑定钩子</h1><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><pre><code>    tags.php 定义数组键值对如下所示：    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="comment">// 应用结束</span></span><br><span class="line">    <span class="string">&#x27;app_end&#x27;</span>      =&gt; [</span><br><span class="line">        <span class="string">&#x27;app\\admin\\behavior\\AdminLog&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">];</span><br></pre></td></tr></table></figure></code></pre><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><pre><code>    Hook::add(&#39;abc&#39;,&quot; app\\index\\behavior\\abc&quot;)</code></pre><h2 id="行为-具体钩子具体实现-定义"><a href="#行为-具体钩子具体实现-定义" class="headerlink" title="行为(具体钩子具体实现)定义"></a>行为(具体钩子具体实现)定义</h2><pre><code>namespace app\index\behaviorclass abc&#123;    public function run()    &#123;        // 行为逻辑    &#125;&#125;</code></pre><h1 id="下钩子"><a href="#下钩子" class="headerlink" title="下钩子"></a>下钩子</h1><pre><code>Hook:listen(&#39;钩子名称&#39;,&#39;参数&#39;,&#39;是否只有一次有效返回值&#39;)</code></pre><h1 id="hook-基本实现"><a href="#hook-基本实现" class="headerlink" title="hook 基本实现"></a>hook 基本实现</h1><p>hook::listen 下钩子  具体实现  判断当前的钩子名称 是否在 tag 中定义 ，<br>有就执行，没有就返回空<br>其中hook::exec 方法是具体的执行钩子</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="系统预留钩子"><a href="#系统预留钩子" class="headerlink" title="系统预留钩子"></a>系统预留钩子</h1><pre><code>app_init        应用初始化标签位app_dispatch    应用调度标签位app_begin       应用开始标签位module_init     模块初始化标签位action_begin    控制器开始标签位view_filter     视图输出过滤标签位app_end         应用结束标签位log_write       日志write方法标签位log_wrire_done  日志写入完成标签位reponse_send    响应发送标签位reponse_end     输出结束标签位</code></pre><h1 id="绑定钩子"><a href="#绑定钩子" class="headerlink" title="绑定钩子"></a>绑定钩子</h1><h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><pre><code>    tags.php 定义数组键值对如下所示：    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="comment">// 应用结束</span></span><br><span class="line">    <span class="string">&#x27;app_end&#x27;</span>      =&gt; [</span><br><span class="line">        <span class="string">&#x27;app\\admin\\behavior\\AdminLog&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">];</span><br></pre></td></tr></table></figure></code></pre><h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><pre><code>    Hook::add(&#39;abc&#39;,&quot; app\\index\\behavior\\abc&quot;)</code></pre><h1 id="行为-具体钩子具体实现-定义"><a href="#行为-具体钩子具体实现-定义" class="headerlink" title="行为(具体钩子具体实现)定义"></a>行为(具体钩子具体实现)定义</h1><pre><code>namespace app\index\behaviorclass abc&#123;    public function run()    &#123;        // 行为逻辑    &#125;&#125;</code></pre><h1 id="下钩子"><a href="#下钩子" class="headerlink" title="下钩子"></a>下钩子</h1><pre><code>Hook:listen(&#39;钩子名称&#39;,&#39;参数&#39;,&#39;是否只有一次有效返回值&#39;)</code></pre><h1 id="hook-基本实现"><a href="#hook-基本实现" class="headerlink" title="hook 基本实现"></a>hook 基本实现</h1><p>hook::listen 下钩子  具体实现  判断当前的钩子名称 是否在 tag 中定义 ，<br>有就执行，没有就返回空<br>其中hook::exec 方法是具体的执行钩子</p>]]></content>
     
     
       
@@ -42,18 +62,18 @@ app_dispatch    应用调度标</summary>
   </entry>
   
   <entry>
-    <title>php开发-登录注册</title>
+    <title>php开发-注册登录</title>
     <link href="http://example.com/posts/a634ca62.html"/>
     <id>http://example.com/posts/a634ca62.html</id>
     <published>2024-03-18T07:43:30.000Z</published>
-    <updated>2024-03-19T05:35:05.451Z</updated>
+    <updated>2024-03-19T11:16:52.622Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="注册方式"><a href="#注册方式" class="headerlink" title="注册方式"></a>注册方式</h1><h2 id="用户名-密码-邮箱注册"><a href="#用户名-密码-邮箱注册" class="headerlink" title="用户名+密码+邮箱注册"></a>用户名+密码+邮箱注册</h2><h2 id="用户名-密码-手机验证码"><a href="#用户名-密码-手机验证码" class="headerlink" title="用户名+密码+手机验证码"></a>用户名+密码+手机验证码</h2><h2 id="第三方注册"><a href="#第三方注册" class="headerlink" title="第三方注册"></a>第三方注册</h2><h1 id="登录方式"><a href="#登录方式" class="headerlink" title="登录方式"></a>登录方式</h1><h2 id="用户名-密码"><a href="#用户名-密码" class="headerlink" title="用户名+密码"></a>用户名+密码</h2><h2 id="手机号-验证码-手机验证码"><a href="#手机号-验证码-手机验证码" class="headerlink" title="手机号+验证码+手机验证码"></a>手机号+验证码+手机验证码</h2><p>手机号码 + 验证码  基于cookie+session </p><h2 id="本机号码一键登录"><a href="#本机号码一键登录" class="headerlink" title="本机号码一键登录"></a>本机号码一键登录</h2><h2 id="第三方授权登录"><a href="#第三方授权登录" class="headerlink" title="第三方授权登录"></a>第三方授权登录</h2><h2 id="手机号-验证码-绑定第三方授权"><a href="#手机号-验证码-绑定第三方授权" class="headerlink" title="手机号+验证码+绑定第三方授权"></a>手机号+验证码+绑定第三方授权</h2><h2 id="记住功能"><a href="#记住功能" class="headerlink" title="记住功能"></a>记住功能</h2><h1 id="单点登录"><a href="#单点登录" class="headerlink" title="单点登录"></a>单点登录</h1><h2 id="直接基于Cookie与Session实现单点登录"><a href="#直接基于Cookie与Session实现单点登录" class="headerlink" title="直接基于Cookie与Session实现单点登录"></a>直接基于Cookie与Session实现单点登录</h2><h2 id="基于CAS方案实现单点登录"><a href="#基于CAS方案实现单点登录" class="headerlink" title="基于CAS方案实现单点登录"></a>基于CAS方案实现单点登录</h2><h2 id="基于OAuth方案实现单点登录"><a href="#基于OAuth方案实现单点登录" class="headerlink" title="基于OAuth方案实现单点登录"></a>基于OAuth方案实现单点登录</h2><h1 id="多终端设备的用户互踢"><a href="#多终端设备的用户互踢" class="headerlink" title="多终端设备的用户互踢"></a>多终端设备的用户互踢</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="一、验证码"><a href="#一、验证码" class="headerlink" title="一、验证码"></a>一、验证码</h1><h2 id="1-1-生成"><a href="#1-1-生成" class="headerlink" title="1.1 生成"></a>1.1 生成</h2><h3 id="随机字符串-方案"><a href="#随机字符串-方案" class="headerlink" title="随机字符串 方案"></a>随机字符串 方案</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$codeset</span>= <span class="string">&quot;2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY</span></span><br><span class="line"><span class="string"> for (<span class="subst">$i</span> = 0; <span class="subst">$i</span> &lt; <span class="subst">$length</span>; <span class="subst">$i</span>++) &#123;</span></span><br><span class="line"><span class="string">        <span class="subst">$code</span>[<span class="subst">$i</span>] = <span class="subst">$codeSet</span>[mt_rand(0, strlen(<span class="subst">$codeset</span>) - 1)];</span></span><br><span class="line"><span class="string"> &#125;</span></span><br><span class="line"><span class="string"> return <span class="subst">$code</span>;</span></span><br></pre></td></tr></table></figure><h3 id="加减法-方案"><a href="#加减法-方案" class="headerlink" title="加减法 方案"></a>加减法 方案</h3><h3 id="拖动拼图方案"><a href="#拖动拼图方案" class="headerlink" title="拖动拼图方案"></a>拖动拼图方案</h3><h2 id="1-2-存储验证码"><a href="#1-2-存储验证码" class="headerlink" title="1.2 存储验证码"></a>1.2 存储验证码</h2><p>   cookie session </p><h2 id="1-3-验证验证码"><a href="#1-3-验证验证码" class="headerlink" title="1.3 验证验证码"></a>1.3 验证验证码</h2><p>  session</p><h1 id="二、注册方式"><a href="#二、注册方式" class="headerlink" title="二、注册方式"></a>二、注册方式</h1><h2 id="用户名-密码-邮箱注册"><a href="#用户名-密码-邮箱注册" class="headerlink" title="用户名+密码+邮箱注册"></a>用户名+密码+邮箱注册</h2><h3 id="注册处理"><a href="#注册处理" class="headerlink" title="注册处理"></a>注册处理</h3><pre><code>存储数据库 过期没激活 删除  url 中加个唯一的key  发送邮件</code></pre><h3 id="激活模块"><a href="#激活模块" class="headerlink" title="激活模块"></a>激活模块</h3><pre><code>根据  url 中唯一的key 查询处理</code></pre><h2 id="用户名-密码-手机验证码"><a href="#用户名-密码-手机验证码" class="headerlink" title="用户名+密码+手机验证码"></a>用户名+密码+手机验证码</h2><pre><code>生成验证码 存储  然后发送短信</code></pre><h2 id="第三方注册"><a href="#第三方注册" class="headerlink" title="第三方注册"></a>第三方注册</h2><h1 id="登录方式"><a href="#登录方式" class="headerlink" title="登录方式"></a>登录方式</h1><h2 id="用户名-密码"><a href="#用户名-密码" class="headerlink" title="用户名+密码"></a>用户名+密码</h2><p>基于cookie+session </p><h2 id="手机号-验证码-手机验证码"><a href="#手机号-验证码-手机验证码" class="headerlink" title="手机号+验证码+手机验证码"></a>手机号+验证码+手机验证码</h2><p>PC端 前后端不分离 手机号码 + 验证码  基于cookie+session </p><p>移动端 token 方式 用户名密码 验证成功 就生成$token<br>然后$token+$user_id 绑定<br>生成token 示例：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 获取全球唯一标识</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">uuid</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> sprintf(</span><br><span class="line">          <span class="string">&#x27;%04x%04x-%04x-%04x-%04x-%04x%04x%04x&#x27;</span>,</span><br><span class="line">          mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>),</span><br><span class="line">          mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>),</span><br><span class="line">          mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>),</span><br><span class="line">          mt_rand(<span class="number">0</span>, <span class="number">0x0fff</span>) | <span class="number">0x4000</span>,</span><br><span class="line">          mt_rand(<span class="number">0</span>, <span class="number">0x3fff</span>) | <span class="number">0x8000</span>,</span><br><span class="line">          mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>),</span><br><span class="line">          mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>),</span><br><span class="line">          mt_rand(<span class="number">0</span>, <span class="number">0xffff</span>)</span><br><span class="line">      );</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><h2 id="本机号码一键登录"><a href="#本机号码一键登录" class="headerlink" title="本机号码一键登录"></a>本机号码一键登录</h2><h2 id="第三方授权登录"><a href="#第三方授权登录" class="headerlink" title="第三方授权登录"></a>第三方授权登录</h2><h2 id="手机号-验证码-绑定第三方授权"><a href="#手机号-验证码-绑定第三方授权" class="headerlink" title="手机号+验证码+绑定第三方授权"></a>手机号+验证码+绑定第三方授权</h2><h2 id="记住功能"><a href="#记住功能" class="headerlink" title="记住功能"></a>记住功能</h2><p>设置session的保存时长</p><h1 id="单点登录"><a href="#单点登录" class="headerlink" title="单点登录"></a>单点登录</h1><h2 id="直接基于Cookie与Session实现单点登录"><a href="#直接基于Cookie与Session实现单点登录" class="headerlink" title="直接基于Cookie与Session实现单点登录"></a>直接基于Cookie与Session实现单点登录</h2><h2 id="基于CAS方案实现单点登录"><a href="#基于CAS方案实现单点登录" class="headerlink" title="基于CAS方案实现单点登录"></a>基于CAS方案实现单点登录</h2><h2 id="基于OAuth方案实现单点登录"><a href="#基于OAuth方案实现单点登录" class="headerlink" title="基于OAuth方案实现单点登录"></a>基于OAuth方案实现单点登录</h2><h1 id="多终端设备的用户互踢"><a href="#多终端设备的用户互踢" class="headerlink" title="多终端设备的用户互踢"></a>多终端设备的用户互踢</h1>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;注册方式&quot;&gt;&lt;a href=&quot;#注册方式&quot; class=&quot;headerlink&quot; title=&quot;注册方式&quot;&gt;&lt;/a&gt;注册方式&lt;/h1&gt;&lt;h2 id=&quot;用户名-密码-邮箱注册&quot;&gt;&lt;a href=&quot;#用户名-密码-邮箱注册&quot; class=&quot;headerlink&quot; ti</summary>
+    <summary type="html">&lt;h1 id=&quot;一、验证码&quot;&gt;&lt;a href=&quot;#一、验证码&quot; class=&quot;headerlink&quot; title=&quot;一、验证码&quot;&gt;&lt;/a&gt;一、验证码&lt;/h1&gt;&lt;h2 id=&quot;1-1-生成&quot;&gt;&lt;a href=&quot;#1-1-生成&quot; class=&quot;headerlink&quot; title=&quot;1</summary>
       
     
     
@@ -421,28 +441,6 @@ app_dispatch    应用调度标</summary>
     
     
     <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>docker学习4-网络</title>
-    <link href="http://example.com/posts/32b808f5.html"/>
-    <id>http://example.com/posts/32b808f5.html</id>
-    <published>2023-10-26T13:56:52.000Z</published>
-    <updated>2024-03-18T05:50:08.123Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="原理linux-network-namespace"><a href="#原理linux-network-namespace" class="headerlink" title="原理linux network namespace"></a>原理linux network namespace</h1><h1 id="docker-bridge-网络"><a href="#docker-bridge-网络" class="headerlink" title="docker  bridge 网络"></a>docker  bridge 网络</h1><p>默认就是 bridge</p><p>宿主主机通过 nat 访问</p><h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><p>``</p><h2 id="自定义-docker-网络"><a href="#自定义-docker-网络" class="headerlink" title="自定义 docker 网络"></a>自定义 docker 网络</h2><h1 id="docker端口映射"><a href="#docker端口映射" class="headerlink" title="docker端口映射"></a>docker端口映射</h1><h1 id="docker-host-网络"><a href="#docker-host-网络" class="headerlink" title="docker host 网络"></a>docker host 网络</h1><p>没有ip  ip就是宿主主机 端口也就对应宿主主机的</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;原理linux-network-namespace&quot;&gt;&lt;a href=&quot;#原理linux-network-namespace&quot; class=&quot;headerlink&quot; title=&quot;原理linux network namespace&quot;&gt;&lt;/a&gt;原理linux net</summary>
-      
-    
-    
-    
-    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
     
     
   </entry>

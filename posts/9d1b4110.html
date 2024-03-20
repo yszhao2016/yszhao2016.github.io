@@ -89,7 +89,7 @@
 <meta property="og:description" content="系统预留钩子app_init        应用初始化标签位 app_dispatch    应用调度标签位 app_begin       应用开始标签位 module_init     模块初始化标签位 action_begin    控制器开始标签位 view_filter     视图输出过滤标签位 app_end         应用结束标签位 log_write       日志wri">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-03-19T03:11:00.000Z">
-<meta property="article:modified_time" content="2024-03-19T05:52:10.199Z">
+<meta property="article:modified_time" content="2024-03-19T05:53:37.873Z">
 <meta property="article:author" content="yszhao">
 <meta property="article:tag" content="PHP开发">
 <meta name="twitter:card" content="summary">
@@ -390,13 +390,13 @@ log_wrire_done  日志写入完成标签位
 reponse_send    响应发送标签位
 reponse_end     输出结束标签位
 </code></pre>
-<h1 id="绑定钩子"><a href="#绑定钩子" class="headerlink" title="绑定钩子"></a>绑定钩子</h1><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><pre><code>    tags.php 定义数组键值对
+<h1 id="绑定钩子"><a href="#绑定钩子" class="headerlink" title="绑定钩子"></a>绑定钩子</h1><h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><pre><code>    tags.php 定义数组键值对
 如下所示：
     <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="comment">// 应用结束</span></span><br><span class="line">    <span class="string">&#x27;app_end&#x27;</span>      =&gt; [</span><br><span class="line">        <span class="string">&#x27;app\\admin\\behavior\\AdminLog&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><pre><code>    Hook::add(&#39;abc&#39;,&quot; app\\index\\behavior\\abc&quot;)
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><pre><code>    Hook::add(&#39;abc&#39;,&quot; app\\index\\behavior\\abc&quot;)
 </code></pre>
-<h2 id="行为-具体钩子具体实现-定义"><a href="#行为-具体钩子具体实现-定义" class="headerlink" title="行为(具体钩子具体实现)定义"></a>行为(具体钩子具体实现)定义</h2><pre><code>namespace app\index\behavior
+<h1 id="行为-具体钩子具体实现-定义"><a href="#行为-具体钩子具体实现-定义" class="headerlink" title="行为(具体钩子具体实现)定义"></a>行为(具体钩子具体实现)定义</h1><pre><code>namespace app\index\behavior
 class abc&#123;
     public function run()
     &#123;
@@ -437,8 +437,8 @@ class abc&#123;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/a634ca62.html" rel="next" title="php开发-登录注册">
-                <i class="fa fa-chevron-left"></i> php开发-登录注册
+              <a href="/posts/a634ca62.html" rel="next" title="php开发-注册登录">
+                <i class="fa fa-chevron-left"></i> php开发-注册登录
               </a>
             
           </div>
@@ -446,6 +446,10 @@ class abc&#123;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/dc9d89c5.html" rel="prev" title="php开发-微信授权登录">
+                php开发-微信授权登录 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -522,7 +526,7 @@ class abc&#123;
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -584,7 +588,7 @@ class abc&#123;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E9%92%A9%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">系统预留钩子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E9%92%A9%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">绑定钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">方法一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-number">2.0.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA-%E5%85%B7%E4%BD%93%E9%92%A9%E5%AD%90%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0-%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">行为(具体钩子具体实现)定义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E9%92%A9%E5%AD%90"><span class="nav-number">3.</span> <span class="nav-text">下钩子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hook-%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">hook 基本实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E9%92%A9%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">系统预留钩子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E9%92%A9%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">绑定钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">方法一：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA-%E5%85%B7%E4%BD%93%E9%92%A9%E5%AD%90%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0-%E5%AE%9A%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">行为(具体钩子具体实现)定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E9%92%A9%E5%AD%90"><span class="nav-number">4.</span> <span class="nav-text">下钩子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hook-%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">hook 基本实现</span></a></li></ol></div>
             
 
           </div>
