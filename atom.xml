@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-20T09:47:15.788Z</updated>
+  <updated>2024-03-25T11:03:20.066Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux-防火墙相关</title>
+    <link href="http://example.com/posts/10974f2f.html"/>
+    <id>http://example.com/posts/10974f2f.html</id>
+    <published>2024-03-25T10:55:25.000Z</published>
+    <updated>2024-03-25T11:03:20.066Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><p>UFW是Debian系列的默认防火墙</p><p>firewall 是红帽系列7及以上的防火墙（如CentOS7.x）</p><p>iptables是红帽系列6及以下（如CentOS6.x）的防火墙</p><p>firewalld、ufw 与iptables的关系，可以理解为两者只是对iptables其进行了一层封装，<br>它们在用户交互方面做了非常多的改进，使其对用户更加友好，不需要再记住原来那么多命令了</p><h1 id="ufw相关命令"><a href="#ufw相关命令" class="headerlink" title="ufw相关命令"></a>ufw相关命令</h1><h1 id="firewalld相关命令"><a href="#firewalld相关命令" class="headerlink" title="firewalld相关命令"></a>firewalld相关命令</h1><h1 id="记奇葩问题"><a href="#记奇葩问题" class="headerlink" title="记奇葩问题"></a>记奇葩问题</h1><pre><code>配置了ufw vim /etc/ufw/before.rules*nat:PREROUTING ACCEPT [0:0]:POSTROUTING ACCEPT [0:0]-A PREROUTING -p tcp --dport 63301 -j REDIRECT --to-port 22#-A PREROUTING -p tcp -m tcp --dport 63306 -j DNAT --to-destination 127.0.0.1:22#-A POSTROUTING -j MASQUERADECOMMIT生效后iptables 即使ufw 删除 nat 记录还是存在查看iptables nat表sudo iptables -t nat -L -n --line-numbers</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;基础&quot;&gt;&lt;a href=&quot;#基础&quot; class=&quot;headerlink&quot; title=&quot;基础&quot;&gt;&lt;/a&gt;基础&lt;/h1&gt;&lt;p&gt;UFW是Debian系列的默认防火墙&lt;/p&gt;
+&lt;p&gt;firewall 是红帽系列7及以上的防火墙（如CentOS7.x）&lt;/p&gt;
+&lt;p&gt;ip</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>php开发-微信授权登录</title>
@@ -419,28 +441,6 @@ app_dispatch    应用调度标</summary>
     
     
     <category term="MYSQL" scheme="http://example.com/categories/MYSQL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>wordpress相关</title>
-    <link href="http://example.com/posts/4aea2b73.html"/>
-    <id>http://example.com/posts/4aea2b73.html</id>
-    <published>2023-11-01T03:01:22.000Z</published>
-    <updated>2024-02-06T10:59:02.131Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="wordpress-迁移后还是访问之前的域名"><a href="#wordpress-迁移后还是访问之前的域名" class="headerlink" title="wordpress 迁移后还是访问之前的域名"></a>wordpress 迁移后还是访问之前的域名</h1><pre><code>1.找到 前缀_options 表修改 siteurl  home字段 2.或者登录后台修改</code></pre><h1 id="wordpress-迁移后栏目打开是404"><a href="#wordpress-迁移后栏目打开是404" class="headerlink" title="wordpress 迁移后栏目打开是404"></a>wordpress 迁移后栏目打开是404</h1><pre><code>nginx加上如下配置location / &#123; try_files $uri $uri/ /index.php?$args;&#125;# Add trailing slash to */wp-admin requests.rewrite /wp-admin$ $scheme://$host$uri/ permanent;</code></pre><h1 id="修改忘记密码-修改"><a href="#修改忘记密码-修改" class="headerlink" title="修改忘记密码 修改"></a>修改忘记密码 修改</h1><pre><code>修改 前缀_users 表    user_pass 字段 MD5 加密</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;wordpress-迁移后还是访问之前的域名&quot;&gt;&lt;a href=&quot;#wordpress-迁移后还是访问之前的域名&quot; class=&quot;headerlink&quot; title=&quot;wordpress 迁移后还是访问之前的域名&quot;&gt;&lt;/a&gt;wordpress 迁移后还是访问之前的</summary>
-      
-    
-    
-    
-    <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
     
     
   </entry>
