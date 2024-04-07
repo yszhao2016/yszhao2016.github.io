@@ -1332,22 +1332,12 @@ NPS简介nps是一款轻量级、高性能、功能强大的内网穿透代理�
       
         
           
-          修改硬盘大小
-先虚拟机管理页面修改硬盘大小
+          一、虚拟机控制后台-修改硬盘大小先虚拟机管理页面修改硬盘大小
     注：不删除快照是 无法修改成功的
 
-分区  
-fdisk /dev/sda    
-n
-p
-默认确定
-w
-
-手动同步磁盘到系统内核
-partprobe
-
-创建物理卷
-pvcreate /dev/sda3          #【/dev/sda3 是
+二、方案一【没法新建分区，就只能这么操作】扩展分区 最后一个分区growpart /dev/sda 4
+扩展 分区所在pvpvresize /dev/sda4
+扩展 所在lvlvresize -
           ...
           <!--noindex-->
           <div class="post-button text-center">
