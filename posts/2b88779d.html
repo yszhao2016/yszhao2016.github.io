@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="PHP开发," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -81,18 +81,22 @@
 
 
 
-<meta name="description" content="一、字符串处理函数1.1 str_pad()str_pad(【必填 需要处理的字符串】,【必填 填充的长度】，【 可选 填充的字符串，默认空白】，【可选 填充字符串的哪边】) 规定填充字符串的哪边 可能的值：  STR_PAD_BOTH - 填充字符串的两侧。如果不是偶数，则右侧获得额外的填充。 STR_PAD_LEFT - 填充字符串的左侧。 STR_PAD_RIGHT - 填充字符串的右侧。这">
+<meta name="description" content="目录结构src：（source）存放所有资源和代码        main：主程序                ○ java（源 根）：.java文件。package 包路径com.项目名称                ○ resources（资源 根）：资源文件，如xml、properties配置文件。                        templates：动态页面，如 thym">
 <meta property="og:type" content="article">
-<meta property="og:title" content="php开发-常用函数总结">
-<meta property="og:url" content="http://example.com/posts/15179f17.html">
+<meta property="og:title" content="java学习2-运行javaee程序">
+<meta property="og:url" content="http://example.com/posts/2b88779d.html">
 <meta property="og:site_name" content="yszhao的博客">
-<meta property="og:description" content="一、字符串处理函数1.1 str_pad()str_pad(【必填 需要处理的字符串】,【必填 填充的长度】，【 可选 填充的字符串，默认空白】，【可选 填充字符串的哪边】) 规定填充字符串的哪边 可能的值：  STR_PAD_BOTH - 填充字符串的两侧。如果不是偶数，则右侧获得额外的填充。 STR_PAD_LEFT - 填充字符串的左侧。 STR_PAD_RIGHT - 填充字符串的右侧。这">
+<meta property="og:description" content="目录结构src：（source）存放所有资源和代码        main：主程序                ○ java（源 根）：.java文件。package 包路径com.项目名称                ○ resources（资源 根）：资源文件，如xml、properties配置文件。                        templates：动态页面，如 thym">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-07-25T07:54:20.000Z">
-<meta property="article:modified_time" content="2024-02-06T10:58:18.937Z">
+<meta property="og:image" content="http://example.com/pic/java2-1.png">
+<meta property="og:image" content="http://example.com/pic/java2-2.png">
+<meta property="og:image" content="http://example.com/pic/java2-3.jpg">
+<meta property="article:published_time" content="2024-04-10T02:09:40.000Z">
+<meta property="article:modified_time" content="2024-04-10T07:05:29.734Z">
 <meta property="article:author" content="yszhao">
-<meta property="article:tag" content="PHP开发">
+<meta property="article:tag" content="php">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/pic/java2-1.png">
 
 
 
@@ -122,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/posts/15179f17.html"/>
+  <link rel="canonical" href="http://example.com/posts/2b88779d.html"/>
 
 
 
 
 
-  <title>php开发-常用函数总结 | yszhao的博客</title>
+  <title>java学习2-运行javaee程序 | yszhao的博客</title>
   
 
 
@@ -289,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/15179f17.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/2b88779d.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -306,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">php开发-常用函数总结</h1>
+          <h1 class="post-title" itemprop="name headline">java学习2-运行javaee程序</h1>
         
 
         <div class="post-meta">
@@ -318,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-25T15:54:20+08:00">
-                2023-07-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-04-10T10:09:40+08:00">
+                2024-04-10
               </time>
             
 
@@ -328,28 +332,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -378,17 +360,36 @@
       
 
       
-        <h1 id="一、字符串处理函数"><a href="#一、字符串处理函数" class="headerlink" title="一、字符串处理函数"></a>一、字符串处理函数</h1><h2 id="1-1-str-pad"><a href="#1-1-str-pad" class="headerlink" title="1.1 str_pad()"></a>1.1 str_pad()</h2><p>str_pad(【必填 需要处理的字符串】,【必填 填充的长度】，【 可选 填充的字符串，默认空白】，【可选 填充字符串的哪边】)</p>
-<pre><code>规定填充字符串的哪边 可能的值：
+        <h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><p>src：（source）存放所有资源和代码<br>        main：主程序<br>                ○ java（源 根）：.java文件。package 包路径com.项目名称<br>                ○ resources（资源 根）：资源文件，如xml、properties配置文件。<br>                        templates：动态页面，如 thymeleaf 页面。<br>                                需要服务器渲染，所以直接访问是无意义的，也访问不到。<br>                        static：静态资源，如 html、css、js、image。<br>                                □ 可直接 localhost:8080/hello.html 访问该目录文件。<br>                                □ 也可 return “hello.html”; 跳转。<br>                        编译后，resources和源根在同一目录下！<br>                ○ lib：存放 jar包，需要设置添加到库。<br>                ○ webapp：web资源<br>                        页面静态资源：html、css、js、图片<br>                        WEB-INF：固定写法。此目录下的文件不能被外部(浏览器)直接访问。<br>                                lib：jar包存放的目录<br>                                web.xml：web 项目的配置文件(3.0规范之后可以省略)<br>                                classes：target中，java编译生成class文件和资源文件存放的路径。对于war项目，配置文件中的classpath就是指这里。<br>        test：测试程序<br>                java（测试 根）：.java文件。<br>                resources（测试资源 根）：资源文件，如xml、properties配置文件。<br>pom.xml：maven 配置文件。<br>target：存放 Maven 构建当前模块，所生成的输出文件。<br>        classes：这就是 classpath。<br>                com.**：存放编译后的 .class 文件<br>                资源文件：src/main/resources 的所有文件。<br>模块配置文件.iml</p>
+<h1 id="运行程序代码"><a href="#运行程序代码" class="headerlink" title="运行程序代码"></a>运行程序代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFirstServlet</span> <span class="keyword">implements</span> <span class="title">Servlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Init&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest request, ServletResponse response)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;From service&quot;</span>);</span><br><span class="line">        PrintWriter out = response.getWriter();</span><br><span class="line">        out.println(<span class="string">&quot;Hello, Java Web.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Destroy&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getServletInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletConfig <span class="title">getServletConfig</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>javax.servlet 这个包找不到。前面提的过 Servlet API 是包含在 JavaEE 当中的。<br>为了方便，我们直接使用 Tomcat 附带的 servlet-api.jar 包。<br>下载 tomcat 就有<br>idea 具体操作如下图<br>方法一<br><img src="../pic/java2-1.png" alt="lena"></p>
+<p>方法二<br><img src="../pic/java2-2.png" alt="lena"></p>
+<h1 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h1><p>idea 调试<br>idea 配置tomcat 直接点击运行就可以了<br>idea 配置tomcat如下<br><img src="../pic/java2-3.jpg" alt="lena"></p>
+<p>服务器部署。</p>
+<p>tomcat 目录下的webapps 目录创建项目目录<br>示例如下：<br>    webapps<br>      - MyFirstServlet<br>        - WEB-INF<br>          - web.xml</p>
+<p><font color="red">将 IDEA 编译出的产物（默认应该在 out/target 文件夹中）</font>，<br>把 package 结构已经对应的产物拷贝到 WEB-INF 中的 classes 文件<br>webapps</p>
+<ul>
+<li>MyFirstServlet<ul>
+<li>WEB-INF<ul>
+<li>classes<ul>
+<li>com<ul>
+<li>skyline<ul>
+<li>MyFirstServlet.class</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>web.xml</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>1.为啥idea 编译后 有时候在out 目录下 有时候子安target 目录下</p>
+<p>在IDEA中，编译后生成的输出文件可以存放在不同的目录中，一般是由项目的配置文件决定的。<br>如果项目使用了Maven或者Gradle等构建工具，那么编译后的输出文件会存放在target目录下；<br>如果项目没有使用构建工具或者使用了自定义的构建配置，那么可以在IDEA中设置输出目录路径，<br>可能会存放在out目录下</p>
 
-STR_PAD_BOTH - 填充字符串的两侧。如果不是偶数，则右侧获得额外的填充。
-STR_PAD_LEFT - 填充字符串的左侧。
-STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
-</code></pre>
-<p>示例 $str=10 ; echo str_pad($str,4,”0”,STR_PAD_LEFT);  <font color="red">意思就4位长度 不够就往左边补0</font></p>
-<h2 id="2-1-strpos、stripos-、strrpos"><a href="#2-1-strpos、stripos-、strrpos" class="headerlink" title="2.1 strpos、stripos 、strrpos"></a>2.1 strpos、stripos 、strrpos</h2><h2 id="2-3-substr"><a href="#2-3-substr" class="headerlink" title="2.3 substr"></a>2.3 substr</h2><h2 id="2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用"><a href="#2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode常用" class="headerlink" title="2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用"></a>2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用</h2><pre><code>比较常用，不在赘述
-</code></pre>
-<h1 id="二、数组处理函数"><a href="#二、数组处理函数" class="headerlink" title="二、数组处理函数"></a>二、数组处理函数</h1>
       
     </div>
     
@@ -403,12 +404,6 @@ STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/PHP%E5%BC%80%E5%8F%91/" rel="tag"># PHP开发</a>
-          
-        </div>
-      
 
       
       
@@ -418,8 +413,8 @@ STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/54e89ac9.html" rel="next" title="跨域问题总结">
-                <i class="fa fa-chevron-left"></i> 跨域问题总结
+              <a href="/posts/10974f2f.html" rel="next" title="linux-防火墙相关">
+                <i class="fa fa-chevron-left"></i> linux-防火墙相关
               </a>
             
           </div>
@@ -427,10 +422,6 @@ STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/24ccf49a.html" rel="prev" title="linux-iptables使用总结">
-                linux-iptables使用总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -569,7 +560,7 @@ STR_PAD_RIGHT - 填充字符串的右侧。这是默认的。
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">一、字符串处理函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-str-pad"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 str_pad()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-strpos%E3%80%81stripos-%E3%80%81strrpos"><span class="nav-number">1.2.</span> <span class="nav-text">2.1 strpos、stripos 、strrpos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-substr"><span class="nav-number">1.3.</span> <span class="nav-text">2.3 substr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-strtolower-strtouplower-strlen-mb-strlen-trim-ltrim-rtrim-explode-implode%E5%B8%B8%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 strtolower strtouplower strlen mb_strlen trim ltrim rtrim explode implode常用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E7%BB%84%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">二、数组处理函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">运行程序代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">遇到问题</span></a></li></ol></div>
             
 
           </div>

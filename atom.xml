@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-25T11:03:20.066Z</updated>
+  <updated>2024-04-10T07:05:29.734Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java学习2-运行javaee程序</title>
+    <link href="http://example.com/posts/2b88779d.html"/>
+    <id>http://example.com/posts/2b88779d.html</id>
+    <published>2024-04-10T02:09:40.000Z</published>
+    <updated>2024-04-10T07:05:29.734Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><p>src：（source）存放所有资源和代码<br>        main：主程序<br>                ○ java（源 根）：.java文件。package 包路径com.项目名称<br>                ○ resources（资源 根）：资源文件，如xml、properties配置文件。<br>                        templates：动态页面，如 thymeleaf 页面。<br>                                需要服务器渲染，所以直接访问是无意义的，也访问不到。<br>                        static：静态资源，如 html、css、js、image。<br>                                □ 可直接 localhost:8080/hello.html 访问该目录文件。<br>                                □ 也可 return “hello.html”; 跳转。<br>                        编译后，resources和源根在同一目录下！<br>                ○ lib：存放 jar包，需要设置添加到库。<br>                ○ webapp：web资源<br>                        页面静态资源：html、css、js、图片<br>                        WEB-INF：固定写法。此目录下的文件不能被外部(浏览器)直接访问。<br>                                lib：jar包存放的目录<br>                                web.xml：web 项目的配置文件(3.0规范之后可以省略)<br>                                classes：target中，java编译生成class文件和资源文件存放的路径。对于war项目，配置文件中的classpath就是指这里。<br>        test：测试程序<br>                java（测试 根）：.java文件。<br>                resources（测试资源 根）：资源文件，如xml、properties配置文件。<br>pom.xml：maven 配置文件。<br>target：存放 Maven 构建当前模块，所生成的输出文件。<br>        classes：这就是 classpath。<br>                com.**：存放编译后的 .class 文件<br>                资源文件：src/main/resources 的所有文件。<br>模块配置文件.iml</p><h1 id="运行程序代码"><a href="#运行程序代码" class="headerlink" title="运行程序代码"></a>运行程序代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFirstServlet</span> <span class="keyword">implements</span> <span class="title">Servlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Init&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest request, ServletResponse response)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;From service&quot;</span>);</span><br><span class="line">        PrintWriter out = response.getWriter();</span><br><span class="line">        out.println(<span class="string">&quot;Hello, Java Web.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Destroy&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getServletInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletConfig <span class="title">getServletConfig</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>javax.servlet 这个包找不到。前面提的过 Servlet API 是包含在 JavaEE 当中的。<br>为了方便，我们直接使用 Tomcat 附带的 servlet-api.jar 包。<br>下载 tomcat 就有<br>idea 具体操作如下图<br>方法一<br><img src="../pic/java2-1.png" alt="lena"></p><p>方法二<br><img src="../pic/java2-2.png" alt="lena"></p><h1 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h1><p>idea 调试<br>idea 配置tomcat 直接点击运行就可以了<br>idea 配置tomcat如下<br><img src="../pic/java2-3.jpg" alt="lena"></p><p>服务器部署。</p><p>tomcat 目录下的webapps 目录创建项目目录<br>示例如下：<br>    webapps<br>      - MyFirstServlet<br>        - WEB-INF<br>          - web.xml</p><p><font color="red">将 IDEA 编译出的产物（默认应该在 out/target 文件夹中）</font>，<br>把 package 结构已经对应的产物拷贝到 WEB-INF 中的 classes 文件<br>webapps</p><ul><li>MyFirstServlet<ul><li>WEB-INF<ul><li>classes<ul><li>com<ul><li>skyline<ul><li>MyFirstServlet.class</li></ul></li></ul></li></ul></li><li>web.xml</li></ul></li></ul></li></ul><h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>1.为啥idea 编译后 有时候在out 目录下 有时候子安target 目录下</p><p>在IDEA中，编译后生成的输出文件可以存放在不同的目录中，一般是由项目的配置文件决定的。<br>如果项目使用了Maven或者Gradle等构建工具，那么编译后的输出文件会存放在target目录下；<br>如果项目没有使用构建工具或者使用了自定义的构建配置，那么可以在IDEA中设置输出目录路径，<br>可能会存放在out目录下</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;目录结构&quot;&gt;&lt;a href=&quot;#目录结构&quot; class=&quot;headerlink&quot; title=&quot;目录结构&quot;&gt;&lt;/a&gt;目录结构&lt;/h1&gt;&lt;p&gt;src：（source）存放所有资源和代码&lt;br&gt;        main：主程序&lt;br&gt;                ○</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>linux-防火墙相关</title>
@@ -419,28 +439,6 @@ app_dispatch    应用调度标</summary>
     
     
     <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>特殊的SQL语句</title>
-    <link href="http://example.com/posts/ee8708d7.html"/>
-    <id>http://example.com/posts/ee8708d7.html</id>
-    <published>2023-11-08T09:54:07.000Z</published>
-    <updated>2024-02-06T11:01:37.748Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="使用逗号分割拆分"><a href="#使用逗号分割拆分" class="headerlink" title="使用逗号分割拆分"></a>使用逗号分割拆分</h1><p>查询出field字段中有value的记录<br>SELECT * FROM table WHERE FIND_IN_SET(‘value’, field)&gt;0</p><p> FIND_IN_SET(‘value’, field)<font color=Red>&gt;0</font>  查询的是字段中<font color=Red>包含了</font>查询字符value的<br> FIND_IN_SET(‘value’, field)<font color=Red>=0</font>   查询的是字段中<font color=Red>不包含</font>了查询字符value的</p><h1 id="SUBSTRING-INDEX-函数"><a href="#SUBSTRING-INDEX-函数" class="headerlink" title="SUBSTRING_INDEX 函数"></a>SUBSTRING_INDEX 函数</h1><p>string：用于截取目标字符串的字符串。可为字段，表达式等。</p><p>sep：分隔符，string存在且用于分割的字符，比如“，”、“.”等。</p><p>num：序号 <font color=Red>负数 从右边取   正数从左边取 取几个值</font></p><p>示例 field  a1,b2,c3<br>SUBSTRING_INDEX(field, ‘,’, 1) 取值就是 a1<br><font color=Red>SUBSTRING_INDEX(field, ‘,’, 2) 取值就是 a1,b2</font></p><p><font color=Red>根据，分割拆分多条数据sql：</font></p><pre><code>SELECT SUBSTRING_INDEX(field, &#39;,&#39;, 1) AS value1,    SUBSTRING_INDEX(SUBSTRING_INDEX(field, &#39;,&#39;, 2), &#39;,&#39;, -1) AS value2,    SUBSTRING_INDEX(SUBSTRING_INDEX(field, &#39;,&#39;, 3), &#39;,&#39;, -1) AS value3    SUBSTRING_INDEX(field, &#39;,&#39;, -1) AS value4FROM table</code></pre><h2 id="根据，隔开字段-分组统计"><a href="#根据，隔开字段-分组统计" class="headerlink" title="根据，隔开字段 分组统计"></a>根据，隔开字段 分组统计</h2><p>根据，隔开字段拆分成多行数据 多会拆分成3行了</p><p>SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(comInputField163, ‘,’,numbers.n), ‘,’, -1) AS tag ,numbers.n,a.*<br>      #,COUNT(*) AS count<br>FROM mida_gd_2023101116015948 a<br>JOIN (<br>  SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3                                   <font color=Red>#这边SELECT 数 根据，隔开最多项来，写到SELECT 5只有数据中只有2项它也要关联5个出来</font><br>) AS numbers<br>WHERE CHAR_LENGTH(comInputField163) - CHAR_LENGTH(REPLACE(comInputField163, ‘,’, ‘’)) &gt;= numbers.n-1  #通过这个来限制,<font color=Red>统计，数量</font> 判断需要几个<br>GROUP BY tag;</p><h1 id="两表连接的SQL语句"><a href="#两表连接的SQL语句" class="headerlink" title="两表连接的SQL语句"></a>两表连接的SQL语句</h1><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A,table2 B<br>where A.id=B.id</p><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A join table2 B<br>on A.id=B.id</p><p>select A.c1,A.c2,B.c1,B.c2<br>from table1 A inner join table2 B<br>on A.id=B.id</p><p>join on与inner join on是相同</p><p>默认JOIN就是指的INNER JOIN</p><p>内连接推荐 join 方式 通过where 的方式 性能较差<br>有的数据库底层 认为是交叉 连接</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;使用逗号分割拆分&quot;&gt;&lt;a href=&quot;#使用逗号分割拆分&quot; class=&quot;headerlink&quot; title=&quot;使用逗号分割拆分&quot;&gt;&lt;/a&gt;使用逗号分割拆分&lt;/h1&gt;&lt;p&gt;查询出field字段中有value的记录&lt;br&gt;SELECT * FROM table WH</summary>
-      
-    
-    
-    
-    <category term="MYSQL" scheme="http://example.com/categories/MYSQL/"/>
     
     
   </entry>
