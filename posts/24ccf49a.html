@@ -89,7 +89,7 @@
 <meta property="og:description" content="一、iptables    iptables防火墙没有启用,iptables命令仍然会显示默认的规则. 二、常用命令 常用参数 -n 参数表示将 IP 地址和端口号显示为数字形式，而不是解析为主机名和服务名。  -L 选项用于列出防火墙规则。  -t nat 参数指定了要操作的表为 NAT 表，NAT 表用于处理网络地址转换相关的规则。  iptables -n -L           显示当前">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-07-26T07:31:32.000Z">
-<meta property="article:modified_time" content="2024-02-06T05:50:34.837Z">
+<meta property="article:modified_time" content="2024-04-17T02:21:49.619Z">
 <meta property="article:author" content="yszhao">
 <meta property="article:tag" content="php">
 <meta name="twitter:card" content="summary">
@@ -365,7 +365,7 @@
 
 -t nat 参数指定了要操作的表为 NAT 表，NAT 表用于处理网络地址转换相关的规则。
 </code></pre>
-<p>iptables -n -L           显示当前防火墙规则列表。</p>
+<p>iptables -n -L           显示当前防火墙规则列表。<br>iptables –list</p>
 <p>iptables -t nat -n -L    看 iptables 中 NAT（Network Address Translation）表的规则。</p>
 <p>结果怎么看</p>
 <pre><code>Chain INPUT (policy ACCEPT)
@@ -416,6 +416,21 @@ REJECT 拒绝
 ACCEPT 允许
 
 DROP   丢弃
+</code></pre>
+<p>禁止主机去访问某个ip</p>
+<pre><code>iptables -A OUTPUT -d 185.196.8.123 -j DROP 
+
+iptables -I OUTPUT -d aheatcorner.world -j REJECT
+
+-A: 在规则链的末尾加入新规则
+
+-I: 在规则链的头部加入新规则
+</code></pre>
+<p>删除某个链中某规则    </p>
+<pre><code>iptables -D 链名 序号
+
+示例：
+iptables -D OUTPUT  1
 </code></pre>
 
       
@@ -521,7 +536,7 @@ DROP   丢弃
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

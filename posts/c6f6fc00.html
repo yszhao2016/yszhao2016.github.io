@@ -89,7 +89,7 @@
 <meta property="og:description" content="#奇怪的问题 无法访问php文件，总是报错 file not found解决思路          1.首先查询 文件是否存在     2.查询nginx php访问的配置     3.关闭selinux        配置ssh 免密码 登录总是提示需要输入密码解决思路      1.排查下authorized_keys 是否存在key     2.排查&#x2F;etc&#x2F;sshd&#x2F;sshd_config">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-11-12T11:48:14.000Z">
-<meta property="article:modified_time" content="2024-02-06T05:50:34.999Z">
+<meta property="article:modified_time" content="2024-04-16T08:42:11.862Z">
 <meta property="article:author" content="yszhao">
 <meta property="article:tag" content="php">
 <meta name="twitter:card" content="summary">
@@ -368,6 +368,15 @@
 
     1.排查下authorized_keys 是否存在key
     2.排查/etc/sshd/sshd_config下是否关闭了 证书登录【PubkeyAuthentication no】
+    
+</code></pre>
+<h2 id="nohup-命令-amp-运行后-关闭SSH-还是-存在问题"><a href="#nohup-命令-amp-运行后-关闭SSH-还是-存在问题" class="headerlink" title="nohup 命令 &amp; 运行后 关闭SSH 还是 存在问题"></a>nohup 命令 &amp; 运行后 关闭SSH 还是 存在问题</h2><pre><code>disown -h %1
+</code></pre>
+<h2 id="sysctl-p-后-docker-mysql就无法连接了"><a href="#sysctl-p-后-docker-mysql就无法连接了" class="headerlink" title="sysctl -p 后 docker mysql就无法连接了"></a>sysctl -p 后 docker mysql就无法连接了</h2><pre><code>重启服务器就可以了
+</code></pre>
+<h2 id="php74-容器中crontab"><a href="#php74-容器中crontab" class="headerlink" title="php74 容器中crontab"></a>php74 容器中crontab</h2><pre><code>crond  ps -ef|grep crond    
+
+ 
 </code></pre>
 
       
@@ -482,7 +491,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -544,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AEphp%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%BB%E6%98%AF%E6%8A%A5%E9%94%99-file-not-found"><span class="nav-number">1.</span> <span class="nav-text">无法访问php文件，总是报错 file not found</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEssh-%E5%85%8D%E5%AF%86%E7%A0%81-%E7%99%BB%E5%BD%95%E6%80%BB%E6%98%AF%E6%8F%90%E7%A4%BA%E9%9C%80%E8%A6%81%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">配置ssh 免密码 登录总是提示需要输入密码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AEphp%E6%96%87%E4%BB%B6%EF%BC%8C%E6%80%BB%E6%98%AF%E6%8A%A5%E9%94%99-file-not-found"><span class="nav-number">1.</span> <span class="nav-text">无法访问php文件，总是报错 file not found</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEssh-%E5%85%8D%E5%AF%86%E7%A0%81-%E7%99%BB%E5%BD%95%E6%80%BB%E6%98%AF%E6%8F%90%E7%A4%BA%E9%9C%80%E8%A6%81%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">配置ssh 免密码 登录总是提示需要输入密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nohup-%E5%91%BD%E4%BB%A4-amp-%E8%BF%90%E8%A1%8C%E5%90%8E-%E5%85%B3%E9%97%ADSSH-%E8%BF%98%E6%98%AF-%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">nohup 命令 &amp; 运行后 关闭SSH 还是 存在问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sysctl-p-%E5%90%8E-docker-mysql%E5%B0%B1%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E4%BA%86"><span class="nav-number">4.</span> <span class="nav-text">sysctl -p 后 docker mysql就无法连接了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php74-%E5%AE%B9%E5%99%A8%E4%B8%ADcrontab"><span class="nav-number">5.</span> <span class="nav-text">php74 容器中crontab</span></a></li></ol></div>
             
 
           </div>
