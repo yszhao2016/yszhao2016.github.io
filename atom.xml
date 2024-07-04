@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-06-29T05:53:35.969Z</updated>
+  <updated>2024-07-04T11:52:39.312Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,19 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>php开发-微信登录</title>
+    <link href="http://example.com/posts/77054df3.html"/>
+    <id>http://example.com/posts/77054df3.html</id>
+    <published>2024-07-04T11:52:39.000Z</published>
+    <updated>2024-07-04T11:52:39.312Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>nginx配置-rewrite</title>
@@ -41,8 +54,15 @@
     <link href="http://example.com/posts/6551734d.html"/>
     <id>http://example.com/posts/6551734d.html</id>
     <published>2024-06-28T14:14:05.000Z</published>
-    <updated>2024-06-29T01:34:06.856Z</updated>
+    <updated>2024-07-01T06:06:34.510Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="gitlab-备份命令"><a href="#gitlab-备份命令" class="headerlink" title="gitlab 备份命令"></a>gitlab 备份命令</h1><h2 id="通过源码安装-备份命令"><a href="#通过源码安装-备份命令" class="headerlink" title="通过源码安装-备份命令"></a>通过源码安装-备份命令</h2><p>bundle exec rake gitlab:backup:create RAILS_ENV=production</p><pre><code>注   bundle exec 是一个用于执行 Rails 或其他 Ruby 项目的命令     bundle exec rake  是一个用于执行 Ruby on Rails 项目中的 Rake 任务的命令。     Rake 是 Ruby 中一个构建工具，用于自动化任务、数据库迁移、部署等操作          bundle exec rails s     这会在 Rails 项目中启动一个本地服务器               </code></pre><h2 id="有gitlab-rake-命令工具"><a href="#有gitlab-rake-命令工具" class="headerlink" title="有gitlab-rake 命令工具"></a>有gitlab-rake 命令工具</h2><p>gitlab-rake gitlab:backup:create</p><h2 id="安装在docker中-可以用"><a href="#安装在docker中-可以用" class="headerlink" title="安装在docker中 可以用"></a>安装在docker中 可以用</h2><p>后台运行<br>sudo docker exec -d a51fe5f513bc bundle exec rake gitlab:backup:create RAILS_ENV=production</p><p>sudo docker exec a51fe5f513bc  /bin/bash -c “bundle exec rake gitlab:backup:create RAILS_ENV=production”</p><h1 id="备份所在目录"><a href="#备份所在目录" class="headerlink" title="备份所在目录"></a>备份所在目录</h1><p>通常在/var/opt/gitlab/backups目录下</p><p>在gitlab 目录下 config/gitlab.yml 有个</p><p>backup:<br>    path: “/home/git/data/backups” </p><h1 id="恢复备份"><a href="#恢复备份" class="headerlink" title="恢复备份"></a>恢复备份</h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;gitlab-备份命令&quot;&gt;&lt;a href=&quot;#gitlab-备份命令&quot; class=&quot;headerlink&quot; title=&quot;gitlab 备份命令&quot;&gt;&lt;/a&gt;gitlab 备份命令&lt;/h1&gt;&lt;h2 id=&quot;通过源码安装-备份命令&quot;&gt;&lt;a href=&quot;#通过源码安装</summary>
+      
     
     
     
@@ -381,28 +401,6 @@ app_dispatch    应用调度标</summary>
       
     <summary type="html">&lt;h1 id=&quot;make-很慢&quot;&gt;&lt;a href=&quot;#make-很慢&quot; class=&quot;headerlink&quot; title=&quot;make 很慢&quot;&gt;&lt;/a&gt;make 很慢&lt;/h1&gt;&lt;p&gt;make -j4   表示同时运行4个编译任务&lt;/p&gt;
 &lt;p&gt;编译任务数  一般情况是cpu 核心的</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux配置代理</title>
-    <link href="http://example.com/posts/42347bce.html"/>
-    <id>http://example.com/posts/42347bce.html</id>
-    <published>2024-03-01T09:29:34.000Z</published>
-    <updated>2024-03-06T08:04:05.067Z</updated>
-    
-    <content type="html"><![CDATA[<p>#设置wget</p><p>编辑文件为：/etc/wgetrc[全局配置文件]  ~/.wgetrc[用户配置文件] 添加下面两行：</p><p>http_proxy=<a href="http://111.112.113.114:8080/">http://111.112.113.114:8080</a><br>https_proxy=<a href="http://111.112.113.114:8080/">http://111.112.113.114:8080</a></p><p>更新一下环境文件：<br>source /etc/wgetrc</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;#设置wget&lt;/p&gt;
-&lt;p&gt;编辑文件为：/etc/wgetrc[全局配置文件]  ~/.wgetrc[用户配置文件] 添加下面两行：&lt;/p&gt;
-&lt;p&gt;http_proxy=&lt;a href=&quot;http://111.112.113.114:8080/&quot;&gt;http://111.1</summary>
       
     
     
