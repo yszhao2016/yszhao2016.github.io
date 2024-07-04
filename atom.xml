@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-06-28T02:43:24.741Z</updated>
+  <updated>2024-06-29T05:53:35.969Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,13 +17,63 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>nginx配置-rewrite</title>
+    <link href="http://example.com/posts/a0181459.html"/>
+    <id>http://example.com/posts/a0181459.html</id>
+    <published>2024-06-29T04:04:32.000Z</published>
+    <updated>2024-06-29T05:53:35.969Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="rewrite-作用"><a href="#rewrite-作用" class="headerlink" title="rewrite 作用"></a>rewrite 作用</h1><p>用于实现URL的重写，URL的重写是非常有用的功能，<br>比如它可以在我们改变网站结构之后，不需要客户端修改原来的书签，<br>也无需其他网站修改我们的链接，就可以设置为自动访问，另外还可以在一定程度上提高网站的安全性</p><p>示例<br>浏览器访问url <a href="http://www.example.com/abc/file/a.jpg">http://www.example.com/abc/file/a.jpg</a><br>实际访问 <a href="http://www.example.com/bb/a.jpg">http://www.example.com/bb/a.jpg</a></p><p>浏览器访问url <a href="http://www.example.com/index/abc.html">http://www.example.com/index/abc.html</a><br>实际访问 <a href="http://www.example.com/index.php?r=index/abc">http://www.example.com/index.php?r=index/abc</a></p><h1 id="rewrite应用场景"><a href="#rewrite应用场景" class="headerlink" title="rewrite应用场景"></a>rewrite应用场景</h1><p>1、URL看起来更规范、合理<br>2、企业会将动态URL地址伪装成静态地址提供服务<br>3、网址换新域名后，让旧的访问跳转到新的域名上<br>4、服务端某些业务调整</p><h1 id="rewrite调试"><a href="#rewrite调试" class="headerlink" title="rewrite调试"></a>rewrite调试</h1><p>rewrite 日志记录指令<br>指令    rewrite_log<br>作用域 http, server, location<br>指令值选项    on 或 off<br>当指令值为 on 时，rewrite 的执行结果会以 notice 级别记录到 Nginx 的 error 日志文件中</p><p>示例：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">      <span class="attribute">rewrite_log</span> <span class="literal">on</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="nginx正则表达式"><a href="#nginx正则表达式" class="headerlink" title="nginx正则表达式"></a>nginx正则表达式</h1><p>常用的正则表达式元字符<br>^：匹配输入字符串的起始位置<br>$：匹配输入字符串的结束位置<br>*****：匹配前面的字符零次或多次<br>+：匹配前面的字符一次或多次<br>?：匹配前面的字符零次或一次<br>.：匹配除\n之外的任何单个字符 使用[.\n]可以匹配包括\n在内的任意字符<br>****：转义符<br>\d：匹配纯数字<br>{n}：重复n次<br>{n,}：重复n次或更多次<br>[c]：匹配单个字符c<br>[a-z]：匹配a-z小写字母的任意一个<br>[a-zA-Z]：匹配a-z小写字母或A-Z大写字母的任意一个<br>（）：表达式的开始和结束位置<br>|：或运算符</p><h1 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h1><pre><code>location ~* .*\.(mp4|avi|wmv|mpg|flv|rm|mov) &#123;    add_header Accept-Ranges bytes;  if ($request_uri ~* ^(.*)file/Image/annex/(.*)/(.*))&#123;    set $file_name $3;    rewrite (.*) $scheme://$host/$file_name;  &#125;  #视频保存的目录  root /www/wwwroot/tjproject-resources/WebAnnexFile/451772413496005765/;  mp4;  mp4_buffer_size 1m;#处理mp4初始内存大小  mp4_max_buffer_size 50m;#处理mp4最大内存大小&#125;location ~ .*\.(mp4|avi|wmv|mpg|flv|rm|mov) &#123;  if ($request_uri ~* ^/monitor_videos/(.*))&#123;    set $file_name $1;    rewrite (.*) $scheme://$host/$file_name;  &#125;  # #视频保存的目录  root /www/wwwroot/aigis_resources_yzc/monitor_videos/;  mp4;  mp4_buffer_size 1m;#处理mp4初始内存大小  mp4_max_buffer_size 50m;#处理mp4最大内存大小&#125;location ~* /upload/。*\.php$&#123;    rewrite (.+) http://www.index.com permanent&#125;server &#123;     listen 80;     server_name example.com www.example.com;         if ($server_port !~ 443)&#123;         rewrite ^(/.*)$ https://$host$1 permanent;         &#125;         # 其他配置... &#125;if ($scheme = http ) &#123;    return 301 https://$host$request_uri;&#125;</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;rewrite-作用&quot;&gt;&lt;a href=&quot;#rewrite-作用&quot; class=&quot;headerlink&quot; title=&quot;rewrite 作用&quot;&gt;&lt;/a&gt;rewrite 作用&lt;/h1&gt;&lt;p&gt;用于实现URL的重写，URL的重写是非常有用的功能，&lt;br&gt;比如它可以在我们</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>gitlab备份恢复</title>
+    <link href="http://example.com/posts/6551734d.html"/>
+    <id>http://example.com/posts/6551734d.html</id>
+    <published>2024-06-28T14:14:05.000Z</published>
+    <updated>2024-06-29T01:34:06.856Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>php开发-fastadmin按钮弹框传数据到列表</title>
+    <link href="http://example.com/posts/6df754b5.html"/>
+    <id>http://example.com/posts/6df754b5.html</id>
+    <published>2024-06-28T14:13:59.000Z</published>
+    <updated>2024-06-29T01:34:06.857Z</updated>
+    
+    
+    
+    
+    <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="fastadmin" scheme="http://example.com/tags/fastadmin/"/>
+    
+  </entry>
+  
+  <entry>
     <title>windows2012-R2发布asp网站</title>
     <link href="http://example.com/posts/dd0146de.html"/>
     <id>http://example.com/posts/dd0146de.html</id>
     <published>2024-06-25T12:22:20.000Z</published>
-    <updated>2024-06-28T02:43:24.741Z</updated>
+    <updated>2024-06-29T06:03:45.280Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="一-、安装asp-net-3-5-总是失败"><a href="#一-、安装asp-net-3-5-总是失败" class="headerlink" title="一 、安装asp.net 3.5 总是失败"></a>一 、安装asp.net 3.5 总是失败</h1><p>卸载相关补丁KB5027141  KB5028872  KB5028970  KB5029915<br><img src="../pic/win2012-net.png" alt="lena"></p><h1 id="二、-应用程序池"><a href="#二、-应用程序池" class="headerlink" title="二、 应用程序池"></a>二、 应用程序池</h1><pre><code>设置为 集成  2.0 的版本【安装.net 3.5 后 这边就是只有2.0的选项哦】</code></pre><h1 id="三、总是显示500，开启报错-方便调试"><a href="#三、总是显示500，开启报错-方便调试" class="headerlink" title="三、总是显示500，开启报错 方便调试"></a>三、总是显示500，开启报错 方便调试</h1><p>双击ASP 设置</p><pre><code>将错误发送到浏览器  true</code></pre><p><img src="../pic/iis-2.png" alt="lena">  </p><h1 id="四、设置文件夹权限"><a href="#四、设置文件夹权限" class="headerlink" title="四、设置文件夹权限"></a>四、设置文件夹权限</h1><p> everyone  读写就可以了</p><p> <img src="../pic/win2012-1.png" alt="lena">     </p><h1 id="五、Win2012-Microsoft-JET-Database-Engine-错误-‘80004005’"><a href="#五、Win2012-Microsoft-JET-Database-Engine-错误-‘80004005’" class="headerlink" title="五、Win2012  Microsoft JET Database Engine 错误 ‘80004005’"></a>五、Win2012  Microsoft JET Database Engine 错误 ‘80004005’</h1><pre><code>access 数据库没有权限访问设置c:/windows/temp或者%windir%/temp/erveryone  读写权限就可以了</code></pre><h1 id="六、IIS给网站配置https证书"><a href="#六、IIS给网站配置https证书" class="headerlink" title="六、IIS给网站配置https证书"></a>六、IIS给网站配置https证书</h1><h2 id="6-1导入入证书"><a href="#6-1导入入证书" class="headerlink" title="6.1导入入证书"></a>6.1导入入证书</h2><p><img src="../pic/iis-3.png" alt="lena"></p><h2 id="6-2配置证书"><a href="#6-2配置证书" class="headerlink" title="6.2配置证书"></a>6.2配置证书</h2><p><img src="../pic/iis-1.png" alt="lena"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="一-、安装asp-net-3-5-总是失败"><a href="#一-、安装asp-net-3-5-总是失败" class="headerlink" title="一 、安装asp.net 3.5 总是失败"></a>一 、安装asp.net 3.5 总是失败</h1><p>卸载相关补丁KB5027141  KB5028872  KB5028970  KB5029915<br><img src="../pic/win2012-net.png" alt="lena"></p><h1 id="二、-应用程序池"><a href="#二、-应用程序池" class="headerlink" title="二、 应用程序池"></a>二、 应用程序池</h1><pre><code>设置为 集成  2.0 的版本【安装.net 3.5 后 这边就是只有2.0的选项哦】</code></pre><h1 id="三、总是显示500，开启报错-方便调试"><a href="#三、总是显示500，开启报错-方便调试" class="headerlink" title="三、总是显示500，开启报错 方便调试"></a>三、总是显示500，开启报错 方便调试</h1><p>双击ASP 设置</p><pre><code>将错误发送到浏览器  true</code></pre><p><img src="../pic/iis-2.png" alt="lena">  </p><h1 id="四、设置文件夹权限"><a href="#四、设置文件夹权限" class="headerlink" title="四、设置文件夹权限"></a>四、设置文件夹权限</h1><p> everyone  读写就可以了</p><p> <img src="../pic/win2012-1.png" alt="lena">     </p><h1 id="五、Win2012-Microsoft-JET-Database-Engine-错误-‘80004005’"><a href="#五、Win2012-Microsoft-JET-Database-Engine-错误-‘80004005’" class="headerlink" title="五、Win2012  Microsoft JET Database Engine 错误 ‘80004005’"></a>五、Win2012  Microsoft JET Database Engine 错误 ‘80004005’</h1><pre><code>access 数据库没有权限访问设置c:/windows/temp或者%windir%/temp/erveryone  读写权限就可以了</code></pre><h1 id="六、IIS给网站配置https证书"><a href="#六、IIS给网站配置https证书" class="headerlink" title="六、IIS给网站配置https证书"></a>六、IIS给网站配置https证书</h1><h2 id="6-1导入入证书"><a href="#6-1导入入证书" class="headerlink" title="6.1导入入证书"></a>6.1导入入证书</h2><p><img src="../pic/iis-3.png" alt="lena"></p><h2 id="6-2配置证书"><a href="#6-2配置证书" class="headerlink" title="6.2配置证书"></a>6.2配置证书</h2><p><img src="../pic/iis-1.png" alt="lena"></p><h1 id="七、IIS限制上传配置"><a href="#七、IIS限制上传配置" class="headerlink" title="七、IIS限制上传配置"></a>七、IIS限制上传配置</h1><p>修改ASP 配置中 限制属性<br><img src="../pic/iis8-file-3.png" alt="lena"></p><p>网站中的配置修改(没配置项，可不配置)<br>在“节”选项下找到system.webServer/security/requestFiltering节。<br><img src="../pic/iis8-file-1.png" alt="lena"></p><p><img src="../pic/iis8-file-2.png" alt="lena"></p>]]></content>
     
     
       
@@ -32,6 +82,8 @@
       
     
     
+    
+    <category term="服务器相关" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/"/>
     
     
   </entry>
@@ -109,7 +161,7 @@
     <link href="http://example.com/posts/33571e0f.html"/>
     <id>http://example.com/posts/33571e0f.html</id>
     <published>2024-06-11T14:23:14.000Z</published>
-    <updated>2024-06-12T00:56:50.462Z</updated>
+    <updated>2024-06-29T01:34:06.859Z</updated>
     
     <content type="html"><![CDATA[<h1 id="一、数据库中的锁"><a href="#一、数据库中的锁" class="headerlink" title="一、数据库中的锁"></a>一、数据库中的锁</h1><p>   数据库锁定机制简单来说，就是数据库为了保证数据的一致性，而使各种共享资源在被并发访问变得有序所设计的一种规则。</p><h2 id="1-1-表级锁"><a href="#1-1-表级锁" class="headerlink" title="1.1 表级锁"></a>1.1 表级锁</h2><p>   使用表级锁定的主要是 MyISAM，MEMORY，CSV 等一些非事务性存储引擎。</p><h2 id="1-2-行级锁"><a href="#1-2-行级锁" class="headerlink" title="1.2 行级锁"></a>1.2 行级锁</h2><p>   使用行级锁定的主要是 InnoDB 存储引擎。</p><h2 id="行级锁类型"><a href="#行级锁类型" class="headerlink" title="行级锁类型"></a>行级锁类型</h2><p>   对于InnoDB 在 RR（MySQL默认隔离级别）而言，对于 update、delete 和 insert 语句，<br>会自动给涉及数据集加排它锁（X）；</p><p>   对于普通 select 语句，innodb 不会加任何锁。<br>如果想在 select 操作的时候加上 S 锁 或者 X 锁，需要我们手动加锁。</p><h3 id="共享锁（简称-s-锁）"><a href="#共享锁（简称-s-锁）" class="headerlink" title="共享锁（简称 s 锁）"></a>共享锁（简称 s 锁）</h3><p>  不会阻塞其他事务对同一行的读请求，但会阻塞对同一行的写请求。<br>  只有当读锁释放后，才会执行其它事物的写操作。</p><h3 id="排它锁（简称-x-锁）"><a href="#排它锁（简称-x-锁）" class="headerlink" title="排它锁（简称 x 锁）"></a>排它锁（简称 x 锁）</h3><p>  会阻塞其他事务对同一行的读和写操作，只有当写锁释放后，才会执行其它事务的读写操作</p><h2 id="Sql示列"><a href="#Sql示列" class="headerlink" title="Sql示列"></a>Sql示列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 加共享锁（S） lock in share mode</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> table_name <span class="keyword">where</span> ... lock <span class="keyword">in</span> share mode</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 加排它锁（X)  for update</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> table_name <span class="keyword">where</span> ... <span class="keyword">for</span> update</span><br><span class="line"></span><br><span class="line"><span class="comment">-- LOCK TABLES 语句用于锁定一个或多个表</span></span><br><span class="line">LOCK TABLES users READ;</span><br></pre></td></tr></table></figure><p>InnoDB 中的 行锁 的实现依赖于 索引，一旦某个加锁操作没有使用到索引，那么该锁就会退化为表锁。</p>]]></content>
     
@@ -124,7 +176,7 @@
     <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
     
     
-    <category term="PHP开发" scheme="http://example.com/tags/PHP%E5%BC%80%E5%8F%91/"/>
+    <category term="mysql" scheme="http://example.com/tags/mysql/"/>
     
   </entry>
   
@@ -354,72 +406,6 @@ app_dispatch    应用调度标</summary>
       
     
     
-    
-    
-  </entry>
-  
-  <entry>
-    <title>php开发-常见加密使用</title>
-    <link href="http://example.com/posts/78f26761.html"/>
-    <id>http://example.com/posts/78f26761.html</id>
-    <published>2024-02-19T09:49:50.000Z</published>
-    <updated>2024-02-22T08:14:22.044Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><pre><code>数字签名 就是明文+私钥密文  这样就能保证数据没有被篡改  非对称加密 RSA、DSA对称加密 DES、AES密码散列算法有 SHA-1、SHA-256 、MD5      算出来就不可逆了，主要用来确定来源的</code></pre><h1 id="签名算法-SHA1withRSA"><a href="#签名算法-SHA1withRSA" class="headerlink" title="签名算法-SHA1withRSA"></a>签名算法-SHA1withRSA</h1><p>用SHA算法进行签名，用RSA算法进行加密</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$str</span>        = chunk_split(<span class="variable">$myPrivateKeyStr</span>, <span class="number">64</span>, <span class="string">&quot;\n&quot;</span>);</span><br><span class="line"><span class="variable">$privateKey</span> = <span class="string">&quot;-----BEGIN RSA PRIVATE KEY-----\n<span class="subst">$str</span>-----END RSA PRIVATE KEY-----\n&quot;</span>;</span><br><span class="line">openssl_sign(<span class="variable">$paramStr</span>, <span class="variable">$sign</span>, <span class="variable">$privateKey</span>);</span><br><span class="line"><span class="variable">$resSign</span> = base64_encode(<span class="variable">$sign</span>);</span><br></pre></td></tr></table></figure><h1 id="RSA加密"><a href="#RSA加密" class="headerlink" title="RSA加密"></a>RSA加密</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * RSA分段加密</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $context string 待加密字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $type string  &#x27;private&#x27; or &#x27;public&#x27;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $key string 公钥 or 私钥</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">encrypt</span>(<span class="params"><span class="variable">$context</span>, <span class="variable">$type</span>, <span class="variable">$key</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//http://www.php.net/manual/en/function.openssl-public-encrypt.php#95307</span></span><br><span class="line">    <span class="comment">//Assumes 1024 bit key and encrypts in chunks.</span></span><br><span class="line">    <span class="variable">$maxlength</span> = <span class="number">117</span>;</span><br><span class="line">    <span class="variable">$output</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="variable">$context</span>) &#123;</span><br><span class="line">        <span class="variable">$input</span> = substr(<span class="variable">$context</span>, <span class="number">0</span>, <span class="variable">$maxlength</span>);</span><br><span class="line">        <span class="variable">$context</span> = substr(<span class="variable">$context</span>, <span class="variable">$maxlength</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$type</span> == <span class="string">&#x27;private&#x27;</span>) &#123;</span><br><span class="line">            <span class="variable">$ok</span> = openssl_private_encrypt(<span class="variable">$input</span>, <span class="variable">$encrypted</span>, <span class="variable">$key</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$ok</span> = openssl_public_encrypt(<span class="variable">$input</span>, <span class="variable">$encrypted</span>, <span class="variable">$key</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$output</span> .= <span class="variable">$encrypted</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> base64_encode(<span class="variable">$output</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="AES加密"><a href="#AES加密" class="headerlink" title="AES加密"></a>AES加密</h1><p>openssl_encrypt($data,$method,$key,$options=0,$iv=””,&amp;$tag=NULL,$aad=””,$tag_length=16)</p><p>1.$data：加密明文</p><p>2.$method：加密方法： 可以通过openssl_get_cipher_methods()获取有哪些加密方式</p><p>3.$passwd：加密密钥[密码]</p><p>4.$options：数据格式选项（可选）【选项有：】：0,OPENSSL_RAW_DATA=1,OPENSSL_ZERO_PADDING=2,OPENSSL_NO_PADDING=3</p><p>5.$iv：密初始化向量（可选),需要注意：如果method为DES−ECB，则iv无需填写</p><p>6.$tag：使用 AEAD 密码模式（GCM 或 CCM）时传引用的验证标签(可选)</p><p>7.$aad：附加的验证数据。（可选）</p><p>8.$tag_length：验证 tag 的长度。GCM 模式时，它的范围是 4 到 16(可选)</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">openssl_encrypt(json_encode(<span class="variable">$body</span>), <span class="string">&#x27;AES-128-CBC&#x27;</span>, <span class="keyword">$this</span>-&gt;key, OPENSSL_RAW_DATA, <span class="keyword">$this</span>-&gt;iv)</span><br><span class="line"></span><br><span class="line">bin2hex(openssl_encrypt(<span class="variable">$str</span>, <span class="string">&#x27;DES-ECB&#x27;</span>, <span class="keyword">$this</span>-&gt;appSecret, OPENSSL_RAW_DATA));</span><br><span class="line"></span><br><span class="line"><span class="comment">#一般多需要转换为base64传输</span></span><br><span class="line">base64_encode(openssl_encrypt(json_encode(<span class="variable">$body</span>), <span class="string">&#x27;AES-128-CBC&#x27;</span>, <span class="keyword">$this</span>-&gt;key, OPENSSL_RAW_DATA, <span class="keyword">$this</span>-&gt;iv));</span><br></pre></td></tr></table></figure><h1 id="HMAC-散列消息身份验证码"><a href="#HMAC-散列消息身份验证码" class="headerlink" title="HMAC 散列消息身份验证码"></a>HMAC 散列消息身份验证码</h1><p>它不是散列函数，而是采用了将MD5或SHA1散列函数与共享机密秘钥（与公钥/秘钥对不同）一起使用的消息身份验证机制。</p><p>目前hmac主要应用在身份验证中，在用户登录传递密码的过程中可以利用，签名来防止密码明文传递。</p><p>在php中hash_hmac函数就能将HMAC和一部分哈希加密算法相结合起来实现HMAC-SHA1  HMAC-SHA256 HMAC-MD5等等算法</p><p>string hash_hmac(string $algo, string $data, string $key, bool $raw_output = false)</p><p>algo：要使用的哈希算法名称，可以是上述提到的md5,sha1等</p><p>data：要进行哈希运算的消息，也就是需要加密的明文。</p><p>key：使用HMAC生成信息摘要是所使用的密钥。</p><p>raw_output：该参数为可选参数，默认为false，如果设为true，则返回原始二进制数据表示的信息摘要，<br>否则返回16进制小写字符串格式表示的信息摘要（注意是16进制数，而非简单的字母加数字）。</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">方案一：hash_hmac(<span class="string">&quot;sha1&quot;</span>, <span class="variable">$str</span>, <span class="variable">$secret</span>)</span><br><span class="line">方案二：bin2hex(hash_hmac(<span class="string">&quot;sha1&quot;</span>, <span class="variable">$str</span>, <span class="variable">$secret</span>, <span class="literal">true</span>));</span><br><span class="line"></span><br><span class="line">hash_hmac( <span class="string">&#x27;md5&#x27;</span>,<span class="variable">$data</span>, <span class="keyword">$this</span>-&gt;appSecret)</span><br><span class="line"></span><br><span class="line">hash_hmac(<span class="string">&#x27;sha256&#x27;</span>, <span class="variable">$data</span>,<span class="keyword">$this</span>-&gt;appSecret)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;数字签名 就是明文+私钥密文  这样就能保证数据没有被篡改  
-
-非对称加密 RSA、DSA
-
-对称加密 D</summary>
-      
-    
-    
-    
-    <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>php开发-ftp下载上传</title>
-    <link href="http://example.com/posts/eae5a656.html"/>
-    <id>http://example.com/posts/eae5a656.html</id>
-    <published>2024-02-06T08:43:04.000Z</published>
-    <updated>2024-02-08T03:50:38.129Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="检查ftp"><a href="#检查ftp" class="headerlink" title="检查ftp"></a>检查ftp</h1><p>1.使用ftp 客户端 连接ftp</p><p>windows系统      winscp<br>redhat发行版本   yum install ftp<br>debian发行版本   apt install ftp</p><pre><code>示例（一定要ls get 下，才能证明能传输数据）    ftp 192.14.23.23 22221    ls                         </code></pre><h1 id="基础方法"><a href="#基础方法" class="headerlink" title="基础方法"></a>基础方法</h1><pre><code>    ftp_connect(ip,port)                            #连接服务器  默认21  返回值 连接资源    ftp_login($conn,$username,$passwd)              #登录  返回值是 bool    ftp_pasv($conn,true)                            #设置被动模式  默认ftp 主动模式       ftp_nlist($conn,$path)                          #查看当前目录 文件列表 类ls功能    ftp_pwd($conn)                                  #查看当前目录    ftp_get($conn,$localpath,$filename,FTP_ASCII)   #下载远程 文件到 本地    ftp_put($conn,$filename,$localpath,FTP_ASCII)   #上传本地文件 到服务器</code></pre><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p><font color="red">ftp 默认是主动模式 传输数据端口是随机的</font></p><p><font color="red">ftp 被动模式  是端口需要配置定义 </font></p><p><font color="red">防火墙需要放开端口</font></p><p>排查方案 用步骤一</p><h1 id="代码摘录示例"><a href="#代码摘录示例" class="headerlink" title="代码摘录示例"></a>代码摘录示例</h1><pre><code class="php">        $conn = ftp_connect($ip, $port);        if ($conn) &#123;            // 登录FTP服务器            $login = ftp_login($conn, $username, $passwd);            if ($login&amp;&amp;$pasv) &#123;//                ftp_set_option($conn, FTP_USEPASVADDRESS, false);                  // 切换到主动模式                  ftp_pasv($conn, true);            &#125;        &#125; else &#123;            throw new Exception(&quot;登录失败&quot;);        &#125;                //查看目录下 列表 类似ls功能        $dirList = ftp_nlist($conn, $dir);                #下载文件        $ret = ftp_get($conn, $local_filepath.$filename, $filename, FTP_ASCII);                #上传文件               ftp_put($conn, $filename, $local_filepath . $filename, FTP_ASCII);</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;检查ftp&quot;&gt;&lt;a href=&quot;#检查ftp&quot; class=&quot;headerlink&quot; title=&quot;检查ftp&quot;&gt;&lt;/a&gt;检查ftp&lt;/h1&gt;&lt;p&gt;1.使用ftp 客户端 连接ftp&lt;/p&gt;
-&lt;p&gt;windows系统      winscp&lt;br&gt;redhat发行</summary>
-      
-    
-    
-    
-    <category term="PHP开发" scheme="http://example.com/categories/PHP%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="PHP开发" scheme="http://example.com/tags/PHP%E5%BC%80%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>高德地图-点位展示开发</title>
-    <link href="http://example.com/posts/fa30932c.html"/>
-    <id>http://example.com/posts/fa30932c.html</id>
-    <published>2024-02-01T10:53:51.000Z</published>
-    <updated>2024-02-06T11:02:25.300Z</updated>
-    
-    
-    
-    
-    <category term="前端" scheme="http://example.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
   </entry>
