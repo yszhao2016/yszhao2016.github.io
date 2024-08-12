@@ -89,7 +89,7 @@
 <meta property="og:description" content="#mysql忘记密码,重置密码 1.修改my.cnf 添加 --skip-grant-tables  2.进入数据 执行 use mysql; mysql&gt; update user set password&#x3D;password(&#39;123&#39;) where user&#x3D;&#39;root&#39; and host&#x3D;&#39;localhost&#39;; mysql&gt; flu">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-10-17T02:12:16.000Z">
-<meta property="article:modified_time" content="2024-02-06T05:50:34.902Z">
+<meta property="article:modified_time" content="2024-08-12T02:43:07.102Z">
 <meta property="article:author" content="yszhao">
 <meta property="article:tag" content="php">
 <meta name="twitter:card" content="summary">
@@ -375,7 +375,10 @@ mysql&gt; flush privileges;
 <p>导入</p>
 <pre><code>方法一：
 mysql -u用户名 -p 数据库名 &lt; 123.sql
+示例：
+    mysql -u root -p book &lt; 123.sql
 方法二：
+登录mysql
 source 123.sql;
 </code></pre>
 <h1 id="mysql修改root权限-修改密码-远程访问"><a href="#mysql修改root权限-修改密码-远程访问" class="headerlink" title="mysql修改root权限/修改密码/远程访问"></a>mysql修改root权限/修改密码/远程访问</h1><pre><code>GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;%&#39;IDENTIFIED BY &#39;Storage@202312&#39; WITH GRANT OPTION;
@@ -493,7 +496,7 @@ source 123.sql;
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -515,7 +518,7 @@ source 123.sql;
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

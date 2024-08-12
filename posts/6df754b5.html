@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="fastadmin," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -81,16 +81,20 @@
 
 
 
+<meta name="description" content="一、实现效果点击按钮 弹出选项列表，选择列表通过table 实现的难点：     1.点击弹框url中传值 怎么传到列表请求中，因为table 数据是通过ajax 试下的，就麻烦了     2.点击选择按钮的实现 数据的回传 接收处理  二、按钮页面 js代码12345678910111213141516$(&quot;#select-coupon-btn&quot;).click(functio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php开发-fastadmin按钮弹框传数据到列表">
 <meta property="og:url" content="http://example.com/posts/6df754b5.html">
 <meta property="og:site_name" content="yszhao的博客">
+<meta property="og:description" content="一、实现效果点击按钮 弹出选项列表，选择列表通过table 实现的难点：     1.点击弹框url中传值 怎么传到列表请求中，因为table 数据是通过ajax 试下的，就麻烦了     2.点击选择按钮的实现 数据的回传 接收处理  二、按钮页面 js代码12345678910111213141516$(&quot;#select-coupon-btn&quot;).click(functio">
 <meta property="og:locale">
+<meta property="og:image" content="http://example.com/pic/dialogbox.png">
 <meta property="article:published_time" content="2024-06-28T14:13:59.000Z">
-<meta property="article:modified_time" content="2024-06-29T01:34:06.857Z">
+<meta property="article:modified_time" content="2024-08-08T11:55:40.498Z">
 <meta property="article:author" content="yszhao">
-<meta property="article:tag" content="fastadmin">
+<meta property="article:tag" content="php">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/pic/dialogbox.png">
 
 
 
@@ -376,7 +380,16 @@
       
 
       
-        
+        <h1 id="一、实现效果"><a href="#一、实现效果" class="headerlink" title="一、实现效果"></a>一、实现效果</h1><p>点击按钮 弹出选项列表，选择列表通过table 实现的<br>难点：<br>     1.点击弹框url中传值 怎么传到列表请求中，因为table 数据是通过ajax 试下的，就麻烦了<br>     2.点击选择按钮的实现 数据的回传 接收处理</p>
+<p><img src="../pic/dialogbox.png" alt="lena"></p>
+<h1 id="二、按钮页面-js代码"><a href="#二、按钮页面-js代码" class="headerlink" title="二、按钮页面 js代码"></a>二、按钮页面 js代码</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;#select-coupon-btn&quot;</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            parent.Fast.api.open(<span class="string">&quot;wanlshop/street_coupon/select?select_use_type=2&quot;</span>, __(<span class="string">&#x27;选择卡券&#x27;</span>), &#123;</span><br><span class="line">                <span class="attr">area</span>: [<span class="string">&#x27;800px&#x27;</span>, <span class="string">&#x27;600px&#x27;</span>],</span><br><span class="line">                <span class="attr">callback</span>: <span class="function">(<span class="params">data</span>)=&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span>(data)&#123;</span><br><span class="line">                        $(<span class="string">&quot;#coupon-table tbody tr&quot;</span>).last().remove();</span><br><span class="line">                        $(<span class="string">&quot;#send_gift&quot;</span>).val(data.id);</span><br><span class="line">                        <span class="keyword">if</span> (data.grant == -<span class="number">1</span>) &#123;</span><br><span class="line">                            data.grant = <span class="string">&quot;不限&quot;</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        $(<span class="string">&quot;#coupon-table tbody&quot;</span>).last().append(<span class="string">&quot;&lt;tr&gt;&lt;td&gt;&quot;</span>+data.name+<span class="string">&quot;&lt;/td&gt;&lt;td&gt;&quot;</span>+data.type+<span class="string">&quot;&lt;/td&gt;&lt;td&gt;&quot;</span>+data.grant+<span class="string">&quot;&lt;/td&gt;&lt;/tr&gt;&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="三、弹框页面"><a href="#三、弹框页面" class="headerlink" title="三、弹框页面"></a>三、弹框页面</h1><p>通过Fast.api.query(‘select_use_type’); 获取 然后加到ajax请求中</p>
+<p>弹框页面js代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">select</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化表格参数配置</span></span><br><span class="line">    Table.api.init(&#123;</span><br><span class="line">        <span class="attr">extend</span>: &#123;</span><br><span class="line">            <span class="attr">index_url</span>: <span class="string">&#x27;wanlshop/street_coupon/select&#x27;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">var</span> urlArr = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> table = $(<span class="string">&quot;#table&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 多选的 操作</span></span><br><span class="line">    table.on(<span class="string">&#x27;check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e, row</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (e.type == <span class="string">&#x27;check&#x27;</span> || e.type == <span class="string">&#x27;uncheck&#x27;</span>) &#123;</span><br><span class="line">            row = [row];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            urlArr = [];</span><br><span class="line">        &#125;</span><br><span class="line">        $.each(row, <span class="function"><span class="keyword">function</span> (<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (e.type.indexOf(<span class="string">&quot;uncheck&quot;</span>) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> index = urlArr.indexOf(j.id);</span><br><span class="line">                <span class="keyword">if</span> (index &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">                    urlArr.splice(index, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                urlArr.indexOf(j.id) == -<span class="number">1</span> &amp;&amp; urlArr.push(j.id);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化表格</span></span><br><span class="line">    table.bootstrapTable(&#123;</span><br><span class="line">        <span class="attr">url</span>: $.fn.bootstrapTable.defaults.extend.index_url,</span><br><span class="line">        <span class="attr">sortName</span>: <span class="string">&#x27;id&#x27;</span>,</span><br><span class="line">        <span class="attr">showToggle</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">showExport</span>: <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">//是否显示右上角的搜索框</span></span><br><span class="line">        <span class="attr">search</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="comment">//控制显示列开关</span></span><br><span class="line">        <span class="attr">showColumns</span>:<span class="literal">false</span>,</span><br><span class="line">        <span class="comment">//显示搜索字段框</span></span><br><span class="line">        <span class="attr">searchFormVisible</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">showExport</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">columns</span>: [</span><br><span class="line">            [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">field</span>: <span class="string">&#x27;type&#x27;</span>,</span><br><span class="line">                    <span class="attr">title</span>: __(<span class="string">&#x27;Type&#x27;</span>),</span><br><span class="line">                    <span class="attr">searchList</span>: &#123;</span><br><span class="line">                        <span class="string">&quot;reduction&quot;</span>: <span class="string">&quot;满减券&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;discount&quot;</span>: <span class="string">&quot;折扣券&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;daijin&quot;</span>: <span class="string">&quot;代金券&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;stopcar&quot;</span>: <span class="string">&quot;停车券&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;gift&quot;</span>: <span class="string">&quot;礼品券&quot;</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="attr">formatter</span>: Table.api.formatter.normal</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;<span class="attr">field</span>: <span class="string">&#x27;name&#x27;</span>, <span class="attr">title</span>: __(<span class="string">&#x27;Name&#x27;</span>), <span class="attr">operate</span>: <span class="string">&#x27;LIKE&#x27;</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">field</span>: <span class="string">&#x27;drawlimit&#x27;</span>, <span class="attr">title</span>: __(<span class="string">&#x27;Drawlimit&#x27;</span>)&#125;,</span><br><span class="line">                &#123;<span class="attr">field</span>: <span class="string">&#x27;grant&#x27;</span>, <span class="attr">title</span>: __(<span class="string">&#x27;Grant&#x27;</span>), <span class="attr">operate</span>: <span class="string">&#x27;LIKE&#x27;</span>,<span class="attr">formatter</span>: Controller.api.formatter.grant&#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">field</span>: <span class="string">&#x27;operate&#x27;</span>, <span class="attr">title</span>: __(<span class="string">&#x27;Operate&#x27;</span>), <span class="attr">events</span>: &#123;</span><br><span class="line">                        <span class="string">&#x27;click .btn-chooseone&#x27;</span>: <span class="function"><span class="keyword">function</span> (<span class="params">e, value, row, index</span>) </span>&#123;</span><br><span class="line">                            <span class="comment">// var multiple = Backend.api.query(&#x27;multiple&#x27;);</span></span><br><span class="line">                            <span class="comment">// multiple = multiple == &#x27;true&#x27; ? true : false;</span></span><br><span class="line">                            Fast.api.close(&#123;</span><br><span class="line">                                <span class="attr">id</span>: row.id,</span><br><span class="line">                                <span class="attr">name</span>: row.name,</span><br><span class="line">                                <span class="attr">type</span>: row.type_text,</span><br><span class="line">                                <span class="attr">drawlimit</span>: row.drawlimit,</span><br><span class="line">                                <span class="attr">grant</span>: row.grant</span><br><span class="line">                            &#125;);</span><br><span class="line">                        &#125;,</span><br><span class="line">                    &#125;, <span class="attr">formatter</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="string">&#x27;&lt;a href=&quot;javascript:;&quot; class=&quot;btn btn-danger btn-chooseone btn-xs&quot;&gt;&lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt; &#x27;</span> + __(<span class="string">&#x27;Choose&#x27;</span>) + <span class="string">&#x27;&lt;/a&gt;&#x27;</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">queryParams</span>: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> filter = <span class="built_in">JSON</span>.parse(params.filter);</span><br><span class="line">            <span class="keyword">var</span> op = <span class="built_in">JSON</span>.parse(params.op);</span><br><span class="line">            <span class="keyword">var</span> select_use_type = Fast.api.query(<span class="string">&#x27;select_use_type&#x27;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (select_use_type != <span class="literal">null</span>)&#123;</span><br><span class="line">                filter.use_type= select_use_type;</span><br><span class="line">                op.use_type = <span class="string">&quot;=&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            params.filter = <span class="built_in">JSON</span>.stringify(filter);</span><br><span class="line">            params.op = <span class="built_in">JSON</span>.stringify(op);</span><br><span class="line">            <span class="keyword">return</span> params;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 为表格绑定事件</span></span><br><span class="line">    Table.api.bindevent(table);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>后端代码 parent::index() 代码服务一份相应控制器就好了</p>
+
       
     </div>
     
@@ -390,12 +403,6 @@
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/fastadmin/" rel="tag"># fastadmin</a>
-          
-        </div>
       
 
       
@@ -470,8 +477,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -486,7 +502,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -508,7 +524,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -538,6 +554,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E7%8E%B0%E6%95%88%E6%9E%9C"><span class="nav-number">1.</span> <span class="nav-text">一、实现效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%8C%89%E9%92%AE%E9%A1%B5%E9%9D%A2-js%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">二、按钮页面 js代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BC%B9%E6%A1%86%E9%A1%B5%E9%9D%A2"><span class="nav-number">3.</span> <span class="nav-text">三、弹框页面</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
